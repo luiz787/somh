@@ -23,7 +23,7 @@ public class JDBCConexaoMySQL implements JDBCFabricaConexao {
     }
 
     @Override
-    public Connection getConexao() throws ClassNotFoundException, SQLException {
+    public Connection getConexao() throws Exception {
         Class.forName(Driver);
         return DriverManager.getConnection(URL, usuario, senha);
     }

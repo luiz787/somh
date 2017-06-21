@@ -6,5 +6,5 @@ import java.sql.SQLException;
 
 public interface JDBCFabricaConexao {
 
-    public Connection getConexao() throws ClassNotFoundException, SQLException;
+    public Connection getConexao() throws Exception;
 }
