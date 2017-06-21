@@ -21,14 +21,11 @@ public class OS {
     public OS() {
     }
     
-    public OS(int nro_OS, int cod_Cpf_Cnpj, int seq_Equipto, String txt_Reclamacao, double vlr_Desconto, double per_Desconto, double vlr_Frete) {
-        this.nro_OS = nro_OS;
+    
+    public OS(int cod_Cpf_Cnpj, int seq_Equipto, String txt_Reclamacao) {
         this.cod_Cpf_Cnpj = cod_Cpf_Cnpj;
         this.seq_Equipto = seq_Equipto;
         this.txt_Reclamacao = txt_Reclamacao;
-        this.vlr_Desconto = vlr_Desconto;
-        this.per_Desconto = per_Desconto;
-        this.vlr_Frete = vlr_Frete;
     }
 
     public int getNro_OS() {

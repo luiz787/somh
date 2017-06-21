@@ -160,26 +160,26 @@ ALTER TABLE `Marca` ADD  PRIMARY KEY (`cod_marca`)
 
 -- Table Acessorio
 
-CREATE TABLE `Acessorio`
+CREATE TABLE `Acessorios`
 (
-  `cod_acessorio` Serial NOT NULL,
-  `nom_acessorio` Char(20) NOT NULL
+  `cod_acessorios` Serial NOT NULL,
+  `des_acessorios` Char(100) NOT NULL
 )
 ;
 
-ALTER TABLE `Acessorio` ADD  PRIMARY KEY (`cod_acessorio`)
+ALTER TABLE `Acessorio` ADD  PRIMARY KEY (`cod_acessorios`)
 ;
 
 -- Table Componente
 
-CREATE TABLE `Componente`
+CREATE TABLE `Componentes`
 (
-  `cod_componente` Serial NOT NULL,
-  `nom_componente` Char(25) NOT NULL
+  `cod_componentes` Serial NOT NULL,
+  `des_componentes` Char(100) NOT NULL
 )
 ;
 
-ALTER TABLE `Componente` ADD  PRIMARY KEY (`cod_componente`)
+ALTER TABLE `Componente` ADD  PRIMARY KEY (`cod_componentes`)
 ;
 
 -- Table Peca

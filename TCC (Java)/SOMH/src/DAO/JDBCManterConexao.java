@@ -31,7 +31,7 @@ public class JDBCManterConexao {
         return conexao;
     }
 
-    public Connection getConexao() throws ClassNotFoundException, SQLException {
+    public Connection getConexao() throws Exception {
 
         return JDBCManterConexao.conFabrica.getConexao();
     }
