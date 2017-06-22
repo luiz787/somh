@@ -14,6 +14,7 @@ public class Equipamento {
     private int cod_Marca;
     private String des_Equipto;
     private String des_Modelo;
+    private String des_Componentes;
     private int nro_Serie;
 
     public Equipamento() {
@@ -25,6 +26,14 @@ public class Equipamento {
         this.des_Equipto = des_Equipto;
         this.des_Modelo = des_Modelo;
         this.nro_Serie = nro_Serie;
+    }
+
+    public String getDes_Componentes() {
+        return des_Componentes;
+    }
+
+    public void setDes_Componentes(String des_Componentes) {
+        this.des_Componentes = des_Componentes;
     }
     
     public int getSeq_Equipto() {

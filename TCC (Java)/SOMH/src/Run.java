@@ -1,6 +1,6 @@
 
-import DAO.OSDAO;
-import DAO.OSDAOException;
+import DAO.CadastroOSDAO;
+import DAO.CadastroOSDAOException;
 import Model.OS;
 
 /*
@@ -18,10 +18,10 @@ public class Run {
     /**
      * @param args the command line arguments
      */
-    public static void main(String[] args) throws OSDAOException {
+    public static void main(String[] args) throws CadastroOSDAOException {
         /*
         OS os = new OS(777, 1, "Ta estragado tudo");
-        OSDAO osDAO = new OSDAO();
+        CadastroOSDAO osDAO = new CadastroOSDAO();
         osDAO.insert(os);
         System.out.println(os.getNro_OS());
         */
