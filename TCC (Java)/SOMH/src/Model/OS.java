@@ -11,22 +11,35 @@ package Model;
  */
 public class OS {
     private int nro_OS;
-    private int cod_Cpf_Cnpj;
+    private String cod_Cpf_Cnpj;
     private int seq_Equipto;
     private String txt_Reclamacao;
+    private String txt_Observacao_Acessorios;
     private double vlr_Desconto;
     private double per_Desconto;
     private double vlr_Frete;
 
     public OS() {
     }
-    
-    
-    public OS(int cod_Cpf_Cnpj, int seq_Equipto, String txt_Reclamacao) {
+
+    public OS(String cod_Cpf_Cnpj, int seq_Equipto, String txt_Reclamacao, String txt_Observacao_Acessorios, double vlr_Desconto, double per_Desconto, double vlr_Frete) {
         this.cod_Cpf_Cnpj = cod_Cpf_Cnpj;
         this.seq_Equipto = seq_Equipto;
         this.txt_Reclamacao = txt_Reclamacao;
+        this.txt_Observacao_Acessorios = txt_Observacao_Acessorios;
+        this.vlr_Desconto = vlr_Desconto;
+        this.per_Desconto = per_Desconto;
+        this.vlr_Frete = vlr_Frete;
     }
+
+    public String getTxt_Observacao_Acessorios() {
+        return txt_Observacao_Acessorios;
+    }
+
+    public void setTxt_Observacao_Acessorios(String txt_Observacao_Acessorios) {
+        this.txt_Observacao_Acessorios = txt_Observacao_Acessorios;
+    }
+    
 
     public int getNro_OS() {
         return nro_OS;
@@ -36,11 +49,11 @@ public class OS {
         this.nro_OS = nro_OS;
     }
 
-    public int getCod_Cpf_Cnpj() {
+    public String getCod_Cpf_Cnpj() {
         return cod_Cpf_Cnpj;
     }
 
-    public void setCod_Cpf_Cnpj(int cod_Cpf_Cnpj) {
+    public void setCod_Cpf_Cnpj(String cod_Cpf_Cnpj) {
         this.cod_Cpf_Cnpj = cod_Cpf_Cnpj;
     }
 

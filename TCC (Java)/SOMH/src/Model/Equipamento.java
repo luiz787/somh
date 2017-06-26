@@ -11,7 +11,7 @@ package Model;
  */
 public class Equipamento {
     private int seq_Equipto;
-    private int cod_Marca;
+    private String des_Marca;
     private String des_Equipto;
     private String des_Modelo;
     private String des_Componentes;
@@ -20,13 +20,23 @@ public class Equipamento {
     public Equipamento() {
     }
 
-    public Equipamento(int seq_Equipto, int cod_Marca, String des_Equipto, String des_Modelo, int nro_Serie) {
+    public Equipamento(int seq_Equipto, String des_Marca, String des_Equipto, String des_Modelo, String des_Componentes, int nro_Serie) {
         this.seq_Equipto = seq_Equipto;
-        this.cod_Marca = cod_Marca;
+        this.des_Marca = des_Marca;
         this.des_Equipto = des_Equipto;
         this.des_Modelo = des_Modelo;
+        this.des_Componentes = des_Componentes;
         this.nro_Serie = nro_Serie;
     }
+
+    public String getDes_Marca() {
+        return des_Marca;
+    }
+
+    public void setDes_Marca(String des_Marca) {
+        this.des_Marca = des_Marca;
+    }
+
 
     public String getDes_Componentes() {
         return des_Componentes;
@@ -42,14 +52,6 @@ public class Equipamento {
 
     public void setSeq_Equipto(int seq_Equipto) {
         this.seq_Equipto = seq_Equipto;
-    }
-
-    public int getCod_Marca() {
-        return cod_Marca;
-    }
-
-    public void setCod_Marca(int cod_Marca) {
-        this.cod_Marca = cod_Marca;
     }
 
     public String getDes_Equipto() {
