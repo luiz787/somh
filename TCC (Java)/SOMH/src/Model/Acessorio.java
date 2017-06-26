@@ -5,20 +5,20 @@
  */
 package Model;
 
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
+
 /**
  *
  * @author aluno
  */
 public class Acessorio {
     private int cod_Acessorio;
-    private String nom_Acessorio;
-
-    public Acessorio() {
-    }
+    private final StringProperty nom_Acessorio;
 
     public Acessorio(int cod_Acessorio, String nom_Acessorio) {
         this.cod_Acessorio = cod_Acessorio;
-        this.nom_Acessorio = nom_Acessorio;
+        this.nom_Acessorio = new SimpleStringProperty(nom_Acessorio);
     }
 
     public int getCod_Acessorio() {
@@ -30,11 +30,13 @@ public class Acessorio {
     }
 
     public String getNom_Acessorio() {
-        return nom_Acessorio;
+        return nom_Acessorio.get();
     }
-
     public void setNom_Acessorio(String nom_Acessorio) {
-        this.nom_Acessorio = nom_Acessorio;
+        this.nom_Acessorio.set(nom_Acessorio);
+    }
+    public StringProperty Nom_AcessorioProperty() {
+        return nom_Acessorio;
     }
     
     

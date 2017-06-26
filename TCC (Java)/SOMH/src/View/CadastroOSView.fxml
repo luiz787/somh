@@ -7,78 +7,75 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<ScrollPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="625.0" prefWidth="607.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
-   <content>
-      <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="848.0" prefWidth="600.0">
-         <children>
-            <Label alignment="CENTER" prefHeight="31.0" prefWidth="600.0" style="-fx-background-color: #255ec9;" text="Cadastro de OS" textAlignment="JUSTIFY" textFill="WHITE" />
-            <Label layoutX="15.0" layoutY="44.0" text="Cliente" underline="true" />
-            <Label layoutX="26.0" layoutY="61.0" text="Nome" />
-            <Label layoutX="14.0" layoutY="115.0" text="Equipamento" underline="true" />
-            <Label layoutX="26.0" layoutY="132.0" text="Nome" />
-            <Label layoutX="342.0" layoutY="203.0" text="Modelo" />
-            <Label layoutX="346.0" layoutY="132.0" text="Marca" />
-            <Label layoutX="22.0" layoutY="178.0" text="Componentes" />
-            <Label layoutX="15.0" layoutY="324.0" text="Acessórios" underline="true" />
-            <Label layoutX="28.0" layoutY="480.0" text="Observação" />
-            <Label layoutX="28.0" layoutY="653.0" text="Reclamação" />
-            <Label layoutX="17.0" layoutY="626.0" text="Problema" underline="true" />
-            <Label layoutX="430.0" layoutY="88.0" text="Status:" />
-            <ComboBox layoutX="29.0" layoutY="84.0" prefWidth="150.0" />
-            <TextField layoutX="30.0" layoutY="153.0" prefHeight="25.0" prefWidth="296.0" />
-            <TextField layoutX="346.0" layoutY="153.0" prefHeight="25.0" prefWidth="122.0" />
-            <TextArea layoutX="25.0" layoutY="203.0" prefHeight="110.0" prefWidth="296.0" />
-            <GridPane layoutX="25.0" layoutY="350.0" prefHeight="90.0" prefWidth="554.0">
-              <columnConstraints>
-                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-              </columnConstraints>
-              <rowConstraints>
-                <RowConstraints maxHeight="42.0" minHeight="10.0" prefHeight="31.0" vgrow="SOMETIMES" />
-                <RowConstraints maxHeight="35.0" minHeight="10.0" prefHeight="29.0" vgrow="SOMETIMES" />
-                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-              </rowConstraints>
+<AnchorPane prefHeight="675.0" prefWidth="615.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.CadastroOSViewController">
+   <children>
+      <ScrollPane fx:id="scrollPane" fitToHeight="true" fitToWidth="true" layoutY="-2.0" prefHeight="999.0" prefViewportHeight="835.0" prefViewportWidth="600.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="-2.0">
+         <content>
+            <AnchorPane layoutX="10.0" layoutY="10.0" prefHeight="917.0" prefWidth="598.0">
                <children>
-                  <CheckBox mnemonicParsing="false" text="Mouse" />
-                  <CheckBox mnemonicParsing="false" text="Teclado" GridPane.columnIndex="1" />
-                  <CheckBox mnemonicParsing="false" text="Teclado" visible="false" GridPane.columnIndex="2" />
-                  <CheckBox mnemonicParsing="false" text="Teclado" visible="false" GridPane.columnIndex="3" />
-                  <CheckBox mnemonicParsing="false" text="Teclado" visible="false" GridPane.columnIndex="4" />
-                  <CheckBox mnemonicParsing="false" text="Teclado" visible="false" GridPane.columnIndex="5" />
-                  <CheckBox mnemonicParsing="false" text="Teclado" visible="false" GridPane.rowIndex="1" />
-                  <CheckBox mnemonicParsing="false" text="Teclado" visible="false" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                  <CheckBox mnemonicParsing="false" text="Teclado" visible="false" GridPane.columnIndex="2" GridPane.rowIndex="1" />
-                  <CheckBox mnemonicParsing="false" text="Teclado" visible="false" GridPane.columnIndex="3" GridPane.rowIndex="1" />
-                  <CheckBox mnemonicParsing="false" text="Teclado" visible="false" GridPane.columnIndex="4" GridPane.rowIndex="1" />
-                  <CheckBox mnemonicParsing="false" text="Teclado" visible="false" GridPane.columnIndex="5" GridPane.rowIndex="1" />
-                  <CheckBox mnemonicParsing="false" text="Teclado" visible="false" GridPane.rowIndex="2" />
-                  <CheckBox mnemonicParsing="false" text="Teclado" visible="false" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                  <CheckBox mnemonicParsing="false" text="Teclado" visible="false" GridPane.columnIndex="2" GridPane.rowIndex="2" />
-                  <CheckBox mnemonicParsing="false" text="Teclado" visible="false" GridPane.columnIndex="3" GridPane.rowIndex="2" />
-                  <CheckBox mnemonicParsing="false" text="Teclado" visible="false" GridPane.columnIndex="4" GridPane.rowIndex="2" />
-                  <CheckBox mnemonicParsing="false" text="Teclado" visible="false" GridPane.columnIndex="5" GridPane.rowIndex="2" />
+                  <HBox alignment="BASELINE_LEFT" layoutY="39.0" prefHeight="960.0" prefWidth="598.0" AnchorPane.bottomAnchor="-2.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+                     <children>
+                        <Pane layoutY="36.0" prefHeight="805.0" prefWidth="598.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="37.0">
+                           <children>
+                              <Label layoutX="26.0" layoutY="96.0" text="Nome" />
+                              <Label layoutX="342.0" layoutY="167.0" text="Modelo" />
+                              <Button fx:id="cancelar" alignment="CENTER" layoutX="14.0" layoutY="915.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="90.0" style="-fx-background-color: #000000;" text="Cancelar" textFill="WHITE" />
+                              <Label layoutX="14.0" layoutY="79.0" text="Equipamento" underline="true" />
+                              <Label layoutX="27.0" layoutY="561.0" text="Observação" />
+                              <TextArea fx:id="reclamacao" layoutX="39.0" layoutY="763.0" prefHeight="110.0" prefWidth="296.0" />
+                              <Label layoutX="426.0" layoutY="54.0" text="Data:" />
+                              <Label layoutX="426.0" layoutY="25.0" text="Nro OS:" />
+                              <Label layoutX="22.0" layoutY="142.0" text="Componentes" />
+                              <TextField fx:id="marca" layoutX="346.0" layoutY="117.0" prefHeight="25.0" prefWidth="122.0" />
+                              <Label layoutX="340.0" layoutY="230.0" text="Numero de Série" />
+                              <Label layoutX="26.0" layoutY="532.0" text="Cadastrar Acessório:" />
+                              <TextField fx:id="nroSerie" layoutX="346.0" layoutY="252.0" prefHeight="25.0" prefWidth="122.0" />
+                              <Label layoutX="12.0" layoutY="8.0" text="Cliente" underline="true" AnchorPane.leftAnchor="12.0" />
+                              <Button fx:id="criar" alignment="CENTER" contentDisplay="RIGHT" layoutX="498.0" layoutY="915.0" maxHeight="31.0" maxWidth="90.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="90.0" style="-fx-background-color: #000000;" text="Criar" textFill="WHITE" AnchorPane.rightAnchor="10.0" />
+                              <TextField fx:id="nomeAcessorioCadastro" layoutX="143.0" layoutY="528.0" prefHeight="25.0" prefWidth="241.0" />
+                              <Label layoutX="17.0" layoutY="715.0" text="Problema" underline="true" />
+                              <TextField fx:id="modelo" layoutX="346.0" layoutY="191.0" prefHeight="25.0" prefWidth="122.0" />
+                              <TextArea fx:id="observacaoAcessorio" layoutX="25.0" layoutY="590.0" prefHeight="110.0" prefWidth="296.0" />
+                              <Button fx:id="cadastroCliente" layoutX="327.0" layoutY="21.0" mnemonicParsing="false" text="+" />
+                              <TextField fx:id="nomeEquipamento" layoutX="30.0" layoutY="117.0" prefHeight="25.0" prefWidth="296.0" />
+                              <TextArea fx:id="componentes" layoutX="25.0" layoutY="167.0" prefHeight="110.0" prefWidth="296.0" />
+                              <Label fx:id="data" layoutX="482.0" layoutY="54.0" text="LabelData" />
+                              <Button fx:id="pesquisa" layoutX="286.0" layoutY="21.0" mnemonicParsing="false" onAction="#hello" prefHeight="16.0" prefWidth="34.0" stylesheets="@CSS%20Botao.css" />
+                              <Label fx:id="nomeCliente" layoutX="68.0" layoutY="25.0" prefHeight="17.0" prefWidth="200.0" style="-fx-background-color: #ffffff;" text="NomeCliente" />
+                              <Label fx:id="nroOS" layoutX="482.0" layoutY="25.0" text="LabelNro_OS" />
+                              <Label alignment="CENTER" layoutX="36.0" layoutY="739.0" text="Reclamação" />
+                              <Label layoutX="346.0" layoutY="96.0" text="Marca" />
+                              <Button fx:id="cadastroAcessorio" layoutX="396.0" layoutY="528.0" mnemonicParsing="false" text="Cadastrar" />
+                              <Label layoutX="26.0" layoutY="25.0" text="Nome:" />
+                              <Label layoutX="15.0" layoutY="288.0" text="Acessórios" underline="true" />
+                              <ScrollPane layoutX="24.0" layoutY="314.0" prefHeight="200.0" prefViewportHeight="200.0" prefViewportWidth="161.0" prefWidth="161.0">
+                                 <content>
+                                    <TableView fx:id="acessoriosCadastrados" layoutX="15.0" layoutY="308.0" prefHeight="198.0" prefWidth="159.0">
+                                      <columns>
+                                        <TableColumn fx:id="colunaAcessoriosCadastrados" maxWidth="157.0" prefWidth="157.0" text="Acessórios Cadastrados" />
+                                      </columns>
+                                    </TableView>
+                                 </content>
+                              </ScrollPane>
+                              <Button fx:id="adicionaAcessorio" layoutX="199.0" layoutY="390.0" mnemonicParsing="false" text="&gt;" />
+                              <Button fx:id="removeAcessorio" layoutX="199.0" layoutY="424.0" mnemonicParsing="false" text="&lt;" />
+                              <ScrollPane layoutX="239.0" layoutY="314.0" prefHeight="200.0" prefViewportHeight="200.0" prefViewportWidth="161.0" prefWidth="161.0">
+                                 <content>
+                                    <TableView fx:id="acessoriosSelecionados" layoutX="15.0" layoutY="308.0" prefHeight="198.0" prefWidth="159.0">
+                                       <columns>
+                                          <TableColumn fx:id="colunaAcessoriosSelecionados" maxWidth="157.0" prefWidth="157.0" text="Acessórios Selecionados" />
+                                       </columns>
+                                    </TableView>
+                                 </content>
+                              </ScrollPane>
+                           </children>
+                        </Pane>
+                     </children>
+                  </HBox>
+                  <Label alignment="CENTER" prefHeight="39.0" prefWidth="600.0" style="-fx-background-color: #000000;" text="Cadastro de OS" textAlignment="JUSTIFY" textFill="WHITE" AnchorPane.bottomAnchor="958.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
                </children>
-            </GridPane>
-            <TextField layoutX="132.0" layoutY="440.0" prefHeight="25.0" prefWidth="241.0" />
-            <Label layoutX="24.0" layoutY="444.0" text="Adiciona Acessório:" />
-            <Button layoutX="381.0" layoutY="440.0" mnemonicParsing="false" text="Adicionar" />
-            <TextArea layoutX="25.0" layoutY="503.0" prefHeight="110.0" prefWidth="296.0" />
-            <TextField layoutX="346.0" layoutY="227.0" prefHeight="25.0" prefWidth="122.0" />
-            <Label layoutX="340.0" layoutY="266.0" text="Numero de Série" />
-            <TextField layoutX="346.0" layoutY="288.0" prefHeight="25.0" prefWidth="122.0" />
-            <TextArea layoutX="31.0" layoutY="670.0" prefHeight="110.0" prefWidth="296.0" />
-            <Label layoutX="428.0" layoutY="36.0" text="Nro OS:" />
-            <Label layoutX="428.0" layoutY="61.0" text="Data:" />
-            <Label layoutX="482.0" layoutY="36.0" text="LabelNro_OS" />
-            <Label layoutX="482.0" layoutY="61.0" text="LabelData" />
-            <Label layoutX="482.0" layoutY="88.0" text="LabelStatus" />
-            <Button layoutX="490.0" layoutY="803.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="90.0" style="-fx-background-color: #255ec9;" text="Criar" textFill="WHITE" />
-            <Button layoutX="15.0" layoutY="803.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="90.0" style="-fx-background-color: #255ec9;" text="Cancelar" textFill="WHITE" />
-         </children>
-      </AnchorPane>
-   </content>
-</ScrollPane>
+            </AnchorPane>
+         </content>
+      </ScrollPane>
+   </children>
+</AnchorPane>
