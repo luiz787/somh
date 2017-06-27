@@ -145,14 +145,12 @@ public class CadastroOSViewController implements Initializable {
             conexao = JDBCManterConexao.getInstancia().getConexao();
             sql="";
             pstmt = conexao.prepareStatement(sql);
-            rs = pstmt.executeQuery("SELECT max(nro_OS) FROM os");
+            rs = pstmt.executeQuery("SELECT max(nro_OS) FROM os where nro_OS");
             if(rs.next()) {
                 int nro_OS_Form = rs.getInt(1);
                 System.out.println(nro_OS_Form);
                 nro_OS_Form++;
                 nroOS.setText(String.valueOf(nro_OS_Form));
-            } else {
-                nroOS.setText("0");
             }
             
             data.setText(DateUtil.format(LocalDate.now()));
@@ -194,9 +192,9 @@ public class CadastroOSViewController implements Initializable {
         os.setTxt_Reclamacao(reclamacao.getText());
         os.setTxt_Observacao_Acessorios(observacaoAcessorio.getText());
         
-        for(int i=0; i<acessoriosCadastrados.getItems().size(); i++) {
+        /*for(int i=0; i<acessoriosCadastrados.getItems().size(); i++) {
             acessoriosCadastrados.getItems().get(0).getNom_Acessorio();
-        }
+        }*/
         
         
         
