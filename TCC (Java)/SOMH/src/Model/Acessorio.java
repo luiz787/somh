@@ -15,7 +15,7 @@ import javafx.beans.property.StringProperty;
 public class Acessorio {
     private int cod_Acessorio;
     private final StringProperty nom_Acessorio;
-
+    
     public Acessorio(int cod_Acessorio, String nom_Acessorio) {
         this.cod_Acessorio = cod_Acessorio;
         this.nom_Acessorio = new SimpleStringProperty(nom_Acessorio);

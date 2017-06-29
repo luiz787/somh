@@ -13,13 +13,13 @@ import java.time.LocalDate;
 public class OSStatus {
     private int nro_OS;
     private LocalDate dat_Ocorrencia;
-    private String cod_Usuario;
+    private int cod_Usuario;
     private int cod_Status;
 
     public OSStatus() {
     }
 
-    public OSStatus(int nro_OS, LocalDate dat_Ocorrencia, String cod_Usuario, int cod_Status) {
+    public OSStatus(int nro_OS, LocalDate dat_Ocorrencia, int cod_Usuario, int cod_Status) {
         this.nro_OS = nro_OS;
         this.dat_Ocorrencia = dat_Ocorrencia;
         this.cod_Usuario = cod_Usuario;
@@ -44,11 +44,11 @@ public class OSStatus {
         this.dat_Ocorrencia = dat_Ocorrencia;
     }
 
-    public String getCod_Usuario() {
+    public int getCod_Usuario() {
         return cod_Usuario;
     }
 
-    public void setCod_Usuario(String cod_Usuario) {
+    public void setCod_Usuario(int cod_Usuario) {
         this.cod_Usuario = cod_Usuario;
     }
 

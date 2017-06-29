@@ -19,6 +19,7 @@ import java.net.URL;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
@@ -145,7 +146,7 @@ public class CadastroOSViewController implements Initializable {
             conexao = JDBCManterConexao.getInstancia().getConexao();
             sql="";
             pstmt = conexao.prepareStatement(sql);
-            rs = pstmt.executeQuery("SELECT max(nro_OS) FROM os where nro_OS");
+            rs = pstmt.executeQuery("SELECT max(nro_OS) FROM os");
             if(rs.next()) {
                 int nro_OS_Form = rs.getInt(1);
                 System.out.println(nro_OS_Form);
@@ -178,7 +179,7 @@ public class CadastroOSViewController implements Initializable {
         equipamento.setDes_Componentes(componentes.getText());
         equipamento.setNro_Serie(Integer.parseInt(nroSerie.getText()));
         
-        os.setCod_Cpf_Cnpj("77777777777");
+        os.setCod_Cpf_Cnpj("77777777777");//Substituir quando cliente estiver pronto
         /*
             conexao = JDBCManterConexao.getInstancia().getConexao();
             sql="";
@@ -192,10 +193,39 @@ public class CadastroOSViewController implements Initializable {
         os.setTxt_Reclamacao(reclamacao.getText());
         os.setTxt_Observacao_Acessorios(observacaoAcessorio.getText());
         
-        /*for(int i=0; i<acessoriosCadastrados.getItems().size(); i++) {
-            acessoriosCadastrados.getItems().get(0).getNom_Acessorio();
-        }*/
+        try {
+            //Acessorios
+            conexao = JDBCManterConexao.getInstancia().getConexao();
+            sql="";
+            pstmt = conexao.prepareStatement(sql);
+            rs = pstmt.executeQuery("SELECT max(cod_acessorio) FROM acessorio");
+            int maxCod_Acessorio;
+            if(rs.next()) {
+                maxCod_Acessorio=rs.getInt(1);
+            } else {
+                maxCod_Acessorio=0;
+            }
+            for (Acessorio acessorio : acessoriosSelecionados.getItems()) {
+                acessorios.add(new Acessorio((maxCod_Acessorio+1), 
+                colunaAcessoriosSelecionados.getCellObservableValue(acessorio).getValue()));
+            }
+        } catch (Exception ex) {
+            throw new OSDAOException(ex);
+        }
         
+        osStatus.setDat_Ocorrencia(LocalDate.now());
+        osStatus.setCod_Usuario(123);//Substituir quando login estiver pronto
+        /*
+            conexao = JDBCManterConexao.getInstancia().getConexao();
+            sql="";
+            pstmt = conexao.prepareStatement(sql);
+            rs = pstmt.executeQuery("SELECT cod_usuario FROM usuario WHERE" 
+            +"cod_usuario="+usuario.getCod_Usuario());
+            if(rs.next()) {
+                osStatus.setCod_Usuario(rs.getString(1));
+            }
+        */
+        osStatus.setCod_Status(1);
         
         
         daoOS.insert(equipamento, os, acessorios, osStatus);
