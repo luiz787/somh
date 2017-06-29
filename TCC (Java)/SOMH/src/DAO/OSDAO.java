@@ -111,7 +111,7 @@ public class OSDAO implements OSDAOInterface {
             
             pstmt.setInt(1, osStatus.getNro_OS());
             pstmt.setString(2, DateUtil.format(osStatus.getDat_Ocorrencia()));
-            pstmt.setString(3, osStatus.getCod_Usuario());
+            pstmt.setInt(3, osStatus.getCod_Usuario());
             pstmt.setInt(4, osStatus.getCod_Status());
             
             pstmt.executeUpdate();
