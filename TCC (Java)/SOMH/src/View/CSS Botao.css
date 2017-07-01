@@ -1,7 +1,53 @@
-.button {
+#pesquisa {
 
     -fx-background-image: url("Lupa.png");
    	-fx-background-size: 18 18;
     -fx-background-repeat: no-repeat;
     -fx-background-position: center;     
+}
+#criar {
+    -fx-background-color: linear-gradient(#575353, #000000);
+    -fx-background-radius: 30;
+    -fx-background-insets: 0;
+    -fx-text-fill: white;
+}
+#cancelar {
+    -fx-background-color: linear-gradient(#575353, #000000);
+    -fx-background-radius: 30;
+    -fx-background-insets: 0;
+    -fx-text-fill: white;
+}
+#criar:pressed {
+    -fx-background-color: linear-gradient(#adbbd3, #000000);
+    -fx-background-radius: 30;
+    -fx-background-insets: 0;
+    -fx-text-fill: white;
+}
+#cancelar:pressed {
+    -fx-background-color: linear-gradient(#adbbd3, #000000);
+    -fx-background-radius: 30;
+    -fx-background-insets: 0;
+    -fx-text-fill: white;
+}
+.button {
+    -fx-background-color: linear-gradient(#575353, #000000);
+    -fx-background-radius: 30;
+    -fx-background-insets: 0;
+    -fx-text-fill: white;
+}
+.button:pressed {
+    -fx-background-color: linear-gradient(#adbbd3, #000000);
+    -fx-background-radius: 30;
+    -fx-background-insets: 0;
+    -fx-text-fill: white;
+}
+
+#painel {
+    -fx-background-color: linear-gradient(#ffffff, #dad2d2);
+}
+#hbox {
+    -fx-background-color: linear-gradient(#ffffff, #dad2d2);
+}
+#faixa {
+    -fx-background-color: linear-gradient(#575353, #000000);
 }
