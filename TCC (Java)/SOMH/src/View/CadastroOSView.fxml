@@ -18,15 +18,15 @@
    <children>
       <ScrollPane fx:id="scrollPane" fitToHeight="true" fitToWidth="true" layoutY="-2.0" prefHeight="999.0" prefViewportHeight="835.0" prefViewportWidth="600.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="-2.0">
          <content>
-            <AnchorPane layoutX="10.0" layoutY="10.0" prefHeight="917.0" prefWidth="598.0">
+            <AnchorPane fx:id="fundo" layoutX="10.0" layoutY="10.0" prefHeight="917.0" prefWidth="598.0">
                <children>
-                  <HBox alignment="CENTER" layoutY="39.0" prefHeight="960.0" prefWidth="598.0" AnchorPane.bottomAnchor="-2.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+                  <HBox fx:id="hbox" alignment="CENTER" layoutY="39.0" prefHeight="960.0" prefWidth="598.0" stylesheets="@CSS%20Botao.css" AnchorPane.bottomAnchor="-2.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
                      <children>
-                        <Pane layoutY="36.0" prefHeight="805.0" prefWidth="598.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="37.0">
+                        <Pane fx:id="painel" layoutY="36.0" prefHeight="805.0" prefWidth="598.0" stylesheets="@CSS%20Botao.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="37.0">
                            <children>
                               <Label layoutX="26.0" layoutY="96.0" text="Nome" />
                               <Label layoutX="342.0" layoutY="167.0" text="Modelo" />
-                              <Button fx:id="cancelar" alignment="CENTER" layoutX="14.0" layoutY="915.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="90.0" style="-fx-background-color: #000000;" text="Cancelar" textFill="WHITE" />
+                              <Button fx:id="cancelar" alignment="CENTER" layoutX="14.0" layoutY="915.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="90.0" stylesheets="@CSS%20Botao.css" text="Cancelar" textFill="WHITE" />
                               <Label layoutX="14.0" layoutY="79.0" text="Equipamento" underline="true" />
                               <Label layoutX="27.0" layoutY="561.0" text="Observação" />
                               <TextArea fx:id="reclamacao" layoutX="39.0" layoutY="763.0" prefHeight="110.0" prefWidth="296.0" />
@@ -38,7 +38,7 @@
                               <Label layoutX="26.0" layoutY="532.0" text="Cadastrar Acessório:" />
                               <TextField fx:id="nroSerie" layoutX="346.0" layoutY="252.0" prefHeight="25.0" prefWidth="122.0" />
                               <Label layoutX="12.0" layoutY="8.0" text="Cliente" underline="true" AnchorPane.leftAnchor="12.0" />
-                              <Button fx:id="criar" alignment="CENTER" contentDisplay="RIGHT" layoutX="498.0" layoutY="915.0" maxHeight="31.0" maxWidth="90.0" mnemonicParsing="false" onAction="#criaOS" prefHeight="31.0" prefWidth="90.0" style="-fx-background-color: #000000;" text="Criar" textFill="WHITE" AnchorPane.rightAnchor="10.0" />
+                              <Button fx:id="criar" alignment="CENTER" contentDisplay="RIGHT" layoutX="498.0" layoutY="915.0" maxHeight="31.0" maxWidth="90.0" mnemonicParsing="false" onAction="#criaOS" prefHeight="31.0" prefWidth="90.0" stylesheets="@CSS%20Botao.css" text="Criar" textFill="WHITE" AnchorPane.rightAnchor="10.0" />
                               <TextField fx:id="nomeAcessorioCadastro" layoutX="143.0" layoutY="528.0" prefHeight="25.0" prefWidth="241.0" />
                               <Label layoutX="17.0" layoutY="715.0" text="Problema" underline="true" />
                               <TextField fx:id="modelo" layoutX="346.0" layoutY="191.0" prefHeight="25.0" prefWidth="122.0" />
@@ -79,7 +79,7 @@
                         </Pane>
                      </children>
                   </HBox>
-                  <Label alignment="CENTER" prefHeight="39.0" prefWidth="600.0" style="-fx-background-color: #000000;" text="Cadastro de OS" textAlignment="JUSTIFY" textFill="WHITE" AnchorPane.bottomAnchor="958.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
+                  <Label fx:id="faixa" alignment="CENTER" prefHeight="39.0" prefWidth="600.0" stylesheets="@CSS%20Botao.css" text="Cadastro de OS" textAlignment="JUSTIFY" textFill="WHITE" AnchorPane.bottomAnchor="958.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
                </children>
             </AnchorPane>
          </content>
