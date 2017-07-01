@@ -20,7 +20,10 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.Instant;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
@@ -103,12 +106,11 @@ public class CadastroOSViewController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         try {
             carregaForm();
-            //criaOS();
-            nomeCliente.setText("Victor Gabriel");
-            nomeEquipamento.setText("Impressora HP");
-            componentes.setText("Varios componentes aqui!!! :)");
+            
             acessoriosCadastrados.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
+            acessoriosSelecionados.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
             colunaAcessoriosCadastrados.setCellValueFactory(cellData -> cellData.getValue().Nom_AcessorioProperty());
+            colunaAcessoriosSelecionados.setCellValueFactory(cellData -> cellData.getValue().Nom_AcessorioProperty());
             
         } catch (Exception ex) {
             System.out.println("Problema ao carregar formulario: "+ex);
@@ -117,24 +119,9 @@ public class CadastroOSViewController implements Initializable {
     
     public void setRun(Run run) {
         this.run = run;
-
-        // Adiciona os dados da observable list na tabela
-        acessoriosCadastrados.setItems(run.getAcessorioData());
-    }
-    /*
-    private void atualizaAcessorios(Acessorio acessorio) {
-        ObservableList<Acessorio> acessorioData2 = FXCollections.observableArrayList();
-        acessorioData2.add(acessorio);
-        run.setAcessorioData(acessorioData2);
-        colunaAcessoriosSelecionados.setCellValueFactory(cellData -> cellData.getValue().Nom_AcessorioProperty());
+        
     }
     
-    @FXML
-    private void adicionaAcessorio() {
-        acessoriosCadastrados.getSelectionModel().selectedItemProperty().addListener(
-                (observable, oldValue, newValue) -> atualizaAcessorios(newValue));
-    }
-    */
     @FXML
     private void carregaForm() throws Exception {
         Connection conexao;
@@ -149,88 +136,150 @@ public class CadastroOSViewController implements Initializable {
             rs = pstmt.executeQuery("SELECT max(nro_OS) FROM os");
             if(rs.next()) {
                 int nro_OS_Form = rs.getInt(1);
-                System.out.println(nro_OS_Form);
                 nro_OS_Form++;
                 nroOS.setText(String.valueOf(nro_OS_Form));
             }
             
             data.setText(DateUtil.format(LocalDate.now()));
             
+            rs = pstmt.executeQuery("SELECT * FROM acessorio");
+            ObservableList<Acessorio> novoAcessorioData = FXCollections.observableArrayList();
+            while(rs.next()) {
+                novoAcessorioData.add(new Acessorio(rs.getInt(1), rs.getString(2)));
+            }
+            acessoriosCadastrados.setItems(novoAcessorioData);
+            
         } catch (Exception ex) {
             System.out.println("Problema ao carregar formulario: "+ex);
         }
     }
+    
+    @FXML
+    private void selecionaAcessorio() {
+        if(!acessoriosCadastrados.getSelectionModel().getSelectedItems().isEmpty()) {
+            ObservableList<Acessorio> novoAcessorioData = FXCollections.observableArrayList();
+            //Mantem os acessorios já contidos na colunaAcessoriosSelecionados
+            int index=1;
+            for (int i=0; i<acessoriosSelecionados.getItems().size(); i++) {
+                    Acessorio acessorioContido = acessoriosSelecionados.getItems().get(i);
+                    novoAcessorioData.add(new Acessorio((index),
+                    colunaAcessoriosSelecionados.getCellObservableValue(acessorioContido).getValue()));
+                    index++;
+            }
+            //Adiciona os novos acessorios selecionados à colunaAcessoriosSelecionados
+            for (int i=0; i<acessoriosCadastrados.getSelectionModel().getSelectedItems().size(); i++) {
+                Acessorio acessorioSelecionado = acessoriosCadastrados.getSelectionModel().getSelectedItems().get(i);
+
+                if(!(novoAcessorioData.contains(acessorioSelecionado))) {
+                    novoAcessorioData.add(new Acessorio((index),
+                    colunaAcessoriosCadastrados.getCellObservableValue(acessorioSelecionado).getValue()));
+                    index++;
+                }
+            }
+            acessoriosSelecionados.setItems(novoAcessorioData);
+            limpaSelecaoTabela(acessoriosCadastrados);
+        }
+    }
+    
+    @FXML
+    private void removeAcessorio() {
+        if(!acessoriosSelecionados.getSelectionModel().getSelectedItems().isEmpty()) {
+            ObservableList<Acessorio> novoAcessorioData = FXCollections.observableArrayList();
+            acessoriosSelecionados.getItems().removeAll(
+                 acessoriosSelecionados.getSelectionModel().getSelectedItems()
+            ); 
+            int index=1;
+            
+            for (int i=0; i<acessoriosSelecionados.getItems().size(); i++) {
+                    Acessorio acessorioContido = acessoriosSelecionados.getItems().get(i);
+                    novoAcessorioData.add(new Acessorio((index),
+                    colunaAcessoriosSelecionados.getCellObservableValue(acessorioContido).getValue()));
+                    index++;
+            }
+            //run.setAcessorioData(acessorioData);
+            acessoriosSelecionados.setItems(novoAcessorioData);
+            limpaSelecaoTabela(acessoriosSelecionados);
+        }
+    }
+    
+    @FXML
+    private void limpaSelecaoTabela(TableView<Acessorio> tabela) {
+        tabela.getSelectionModel().clearSelection();
+    }
+    
     @FXML
     private void criaOS() throws OSDAOException {
-        Connection conexao;
-        String sql;
-        PreparedStatement pstmt;
-        ResultSet rs;
-        
-        OSDAO daoOS = new OSDAO();
-        Equipamento equipamento = new Equipamento();
-        OS os = new OS();
-        ArrayList<Acessorio> acessorios = new ArrayList<Acessorio>();
-        OSStatus osStatus = new OSStatus();
-        
-        equipamento.setDes_Marca(marca.getText());
-        equipamento.setDes_Equipto(nomeEquipamento.getText());
-        equipamento.setDes_Modelo(modelo.getText());
-        equipamento.setDes_Componentes(componentes.getText());
-        equipamento.setNro_Serie(Integer.parseInt(nroSerie.getText()));
-        
-        os.setCod_Cpf_Cnpj("77777777777");//Substituir quando cliente estiver pronto
-        /*
+        try {
+            Connection conexao;
+            String sql;
+            PreparedStatement pstmt;
+            ResultSet rs;
+            
+            OSDAO daoOS = new OSDAO();
+            Equipamento equipamento = new Equipamento();
+            OS os = new OS();
+            ArrayList<Acessorio> acessorios = new ArrayList<Acessorio>();
+            OSStatus osStatus = new OSStatus();
+            
+            equipamento.setDes_Marca(marca.getText());
+            equipamento.setDes_Equipto(nomeEquipamento.getText());
+            equipamento.setDes_Modelo(modelo.getText());
+            equipamento.setDes_Componentes(componentes.getText());
+            equipamento.setNro_Serie(Integer.parseInt(nroSerie.getText()));
+            
+            os.setCod_Cpf_Cnpj("77777777777");//Substituir quando cliente estiver pronto
+            /*
             conexao = JDBCManterConexao.getInstancia().getConexao();
             sql="";
             pstmt = conexao.prepareStatement(sql);
-            rs = pstmt.executeQuery("SELECT cod_cpf_cnpj FROM cliente where 
+            rs = pstmt.executeQuery("SELECT cod_cpf_cnpj FROM cliente where
             nom_cliente="+nomeCliente.getText());
             if(rs.next()) {
-                os.setCod_Cpf_Cnpj(rs.getString(1));
+            os.setCod_Cpf_Cnpj(rs.getString(1));
             }
-        */
-        os.setTxt_Reclamacao(reclamacao.getText());
-        os.setTxt_Observacao_Acessorios(observacaoAcessorio.getText());
-        
-        try {
+            */
+            os.setTxt_Reclamacao(reclamacao.getText());
+            os.setTxt_Observacao_Acessorios(observacaoAcessorio.getText());
             //Acessorios
+            /*
             conexao = JDBCManterConexao.getInstancia().getConexao();
             sql="";
             pstmt = conexao.prepareStatement(sql);
             rs = pstmt.executeQuery("SELECT max(cod_acessorio) FROM acessorio");
-            int maxCod_Acessorio;
-            if(rs.next()) {
-                maxCod_Acessorio=rs.getInt(1);
-            } else {
-                maxCod_Acessorio=0;
-            }
+            */
+            int cod_Acessorio=1;
             for (Acessorio acessorio : acessoriosSelecionados.getItems()) {
-                acessorios.add(new Acessorio((maxCod_Acessorio+1), 
-                colunaAcessoriosSelecionados.getCellObservableValue(acessorio).getValue()));
+                acessorios.add(new Acessorio((cod_Acessorio),
+                        colunaAcessoriosSelecionados.getCellObservableValue(acessorio).getValue()));
+                cod_Acessorio++;
             }
-        } catch (Exception ex) {
-            throw new OSDAOException(ex);
-        }
-        
-        osStatus.setDat_Ocorrencia(LocalDate.now());
-        osStatus.setCod_Usuario(123);//Substituir quando login estiver pronto
-        /*
+            
+            osStatus.setDat_Ocorrencia(System.currentTimeMillis());
+            osStatus.setCod_Usuario(123);//Substituir quando login estiver pronto
+            /*
             conexao = JDBCManterConexao.getInstancia().getConexao();
             sql="";
             pstmt = conexao.prepareStatement(sql);
             rs = pstmt.executeQuery("SELECT cod_usuario FROM usuario WHERE" 
             +"cod_usuario="+usuario.getCod_Usuario());
             if(rs.next()) {
-                osStatus.setCod_Usuario(rs.getString(1));
+            osStatus.setCod_Usuario(rs.getString(1));
             }
-        */
-        osStatus.setCod_Status(1);
-        
-        
-        daoOS.insert(equipamento, os, acessorios, osStatus);
+            */
+            osStatus.setCod_Status(1);
+            
+            
+            daoOS.insert(equipamento, os, acessorios, osStatus);
+        } catch (Exception ex) {
+            System.out.println("Problema ao criar OS: "+ex);
+        }
+    }
+    
+    @FXML
+    private void validate() {
         
     }
+    
     @FXML
     private void  hello() {
         System.out.println("hy");

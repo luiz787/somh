@@ -15,7 +15,7 @@ public class Equipamento {
     private String des_Equipto;
     private String des_Modelo;
     private String des_Componentes;
-    private int nro_Serie;
+    private Integer nro_Serie;
 
     public Equipamento() {
     }
