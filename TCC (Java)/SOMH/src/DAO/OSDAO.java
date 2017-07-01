@@ -14,6 +14,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Timestamp;
+import java.time.ZoneOffset;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -54,7 +56,7 @@ public class OSDAO implements OSDAOInterface {
             }
             
             sql = "INSERT INTO os (cod_cpf_cnpj, seq_equipto, "
-            +"txt_reclamacao, txt_observacao_acessorio) VALUES (?,?,?,?)";
+            +"txt_reclamacao, txt_observacao_acessorios) VALUES (?,?,?,?)";
             pstmt = conexao.prepareStatement(sql);
             
             pstmt.setString(1, os.getCod_Cpf_Cnpj());
@@ -72,10 +74,10 @@ public class OSDAO implements OSDAOInterface {
                 osStatus.setNro_OS(nro_OS);
             }
             
-            rs = pstmt.executeQuery("SELECT nom_acessrio FROM acessorio");
+            rs = pstmt.executeQuery("SELECT nom_acessorio FROM acessorio");
             ArrayList cadastrados = new ArrayList();
             while(rs.next()) {
-                cadastrados.add(rs.getInt(1));
+                cadastrados.add(rs.getString(1));
             }
             for(int i=0; i<acessorios.size(); i++) {
                 if(!(cadastrados.contains(acessorios.get(i).getNom_Acessorio()))) {
@@ -95,7 +97,7 @@ public class OSDAO implements OSDAOInterface {
                 }
                 
                 sql = "INSERT INTO osacessorio "
-                + "(nro_OS, cod_acessorioo) VALUES (?,?)";
+                + "(nro_OS, cod_acessorio) VALUES (?,?)";
                 pstmt = conexao.prepareStatement(sql);
                 
                 pstmt.setInt(1, os.getNro_OS());
@@ -105,12 +107,14 @@ public class OSDAO implements OSDAOInterface {
             }
             
             sql = "INSERT INTO osstatus (nro_OS, dat_ocorrencia, cod_usuario,"
-                + " cod_status) VALUES (?,?,?,?)";
+                + " cod_status) VALUES (?, ?,?,?)";
             
             pstmt = conexao.prepareStatement(sql);
             
             pstmt.setInt(1, osStatus.getNro_OS());
-            pstmt.setString(2, DateUtil.format(osStatus.getDat_Ocorrencia()));
+            System.out.println("nao null1");
+            pstmt.setTimestamp(2, new Timestamp(osStatus.getDat_Ocorrencia()));
+            System.out.println("nao null2");
             pstmt.setInt(3, osStatus.getCod_Usuario());
             pstmt.setInt(4, osStatus.getCod_Status());
             

@@ -36,6 +36,7 @@ public class Run extends Application {
     
     
     public Run() {
+        /*
         acessorioData.add(new Acessorio(1,"Mouse"));
         acessorioData.add(new Acessorio(2,"Teclado"));
         acessorioData.add(new Acessorio(3,"Fone de ouvido"));
@@ -44,6 +45,7 @@ public class Run extends Application {
         acessorioData.add(new Acessorio(6,"Microfone"));
         acessorioData.add(new Acessorio(7,"Mouse Bang"));
         acessorioData.add(new Acessorio(8,"HandSpinner"));
+        */
     }
 
     public ObservableList<Acessorio> getAcessorioData() {

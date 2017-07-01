@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ScrollPane?>
@@ -11,13 +14,13 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
 
-<AnchorPane prefHeight="1000.0" prefWidth="615.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.CadastroOSViewController">
+<AnchorPane prefHeight="1000.0" prefWidth="615.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.CadastroOSViewController">
    <children>
       <ScrollPane fx:id="scrollPane" fitToHeight="true" fitToWidth="true" layoutY="-2.0" prefHeight="999.0" prefViewportHeight="835.0" prefViewportWidth="600.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="-2.0">
          <content>
             <AnchorPane layoutX="10.0" layoutY="10.0" prefHeight="917.0" prefWidth="598.0">
                <children>
-                  <HBox alignment="BASELINE_LEFT" layoutY="39.0" prefHeight="960.0" prefWidth="598.0" AnchorPane.bottomAnchor="-2.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+                  <HBox alignment="CENTER" layoutY="39.0" prefHeight="960.0" prefWidth="598.0" AnchorPane.bottomAnchor="-2.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
                      <children>
                         <Pane layoutY="36.0" prefHeight="805.0" prefWidth="598.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="37.0">
                            <children>
@@ -35,7 +38,7 @@
                               <Label layoutX="26.0" layoutY="532.0" text="Cadastrar Acessório:" />
                               <TextField fx:id="nroSerie" layoutX="346.0" layoutY="252.0" prefHeight="25.0" prefWidth="122.0" />
                               <Label layoutX="12.0" layoutY="8.0" text="Cliente" underline="true" AnchorPane.leftAnchor="12.0" />
-                              <Button fx:id="criar" alignment="CENTER" contentDisplay="RIGHT" layoutX="498.0" layoutY="915.0" maxHeight="31.0" maxWidth="90.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="90.0" style="-fx-background-color: #000000;" text="Criar" textFill="WHITE" AnchorPane.rightAnchor="10.0" />
+                              <Button fx:id="criar" alignment="CENTER" contentDisplay="RIGHT" layoutX="498.0" layoutY="915.0" maxHeight="31.0" maxWidth="90.0" mnemonicParsing="false" onAction="#criaOS" prefHeight="31.0" prefWidth="90.0" style="-fx-background-color: #000000;" text="Criar" textFill="WHITE" AnchorPane.rightAnchor="10.0" />
                               <TextField fx:id="nomeAcessorioCadastro" layoutX="143.0" layoutY="528.0" prefHeight="25.0" prefWidth="241.0" />
                               <Label layoutX="17.0" layoutY="715.0" text="Problema" underline="true" />
                               <TextField fx:id="modelo" layoutX="346.0" layoutY="191.0" prefHeight="25.0" prefWidth="122.0" />
@@ -61,8 +64,8 @@
                                     </TableView>
                                  </content>
                               </ScrollPane>
-                              <Button fx:id="adicionaAcessorio" layoutX="199.0" layoutY="390.0" mnemonicParsing="false" text="&gt;" />
-                              <Button fx:id="removeAcessorio" layoutX="199.0" layoutY="424.0" mnemonicParsing="false" text="&lt;" />
+                              <Button fx:id="adicionaAcessorio" layoutX="199.0" layoutY="390.0" mnemonicParsing="false" onAction="#selecionaAcessorio" text="&gt;" />
+                              <Button fx:id="removeAcessorio" layoutX="199.0" layoutY="424.0" mnemonicParsing="false" onAction="#removeAcessorio" text="&lt;" />
                               <ScrollPane layoutX="239.0" layoutY="314.0" prefHeight="200.0" prefViewportHeight="200.0" prefViewportWidth="161.0" prefWidth="161.0">
                                  <content>
                                     <TableView fx:id="acessoriosSelecionados" layoutX="15.0" layoutY="308.0" prefHeight="198.0" prefWidth="159.0">

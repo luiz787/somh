@@ -6,20 +6,21 @@
 package Model;
 import java.sql.Date;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 /**
  *
  * @author andro
  */
 public class OSStatus {
     private int nro_OS;
-    private LocalDate dat_Ocorrencia;
-    private int cod_Usuario;
-    private int cod_Status;
+    private Long dat_Ocorrencia;
+    private Integer cod_Usuario;
+    private Integer cod_Status;
 
     public OSStatus() {
     }
 
-    public OSStatus(int nro_OS, LocalDate dat_Ocorrencia, int cod_Usuario, int cod_Status) {
+    public OSStatus(int nro_OS, Long dat_Ocorrencia, int cod_Usuario, int cod_Status) {
         this.nro_OS = nro_OS;
         this.dat_Ocorrencia = dat_Ocorrencia;
         this.cod_Usuario = cod_Usuario;
@@ -36,11 +37,11 @@ public class OSStatus {
         this.nro_OS = nro_OS;
     }
 
-    public LocalDate getDat_Ocorrencia() {
+    public Long getDat_Ocorrencia() {
         return dat_Ocorrencia;
     }
 
-    public void setDat_Ocorrencia(LocalDate dat_Ocorrencia) {
+    public void setDat_Ocorrencia(Long dat_Ocorrencia) {
         this.dat_Ocorrencia = dat_Ocorrencia;
     }
 
