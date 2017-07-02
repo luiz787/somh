@@ -73,48 +73,57 @@ public class OSDAO implements OSDAOInterface {
                 os.setNro_OS(nro_OS);
                 osStatus.setNro_OS(nro_OS);
             }
-            
-            rs = pstmt.executeQuery("SELECT nom_acessorio FROM acessorio");
-            ArrayList cadastrados = new ArrayList();
-            while(rs.next()) {
-                cadastrados.add(rs.getString(1));
-            }
-            for(int i=0; i<acessorios.size(); i++) {
-                if(!(cadastrados.contains(acessorios.get(i).getNom_Acessorio()))) {
-                    sql = "INSERT INTO acessorio (nom_acessorio) VALUES (?)";
-                    pstmt = conexao.prepareStatement(sql);
-
-                    pstmt.setString(1, acessorios.get(i).getNom_Acessorio());
+            if(!(acessorios.isEmpty())) {
+                rs = pstmt.executeQuery("SELECT * FROM acessorio");
+                ArrayList<Acessorio> cadastrados = new ArrayList<Acessorio>();
+                ArrayList<String> cadastradosString = new ArrayList<String>();
+                while(rs.next()) {
+                    cadastrados.add(new Acessorio(rs.getInt(1), rs.getString(2)));
+                    cadastradosString.add(rs.getString(2));
+                }
+                for(int i=0; i<acessorios.size(); i++) {
                     
-                    pstmt.executeUpdate();
+                    if(!(cadastradosString.contains(acessorios.get(i).getNom_Acessorio()))) {
+                        sql = "INSERT INTO acessorio (nom_acessorio) VALUES (?)";
+                        pstmt = conexao.prepareStatement(sql);
 
-                    rs = pstmt.executeQuery("SELECT LAST_INSERT_ID() FROM acessorio");
+                        pstmt.setString(1, acessorios.get(i).getNom_Acessorio());
 
-                    if(rs.next()) {
-                        int cod_acessorio = rs.getInt(1);
-                        acessorios.get(i).setCod_Acessorio(cod_acessorio);
+                        pstmt.executeUpdate();
+
+                        rs = pstmt.executeQuery("SELECT LAST_INSERT_ID() FROM acessorio");
+
+                        if(rs.next()) {
+                            int cod_acessorio = rs.getInt(1);
+                            acessorios.get(i).setCod_Acessorio(cod_acessorio);
+                        }
+                        sql = "INSERT INTO osacessorio "
+                        + "(nro_OS, cod_acessorio) VALUES (?,?)";
+                        pstmt = conexao.prepareStatement(sql);
+
+                        pstmt.setInt(1, os.getNro_OS());
+                        pstmt.setInt(2, acessorios.get(i).getCod_Acessorio());
+
+                        pstmt.executeUpdate();
+                    } else {
+                        sql = "INSERT INTO osacessorio "
+                        + "(nro_OS, cod_acessorio) VALUES (?,?)";
+                        pstmt = conexao.prepareStatement(sql);
+
+                        pstmt.setInt(1, os.getNro_OS());
+                        pstmt.setInt(2, cadastrados.get(cadastradosString.indexOf(acessorios.get(i).getNom_Acessorio())).getCod_Acessorio());
+
+                        pstmt.executeUpdate();
                     }
                 }
-                
-                sql = "INSERT INTO osacessorio "
-                + "(nro_OS, cod_acessorio) VALUES (?,?)";
-                pstmt = conexao.prepareStatement(sql);
-                
-                pstmt.setInt(1, os.getNro_OS());
-                pstmt.setInt(2, acessorios.get(i).getCod_Acessorio());
-                
-                pstmt.executeUpdate();
             }
-            
             sql = "INSERT INTO osstatus (nro_OS, dat_ocorrencia, cod_usuario,"
                 + " cod_status) VALUES (?, ?,?,?)";
             
             pstmt = conexao.prepareStatement(sql);
             
             pstmt.setInt(1, osStatus.getNro_OS());
-            System.out.println("nao null1");
             pstmt.setTimestamp(2, new Timestamp(osStatus.getDat_Ocorrencia()));
-            System.out.println("nao null2");
             pstmt.setInt(3, osStatus.getCod_Usuario());
             pstmt.setInt(4, osStatus.getCod_Status());
             
@@ -125,6 +134,7 @@ public class OSDAO implements OSDAOInterface {
             conexao.close();
             
         } catch (Exception ex) {
+            System.out.println(ex.getCause());
             throw new OSDAOException(ex);
         }
     }
