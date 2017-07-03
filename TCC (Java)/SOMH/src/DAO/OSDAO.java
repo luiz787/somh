@@ -41,9 +41,22 @@ public class OSDAO implements OSDAOInterface {
             
             pstmt.setString(1, equipamento.getDes_Marca());
             pstmt.setString(2, equipamento.getDes_Equipto());
-            pstmt.setString(3, equipamento.getDes_Modelo());
-            pstmt.setString(4, equipamento.getDes_Componentes());
-            pstmt.setInt(5, equipamento.getNro_Serie());
+            
+            if(equipamento.getDes_Modelo()!=null) {
+                pstmt.setString(3, equipamento.getDes_Modelo());
+            } else {
+                pstmt.setNull(3, java.sql.Types.NULL);
+            }
+            if(equipamento.getDes_Componentes()!=null) {
+                pstmt.setString(4, equipamento.getDes_Componentes());
+            } else {
+                pstmt.setNull(4, java.sql.Types.NULL);
+            }
+            if(equipamento.getNro_Serie()!=null) {
+                pstmt.setLong(5, equipamento.getNro_Serie());
+            } else {
+                pstmt.setNull(5, java.sql.Types.NULL);
+            }
             
             pstmt.executeUpdate();
             
@@ -59,10 +72,15 @@ public class OSDAO implements OSDAOInterface {
             +"txt_reclamacao, txt_observacao_acessorios) VALUES (?,?,?,?)";
             pstmt = conexao.prepareStatement(sql);
             
+            
             pstmt.setString(1, os.getCod_Cpf_Cnpj());
             pstmt.setInt(2, os.getSeq_Equipto());
             pstmt.setString(3, os.getTxt_Reclamacao());
-            pstmt.setString(4, os.getTxt_Observacao_Acessorios());
+            if(os.getTxt_Observacao_Acessorios()!=null && !(os.getTxt_Observacao_Acessorios().isEmpty())) {
+                pstmt.setString(4, os.getTxt_Observacao_Acessorios());
+            } else {
+                pstmt.setNull(4, java.sql.Types.NULL);
+            }
             
             pstmt.executeUpdate();
             
