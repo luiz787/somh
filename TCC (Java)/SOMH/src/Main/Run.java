@@ -36,18 +36,26 @@ public class Run extends Application {
     
     
     public Run() {
-        /*
-        acessorioData.add(new Acessorio(1,"Mouse"));
-        acessorioData.add(new Acessorio(2,"Teclado"));
-        acessorioData.add(new Acessorio(3,"Fone de ouvido"));
-        acessorioData.add(new Acessorio(4,"Mousepad"));
-        acessorioData.add(new Acessorio(5,"Monitor"));
-        acessorioData.add(new Acessorio(6,"Microfone"));
-        acessorioData.add(new Acessorio(7,"Mouse Bang"));
-        acessorioData.add(new Acessorio(8,"HandSpinner"));
-        */
     }
 
+    public Stage getPrimaryStage() {
+        return primaryStage;
+    }
+
+    public void setPrimaryStage(Stage primaryStage) {
+        this.primaryStage = primaryStage;
+    }
+
+    public BorderPane getRootLayout() {
+        return rootLayout;
+    }
+
+    public void setRootLayout(BorderPane rootLayout) {
+        this.rootLayout = rootLayout;
+    }
+
+    
+    
     public ObservableList<Acessorio> getAcessorioData() {
         return acessorioData;
     }

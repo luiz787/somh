@@ -15,12 +15,12 @@ public class Equipamento {
     private String des_Equipto;
     private String des_Modelo;
     private String des_Componentes;
-    private Integer nro_Serie;
+    private Long nro_Serie;
 
     public Equipamento() {
     }
 
-    public Equipamento(int seq_Equipto, String des_Marca, String des_Equipto, String des_Modelo, String des_Componentes, int nro_Serie) {
+    public Equipamento(int seq_Equipto, String des_Marca, String des_Equipto, String des_Modelo, String des_Componentes, Long nro_Serie) {
         this.seq_Equipto = seq_Equipto;
         this.des_Marca = des_Marca;
         this.des_Equipto = des_Equipto;
@@ -70,11 +70,11 @@ public class Equipamento {
         this.des_Modelo = des_Modelo;
     }
 
-    public int getNro_Serie() {
+    public Long getNro_Serie() {
         return nro_Serie;
     }
 
-    public void setNro_Serie(int nro_Serie) {
+    public void setNro_Serie(Long nro_Serie) {
         this.nro_Serie = nro_Serie;
     }
     

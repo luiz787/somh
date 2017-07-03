@@ -14,8 +14,8 @@ import java.time.LocalDateTime;
 public class OSStatus {
     private int nro_OS;
     private Long dat_Ocorrencia;
-    private Integer cod_Usuario;
-    private Integer cod_Status;
+    private int cod_Usuario;
+    private int cod_Status;
 
     public OSStatus() {
     }

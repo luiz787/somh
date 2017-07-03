@@ -14,6 +14,7 @@ import Model.DateUtil;
 import Model.Equipamento;
 import Model.OS;
 import Model.OSStatus;
+import java.io.IOException;
 import java.net.URL;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -27,6 +28,7 @@ import java.util.logging.Logger;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
@@ -38,6 +40,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.AnchorPane;
 
 /**
  * FXML Controller class
@@ -241,10 +244,10 @@ public class CadastroOSViewController implements Initializable {
                 equipamento.setDes_Componentes(componentes.getText());
             }
             if(!(nroSerie.getText().isEmpty())) {
-                equipamento.setNro_Serie(Integer.parseInt(nroSerie.getText()));
+                equipamento.setNro_Serie(Long.parseLong(nroSerie.getText()));
             }
             
-            os.setCod_Cpf_Cnpj("21314");//Substituir quando cliente estiver pronto
+            os.setCod_Cpf_Cnpj("15771757517");//Substituir quando cliente estiver pronto
             /*
             conexao = JDBCManterConexao.getInstancia().getConexao();
             sql="";
@@ -270,7 +273,7 @@ public class CadastroOSViewController implements Initializable {
             }
             
             osStatus.setDat_Ocorrencia(System.currentTimeMillis());
-            osStatus.setCod_Usuario(1);//Substituir quando login estiver pronto
+            osStatus.setCod_Usuario(1234567);//Substituir quando login estiver pronto
             /*
             conexao = JDBCManterConexao.getInstancia().getConexao();
             sql="";
@@ -356,9 +359,9 @@ public class CadastroOSViewController implements Initializable {
         if(!acessoriosCadastrados.getSelectionModel().getSelectedItems().isEmpty()) {
             try {
                 ObservableList<Acessorio> novoAcessorioData = FXCollections.observableArrayList();
-                ArrayList<String> acessoriosSelecionados = new ArrayList<>();
+                ArrayList<String> acessoriosSelecionadosString = new ArrayList<>();
                 for (int i=0; i<acessoriosCadastrados.getSelectionModel().getSelectedItems().size(); i++) {
-                    acessoriosSelecionados.add(acessoriosCadastrados.getSelectionModel().getSelectedItems().get(i).getNom_Acessorio());
+                    acessoriosSelecionadosString.add(acessoriosCadastrados.getSelectionModel().getSelectedItems().get(i).getNom_Acessorio());
                 }
                 conexao = JDBCManterConexao.getInstancia().getConexao();
                 
@@ -369,16 +372,22 @@ public class CadastroOSViewController implements Initializable {
                 rs = pstmt.executeQuery();
                 int erro=0;
                 while(rs.next() && erro==0) {
-                    if(acessoriosSelecionados.contains(rs.getString(1))) {
+                    if(acessoriosSelecionadosString.contains(rs.getString(1))) {
                         erro=1;
                     }
-                }  
+                }
+                for(int i=0; i<acessoriosSelecionados.getItems().size(); i++) {
+                    if(acessoriosSelecionadosString.contains(
+                        acessoriosSelecionados.getItems().get(i).getNom_Acessorio())) {
+                        erro=2;
+                    }
+                }
                 
                 if(erro==0) {
-                    for (int i=0; i<acessoriosSelecionados.size(); i++) {
+                    for (int i=0; i<acessoriosSelecionadosString.size(); i++) {
                         sql="DELETE FROM acessorio WHERE nom_acessorio = ?";
                         pstmt = conexao.prepareStatement(sql);
-                        pstmt.setString(1, acessoriosSelecionados.get(i));
+                        pstmt.setString(1, acessoriosSelecionadosString.get(i));
                         pstmt.executeUpdate();
                     }
                     rs = pstmt.executeQuery("SELECT nom_acessorio FROM acessorio");
@@ -387,12 +396,20 @@ public class CadastroOSViewController implements Initializable {
                             novoAcessorioData.add(new Acessorio((index),rs.getString(1)));
                     }
                     acessoriosCadastrados.setItems(novoAcessorioData);
-                } else {
+                } else if(erro==1) {
                     Alert alert = new Alert(AlertType.ERROR);
                     alert.setTitle("Cadastro de OS");
                     alert.setHeaderText("Erro");
                     alert.setContentText("Você não pode excluir um acessorio "
                             + "utilizado por uma OS já cadastrada!");
+
+                    alert.showAndWait();
+                } else {
+                    Alert alert = new Alert(AlertType.ERROR);
+                    alert.setTitle("Cadastro de OS");
+                    alert.setHeaderText("Erro");
+                    alert.setContentText("Você não pode excluir um acessorio "
+                            + "da tabela selecionados!");
 
                     alert.showAndWait();
                 }
@@ -431,6 +448,17 @@ public class CadastroOSViewController implements Initializable {
     @FXML
     private void redirecionaTelaFuncionario() {
         System.out.println("tela de funcionario");
+        try{
+            FXMLLoader loader = new FXMLLoader();
+            
+            loader.setLocation(Run.class.getResource("../View/teste.fxml"));
+            AnchorPane TelaFuncionario = (AnchorPane) loader.load();
+            
+            run.getRootLayout().setCenter(TelaFuncionario);
+        
+        } catch (IOException ex) {
+            Logger.getLogger(Run.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
     
 }
