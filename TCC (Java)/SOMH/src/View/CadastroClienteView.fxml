@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.SplitMenuButton?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+
+<AnchorPane prefHeight="1000.0" prefWidth="615.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.CadastroOSViewController">
+   <children>
+      <ScrollPane fx:id="scrollPane" fitToHeight="true" fitToWidth="true" layoutY="-2.0" prefHeight="999.0" prefViewportHeight="835.0" prefViewportWidth="600.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="-2.0">
+         <content>
+            <AnchorPane fx:id="fundo" layoutX="10.0" layoutY="10.0" prefHeight="917.0" prefWidth="598.0">
+               <children>
+                  <HBox fx:id="hbox" alignment="CENTER" layoutY="39.0" prefHeight="960.0" prefWidth="598.0" stylesheets="@CSS%20Botao.css" AnchorPane.bottomAnchor="-2.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+                     <children>
+                        <Pane prefHeight="894.0" prefWidth="618.0">
+                           <children>
+                              <Label layoutX="23.0" layoutY="59.0" text="Informações gerais:" underline="true" />
+                              <TextField layoutX="137.0" layoutY="122.0" prefHeight="25.0" prefWidth="292.0" />
+                              <Label layoutX="34.0" layoutY="126.0" text="Nome do Cliente:" />
+                              <TextField layoutX="143.0" layoutY="165.0" prefHeight="25.0" />
+                              <Label layoutX="80.0" layoutY="217.0" text="Email:" />
+                              <TextField layoutX="137.0" layoutY="213.0" prefHeight="25.0" prefWidth="292.0" />
+                              <Label layoutX="34.0" layoutY="270.0" text="Telefone Fixo:" />
+                              <TextField layoutX="118.0" layoutY="266.0" prefHeight="25.0" prefWidth="130.0" />
+                              <Label layoutX="275.0" layoutY="270.0" text="Telefone Celular:" />
+                              <TextField layoutX="372.0" layoutY="266.0" prefHeight="25.0" prefWidth="136.0" />
+                              <Label layoutX="65.0" layoutY="169.0" text="CPF/CNPJ:" />
+                              <Label layoutX="65.0" layoutY="338.0" text="Endereço:" underline="true" />
+                              <Label layoutX="74.0" layoutY="408.0" text="CEP:" />
+                              <TextField layoutX="116.0" layoutY="404.0" prefHeight="25.0" prefWidth="90.0" />
+                              <Label layoutX="243.0" layoutY="408.0" text="Estado:" />
+                              <SplitMenuButton layoutX="287.0" layoutY="404.0" mnemonicParsing="false" text="...">
+                                 <items>
+                                    <MenuItem mnemonicParsing="false" text="Action 1" />
+                                    <MenuItem mnemonicParsing="false" text="Action 2" />
+                                 </items>
+                              </SplitMenuButton>
+                              <Label layoutX="74.0" layoutY="465.0" text="Cidade:" />
+                              <TextField layoutX="137.0" layoutY="461.0" prefHeight="25.0" prefWidth="290.0" />
+                              <Label layoutX="80.0" layoutY="517.0" text="Rua:" />
+                              <TextField layoutX="137.0" layoutY="513.0" prefHeight="25.0" prefWidth="296.0" />
+                              <Label layoutX="463.0" layoutY="517.0" text="Número:" />
+                              <TextField layoutX="519.0" layoutY="513.0" prefHeight="25.0" prefWidth="34.0" />
+                              <Label layoutX="46.0" layoutY="566.0" text="Complemento:" />
+                              <TextField layoutX="137.0" layoutY="562.0" />
+                              <Label layoutX="126.0" layoutY="123.0" text="*" textFill="RED" />
+                              <Label layoutX="119.0" layoutY="165.0" text="*" textFill="RED" />
+                              <Label layoutX="112.0" layoutY="213.0" text="*" textFill="RED" />
+                              <Label layoutX="363.0" layoutY="267.0" text="*" textFill="RED" />
+                              <Label layoutX="98.0" layoutY="403.0" text="*" textFill="RED" />
+                              <Label layoutX="280.0" layoutY="404.0" text="*" textFill="RED" />
+                              <Label layoutX="115.0" layoutY="461.0" text="*" textFill="RED" />
+                              <Label layoutX="105.0" layoutY="514.0" text="*" textFill="RED" />
+                              <Button fx:id="criar" alignment="CENTER" contentDisplay="RIGHT" layoutX="438.0" layoutY="828.0" maxHeight="31.0" maxWidth="90.0" mnemonicParsing="false" onAction="#cadastraCliente" prefHeight="31.0" prefWidth="90.0" stylesheets="@CSS%20Botao.css" text="Cadastrar" textFill="WHITE" />
+                              <Button fx:id="criar1" alignment="CENTER" contentDisplay="RIGHT" layoutX="92.0" layoutY="828.0" maxHeight="31.0" maxWidth="90.0" mnemonicParsing="false" onAction="#criaOS" prefHeight="31.0" prefWidth="90.0" stylesheets="@CSS%20Botao.css" text="Cancelar" textFill="WHITE" />
+                              <Label fx:id="faixa1" alignment="CENTER" prefHeight="39.0" prefWidth="625.0" stylesheets="@CSS%20Botao.css" text="Cadastro de Cliente" textAlignment="JUSTIFY" textFill="WHITE" />
+                           </children>
+                        </Pane>
+                     </children>
+                  </HBox>
+                  <Label fx:id="faixa" alignment="CENTER" prefHeight="39.0" prefWidth="600.0" stylesheets="@CSS%20Botao.css" text="Cadastro de Cliente" textAlignment="JUSTIFY" textFill="WHITE" AnchorPane.bottomAnchor="958.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
+               </children>
+            </AnchorPane>
+         </content>
+      </ScrollPane>
+   </children>
+</AnchorPane>
