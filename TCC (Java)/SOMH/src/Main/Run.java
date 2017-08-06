@@ -5,7 +5,7 @@
  */
 package Main;
 
-import Model.Acessorio;
+import Domain.Acessorio;
 import Controller.CadastroOSViewController;
 import java.io.IOException;
 import java.time.LocalDate;
