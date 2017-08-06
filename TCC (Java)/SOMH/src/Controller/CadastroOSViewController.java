@@ -5,15 +5,15 @@
  */
 package Controller;
 
-import DAO.OSDAOException;
-import DAO.JDBCManterConexao;
-import DAO.OSDAO;
+import DAO.OSDAOException_oldVersion;
+import BD.JDBCManterConexao;
+import DAOImpl.OSDAO_oldVersion;
 import Main.Run;
-import Model.Acessorio;
-import Model.DateUtil;
-import Model.Equipamento;
-import Model.OS;
-import Model.OSStatus;
+import Domain.Acessorio;
+import Data.DateUtil;
+import Domain.Equipamento;
+import Domain.OS;
+import Domain.OSStatus;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.Connection;
@@ -211,14 +211,14 @@ public class CadastroOSViewController implements Initializable {
     }
     
     @FXML
-    private void criaOS() throws OSDAOException {
+    private void criaOS() throws OSDAOException_oldVersion {
         try {
             Connection conexao;
             String sql;
             PreparedStatement pstmt;
             ResultSet rs;
             
-            OSDAO daoOS = new OSDAO();
+            OSDAO_oldVersion daoOS = new OSDAO_oldVersion();
             Equipamento equipamento = new Equipamento();
             OS os = new OS();
             ArrayList<Acessorio> acessorios = new ArrayList<Acessorio>();

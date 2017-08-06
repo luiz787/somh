@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package DAO;
+package BD;
 
 import java.sql.Connection;
 import java.sql.SQLException;
@@ -31,7 +31,7 @@ public class JDBCManterConexao {
         return conexao;
     }
 
-    public Connection getConexao() throws Exception {
+    public Connection getConexao() throws ClassNotFoundException, SQLException {
 
         return JDBCManterConexao.conFabrica.getConexao();
     }
