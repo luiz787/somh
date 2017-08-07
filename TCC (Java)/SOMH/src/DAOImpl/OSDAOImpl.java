@@ -71,6 +71,11 @@ public class OSDAOImpl implements OSDAO {
             } else {
                 pstmt.setNull(6, java.sql.Types.NULL);
             }
+            if(os.getVlrFrete()!=null) {
+                pstmt.setDouble(7, os.getVlrFrete());
+            } else {
+                pstmt.setNull(7, java.sql.Types.NULL);
+            }
             
             pstmt.executeUpdate();
             
@@ -209,7 +214,7 @@ public class OSDAOImpl implements OSDAO {
         try {
             Connection connection = JDBCManterConexao.getInstancia().getConexao();
 
-            String sql = "SELECT * FROM os ORDER BY cod_os;";
+            String sql = "SELECT * FROM os ORDER BY nro_os;";
 
             PreparedStatement pstmt = connection.prepareStatement(sql);
             ResultSet rs = pstmt.executeQuery();

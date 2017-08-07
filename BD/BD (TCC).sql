@@ -13,6 +13,7 @@ CREATE INDEX `IX_Relationship1` ON `Usuario` (`cod_perfil`)
 
 ALTER TABLE `Usuario` ADD UNIQUE `nom_usuario` (`nom_usuario`)
 ;
+
 CREATE TABLE `Perfil`
 (
   `cod_perfil` Int NOT NULL,
@@ -22,6 +23,7 @@ CREATE TABLE `Perfil`
 
 ALTER TABLE `Perfil` ADD  PRIMARY KEY (`cod_perfil`)
 ;
+
 CREATE TABLE `Cliente`
 (
   `cod_cpf_cnpj` Char(14) NOT NULL,
@@ -44,6 +46,7 @@ CREATE INDEX `IX_Relationship4` ON `Cliente` (`nro_cep`,`cod_cidade`,`cod_UF`)
 
 ALTER TABLE `Cliente` ADD  PRIMARY KEY (`cod_cpf_cnpj`)
 ;
+
 CREATE TABLE `CEP`
 (
   `cod_UF` Char(2) NOT NULL,
@@ -54,6 +57,7 @@ CREATE TABLE `CEP`
 
 ALTER TABLE `CEP` ADD  PRIMARY KEY (`nro_cep`,`cod_cidade`,`cod_UF`)
 ;
+
 CREATE TABLE `UF`
 (
   `cod_UF` Char(2) NOT NULL,
@@ -63,6 +67,7 @@ CREATE TABLE `UF`
 
 ALTER TABLE `UF` ADD  PRIMARY KEY (`cod_UF`)
 ;
+
 CREATE TABLE `Cidade`
 (
   `cod_UF` Char(2) NOT NULL,
@@ -73,6 +78,7 @@ CREATE TABLE `Cidade`
 
 ALTER TABLE `Cidade` ADD  PRIMARY KEY (`cod_cidade`,`cod_UF`)
 ;
+
 CREATE TABLE `OS`
 (
   `nro_OS` Bigint UNSIGNED NOT NULL AUTO_INCREMENT,
@@ -92,6 +98,7 @@ CREATE INDEX `IX_Relationship25` ON `OS` (`cod_cpf_cnpj`)
 
 CREATE INDEX `IX_Relationship29` ON `OS` (`seq_equipto`)
 ;
+
 CREATE TABLE `Status`
 (
   `cod_status` Int NOT NULL,
@@ -101,6 +108,7 @@ CREATE TABLE `Status`
 
 ALTER TABLE `Status` ADD  PRIMARY KEY (`cod_status`)
 ;
+
 CREATE TABLE `Equipamento`
 (
   `seq_equipto` Bigint UNSIGNED NOT NULL AUTO_INCREMENT,
@@ -112,6 +120,7 @@ CREATE TABLE `Equipamento`
   PRIMARY KEY (`seq_equipto`)
 )
 ;
+
 CREATE TABLE `Acessorio`
 (
   `cod_acessorio` Bigint UNSIGNED NOT NULL AUTO_INCREMENT,
@@ -119,6 +128,7 @@ CREATE TABLE `Acessorio`
   PRIMARY KEY (`cod_acessorio`)
 )
 ;
+
 CREATE TABLE `Peca`
 (
   `cod_peca` Bigint UNSIGNED NOT NULL AUTO_INCREMENT,
@@ -128,6 +138,7 @@ CREATE TABLE `Peca`
   PRIMARY KEY (`cod_peca`)
 )
 ;
+
 CREATE TABLE `Servico`
 (
   `cod_servico` Bigint UNSIGNED NOT NULL AUTO_INCREMENT,
@@ -137,6 +148,7 @@ CREATE TABLE `Servico`
   PRIMARY KEY (`cod_servico`)
 )
 ;
+
 CREATE TABLE `Programa`
 (
   `cod_programa` Int NOT NULL,
@@ -146,6 +158,7 @@ CREATE TABLE `Programa`
 
 ALTER TABLE `Programa` ADD  PRIMARY KEY (`cod_programa`)
 ;
+
 CREATE TABLE `PerfilAcesso`
 (
   `cod_perfil` Int NOT NULL,
@@ -156,6 +169,7 @@ CREATE TABLE `PerfilAcesso`
 
 ALTER TABLE `PerfilAcesso` ADD  PRIMARY KEY (`cod_perfil`,`cod_programa`)
 ;
+
 CREATE TABLE `OSStatus`
 (
   `nro_OS` Bigint UNSIGNED NOT NULL,
@@ -173,6 +187,7 @@ CREATE INDEX `IX_Relationship10` ON `OSStatus` (`cod_status`)
 
 ALTER TABLE `OSStatus` ADD  PRIMARY KEY (`nro_OS`,`dat_ocorrencia`)
 ;
+
 CREATE TABLE `OSAcessorio`
 (
   `nro_OS` Bigint UNSIGNED NOT NULL,
@@ -182,6 +197,7 @@ CREATE TABLE `OSAcessorio`
 
 ALTER TABLE `OSAcessorio` ADD  PRIMARY KEY (`nro_OS`,`cod_acessorio`)
 ;
+
 CREATE TABLE `OSItemPeca`
 (
   `nro_OS` Bigint UNSIGNED NOT NULL,
@@ -197,6 +213,7 @@ CREATE INDEX `IX_Relationship21` ON `OSItemPeca` (`cod_peca`)
 
 ALTER TABLE `OSItemPeca` ADD  PRIMARY KEY (`nro_OS`)
 ;
+
 CREATE TABLE `OSItemServico`
 (
   `nro_OS` Bigint UNSIGNED NOT NULL,
@@ -212,6 +229,7 @@ CREATE INDEX `IX_Relationship24` ON `OSItemServico` (`cod_servico`)
 
 ALTER TABLE `OSItemServico` ADD  PRIMARY KEY (`nro_OS`)
 ;
+
 ALTER TABLE `Usuario` ADD CONSTRAINT `Relationship1` FOREIGN KEY (`cod_perfil`) REFERENCES `Perfil` (`cod_perfil`) ON DELETE RESTRICT ON UPDATE RESTRICT
 ;
 

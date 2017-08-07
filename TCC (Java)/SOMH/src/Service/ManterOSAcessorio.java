@@ -10,4 +10,5 @@ public interface ManterOSAcessorio {
     public OSAcessorio deletarOSAcessorio(Long idOS, Long idAcessorio) throws ExcecaoPersistencia;
     public OSAcessorio getOSAcessorioById(Long idOS, Long idAcessorio) throws ExcecaoPersistencia;
     public List<OSAcessorio> getAllByOS(Long id) throws ExcecaoPersistencia;
+    public List<OSAcessorio> getAll() throws ExcecaoPersistencia;
 }

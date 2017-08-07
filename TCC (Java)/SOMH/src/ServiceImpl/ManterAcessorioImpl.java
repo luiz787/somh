@@ -31,5 +31,11 @@ public class ManterAcessorioImpl implements ManterAcessorio{
         List<Acessorio> result = acessorioDAO.listAll();
         return result;
     }
+
+    @Override
+    public Acessorio getAcessorioById(Long id) throws ExcecaoPersistencia {
+        Acessorio result = acessorioDAO.getAcessorioById(id);
+        return result;
+    }
     
 }

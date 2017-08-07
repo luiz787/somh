@@ -20,7 +20,7 @@ import model.exception.ExcecaoPersistencia;*/
  */
 public class JDBCConexaoMySQL implements JDBCFabricaConexao {
     private final static String DRIVER = "com.mysql.jdbc.Driver";
-    private final static String URL = "jdbc:mysql://localhost:3306/quiz";
+    private final static String URL = "jdbc:mysql://localhost:3306/somh";
     private final static String USUARIO = "root";
     private final static String SENHA = "";
 
