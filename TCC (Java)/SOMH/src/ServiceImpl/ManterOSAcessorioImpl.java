@@ -37,4 +37,10 @@ public class ManterOSAcessorioImpl implements ManterOSAcessorio{
         List<OSAcessorio> result = osAcessorioDAO.listAllByOS(id);
         return result;
     }
+
+    @Override
+    public List<OSAcessorio> getAll() throws ExcecaoPersistencia {
+        List<OSAcessorio> result = osAcessorioDAO.listAll();
+        return result;
+    }
 }

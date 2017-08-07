@@ -197,7 +197,7 @@ public class EquipamentoDAOImpl implements EquipamentoDAO{
         try {
             Connection connection = JDBCManterConexao.getInstancia().getConexao();
 
-            String sql = "SELECT * FROM equipamento WHERE cod_equipamento = ?";
+            String sql = "SELECT * FROM equipamento WHERE seq_equipto = ?";
 
             PreparedStatement pstmt = connection.prepareStatement(sql);
             pstmt.setLong(1, id);

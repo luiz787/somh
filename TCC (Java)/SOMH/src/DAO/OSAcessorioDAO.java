@@ -9,4 +9,5 @@ public interface OSAcessorioDAO {
     public OSAcessorio delete(Long idOS, Long idAcessorio) throws ExcecaoPersistencia;
     public OSAcessorio getOSAcessorioById(Long idOS, Long idAcessorio) throws ExcecaoPersistencia;
     public List<OSAcessorio> listAllByOS(Long id) throws ExcecaoPersistencia;
+    public List<OSAcessorio> listAll() throws ExcecaoPersistencia;
 }

@@ -154,5 +154,39 @@ public class OSAcessorioDAOImpl implements OSAcessorioDAO{
             throw new ExcecaoPersistencia(ex);
         }
     }
+
+    @Override
+    public List<OSAcessorio> listAll() throws ExcecaoPersistencia {
+        try {
+            Connection connection = JDBCManterConexao.getInstancia().getConexao();
+
+            String sql = "SELECT * FROM osacessorio ORDER BY nro_OS;";
+
+            PreparedStatement pstmt = connection.prepareStatement(sql);
+            ResultSet rs = pstmt.executeQuery();
+
+            List<OSAcessorio> listAll = new ArrayList<>();
+            OSDAO osDAOImpl = OSDAOImpl.getInstance();
+            AcessorioDAO acessorioDAOImpl = AcessorioDAOImpl.getInstance();
+            if (rs.next()) {
+                do {
+                    OSAcessorio osAcessorio = new OSAcessorio(
+                        osDAOImpl.getOSById(rs.getLong("nro_OS")),
+                        acessorioDAOImpl.getAcessorioById(rs.getLong("cod_acessorio"))
+                    );
+                    listAll.add(osAcessorio);
+                } while (rs.next());
+            }
+            
+            rs.close();
+            pstmt.close();
+            connection.close();
+
+            return listAll;
+        } catch (ClassNotFoundException | SQLException ex) {
+            Logger.getLogger(OSAcessorioDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
+            throw new ExcecaoPersistencia(ex);
+        }
+    }
     
 }
