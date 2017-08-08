@@ -7,6 +7,7 @@ package Main;
 
 import Domain.Acessorio;
 import Controller.CadastroOSViewController;
+import Controller.LoginController;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.util.logging.Level;
@@ -71,6 +72,7 @@ public class Run extends Application {
         this.primaryStage.setTitle("SOHM");
         initRootLayout();
         showCadastroOSView();
+        //showLogin();
     }
 
     
@@ -102,6 +104,19 @@ public class Run extends Application {
             controller.setRun(this);
         
         } catch (IOException ex) {
+            Logger.getLogger(Run.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    public void showLogin(){
+        try {
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(Run.class.getResource("../View/Login.fxml"));
+            AnchorPane Login = (AnchorPane) loader.load();
+            rootLayout.setCenter(Login);
+            LoginController controller = loader.getController();
+            controller.setRun(this);
+        } catch (IOException ex){
             Logger.getLogger(Run.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
