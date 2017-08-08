@@ -14,10 +14,11 @@ import java.util.List;
  *
  * @author aluno
  */
-public interface IManterUsuario {
+public interface ManterUsuario {
     public Long cadastrar(Usuario usuario) throws ExcecaoPersistencia, ExcecaoNegocio;
     public boolean alterar(Usuario usuario) throws ExcecaoPersistencia, ExcecaoNegocio;
     public boolean excluir(Usuario usuario) throws ExcecaoPersistencia, ExcecaoNegocio;
     public List<Usuario> pesquisarTodos() throws ExcecaoPersistencia;
     public Usuario pesquisarPorId(Long id) throws ExcecaoPersistencia;
+    public Usuario getUsuarioByEmailSenha(String email, String senha) throws ExcecaoPersistencia;
 }

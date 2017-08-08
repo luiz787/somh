@@ -71,8 +71,8 @@ public class Run extends Application {
         this.primaryStage = primaryStage;
         this.primaryStage.setTitle("SOHM");
         initRootLayout();
-        showCadastroOSView();
-        //showLogin();
+        //showCadastroOSView();
+        showLogin();
     }
 
     

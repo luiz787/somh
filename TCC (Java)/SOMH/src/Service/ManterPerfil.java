@@ -13,7 +13,7 @@ import java.util.List;
  *
  * @author aluno
  */
-public interface IManterPerfil {
+public interface ManterPerfil {
     public List<Perfil> pesquisarTodos() throws ExcecaoPersistencia;
     public Perfil pesquisarPorId(Long id) throws ExcecaoPersistencia;
 }

@@ -11,15 +11,15 @@ import Domain.Usuario;
 import Exception.ExcecaoNegocio;
 import Exception.ExcecaoPersistencia;
 import java.util.List;
-import Service.IManterUsuario;
+import Service.ManterUsuario;
 
 /**
  *
  * @author aluno
  */
-public class ManterUsuario implements IManterUsuario {
+public class ManterUsuarioImpl implements ManterUsuario {
 
-    public ManterUsuario() {
+    public ManterUsuarioImpl() {
         usuarioDAO = UsuarioDAOImpl.getInstance();
     }
     
@@ -89,6 +89,11 @@ public class ManterUsuario implements IManterUsuario {
     @Override
     public Usuario pesquisarPorId(Long id) throws ExcecaoPersistencia {
         return usuarioDAO.consultarPorId(id);
+    }
+
+    @Override
+    public Usuario getUsuarioByEmailSenha(String email, String senha) throws ExcecaoPersistencia {
+        return usuarioDAO.consultarPorEmailSenha(email, senha);
     }
     
 }

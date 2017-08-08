@@ -10,15 +10,15 @@ import DAOImpl.PerfilDAOImpl;
 import Domain.Perfil;
 import Exception.ExcecaoPersistencia;
 import java.util.List;
-import Service.IManterPerfil;
+import Service.ManterPerfil;
 
 /**
  *
  * @author aluno
  */
-public class ManterPerfil implements IManterPerfil {
+public class ManterPerfilImpl implements ManterPerfil {
 
-    public ManterPerfil() {
+    public ManterPerfilImpl() {
         perfilDAO = PerfilDAOImpl.getInstance();
     }
     PerfilDAO perfilDAO;

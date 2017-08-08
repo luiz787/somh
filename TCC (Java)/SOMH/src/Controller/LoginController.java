@@ -5,9 +5,10 @@
  */
 package Controller;
 
+import Domain.Usuario;
+import Exception.ExcecaoPersistencia;
 import Main.Run;
-import Service.IManterUsuario;
-import ServiceImpl.ManterUsuario;
+import ServiceImpl.ManterUsuarioImpl;
 import java.net.URL;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -18,6 +19,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
+import Service.ManterUsuario;
 
 /**
  *
@@ -33,6 +35,15 @@ public class LoginController implements Initializable {
     private TextField password;
     
     private Run run;
+    private Usuario usuarioLogado;
+
+    public Usuario getUsuarioLogado() {
+        return usuarioLogado;
+    }
+
+    public void setUsuarioLogado(Usuario usuarioLogado) {
+        this.usuarioLogado = usuarioLogado;
+    }
 
     public void setRun(Run run) {
         this.run = run;
@@ -40,34 +51,13 @@ public class LoginController implements Initializable {
     
     
     @FXML
-    private void login(ActionEvent event) {
-        Connection conexao;
-        String sql;
-        PreparedStatement pstmt;
-        ResultSet rs;
+    private void login(ActionEvent event) throws ExcecaoPersistencia {
         String nomeUsuario = user.getText();
         String senha = password.getText();
         System.out.println(nomeUsuario + ", " + senha);
-        IManterUsuario manterUsuario = new ManterUsuario();
-        //Usuario currentUser = manterUsuario.getByUsuarioSenha(nomeUsuario, senha);
-        //int codPerfil = currentUser.getPerfil().getCodigo();
-        try {
-            /*conexao = JDBCManterConexao.getInstancia().getConexao();
-            sql=""SELECT cod_perfil
-                  FROM usuario 
-                  WHERE nom_usuario=(?) 
-                  AND cod_senha = md5((?))"";
-            pstmt.setString(1, nomeUsuario);
-            pstmt.setString(2, senha);
-            pstmt = conexao.prepareStatement(sql);
-            rs = pstmt.executeQuery();
-            codPerfil = rs.getInt(1);*/
-            
-            
-            
-        } catch (Exception ex) {
-            System.out.println("Erro de persistência");
-        }
+        ManterUsuario manterUsuario = new ManterUsuarioImpl();
+        //usuarioLogado = manterUsuario.getUsuarioByEmailSenha(nomeUsuario, senha);
+        //Long codPerfil = usuarioLogado.getPerfil().getId();
     }
 
     @Override
