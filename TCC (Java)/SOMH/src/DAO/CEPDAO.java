@@ -5,10 +5,19 @@
  */
 package DAO;
 
+import Domain.CEP;
+import Exception.ExcecaoPersistencia;
+import java.util.List;
+
 /**
  *
- * @author andro
+ * @author fael
  */
 public interface CEPDAO {
-    
+    public boolean insert(CEP cep) throws ExcecaoPersistencia;
+    public boolean update(CEP cep) throws ExcecaoPersistencia;
+    public CEP delete(int id) throws ExcecaoPersistencia;
+    public CEP getCEPById(int id) throws ExcecaoPersistencia;
+    public List<CEP> listAll() throws ExcecaoPersistencia;
+
 }
