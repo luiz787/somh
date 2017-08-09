@@ -18,6 +18,10 @@
 *.tar.gz
 *.rar
 
+# excecoes de jars necessarios
+!mysql-connector-java-5.1.42-bin.jar
+!controlsfx-8.0.6_20.jar
+
 # virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
 hs_err_pid*
 /TCC (Java)/SOMH/build/
