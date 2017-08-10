@@ -268,19 +268,6 @@ public class CadastroOSViewController implements Initializable {
                 }
             }
             
-            osStatus.setDatOcorrencia(System.currentTimeMillis());
-            usuario.setId((long)(1));//Substituir quando login estiver pronto
-            usuario.setNome("Gabriel Victor");
-            Perfil perfil = new Perfil();
-            perfil.setId((long)1);
-            perfil.setDescricao("Balcão");
-            usuario.setPerfil(perfil);
-            usuario.setSenha("supersenha123");
-            osStatus.setUsuario(usuario);
-            status.setId(1);//Substituir quando login estiver pronto
-            status.setNome("Em orçamento");
-            osStatus.setStatus(status);
-            
             
             Long seqEquipamento = manterEquipamento.cadastrarEquipamento(equipamento);
             equipamento.setId(seqEquipamento);
@@ -309,7 +296,20 @@ public class CadastroOSViewController implements Initializable {
                     boolean check = manterOSAcessorio.cadastrarOSAcessorio(osAcessorio);
                 }
             }
-            System.out.println("OSStatus: "+osStatus.getUsuario().getId());
+            
+            osStatus.setDatOcorrencia(System.currentTimeMillis());
+            usuario.setId((long)(1));//Substituir quando login estiver pronto
+            usuario.setNome("Gabriel Victor");
+            Perfil perfil = new Perfil();
+            perfil.setId((long)1);
+            perfil.setDescricao("Balcão");
+            usuario.setPerfil(perfil);
+            usuario.setSenha("supersenha123");
+            osStatus.setUsuario(usuario);
+            status.setId(1);//Substituir quando login estiver pronto
+            status.setNome("Em orçamento");
+            osStatus.setStatus(status);
+            osStatus.setOs(os);
             manterOSStatus.cadastrarOSStatus(osStatus);
             
             Alert alert = new Alert(AlertType.CONFIRMATION);
