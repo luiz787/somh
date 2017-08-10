@@ -17,5 +17,5 @@ import java.util.List;
 public interface UFDAO {
     public boolean insert(UF uf) throws ExcecaoPersistencia;
     public List<UF> listAll() throws ExcecaoPersistencia;
-     public UF consultarPorId(Long id) throws ExcecaoPersistencia;
+    public UF consultarPorId(Long id) throws ExcecaoPersistencia;
 }
