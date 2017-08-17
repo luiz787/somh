@@ -32,7 +32,7 @@ public class ManterUFImpl implements ManterUF{
     }
 
     @Override
-    public UF getUFById(Long id) throws ExcecaoPersistencia {
+    public UF getUFById(String id) throws ExcecaoPersistencia {
         return ufdao.consultarPorId(id);
     }
 

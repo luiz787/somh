@@ -27,7 +27,7 @@ public class ManterCidadeImpl implements ManterCidade {
     
 
         @Override
-        public boolean cadastrarCidade(Cidade cidade) throws ExcecaoPersistencia, ExcecaoNegocio {
+        public Long cadastrarCidade(Cidade cidade) throws ExcecaoPersistencia, ExcecaoNegocio {
             return cidadeDAO.insert(cidade);
         }
 
