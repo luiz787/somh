@@ -75,7 +75,7 @@ public class CadastroClienteViewController implements Initializable {
     @FXML
     private Button criar;
     @FXML
-    private Button criar1;
+    private Button cancelar;
     @FXML
     private Label faixa1;
     @FXML
@@ -88,12 +88,15 @@ public class CadastroClienteViewController implements Initializable {
     
      public void setRun(Run run) {
         this.run = run;
+        
     }
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
+        
     }    
-
+    @FXML
+    public void Cancelar(ActionEvent event){}
     @FXML
     private void cadastraCliente(ActionEvent event) {
         
@@ -114,7 +117,7 @@ public class CadastroClienteViewController implements Initializable {
            
             
             //Valida os dados no formulário
-                if(!(validacao())) {
+             if(!(validacao())) {
                 Alert alert = new Alert(AlertType.ERROR);
                 alert.setTitle("Cadastro de Cliente");
                 alert.setHeaderText("Erro");
@@ -124,20 +127,20 @@ public class CadastroClienteViewController implements Initializable {
                 throw new Exception("Preencha os campos corretamente!(Campos com * são obrigatórios!)");
             }
             
-            uf = manteruf.getUFById(Long.parseLong(estado.getText()));
+            uf = manteruf.getUFById("MG");
             city.setNome(cidade.getText());
             city.setUf(uf);
-            city.setId(mantercidade.getAll().get(mantercidade.getAll().size()-1).getId()+1);
+            
             cep.setCidade(city);
             cep.setNroCEP(Integer.parseInt(CEP_cliente.getText()));
             
             cliente.setCep(cep);
             cliente.setCodCPF_CNPJ(Long.parseLong(id_cliente.getText()));
             cliente.setEmail(email_cliente.getText());
-            cliente.setNroTelefoneCelular(Integer.parseInt(cel_cliente.getText()));
+            cliente.setNroTelefoneCelular(cel_cliente.getText());
             
             if(!tel_cliente.getText().isEmpty()){
-                cliente.setNroTelefoneFixo(Integer.parseInt(tel_cliente.getText()));
+                cliente.setNroTelefoneFixo(tel_cliente.getText());
             }
             
             if(!numero.getText().isEmpty()){
@@ -159,14 +162,14 @@ public class CadastroClienteViewController implements Initializable {
            mantercliente.cadastrarCliente(cliente);
            
             Alert alert = new Alert(AlertType.CONFIRMATION);
-            alert.setTitle("Cadastro de OS");
+            alert.setTitle("Cadastro de Cliente");
             alert.setHeaderText("Concluído");
-            alert.setContentText("A OS foi cadastrada com sucesso");
+            alert.setContentText("O Cliente foi cadastrada com sucesso");
 
             alert.showAndWait();
             
         } catch (Exception ex) {
-            System.out.println("Problema ao criar OS: "+ex);
+            System.out.println("Problema ao criar Cliente: "+ex);
         }
         
     }
