@@ -19,19 +19,19 @@
             </Label>
             <Pane layoutX="337.0" layoutY="136.0" prefHeight="329.0" prefWidth="326.0" style="-fx-background-color: #FFFFFF;">
                <children>
-                  <Label layoutX="59.0" layoutY="122.0" prefHeight="21.0" prefWidth="210.0" text="Entre com sua conta de usuário" textFill="#8190a5">
-                     <font>
-                        <Font size="15.0" />
-                     </font>
-                  </Label>
-                  <Button fx:id="botaoEntrar" layoutX="107.0" layoutY="267.0" mnemonicParsing="false" onAction="#login" prefHeight="25.0" prefWidth="113.0" text="Entrar" />
-                  <PasswordField fx:id="password" layoutX="58.0" layoutY="227.0" prefHeight="25.0" prefWidth="210.0" promptText="Senha" />
-                  <TextField fx:id="user" layoutX="58.0" layoutY="192.0" prefHeight="25.0" prefWidth="210.0" promptText="Usuário" />
                   <Label layoutX="122.0" layoutY="58.0" prefHeight="44.0" prefWidth="82.0" text="Login" textAlignment="CENTER">
                      <font>
                         <Font size="32.0" />
                      </font>
                   </Label>
+                  <Label layoutX="59.0" layoutY="122.0" prefHeight="21.0" prefWidth="210.0" text="Entre com sua conta de usuário" textFill="#8190a5">
+                     <font>
+                        <Font size="15.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="user" layoutX="58.0" layoutY="192.0" prefHeight="25.0" prefWidth="210.0" promptText="Usuário" />
+                  <PasswordField fx:id="password" layoutX="58.0" layoutY="227.0" prefHeight="25.0" prefWidth="210.0" promptText="Senha" />
+                  <Button fx:id="botaoEntrar" layoutX="107.0" layoutY="267.0" mnemonicParsing="false" onAction="#login" prefHeight="25.0" prefWidth="113.0" text="Entrar" />
                </children>
             </Pane>
          </children>
