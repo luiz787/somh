@@ -7,6 +7,7 @@ package Main;
 
 import Domain.Acessorio;
 import Controller.CadastroOSViewController;
+import Controller.CadastroUsuarioController;
 import Controller.LoginController;
 import java.io.IOException;
 import java.time.LocalDate;
@@ -72,7 +73,8 @@ public class Run extends Application {
         this.primaryStage.setTitle("SOHM");
         initRootLayout();
         //showCadastroOSView();
-        showLogin();
+        //showLogin();
+        showCadastroUsuario();
     }
 
     
@@ -115,6 +117,19 @@ public class Run extends Application {
             AnchorPane Login = (AnchorPane) loader.load();
             rootLayout.setCenter(Login);
             LoginController controller = loader.getController();
+            controller.setRun(this);
+        } catch (IOException ex){
+            Logger.getLogger(Run.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    public void showCadastroUsuario(){
+        try {
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(Run.class.getResource("../View/CadastroUsuario.fxml"));
+            AnchorPane Login = (AnchorPane) loader.load();
+            rootLayout.setCenter(Login);
+            CadastroUsuarioController controller = loader.getController();
             controller.setRun(this);
         } catch (IOException ex){
             Logger.getLogger(Run.class.getName()).log(Level.SEVERE, null, ex);
