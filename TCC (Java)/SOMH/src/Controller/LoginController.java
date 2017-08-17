@@ -59,7 +59,8 @@ public class LoginController implements Initializable {
         System.out.println(nomeUsuario + ", " + senha);
         ManterUsuario manterUsuario = new ManterUsuarioImpl();
         /*usuarioLogado = manterUsuario.getUsuarioByEmailSenha(nomeUsuario, senha);
-        int codPerfil = usuarioLogado.getPerfil().getId().intValue();
+        int codPerfil = usuarioLogado.getPerfil().getId().intValue();*/
+        int codPerfil = 4;
         switch (codPerfil){
             case 1:
                 showTelaAdministradorView();
@@ -75,7 +76,7 @@ public class LoginController implements Initializable {
                 break;
             default:
                 break;
-        }*/ // arrumar ordem das chamadas
+        } // arrumar ordem das chamadas
     }
 
     @Override
@@ -100,18 +101,62 @@ public class LoginController implements Initializable {
     
     private void showTelaAdministradorView(){
         System.out.println("Tela Administrador");
+        try{
+            FXMLLoader loader = new FXMLLoader();
+            
+            loader.setLocation(Run.class.getResource("../View/TelaAdministradorView.fxml"));
+            AnchorPane TelaAdm = (AnchorPane) loader.load();
+            
+            run.getRootLayout().setCenter(TelaAdm);
+        
+        } catch (IOException ex) {
+            Logger.getLogger(Run.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
     
     private void showTelaAtendenteView(){
         System.out.println("Tela Atendente");
+        try{
+            FXMLLoader loader = new FXMLLoader();
+            
+            loader.setLocation(Run.class.getResource("../View/TelaAtendenteView.fxml"));
+            AnchorPane TelaAtendente = (AnchorPane) loader.load();
+            
+            run.getRootLayout().setCenter(TelaAtendente);
+        
+        } catch (IOException ex) {
+            Logger.getLogger(Run.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
     
     private void showTelaTelefonistaView(){
         System.out.println("Tela Telefonista");
+        try{
+            FXMLLoader loader = new FXMLLoader();
+            
+            loader.setLocation(Run.class.getResource("../View/TelaTelefonistaView.fxml"));
+            AnchorPane TelaTelefonista = (AnchorPane) loader.load();
+            
+            run.getRootLayout().setCenter(TelaTelefonista);
+        
+        } catch (IOException ex) {
+            Logger.getLogger(Run.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
     
     private void showTelaTecnicoView(){
         System.out.println("Tela Tecnico");
+        try{
+            FXMLLoader loader = new FXMLLoader();
+            
+            loader.setLocation(Run.class.getResource("../View/TelaTecnicoView.fxml"));
+            AnchorPane TelaTecnico = (AnchorPane) loader.load();
+            
+            run.getRootLayout().setCenter(TelaTecnico);
+        
+        } catch (IOException ex) {
+            Logger.getLogger(Run.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
     
     
