@@ -18,9 +18,13 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import Service.ManterUsuario;
 import java.io.IOException;
+import java.util.Optional;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.ButtonType;
 import javafx.scene.layout.AnchorPane;
 
 /**
@@ -58,9 +62,11 @@ public class LoginController implements Initializable {
         String senha = password.getText();
         System.out.println(nomeUsuario + ", " + senha);
         ManterUsuario manterUsuario = new ManterUsuarioImpl();
-        /*usuarioLogado = manterUsuario.getUsuarioByEmailSenha(nomeUsuario, senha);
-        int codPerfil = usuarioLogado.getPerfil().getId().intValue();*/
-        int codPerfil = 4;
+        usuarioLogado = manterUsuario.getUsuarioByEmailSenha(nomeUsuario, senha);
+        int codPerfil = -1;
+        codPerfil = usuarioLogado.getPerfil().getId().intValue();
+        System.out.println(codPerfil);
+        //int codPerfil = 1;
         switch (codPerfil){
             case 1:
                 showTelaAdministradorView();
@@ -75,6 +81,12 @@ public class LoginController implements Initializable {
                 showTelaTecnicoView();
                 break;
             default:
+                Alert alert = new Alert(AlertType.ERROR, "Erro: perfil de usuário inválido. Tente novamente.");
+                Optional<ButtonType> result = alert.showAndWait();
+                if (result.isPresent() && result.get() == ButtonType.OK) {
+                    user.setText("");
+                    password.setText("");
+                }
                 break;
         } // arrumar ordem das chamadas
     }
@@ -158,6 +170,4 @@ public class LoginController implements Initializable {
             Logger.getLogger(Run.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
-    
 }

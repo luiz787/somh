@@ -71,7 +71,7 @@ public class PerfilDAOImpl implements PerfilDAO {
         try {
             Connection connection = JDBCManterConexao.getInstancia().getConexao();
 
-            String sql = "SELECT * FROM categoria WHERE id = ?";
+            String sql = "SELECT * FROM perfil WHERE cod_perfil = ?";
 
             PreparedStatement pstmt = connection.prepareStatement(sql);
             pstmt.setLong(1, id);
@@ -80,8 +80,8 @@ public class PerfilDAOImpl implements PerfilDAO {
             Perfil perfil = null;
             if (rs.next()) {
                 perfil = new Perfil();
-                perfil.setId(rs.getLong("id"));
-                perfil.setDescricao(rs.getString("descricao"));
+                perfil.setId(rs.getLong("cod_perfil"));
+                perfil.setDescricao(rs.getString("des_perfil"));
             }
             rs.close();
             pstmt.close();

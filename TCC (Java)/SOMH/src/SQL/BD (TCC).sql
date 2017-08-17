@@ -263,3 +263,52 @@ ALTER TABLE `CEP` ADD CONSTRAINT `Relationship28` FOREIGN KEY (`cod_cidade`, `co
 ALTER TABLE `OS` ADD CONSTRAINT `Relationship29` FOREIGN KEY (`seq_equipto`) REFERENCES `Equipamento` (`seq_equipto`) ON DELETE RESTRICT ON UPDATE RESTRICT
 ;
 
+INSERT INTO `perfil` (`cod_perfil`, `des_perfil`) VALUES
+(1, 'adm'),
+(2, 'atendente'),
+(3, 'telefonista'),
+(4, 'técnico');
+
+INSERT INTO `status` (`cod_status`, `des_status`) VALUES
+(1, 'Em orçamento'),
+(2, 'Orçado'),
+(3, 'Aguardando cliente'),
+(4, 'Recusado'),
+(5, 'Aprovado'),
+(6, 'Aguardando peça'),
+(7, 'Pronto'),
+(8, 'Avisado'),
+(9, 'Entregue'),
+(10, 'Garantia');
+
+INSERT INTO `uf` (`cod_UF`, `nom_UF`) VALUES
+('RS', 'Rio Grande do Sul'),
+('SC', 'Santa Catarina'),
+('PR', 'Paraná'),
+('RJ', 'Rio de Janeiro'),
+('SP', 'São Paulo'),
+('MG', 'Minas Gerais'),
+('ES', 'Espírito Santo'),
+('MT', 'Mato Grosso'),
+('MS', 'Mato Grosso do Sul'),
+('GO', 'Goiás'),
+('DF', 'Distrito Federal'),
+('TO', 'Tocantins'),
+('AM', 'Amazonas'),
+('AC', 'Acre'),
+('AP', 'Amapá'),
+('RO', 'Rondônia'),
+('RR', 'Roraima'),
+('PA', 'Pará'),
+('BA', 'Bahia'),
+('PE', 'Pernambuco'),
+('SE', 'Sergipe'),
+('AL', 'Alagoas'),
+('RN', 'Rio Grande do Norte'),
+('PB', 'Paraíba'),
+('MA', 'Maranhão'),
+('PI', 'Piauí'),
+('CE', 'Ceará');
+
+INSERT INTO `usuario` (`cod_usuario`, `cod_perfil`, `nom_usuario`, `txt_senha`) VALUES
+(1, 1, 'admin', '21232f297a57a5a743894a0e4a801fc3');
