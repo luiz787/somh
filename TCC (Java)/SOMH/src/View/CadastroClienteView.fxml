@@ -58,7 +58,7 @@
                               <Label layoutX="115.0" layoutY="461.0" text="*" textFill="RED" />
                               <Label layoutX="105.0" layoutY="514.0" text="*" textFill="RED" />
                               <Button fx:id="criar" alignment="CENTER" contentDisplay="RIGHT" layoutX="438.0" layoutY="828.0" maxHeight="31.0" maxWidth="90.0" mnemonicParsing="false" onAction="#cadastraCliente" prefHeight="31.0" prefWidth="90.0" stylesheets="@CSS%20Botao.css" text="Cadastrar" textFill="WHITE" />
-                              <Button fx:id="criar1" alignment="CENTER" contentDisplay="RIGHT" layoutX="92.0" layoutY="828.0" maxHeight="31.0" maxWidth="90.0" mnemonicParsing="false" onAction="#criaOS" prefHeight="31.0" prefWidth="90.0" stylesheets="@CSS%20Botao.css" text="Cancelar" textFill="WHITE" />
+                              <Button fx:id="cancelar" alignment="CENTER" contentDisplay="RIGHT" layoutX="92.0" layoutY="828.0" maxHeight="31.0" maxWidth="90.0" mnemonicParsing="false" onAction="#Cancelar" prefHeight="31.0" prefWidth="90.0" stylesheets="@CSS%20Botao.css" text="Cancelar" textFill="WHITE" />
                               <Label fx:id="faixa1" alignment="CENTER" prefHeight="39.0" prefWidth="625.0" stylesheets="@CSS%20Botao.css" text="Cadastro de Cliente" textAlignment="JUSTIFY" textFill="WHITE" />
                            </children>
                         </Pane>
