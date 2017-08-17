@@ -41,7 +41,7 @@ public class CidadeDAOImpl implements CidadeDAO{
     }
 
     @Override
-    public boolean insert(Cidade cidade) throws ExcecaoPersistencia {
+    public Long insert(Cidade cidade) throws ExcecaoPersistencia {
         try {
             if (cidade == null) {
                 throw new ExcecaoPersistencia("Entidade não pode ser nula.");
@@ -51,24 +51,31 @@ public class CidadeDAOImpl implements CidadeDAO{
 
             String sql = "INSERT INTO `cidade` ("
                     + "`cod_UF`,"
-                    + " `cod_cidade`,"
                     + " `nom_cidade`"
-                    + ") VALUES (?, ?, ?)" ;
+                    + ") VALUES (?,  ?)" ;
             
             
             PreparedStatement pstmt = connection.prepareStatement(sql);
-            pstmt.setLong(1, cidade.getUf().getId());
-            pstmt.setLong(2, cidade.getId());
-            pstmt.setString(3, cidade.getNome());
+            
+            pstmt.setString(1, cidade.getUf().getId());
+            pstmt.setString(2, cidade.getNome());
             
             
             pstmt.executeUpdate();
             
+            ResultSet rs = pstmt.executeQuery("SELECT LAST_INSERT_ID() FROM cidade");
             
+            Long id = null;
+            if (rs.next()) {
+                id = rs.getLong(1);
+                cidade.setId(id);
+            }
+            
+            rs.close();
             pstmt.close();
             connection.close();
             
-            return true;
+            return id;
         } catch (ClassNotFoundException | SQLException ex) {
             Logger.getLogger(OSDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
             throw new ExcecaoPersistencia(ex);
@@ -84,15 +91,15 @@ public class CidadeDAOImpl implements CidadeDAO{
             String sql = "UPDATE cidade "
                     + "SET "
                     + "cod_UF=?,"
-                    + "cod_cidade=?, "
+                    
                     + "nom_cidade=?, "
                     + " WHERE cod_cidade=?;";
 
             PreparedStatement pstmt = connection.prepareStatement(sql);
-            pstmt.setLong(1, cidade.getUf().getId());
-            pstmt.setLong(2, cidade.getId());
-            pstmt.setString(3, cidade.getNome());
-            pstmt.setLong(4, cidade.getId());
+            pstmt.setString(1, cidade.getUf().getId());
+            
+            pstmt.setString(2, cidade.getNome());
+            pstmt.setLong(3, cidade.getId());
             
             pstmt.executeUpdate();
 
@@ -146,7 +153,7 @@ public class CidadeDAOImpl implements CidadeDAO{
             UFDAO ufDAOImpl = UfDAOImpl.getInstance();
             if (rs.next()) {
                 cidade = new Cidade(
-                    ufDAOImpl.consultarPorId(rs.getLong("cod_UF")),
+                    ufDAOImpl.consultarPorId(rs.getString("cod_UF")),
                     rs.getLong("cod_cidade"),
                     rs.getString("nom_cidade")
                     
@@ -180,7 +187,7 @@ public class CidadeDAOImpl implements CidadeDAO{
             if (rs.next()) {
                 do {
                     Cidade cidade = new Cidade(
-                    ufDAOImpl.consultarPorId(rs.getLong("cod_UF")),
+                    ufDAOImpl.consultarPorId(rs.getString("cod_UF")),
                     rs.getLong("cod_cidade"),
                     rs.getString("nom_cidade")
                     
@@ -208,7 +215,7 @@ public class CidadeDAOImpl implements CidadeDAO{
             String sql = "SELECT * FROM cidade WHERE cod_UF=? ORDER BY cod_cidade;";
 
             PreparedStatement pstmt = connection.prepareStatement(sql);
-            pstmt.setLong(1, uf.getId());
+            pstmt.setString(1, uf.getId());
             ResultSet rs = pstmt.executeQuery();
             
             
@@ -219,7 +226,7 @@ public class CidadeDAOImpl implements CidadeDAO{
             if (rs.next()) {
                 do {
                     Cidade cidade = new Cidade(
-                    ufDAOImpl.consultarPorId(rs.getLong("cod_UF")),
+                    ufDAOImpl.consultarPorId(rs.getString("cod_UF")),
                     rs.getLong("cod_cidade"),
                     rs.getString("nom_cidade")
                     

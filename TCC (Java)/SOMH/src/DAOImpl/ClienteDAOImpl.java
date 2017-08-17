@@ -50,10 +50,10 @@ public class ClienteDAOImpl implements ClienteDAO{
                     cepDAOImpl.getCEPById(rs.getInt("nro_cep")),
                     rs.getString("nom_cliente"),
                     rs.getString("des_email"),
-                    rs.getInt("nro_tel_cel"),
+                    rs.getString("nro_tel_cel"),
                     rs.getString("des_endereco"),
-                    rs.getInt("nro_tel_fixo"),
-                    rs.getInt("nro_tel_cel_2"),
+                    rs.getString("nro_tel_fixo"),
+                   
                     rs.getInt("nro_endereco"),
                     rs.getString("des_complemento")
                       
@@ -92,7 +92,7 @@ public class ClienteDAOImpl implements ClienteDAO{
                     + ", `nro_tel_cel`,"
                     + " `des_endereco`,"
                     + " `nro_tel_fixo`," //
-                    + " `nro_tel_cel_2`," //
+                    
                     + " `nro_endereco`," //
                     + " `des_complemento`) " //
                     + "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
@@ -102,32 +102,28 @@ public class ClienteDAOImpl implements ClienteDAO{
             pstmt.setLong(1, cliente.getCodCPF_CNPJ());
             pstmt.setInt(2, cliente.getCep().getNroCEP());
             pstmt.setLong(3, cliente.getCep().getCidade().getId());
-            pstmt.setLong(4, cliente.getCep().getCidade().getUf().getId());
+            pstmt.setString(4, cliente.getCep().getCidade().getUf().getId());
             pstmt.setString(5, cliente.getNome());
             pstmt.setString(6, cliente.getEmail());
-            pstmt.setInt(7, cliente.getNroTelefoneCelular());
+            pstmt.setString(7, cliente.getNroTelefoneCelular());
             pstmt.setString(8, cliente.getEndereco());
             
 
             if(cliente.getNroTelefoneFixo()!= null) {
-                pstmt.setInt(9, cliente.getNroTelefoneFixo());
+                pstmt.setString(9, cliente.getNroTelefoneFixo());
             } else {
                 pstmt.setNull(9, java.sql.Types.NULL);
             }
-            if(cliente.getNroTelefoneCelular2()!=null) {
-                pstmt.setInt(10, cliente.getNroTelefoneCelular2());
+            
+            if(cliente.getNroEndereco()!=null) {
+                pstmt.setInt(10, cliente.getNroEndereco());
             } else {
                 pstmt.setNull(10, java.sql.Types.NULL);
             }
-            if(cliente.getNroEndereco()!=null) {
-                pstmt.setInt(11, cliente.getNroEndereco());
+            if(cliente.getDescricaoComplemento()!=null) {
+                pstmt.setString(11, cliente.getDescricaoComplemento());
             } else {
                 pstmt.setNull(11, java.sql.Types.NULL);
-            }
-            if(cliente.getDescricaoComplemento()!=null) {
-                pstmt.setString(12, cliente.getDescricaoComplemento());
-            } else {
-                pstmt.setNull(12, java.sql.Types.NULL);
             }
             
             pstmt.executeUpdate();
@@ -159,7 +155,7 @@ public class ClienteDAOImpl implements ClienteDAO{
                     + "nro_tel_cel=?,"
                     + "des_endereco=?,"
                     + "nro_tel_fixo=?," //
-                    + "nro_tel_cel_2=?," //
+                    
                     + "nro_endereco=?," //
                     + "des_complemento=?"
                     //
@@ -170,35 +166,31 @@ public class ClienteDAOImpl implements ClienteDAO{
             pstmt.setLong(1, cliente.getCodCPF_CNPJ());
             pstmt.setInt(2, cliente.getCep().getNroCEP());
             pstmt.setLong(3, cliente.getCep().getCidade().getId());
-            pstmt.setLong(4, cliente.getCep().getCidade().getUf().getId());
+            pstmt.setString(4, cliente.getCep().getCidade().getUf().getId());
             pstmt.setString(5, cliente.getNome());
             pstmt.setString(6, cliente.getEmail());
-            pstmt.setInt(7, cliente.getNroTelefoneCelular());
+            pstmt.setString(7, cliente.getNroTelefoneCelular());
             pstmt.setString(8, cliente.getEndereco());
             
 
             if(cliente.getNroTelefoneFixo()!= null) {
-                pstmt.setInt(9, cliente.getNroTelefoneFixo());
+                pstmt.setString(9, cliente.getNroTelefoneFixo());
             } else {
                 pstmt.setNull(9, java.sql.Types.NULL);
             }
-            if(cliente.getNroTelefoneCelular2()!=null) {
-                pstmt.setInt(10, cliente.getNroTelefoneCelular2());
+            
+            if(cliente.getNroEndereco()!=null) {
+                pstmt.setInt(10, cliente.getNroEndereco());
             } else {
                 pstmt.setNull(10, java.sql.Types.NULL);
             }
-            if(cliente.getNroEndereco()!=null) {
-                pstmt.setInt(11, cliente.getNroEndereco());
+            if(cliente.getDescricaoComplemento()!=null) {
+                pstmt.setString(11, cliente.getDescricaoComplemento());
             } else {
                 pstmt.setNull(11, java.sql.Types.NULL);
             }
-            if(cliente.getDescricaoComplemento()!=null) {
-                pstmt.setString(12, cliente.getDescricaoComplemento());
-            } else {
-                pstmt.setNull(12, java.sql.Types.NULL);
-            }
             
-            pstmt.setLong(13, cliente.getCodCPF_CNPJ());
+            pstmt.setLong(12, cliente.getCodCPF_CNPJ());
             
             pstmt.executeUpdate();
 
@@ -256,10 +248,10 @@ public class ClienteDAOImpl implements ClienteDAO{
                         cepDAOImpl.getCEPById(rs.getInt("nro_cep")),
                         rs.getString("nom_cliente"),
                         rs.getString("des_email"),
-                        rs.getInt("nro_tel_cel"),
+                        rs.getString("nro_tel_cel"),
                         rs.getString("des_endereco"),
-                        rs.getInt("nro_tel_fixo"),
-                        rs.getInt("nro_tel_cel_2"),
+                        rs.getString("nro_tel_fixo"),
+                        
                         rs.getInt("nro_endereco"),
                         rs.getString("des_complemento")
                     );

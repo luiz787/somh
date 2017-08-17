@@ -53,7 +53,7 @@ public class UfDAOImpl implements UFDAO{
                     ;
 
             PreparedStatement pstmt = connection.prepareStatement(sql);
-            pstmt.setLong(1, uf.getId());
+            pstmt.setString(1, uf.getId());
             pstmt.setString(2,uf.getNome() );
             
             
@@ -83,8 +83,9 @@ public class UfDAOImpl implements UFDAO{
             List<UF> listAll = new ArrayList<>();
             if (rs.next()) {
                 do {
+                    
                     UF uf = new UF(
-                        rs.getLong("cod_UF"),
+                        rs.getString("cod_UF"),
                         rs.getString("nom_UF")
                         
                     );
@@ -104,20 +105,20 @@ public class UfDAOImpl implements UFDAO{
     }
 
     @Override
-    public UF consultarPorId(Long id) throws ExcecaoPersistencia {
+    public UF consultarPorId(String id) throws ExcecaoPersistencia {
          try {
             Connection connection = JDBCManterConexao.getInstancia().getConexao();
 
             String sql = "SELECT * FROM uf WHERE cod_UF = ?";
 
             PreparedStatement pstmt = connection.prepareStatement(sql);
-            pstmt.setLong(1, id);
+            pstmt.setString(1, id);
             ResultSet rs = pstmt.executeQuery();
             
             UF uf = null;
             if (rs.next()) {
                 uf = new UF(
-                        rs.getLong("cod_UF"),
+                        rs.getString("cod_UF"),
                         rs.getString("nom_UF")
                         
                     );

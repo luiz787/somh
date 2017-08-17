@@ -57,7 +57,7 @@ public class CEPDAOImpl implements CEPDAO {
             
             
             PreparedStatement pstmt = connection.prepareStatement(sql);
-            pstmt.setLong(1, cep.getCidade().getUf().getId());
+            pstmt.setString(1, cep.getCidade().getUf().getId());
             pstmt.setLong(2, cep.getCidade().getId());
             pstmt.setInt(3, cep.getNroCEP());
             
@@ -89,7 +89,7 @@ public class CEPDAOImpl implements CEPDAO {
                     + " WHERE nro_cep=?;";
 
             PreparedStatement pstmt = connection.prepareStatement(sql);
-            pstmt.setLong(1, cep.getCidade().getUf().getId());
+            pstmt.setString(1, cep.getCidade().getUf().getId());
             pstmt.setLong(2, cep.getCidade().getId());
             pstmt.setInt(3, cep.getNroCEP());
             pstmt.setLong(4, cep.getNroCEP());
