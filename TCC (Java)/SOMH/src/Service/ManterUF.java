@@ -17,7 +17,7 @@ import java.util.List;
  */
 public interface ManterUF {
     public boolean cadastrarUF(UF id) throws ExcecaoPersistencia, ExcecaoNegocio;
-    public UF getUFById(Long id) throws ExcecaoPersistencia;
+    public UF getUFById(String id) throws ExcecaoPersistencia;
     public List<UF> getAll() throws ExcecaoPersistencia;
     
 }

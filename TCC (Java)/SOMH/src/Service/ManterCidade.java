@@ -17,7 +17,7 @@ import java.util.List;
  * @author F43L
  */
 public interface ManterCidade {
-    public boolean cadastrarCidade(Cidade cidade) throws ExcecaoPersistencia, ExcecaoNegocio;
+    public Long cadastrarCidade(Cidade cidade) throws ExcecaoPersistencia, ExcecaoNegocio;
     public Cidade deletarCidade(Long id) throws ExcecaoPersistencia;
     public Cidade getCidadeById(Long id) throws ExcecaoPersistencia;
     public List<Cidade> getAll() throws ExcecaoPersistencia;
