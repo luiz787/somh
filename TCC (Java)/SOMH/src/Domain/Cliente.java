@@ -14,10 +14,9 @@ public class Cliente {
     private CEP cep;
     private String nome;
     private String email;
-    private Integer nroTelefoneCelular;
+    private String nroTelefoneCelular;
     private String endereco;
-    private Integer nroTelefoneFixo;
-    private Integer nroTelefoneCelular2;
+    private String nroTelefoneFixo;
     private Integer nroEndereco;
     private String descricaoComplemento;
 
@@ -31,7 +30,7 @@ public class Cliente {
     }
     
 
-    public Cliente(Long codCPF_CNPJ, CEP cep, String nome, String email, Integer nroTelefoneCelular, String endereco, Integer nroTelefoneFixo, Integer nroTelefoneCelular2, Integer nroEndereco, String descricaoComplemento) {
+    public Cliente(Long codCPF_CNPJ, CEP cep, String nome, String email, String nroTelefoneCelular, String endereco, String nroTelefoneFixo, Integer nroEndereco, String descricaoComplemento) {
         this.codCPF_CNPJ = codCPF_CNPJ;
         this.cep = cep;
         this.nome = nome;
@@ -39,7 +38,7 @@ public class Cliente {
         this.nroTelefoneCelular = nroTelefoneCelular;
         this.endereco = endereco;
         this.nroTelefoneFixo = nroTelefoneFixo;
-        this.nroTelefoneCelular2 = nroTelefoneCelular2;
+        
         this.nroEndereco = nroEndereco;
         this.descricaoComplemento = descricaoComplemento;
     }
@@ -76,11 +75,11 @@ public class Cliente {
         this.email = email;
     }
 
-    public Integer getNroTelefoneCelular() {
+    public String getNroTelefoneCelular() {
         return nroTelefoneCelular;
     }
 
-    public void setNroTelefoneCelular(Integer nroTelefoneCelular) {
+    public void setNroTelefoneCelular(String nroTelefoneCelular) {
         this.nroTelefoneCelular = nroTelefoneCelular;
     }
 
@@ -92,21 +91,15 @@ public class Cliente {
         this.endereco = endereco;
     }
 
-    public Integer getNroTelefoneFixo() {
+    public String getNroTelefoneFixo() {
         return nroTelefoneFixo;
     }
 
-    public void setNroTelefoneFixo(Integer nroTelefoneFixo) {
+    public void setNroTelefoneFixo(String nroTelefoneFixo) {
         this.nroTelefoneFixo = nroTelefoneFixo;
     }
 
-    public Integer getNroTelefoneCelular2() {
-        return nroTelefoneCelular2;
-    }
-
-    public void setNroTelefoneCelular2(Integer nroTelefoneCelular2) {
-        this.nroTelefoneCelular2 = nroTelefoneCelular2;
-    }
+    
 
     public Integer getNroEndereco() {
         return nroEndereco;

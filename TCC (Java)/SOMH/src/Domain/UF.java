@@ -10,22 +10,22 @@ package Domain;
  * @author andro
  */
 public class UF {
-    private Long id;
+    private String id;
     private String nome;
 
     public UF() {
     }
 
-    public UF(Long id, String nome) {
+    public UF(String id, String nome) {
         this.id = id;
         this.nome = nome;
     }
 
-    public Long getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(String id) {
         this.id = id;
     }
 
