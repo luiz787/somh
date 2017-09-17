@@ -95,9 +95,9 @@ public class ClienteDAOImpl implements ClienteDAO{
                     
                     + " `nro_endereco`," //
                     + " `des_complemento`) " //
-                    + "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+                    + "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
                     
-
+            
             PreparedStatement pstmt = connection.prepareStatement(sql);
             pstmt.setLong(1, cliente.getCodCPF_CNPJ());
             pstmt.setInt(2, cliente.getCep().getNroCEP());
@@ -111,21 +111,29 @@ public class ClienteDAOImpl implements ClienteDAO{
 
             if(cliente.getNroTelefoneFixo()!= null) {
                 pstmt.setString(9, cliente.getNroTelefoneFixo());
+                
             } else {
                 pstmt.setNull(9, java.sql.Types.NULL);
             }
             
             if(cliente.getNroEndereco()!=null) {
                 pstmt.setInt(10, cliente.getNroEndereco());
+                
             } else {
                 pstmt.setNull(10, java.sql.Types.NULL);
             }
             if(cliente.getDescricaoComplemento()!=null) {
                 pstmt.setString(11, cliente.getDescricaoComplemento());
+                
             } else {
                 pstmt.setNull(11, java.sql.Types.NULL);
             }
+            System.out.println(sql); 
             
+           System.out.println("Cliente infos: cpf: "+cliente.getCodCPF_CNPJ()+" cod_cep: "+cliente.getCep().getNroCEP()+" cod_cidade_id: "+cliente.getCep().getCidade().getId()+
+                 " cod_UF: "+cliente.getCep().getCidade().getUf().getId()+" nome: "+cliente.getNome()+" email: "+cliente.getEmail()+
+                    " nro_tel_cel: "+ cliente.getNroTelefoneCelular()+" des_endereço(rua): "+cliente.getEndereco()+" nro_endereço: "+cliente.getNroEndereco()
+            +" des_complemento: "+cliente.getDescricaoComplemento());
             pstmt.executeUpdate();
            
             pstmt.close();
