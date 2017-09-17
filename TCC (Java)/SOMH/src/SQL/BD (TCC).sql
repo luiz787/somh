@@ -66,7 +66,7 @@ ALTER TABLE `UF` ADD  PRIMARY KEY (`cod_UF`)
 CREATE TABLE `Cidade`
 (
   `cod_UF` Char(2) NOT NULL,
-  `cod_cidade` Int NOT NULL,
+  `cod_cidade` Bigint UNSIGNED NOT NULL AUTO_INCREMENT,
   `nom_cidade` Char(30) NOT NULL
 )
 ;
