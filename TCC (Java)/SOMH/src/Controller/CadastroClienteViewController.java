@@ -24,14 +24,18 @@ import ServiceImpl.ManterClienteImpl;
 import ServiceImpl.ManterUFImpl;
 import java.net.URL;
 import java.util.ResourceBundle;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
+import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
+import javafx.scene.control.SelectionMode;
 import javafx.scene.control.SplitMenuButton;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
@@ -44,6 +48,8 @@ import javafx.scene.layout.HBox;
  */
 public class CadastroClienteViewController implements Initializable {
 
+    ObservableList<String> ufs;
+    
     @FXML
     private ScrollPane scrollPane;
     @FXML
@@ -63,7 +69,7 @@ public class CadastroClienteViewController implements Initializable {
     @FXML
     private TextField CEP_cliente;
     @FXML
-    private SplitMenuButton estado;
+    private ChoiceBox estado;
     @FXML
     private TextField cidade;
     @FXML
@@ -92,7 +98,19 @@ public class CadastroClienteViewController implements Initializable {
     }
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
+        try {
+            
+            ManterUF esta= new ManterUFImpl(UfDAOImpl.getInstance());
+            //System.out.println(esta.getAll().size());
+            ufs = FXCollections.observableArrayList();
+            for(int x=1;x<esta.getAll().size();x++){
+                ufs.add(esta.getAll().get(x).getId());
+            }
+            estado.setItems(ufs);
+            estado.setValue("MG");
+        } catch (Exception ex) {
+            System.out.println("Problema ao carregar formulario: "+ex);
+        }
         
     }    
     @FXML
@@ -128,8 +146,10 @@ public class CadastroClienteViewController implements Initializable {
             }
             
             uf = manteruf.getUFById("MG");
+            
             city.setNome(cidade.getText());
             city.setUf(uf);
+            city.setId(mantercidade.cadastrarCidade(city));
             
             cep.setCidade(city);
             cep.setNroCEP(Integer.parseInt(CEP_cliente.getText()));
@@ -138,7 +158,8 @@ public class CadastroClienteViewController implements Initializable {
             cliente.setCodCPF_CNPJ(Long.parseLong(id_cliente.getText()));
             cliente.setEmail(email_cliente.getText());
             cliente.setNroTelefoneCelular(cel_cliente.getText());
-            
+            cliente.setNome(nom_cliente.getText());
+            cliente.setEndereco(rua.getText());
             if(!tel_cliente.getText().isEmpty()){
                 cliente.setNroTelefoneFixo(tel_cliente.getText());
             }
@@ -153,14 +174,10 @@ public class CadastroClienteViewController implements Initializable {
             
            if(mantercep.getCEPById(Integer.parseInt(CEP_cliente.getText()))==null){
                mantercep.cadastrarCEP(cep);
+               
            }
            
-           if(mantercidade.getCidadeById(Long.parseLong(cidade.getText()))==null){
-               mantercidade.cadastrarCidade(city);
-           }
-           
-           mantercliente.cadastrarCliente(cliente);
-           
+          
             Alert alert = new Alert(AlertType.CONFIRMATION);
             alert.setTitle("Cadastro de Cliente");
             alert.setHeaderText("Concluído");
@@ -197,9 +214,7 @@ public class CadastroClienteViewController implements Initializable {
         if(rua.getText().isEmpty()) {
             validacao=false;
         }
-        if(estado.getText().isEmpty()) {
-            validacao=false;
-        }
+       
         return validacao;
     }
 
