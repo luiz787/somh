@@ -32,6 +32,7 @@ import javafx.scene.layout.BorderStrokeStyle;
 import javafx.scene.layout.BorderWidths;
 import javafx.scene.layout.CornerRadii;
 import javafx.scene.paint.Paint;
+import javax.swing.JOptionPane;
 
 /**
  * FXML Controller class
@@ -83,21 +84,15 @@ public class CadastroUsuarioController implements Initializable {
     
     @FXML
     private void confirma() {
-        ManterUsuario manterUser = new ManterUsuarioImpl();
+        if(!validacao() && txt_senha.getText() != confirmaSenha.getText()) {
+            JOptionPane.showMessageDialog(null, "Digite um nome de usuario!!!", "Erro no cadastro", JOptionPane.ERROR_MESSAGE);
+        }
         
-        Usuario user = new Usuario();
-        Perfil perfil = new Perfil();
+        if(!validacao() && txt_senha.getText() != confirmaSenha.getText()) {
+            JOptionPane.showMessageDialog(null, "As senhas não correspondem!!!", "Erro no cadastro" ,JOptionPane.ERROR_MESSAGE);
+        }
         
-        user.setNome(nom_usuario.getText());
-        
-        perfil.setDescricao(des_perfil.getText());
-        user.setPerfil(perfil);
-        
-        user.setSenha(txt_senha.getText());
-        
-        try {
-            manterUser.cadastrar(user);
-        } catch (ExcecaoPersistencia | ExcecaoNegocio ex) {
+        if(validacao()) {
             
         }
     }
@@ -105,5 +100,32 @@ public class CadastroUsuarioController implements Initializable {
     @FXML
     private void sair() {
         
+    }
+    
+    private boolean validacao() {
+        
+        boolean validacao = true;
+        
+        if(nom_usuario.getText().isEmpty()) {
+            validacao = false;
+        }
+        
+        if(txt_senha.getText().isEmpty()) {
+            validacao = false;
+        }
+        
+        if(confirmaSenha.getText().isEmpty()) {
+            validacao = false;
+        }
+        
+        if(des_perfil.getText().isEmpty()) {
+            validacao = false;
+        }
+        
+        if(txt_senha.getText() != confirmaSenha.getText()) {
+            validacao = false;
+        }
+        
+        return validacao;
     }
 }
