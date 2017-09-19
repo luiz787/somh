@@ -4,24 +4,14 @@
  * and open the template in the editor.
  */
 package Controller;
-
-import DAOImpl.EquipamentoDAOImpl;
 import Domain.Equipamento;
-import Exception.ExcecaoPersistencia;
-import Service.ManterEquipamento;
-import ServiceImpl.ManterEquipamentoImpl;
 import java.net.URL;
-import java.util.List;
 import java.util.ResourceBundle;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
-import javafx.scene.control.SelectionMode;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.layout.AnchorPane;
@@ -51,6 +41,8 @@ public class TelaListagemOSController implements Initializable {
     private TableColumn<String, String> colunaStatus;
     @FXML
     private TableColumn<Long, String> colunaDataFecha;
+    @FXML
+    private Button pesquisa;
 
     /**
      * Initializes the controller class.

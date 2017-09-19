@@ -14,10 +14,10 @@
    <children>
       <ScrollPane fx:id="scrollPane" fitToHeight="true" fitToWidth="true" layoutY="-2.0" prefHeight="999.0" prefViewportHeight="835.0" prefViewportWidth="600.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="-2.0">
          <content>
-            <AnchorPane fx:id="fundo" layoutX="10.0" layoutY="10.0" prefHeight="917.0" prefWidth="598.0">
+            <AnchorPane fx:id="fundo" layoutX="10.0" layoutY="10.0" prefHeight="974.0" prefWidth="613.0">
                <children>
                   <Label fx:id="faixa" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="39.0" prefHeight="39.0" prefWidth="600.0" stylesheets="@CSS%20Botao.css" text="Listagem de OS" textAlignment="JUSTIFY" textFill="WHITE" AnchorPane.bottomAnchor="958.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
-                  <TableView fx:id="listaOS" layoutX="6.0" layoutY="113.0" prefHeight="887.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="7.0" AnchorPane.rightAnchor="7.0" AnchorPane.topAnchor="113.0">
+                  <TableView fx:id="listaOS" layoutX="6.0" layoutY="113.0" prefHeight="887.0" prefWidth="599.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="7.0" AnchorPane.rightAnchor="7.0" AnchorPane.topAnchor="113.0">
                      <columns>
                         <TableColumn fx:id="colunaEquipamento" editable="false" minWidth="100.0" prefWidth="-1.0" text="Equipamento" />
                         <TableColumn fx:id="colunaCodigo" editable="false" minWidth="100.0" prefWidth="-1.0" text="Código" />

@@ -1,7 +1,6 @@
 #pesquisa {
-
     -fx-background-image: url("../Imagens/Lupa.png");
-   	-fx-background-size: 18 18;
+    -fx-background-size: 18 18;
     -fx-background-repeat: no-repeat;
     -fx-background-position: center;     
 }
