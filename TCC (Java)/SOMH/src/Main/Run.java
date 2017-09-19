@@ -9,6 +9,7 @@ import Domain.Acessorio;
 import Controller.CadastroOSViewController;
 import Controller.CadastroUsuarioController;
 import Controller.LoginController;
+import Domain.Cliente;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.util.logging.Level;
@@ -34,7 +35,7 @@ public class Run extends Application {
     
     private Stage primaryStage; 
     private BorderPane rootLayout;
-    private ObservableList<Acessorio> acessorioData = FXCollections.observableArrayList();
+    private Cliente cliente;
     
     
     public Run() {
@@ -56,15 +57,15 @@ public class Run extends Application {
         this.rootLayout = rootLayout;
     }
 
-    
-    
-    public ObservableList<Acessorio> getAcessorioData() {
-        return acessorioData;
+    public Cliente getCliente() {
+        return cliente;
     }
 
-    public void setAcessorioData(ObservableList<Acessorio> acessorioData) {
-        this.acessorioData = acessorioData;
+    public void setCliente(Cliente cliente) {
+        this.cliente = cliente;
     }
+    
+    
     
     
     @Override

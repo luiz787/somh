@@ -477,7 +477,6 @@ public class CadastroOSViewController implements Initializable {
     
     @FXML
     private void redirecionaTelaFuncionario() {
-        System.out.println("tela de funcionario");
         try{
             FXMLLoader loader = new FXMLLoader();
             
