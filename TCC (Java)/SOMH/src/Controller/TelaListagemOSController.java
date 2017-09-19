@@ -5,11 +5,16 @@
  */
 package Controller;
 import Domain.Equipamento;
+import Domain.Status;
+import Main.Run;
 import java.net.URL;
 import java.util.ResourceBundle;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TableColumn;
@@ -43,12 +48,15 @@ public class TelaListagemOSController implements Initializable {
     private TableColumn<Long, String> colunaDataFecha;
     @FXML
     private Button pesquisa;
+    @FXML
+    private ChoiceBox<String> filtroOS;
 
-    /**
-     * Initializes the controller class.
-     */
+    private Run run;
+    
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        ObservableList<String> listStatus = FXCollections.observableArrayList("Em orçamento", "Orçado");
+        filtroOS.setItems(listStatus);
         /*
         try {
             
@@ -70,5 +78,9 @@ public class TelaListagemOSController implements Initializable {
         }
         */
     }    
+    
+    public void setRun(Run run) {
+        this.run = run;
+    }
     
 }

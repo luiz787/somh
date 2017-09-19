@@ -33,7 +33,7 @@
                   <Button fx:id="pesquisa" layoutX="345.0" layoutY="70.0" mnemonicParsing="false" prefHeight="16.0" prefWidth="34.0" stylesheets="@CSS%20Botao.css" AnchorPane.rightAnchor="7.0" />
                   <Pane layoutX="7.0" layoutY="50.0" prefHeight="56.0" prefWidth="180.0" AnchorPane.leftAnchor="7.0">
                      <children>
-                        <ChoiceBox layoutY="18.0" prefHeight="25.0" prefWidth="180.0" />
+                        <ChoiceBox fx:id="filtroOS" layoutY="18.0" prefHeight="25.0" prefWidth="180.0" />
                      </children>
                   </Pane>
                </children>
