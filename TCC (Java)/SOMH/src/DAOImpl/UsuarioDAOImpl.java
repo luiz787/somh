@@ -214,5 +214,4 @@ public class UsuarioDAOImpl implements UsuarioDAO {
             throw new ExcecaoPersistencia(ex);
         }
     }
-    
 }

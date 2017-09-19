@@ -68,7 +68,7 @@
                   <MenuItem id="itemTelefonista" mnemonicParsing="false" text="Telefonista" />
                </items>
             </SplitMenuButton>
-            <Button id="btnConfirmar" fx:id="btnConfirmar" layoutX="433.0" layoutY="340.0" mnemonicParsing="false" onAction="#confirma" onMouseClicked="#confirma" onMouseEntered="#mouseEntrou" prefHeight="27.0" prefWidth="97.0" style="-fx-background-radius: 7; -fx-border-color: #FFFFFF; -fx-background-color: #999ea8;" text="Confirmar" textAlignment="CENTER">
+            <Button id="btnConfirmar" fx:id="btnConfirmar" layoutX="433.0" layoutY="340.0" mnemonicParsing="false" onAction="#cadastraUsuario" onMouseClicked="#cadastraUsuario" onMouseEntered="#mouseEntrou" prefHeight="27.0" prefWidth="97.0" style="-fx-background-radius: 7; -fx-border-color: #FFFFFF; -fx-background-color: #999ea8;" text="Confirmar" textAlignment="CENTER">
                <font>
                   <Font size="10.0" />
                </font>
