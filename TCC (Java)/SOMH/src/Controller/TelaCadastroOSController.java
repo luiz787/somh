@@ -55,8 +55,10 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.Pane;
 
-public class CadastroOSViewController implements Initializable {
+public class TelaCadastroOSController implements Initializable {
 
     @FXML
     private ScrollPane scrollPane;
@@ -91,8 +93,6 @@ public class CadastroOSViewController implements Initializable {
     @FXML
     private Label nroOS;
     @FXML
-    private Button cadastroAcessorio;
-    @FXML
     private TableView<Acessorio> acessoriosCadastrados;
     @FXML
     private TableColumn<Acessorio, String> colunaAcessoriosCadastrados;
@@ -106,6 +106,18 @@ public class CadastroOSViewController implements Initializable {
     private TableColumn<Acessorio, String> colunaAcessoriosSelecionados;
     
     private Run run;
+    @FXML
+    private AnchorPane fundo;
+    @FXML
+    private HBox hbox;
+    @FXML
+    private Pane painel;
+    @FXML
+    private Button cadastrarAcessorio;
+    @FXML
+    private Button excluirAcessorio;
+    @FXML
+    private Label faixa;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -126,7 +138,6 @@ public class CadastroOSViewController implements Initializable {
         this.run = run;
     }
     
-    @FXML
     private void carregaForm() throws Exception {
         try {
             ManterOS manterOS = new ManterOSImpl(OSDAOImpl.getInstance());
@@ -204,7 +215,6 @@ public class CadastroOSViewController implements Initializable {
     }
     
     
-    @FXML
     private void limpaSelecaoTabela(TableView<Acessorio> tabela) {
         tabela.getSelectionModel().clearSelection();
     }
@@ -456,7 +466,6 @@ public class CadastroOSViewController implements Initializable {
     }
     
     
-    @FXML
     private boolean validacao() {
         boolean validacao=true;
         if(marca.getText().isEmpty()) {

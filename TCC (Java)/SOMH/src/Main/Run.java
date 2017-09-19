@@ -6,9 +6,10 @@
 package Main;
 
 import Domain.Acessorio;
-import Controller.CadastroOSViewController;
+import Controller.TelaCadastroOSController;
 import Controller.CadastroUsuarioController;
 import Controller.LoginController;
+import Controller.TelaListagemOSController;
 import Domain.Cliente;
 import java.io.IOException;
 import java.time.LocalDate;
@@ -75,7 +76,8 @@ public class Run extends Application {
         initRootLayout();
         //showCadastroOSView();
         //showLogin();
-        showCadastroUsuario();
+        //showCadastroUsuario();
+        showListagemOS();
     }
 
     
@@ -98,12 +100,29 @@ public class Run extends Application {
         try{
             FXMLLoader loader = new FXMLLoader();
             
-            loader.setLocation(Run.class.getResource("../View/CadastroOSView.fxml"));
+            loader.setLocation(Run.class.getResource("../View/TelaCadastroOSView.fxml"));
             AnchorPane CadastroOSView = (AnchorPane) loader.load();
             
             rootLayout.setCenter(CadastroOSView);
             
-            CadastroOSViewController controller = loader.getController();
+            TelaCadastroOSController controller = loader.getController();
+            controller.setRun(this);
+        
+        } catch (IOException ex) {
+            Logger.getLogger(Run.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    public void showListagemOS() {
+        try{
+            FXMLLoader loader = new FXMLLoader();
+            
+            loader.setLocation(Run.class.getResource("../View/TelaListagemOSView.fxml"));
+            AnchorPane TelaListagemOS = (AnchorPane) loader.load();
+            
+            rootLayout.setCenter(TelaListagemOS);
+            
+            TelaListagemOSController controller = loader.getController();
             controller.setRun(this);
         
         } catch (IOException ex) {
