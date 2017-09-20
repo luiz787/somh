@@ -1,6 +1,7 @@
 #pesquisa {
+
     -fx-background-image: url("../Imagens/Lupa.png");
-    -fx-background-size: 18 18;
+   	-fx-background-size: 18 18;
     -fx-background-repeat: no-repeat;
     -fx-background-position: center;     
 }
@@ -49,4 +50,55 @@
 }
 #faixa {
     -fx-background-color: linear-gradient(#575353, #000000);
+}
+
+#btnCadastrarCliente {
+    -fx-text-fill: #000000;
+    -fx-background-radius: 0;
+    -fx-border-color: #E4E7ED;
+    -fx-background-color: #E4E7ED;
+}
+
+#btnCadastrarCliente:pressed {
+    -fx-border-color: #ADAEB2;
+    -fx-background-color: #ADAEB2;
+}
+
+#btnCadastrarCliente:hover {
+    -fx-border-color: #EFF1F4;
+    -fx-background-color: #EFF1F4;
+}
+
+#btnConfirmar {
+    -fx-text-fill: #000000;
+    -fx-background-radius: 7;
+    -fx-border-color: #ffffff;
+    -fx-background-color:#999ea8;
+}
+
+#btnConfirmar:hover {
+    -fx-border-color: #ffffff;
+    -fx-background-color: #EFF1F4;
+}
+
+#btnConfirmar:pressed {
+    -fx-border-color: #ADAEB2;
+    -fx-background-color: #ADAEB2;
+}
+
+#btnSair {
+    -fx-text-fill: #000000;
+    -fx-background-radius: 7;
+    -fx-border-color: #ffffff;
+    -fx-background-color:#999ea8;
+}
+
+#btnSair:hover {
+    -fx-border-color: #ffffff;
+    -fx-background-color: #EFF1F4;
+}
+
+#btnSair:pressed {
+    -fx-border-color: #ADAEB2;
+    -fx-background-color: #ADAEB2;
 }

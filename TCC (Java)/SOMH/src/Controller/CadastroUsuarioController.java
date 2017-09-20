@@ -36,7 +36,6 @@ import javafx.scene.layout.BorderStrokeStyle;
 import javafx.scene.layout.BorderWidths;
 import javafx.scene.layout.CornerRadii;
 import javafx.scene.paint.Paint;
-import javax.swing.JOptionPane;
 
 /**
  * FXML Controller class
@@ -75,15 +74,16 @@ public class CadastroUsuarioController implements Initializable {
 
     @FXML
     private void mouseEntrou(MouseEvent event) {
-        btnCadastrarCliente.setBackground(new Background(new BackgroundFill(Paint.valueOf("#eff1f4"), CornerRadii.EMPTY, Insets.EMPTY)));
-        btnCadastrarCliente.setBorder(new Border(new BorderStroke(Paint.valueOf("#eff1f4"), BorderStrokeStyle.NONE, CornerRadii.EMPTY, BorderWidths.EMPTY)));
+        //btnCadastrarCliente.setStyle("#eff1f4");
+        //System.out.println("test");
+        //btnCadastrarCliente.setBorder(new Border(new BorderStroke(Paint.valueOf("#eff1f4"), BorderStrokeStyle.NONE, CornerRadii.EMPTY, BorderWidths.EMPTY)));
     }
 
     @FXML
     private void mouseClick(ActionEvent event) {
-        System.out.println("test");
-        btnCadastrarCliente.setBackground(new Background(new BackgroundFill(Paint.valueOf("#d0d2d8"), CornerRadii.EMPTY, Insets.EMPTY)));
-        btnCadastrarCliente.setBorder(new Border(new BorderStroke(Paint.valueOf("#d0d2d8"), BorderStrokeStyle.NONE, CornerRadii.EMPTY, BorderWidths.EMPTY)));
+        //btnCadastrarCliente.setStyle("#d0d2d8");
+        //System.out.println("test");
+        //btnCadastrarCliente.setBorder(new Border(new BorderStroke(Paint.valueOf("#d0d2d8"), BorderStrokeStyle.NONE, CornerRadii.EMPTY, BorderWidths.EMPTY)));
     }
 
     @FXML
