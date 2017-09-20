@@ -21,16 +21,13 @@
                   <Font size="21.0" />
                </font>
             </Label>
-            <Label layoutY="45.0" prefHeight="38.0" prefWidth="692.0" style="-fx-background-color: #000000;">
-               <graphic>
-                  <Button id="btnCadastrarCliente" fx:id="btnCadastrarCliente" mnemonicParsing="false" onAction="#mouseClick" onMouseEntered="#mouseEntrou" prefHeight="44.0" prefWidth="97.0" style="-fx-background-radius: 0; -fx-border-color: #E4E7ED; -fx-background-color: #E4E7ED;" text="Cadastrar cliente" textAlignment="CENTER">
-                     <font>
-                        <Font size="10.0" />
-                     </font>
-                  </Button>
-               </graphic>
-            </Label>
-            <ImageView fitHeight="38.0" fitWidth="43.0" layoutX="14.0" layoutY="7.0" pickOnBounds="true" preserveRatio="true">
+            <Label layoutY="45.0" prefHeight="38.0" prefWidth="692.0" style="-fx-background-color: #000000;" />
+            <Button id="btnCadastrarCliente" fx:id="btnCadastrarCliente" layoutY="45.0" mnemonicParsing="false" prefHeight="38.0" prefWidth="97.0" stylesheets="@CSS%20Botao.css" text="Cadastrar cliente" textAlignment="CENTER">
+               <font>
+                  <Font size="10.0" />
+               </font>
+            </Button>
+            <ImageView fitHeight="38.0" fitWidth="43.0" layoutX="14.0" layoutY="4.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../Imagens/pc.png" />
                </image>
@@ -68,12 +65,12 @@
                   <MenuItem id="itemTelefonista" mnemonicParsing="false" text="Telefonista" />
                </items>
             </SplitMenuButton>
-            <Button id="btnConfirmar" fx:id="btnConfirmar" layoutX="433.0" layoutY="340.0" mnemonicParsing="false" onAction="#cadastraUsuario" onMouseClicked="#cadastraUsuario" onMouseEntered="#mouseEntrou" prefHeight="27.0" prefWidth="97.0" style="-fx-background-radius: 7; -fx-border-color: #FFFFFF; -fx-background-color: #999ea8;" text="Confirmar" textAlignment="CENTER">
+            <Button id="btnConfirmar" fx:id="btnConfirmar" layoutX="433.0" layoutY="340.0" mnemonicParsing="false" onAction="#cadastraUsuario" onMouseClicked="#cadastraUsuario" onMouseEntered="#mouseEntrou" prefHeight="27.0" prefWidth="97.0" stylesheets="@CSS%20Botao.css" text="Confirmar" textAlignment="CENTER">
                <font>
                   <Font size="10.0" />
                </font>
             </Button>
-            <Button id="btnSair" fx:id="btnSair" layoutX="549.0" layoutY="340.0" mnemonicParsing="false" onMouseClicked="#sair" onMouseEntered="#mouseEntrou" prefHeight="27.0" prefWidth="97.0" style="-fx-background-radius: 7; -fx-border-color: #FFFFFF; -fx-background-color: #999ea8;" text="Sair" textAlignment="CENTER">
+            <Button id="btnSair" fx:id="btnSair" layoutX="549.0" layoutY="340.0" mnemonicParsing="false" onMouseClicked="#sair" onMouseEntered="#mouseEntrou" prefHeight="27.0" prefWidth="97.0" stylesheets="@CSS%20Botao.css" text="Sair" textAlignment="CENTER">
                <font>
                   <Font size="10.0" />
                </font>
