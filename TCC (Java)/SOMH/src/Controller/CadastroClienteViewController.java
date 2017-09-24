@@ -101,7 +101,6 @@ public class CadastroClienteViewController implements Initializable {
         try {
             
             ManterUF esta= new ManterUFImpl(UfDAOImpl.getInstance());
-            //System.out.println(esta.getAll().size());
             ufs = FXCollections.observableArrayList();
             for(int x=1;x<esta.getAll().size();x++){
                 ufs.add(esta.getAll().get(x).getId());
@@ -145,11 +144,23 @@ public class CadastroClienteViewController implements Initializable {
                 throw new Exception("Preencha os campos corretamente!(Campos com * são obrigatórios!)");
             }
             
-            uf = manteruf.getUFById("MG");
+             
+            uf = manteruf.getUFById(estado.getValue().toString());
             
             city.setNome(cidade.getText());
             city.setUf(uf);
-            city.setId(mantercidade.cadastrarCidade(city));
+            
+            boolean testexiste=false;
+            
+            for(int i=0;i<mantercidade.getAll().size();i++){
+                if( mantercidade.getAll().get(i).getNome().equals(cidade.getText())){
+                    city.setId(mantercidade.getAll().get(i).getId());
+                    testexiste=true;
+                }
+            }
+            if(!testexiste) {  
+                city.setId(mantercidade.cadastrarCidade(city));
+            }
             
             cep.setCidade(city);
             cep.setNroCEP(Integer.parseInt(CEP_cliente.getText()));
@@ -177,7 +188,7 @@ public class CadastroClienteViewController implements Initializable {
                
            }
            
-          
+            mantercliente.cadastrarCliente(cliente);
             Alert alert = new Alert(AlertType.CONFIRMATION);
             alert.setTitle("Cadastro de Cliente");
             alert.setHeaderText("Concluído");
