@@ -1,4 +1,4 @@
-﻿package Controller;
+package Controller;
 
 import Domain.Perfil;
 import Domain.Usuario;
