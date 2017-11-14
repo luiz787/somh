@@ -11,6 +11,7 @@ import DAO.UsuarioDAO;
 import Domain.Perfil;
 import Domain.Usuario;
 import Exception.ExcecaoPersistencia;
+import java.io.Serializable;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -24,9 +25,9 @@ import java.util.logging.Logger;
  *
  * @author aluno
  */
-public class UsuarioDAOImpl implements UsuarioDAO {
+public class UsuarioDAOImpl implements UsuarioDAO, Serializable {
     private static UsuarioDAOImpl usuarioDAO = null;
-
+    
     private UsuarioDAOImpl() {
     }
 
@@ -43,16 +44,13 @@ public class UsuarioDAOImpl implements UsuarioDAO {
     public Long inserir(Usuario usuario) throws ExcecaoPersistencia {
         try {
             Connection connection = JDBCManterConexao.getInstancia().getConexao();
-
-            String sql = "INSERT INTO usuario (nome, perfil, senha) VALUES(?, ?, md5(?)) RETURNING id";
-
+            String sql = "INSERT INTO usuario (nom_usuario, cod_perfil, txt_senha) VALUES(?, ?, md5(?))";
             PreparedStatement pstmt = connection.prepareStatement(sql);
             pstmt.setString(1, usuario.getNome());
             pstmt.setObject(2, usuario.getPerfil().getId());
             pstmt.setString(3, usuario.getSenha());
-            //ResultSet rs = pstmt.executeQuery();
-            int rs = pstmt.executeUpdate();
-
+            pstmt.executeUpdate();
+                
             Long id = null;
             /*
             if (rs.next()) {
@@ -61,8 +59,9 @@ public class UsuarioDAOImpl implements UsuarioDAO {
             }
 
             rs.close();
-            */
             pstmt.close();
+            */
+            
             connection.close();
             
             return id;
