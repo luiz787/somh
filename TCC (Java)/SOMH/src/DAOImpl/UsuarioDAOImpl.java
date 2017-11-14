@@ -48,17 +48,20 @@ public class UsuarioDAOImpl implements UsuarioDAO {
 
             PreparedStatement pstmt = connection.prepareStatement(sql);
             pstmt.setString(1, usuario.getNome());
-            pstmt.setObject(2, usuario.getPerfil());
+            pstmt.setObject(2, usuario.getPerfil().getId());
             pstmt.setString(3, usuario.getSenha());
-            ResultSet rs = pstmt.executeQuery();
+            //ResultSet rs = pstmt.executeQuery();
+            int rs = pstmt.executeUpdate();
 
             Long id = null;
+            /*
             if (rs.next()) {
                 id = new Long(rs.getLong("id"));
                 usuario.setId(id);
             }
 
             rs.close();
+            */
             pstmt.close();
             connection.close();
             

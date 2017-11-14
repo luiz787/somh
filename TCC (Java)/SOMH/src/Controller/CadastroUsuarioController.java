@@ -7,6 +7,7 @@ import Exception.ExcecaoPersistencia;
 import Main.Run;
 import Service.ManterUsuario;
 import ServiceImpl.ManterUsuarioImpl;
+import java.io.Serializable;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
@@ -23,7 +24,7 @@ import javafx.scene.control.TextField;
  *
  * @author Victor Cesar
  */
-public class CadastroUsuarioController implements Initializable {
+public class CadastroUsuarioController implements Initializable, Serializable {
 
     @FXML
     private Button btnCadastrarCliente;
