@@ -10,6 +10,7 @@ import Controller.TelaCadastroOSController;
 import Controller.CadastroUsuarioController;
 import Controller.LoginController;
 import Controller.TelaListagemOSController;
+import Controller.TelaManutencaoController;
 import Controller.TelaOSController;
 import Domain.Cliente;
 import java.io.IOException;
@@ -78,7 +79,8 @@ public class Run extends Application {
         //showCadastroOSView();
         //showLogin();
         //showCadastroUsuario();
-        showListagemOS();
+        //showListagemOS();
+        showTelaManutencao();
         //showOS();
     }
 
@@ -128,6 +130,21 @@ public class Run extends Application {
             controller.setRun(this);
         
         } catch (IOException ex) {
+            Logger.getLogger(Run.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    public void showTelaManutencao() {
+        try {
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(Run.class.getResource("../View/TelaManutencao.fxml"));
+            AnchorPane telaManutencao = (AnchorPane) loader.load();
+            rootLayout.setCenter(telaManutencao);
+            TelaManutencaoController controller = loader.getController();
+            controller.setRun(this);
+            primaryStage.setWidth(1000);
+            primaryStage.setHeight(600);
+        } catch (IOException ex){
             Logger.getLogger(Run.class.getName()).log(Level.SEVERE, null, ex);
         }
     }

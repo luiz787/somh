@@ -42,14 +42,14 @@ public class LoginController implements Initializable {
     private TextField password;
 
     private Run run;
-    private Usuario usuarioLogado;
+    private static Usuario usuarioLogado;
 
-    public Usuario getUsuarioLogado() {
+    public static Usuario getUsuarioLogado() {
         return usuarioLogado;
     }
 
-    public void setUsuarioLogado(Usuario usuarioLogado) {
-        this.usuarioLogado = usuarioLogado;
+    public static void setUsuarioLogado(Usuario usuarioLogado) {
+        LoginController.usuarioLogado = usuarioLogado;
     }
 
     public void setRun(Run run) {

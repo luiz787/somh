@@ -5,9 +5,11 @@
  */
 package Controller;
 
+import Main.Run;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
@@ -18,14 +20,7 @@ import javafx.scene.control.TextField;
  *
  * @author Luiz
  */
-
-public class TelaManutencaoController {
-
-    @FXML
-    private ResourceBundle resources;
-
-    @FXML
-    private URL location;
+public class TelaManutencaoController implements Initializable {
 
     @FXML
     private Button addPeca;
@@ -84,28 +79,21 @@ public class TelaManutencaoController {
     @FXML
     private TextField valorTotal;
 
+    private Run run;
 
-    @FXML
-    void initialize() {
-        assert addPeca != null : "fx:id=\"addPeca\" was not injected: check your FXML file 'TelaManutencao.fxml'.";
-        assert adicionarPeca != null : "fx:id=\"adicionarPeca\" was not injected: check your FXML file 'TelaManutencao.fxml'.";
-        assert botaoAprovacao != null : "fx:id=\"botaoAprovacao\" was not injected: check your FXML file 'TelaManutencao.fxml'.";
-        assert botaoIrrecuperavel != null : "fx:id=\"botaoIrrecuperavel\" was not injected: check your FXML file 'TelaManutencao.fxml'.";
-        assert codigoOS != null : "fx:id=\"codigoOS\" was not injected: check your FXML file 'TelaManutencao.fxml'.";
-        assert dataEntrada != null : "fx:id=\"dataEntrada\" was not injected: check your FXML file 'TelaManutencao.fxml'.";
-        assert descricaoEquipamento != null : "fx:id=\"descricaoEquipamento\" was not injected: check your FXML file 'TelaManutencao.fxml'.";
-        assert marcaPeca != null : "fx:id=\"marcaPeca\" was not injected: check your FXML file 'TelaManutencao.fxml'.";
-        assert nomePeca != null : "fx:id=\"nomePeca\" was not injected: check your FXML file 'TelaManutencao.fxml'.";
-        assert nomeTecnico != null : "fx:id=\"nomeTecnico\" was not injected: check your FXML file 'TelaManutencao.fxml'.";
-        assert observacoes != null : "fx:id=\"observacoes\" was not injected: check your FXML file 'TelaManutencao.fxml'.";
-        assert pecasEstoque != null : "fx:id=\"pecasEstoque\" was not injected: check your FXML file 'TelaManutencao.fxml'.";
-        assert pecasUsadas != null : "fx:id=\"pecasUsadas\" was not injected: check your FXML file 'TelaManutencao.fxml'.";
-        assert precoPecas != null : "fx:id=\"precoPecas\" was not injected: check your FXML file 'TelaManutencao.fxml'.";
-        assert removerPeca != null : "fx:id=\"removerPeca\" was not injected: check your FXML file 'TelaManutencao.fxml'.";
-        assert servicos != null : "fx:id=\"servicos\" was not injected: check your FXML file 'TelaManutencao.fxml'.";
-        assert valorPeca != null : "fx:id=\"valorPeca\" was not injected: check your FXML file 'TelaManutencao.fxml'.";
-        assert valorServicos != null : "fx:id=\"valorServicos\" was not injected: check your FXML file 'TelaManutencao.fxml'.";
-        assert valorTotal != null : "fx:id=\"valorTotal\" was not injected: check your FXML file 'TelaManutencao.fxml'.";
+    public void setRun(Run run) {
+        this.run = run;
     }
-}
 
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+        System.out.println("test");
+        if (LoginController.getUsuarioLogado()==null){
+            nomeTecnico.setText("-");
+        } else {
+            nomeTecnico.setText(LoginController.getUsuarioLogado().getNome());
+        }
+        
+    }
+
+}

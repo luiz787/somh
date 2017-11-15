@@ -12,7 +12,7 @@
 <?import javafx.scene.text.*?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1000.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1000.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="TelaManutencaoController">
   <children>
     <Pane layoutX="0.0" layoutY="-2.0" prefHeight="600.0" prefWidth="1000.0">
       <children>
@@ -60,8 +60,8 @@
         <Button fx:id="addPeca" layoutX="392.0" layoutY="528.0" mnemonicParsing="false" text="Adicionar" />
         <ListView fx:id="pecasUsadas" layoutX="131.0" layoutY="184.0" prefHeight="157.0" prefWidth="139.0" />
         <ListView fx:id="pecasEstoque" layoutX="368.0" layoutY="184.0" prefHeight="157.0" prefWidth="139.0" />
-        <Button fx:id="removerPeca" layoutX="290.0" layoutY="224.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="56.0" style="" text="" />
-        <Button fx:id="adicionarPeca" layoutX="290.0" layoutY="269.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="56.0" text="" />
+        <Button fx:id="removerPeca" layoutX="290.0" layoutY="224.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="56.0" style="" text="&gt;" />
+        <Button fx:id="adicionarPeca" layoutX="290.0" layoutY="269.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="56.0" text="&lt;" />
         <Label fx:id="codigoOS" font="$x3" layoutX="234.0" layoutY="117.0" prefHeight="25.0" prefWidth="56.0" text="Label" />
         <Label fx:id="dataEntrada" font="$x3" layoutX="421.0" layoutY="120.0" prefWidth="42.0" text="Label" />
         <Label fx:id="descricaoEquipamento" font="$x3" layoutX="680.0" layoutY="122.0" text="Label" />
