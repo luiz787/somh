@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.control.Label?>
@@ -10,17 +13,17 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
 
-<AnchorPane prefHeight="1000.0" prefWidth="615.0" stylesheets="@CSS%20Botao.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.TelaListagemOSController">
+<AnchorPane prefHeight="1000.0" prefWidth="615.0" stylesheets="@CSS%20Botao.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.TelaListagemOSController">
    <children>
       <ScrollPane fx:id="scrollPane" fitToHeight="true" fitToWidth="true" layoutY="-2.0" prefHeight="999.0" prefViewportHeight="835.0" prefViewportWidth="600.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="-2.0">
          <content>
-            <AnchorPane fx:id="fundo" layoutX="10.0" layoutY="10.0" prefHeight="974.0" prefWidth="613.0">
+            <AnchorPane fx:id="fundo" layoutX="10.0" layoutY="10.0" prefHeight="974.0" prefWidth="613.0" stylesheets="@CSS%20Botao.css">
                <children>
                   <Label fx:id="faixa" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="39.0" prefHeight="39.0" prefWidth="600.0" stylesheets="@CSS%20Botao.css" text="Listagem de OS" textAlignment="JUSTIFY" textFill="WHITE" AnchorPane.bottomAnchor="958.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
                   <TableView fx:id="listaOS" layoutX="6.0" layoutY="113.0" prefHeight="887.0" prefWidth="599.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="7.0" AnchorPane.rightAnchor="7.0" AnchorPane.topAnchor="113.0">
                      <columns>
+                        <TableColumn fx:id="colunaCodigo" editable="false" minWidth="100.0" prefWidth="-1.0" text="Código de OS" />
                         <TableColumn fx:id="colunaEquipamento" editable="false" minWidth="100.0" prefWidth="-1.0" text="Equipamento" />
-                        <TableColumn fx:id="colunaCodigo" editable="false" minWidth="100.0" prefWidth="-1.0" text="Código" />
                         <TableColumn fx:id="colunaDataReceb" editable="false" minWidth="100.0" prefWidth="10.0" text="Data de recebimento" />
                         <TableColumn fx:id="colunaStatus" editable="false" minWidth="100.0" prefWidth="0.0" text="Status" />
                         <TableColumn fx:id="colunaDataFecha" editable="false" minWidth="100.0" prefWidth="-1.0" text="Data de fechamento" />

@@ -157,19 +157,21 @@ public class UsuarioDAOImpl implements UsuarioDAO, Serializable {
         try {
             Connection connection = JDBCManterConexao.getInstancia().getConexao();
 
-            String sql = "SELECT * FROM usuario WHERE id = ?";
+            String sql = "SELECT * FROM usuario WHERE cod_usuario = ?";
 
             PreparedStatement pstmt = connection.prepareStatement(sql);
             pstmt.setLong(1, id);
             ResultSet rs = pstmt.executeQuery();
 
             Usuario usuario = null;
+            PerfilDAO perfilDAOImpl = PerfilDAOImpl.getInstance();
             if (rs.next()) {
                 usuario = new Usuario();
-                usuario.setId(rs.getLong("id"));
-                usuario.setNome(rs.getString("nome"));
-                usuario.setSenha(rs.getString("senha"));
-                usuario.setPerfil((Perfil)rs.getObject("perfil"));
+                usuario.setId(rs.getLong("cod_usuario"));
+                usuario.setNome(rs.getString("nom_usuario"));
+                usuario.setSenha(rs.getString("txt_senha"));
+                Perfil perfil = perfilDAOImpl.consultarPorId(rs.getLong("cod_perfil"));
+                usuario.setPerfil(perfil);
             }
 
             rs.close();
