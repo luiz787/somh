@@ -10,6 +10,7 @@ import Controller.TelaCadastroOSController;
 import Controller.CadastroUsuarioController;
 import Controller.LoginController;
 import Controller.TelaListagemOSController;
+import Controller.TelaOSController;
 import Domain.Cliente;
 import java.io.IOException;
 import java.time.LocalDate;
@@ -78,6 +79,7 @@ public class Run extends Application {
         //showLogin();
         //showCadastroUsuario();
         showListagemOS();
+        //showOS();
     }
 
     
@@ -123,6 +125,23 @@ public class Run extends Application {
             rootLayout.setCenter(TelaListagemOS);
             
             TelaListagemOSController controller = loader.getController();
+            controller.setRun(this);
+        
+        } catch (IOException ex) {
+            Logger.getLogger(Run.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    public void showOS() {
+        try{
+            FXMLLoader loader = new FXMLLoader();
+            
+            loader.setLocation(Run.class.getResource("../View/TelaOSView.fxml"));
+            AnchorPane TelaOS = (AnchorPane) loader.load();
+            
+            rootLayout.setCenter(TelaOS);
+            
+            TelaOSController controller = loader.getController();
             controller.setRun(this);
         
         } catch (IOException ex) {

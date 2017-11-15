@@ -16,13 +16,13 @@
 
 <AnchorPane prefHeight="1000.0" prefWidth="615.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.TelaCadastroOSController">
    <children>
-      <ScrollPane fx:id="scrollPane" fitToHeight="true" fitToWidth="true" layoutY="-2.0" prefHeight="999.0" prefViewportHeight="835.0" prefViewportWidth="600.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="-2.0">
+      <ScrollPane fx:id="scrollPane" fitToHeight="true" fitToWidth="true" layoutY="-2.0" prefHeight="550.0" prefViewportHeight="835.0" prefViewportWidth="600.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <content>
             <AnchorPane fx:id="fundo" layoutX="10.0" layoutY="10.0" prefHeight="917.0" prefWidth="598.0">
                <children>
-                  <HBox fx:id="hbox" alignment="CENTER" layoutY="39.0" prefHeight="960.0" prefWidth="598.0" stylesheets="@CSS%20Botao.css" AnchorPane.bottomAnchor="-2.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+                  <HBox fx:id="hbox" alignment="CENTER" layoutY="39.0" prefHeight="960.0" prefWidth="598.0" stylesheets="@CSS%20Botao.css" AnchorPane.bottomAnchor="-2.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="42.0">
                      <children>
-                        <Pane fx:id="painel" layoutY="36.0" prefHeight="805.0" prefWidth="598.0" stylesheets="@CSS%20Botao.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="37.0">
+                        <Pane fx:id="painel" layoutY="36.0" prefHeight="958.0" prefWidth="611.0" stylesheets="@CSS%20Botao.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="37.0">
                            <children>
                               <Label layoutX="26.0" layoutY="96.0" text="Nome" />
                               <Label layoutX="342.0" layoutY="167.0" text="Modelo" />

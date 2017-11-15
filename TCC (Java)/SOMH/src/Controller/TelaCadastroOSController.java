@@ -261,7 +261,7 @@ public class TelaCadastroOSController implements Initializable {
                 equipamento.setNroSerie(Integer.parseInt(nroSerie.getText()));
             }
             
-            cliente.setCodCPF_CNPJ(Long.parseLong("15771757517"));//Substituir quando cliente estiver pronto
+            cliente.setCodCPF_CNPJ(Long.parseLong("10213683695"));//Substituir quando cliente estiver pronto
             os.setCliente(cliente);
             
             os.setTxtReclamacao(reclamacao.getText());

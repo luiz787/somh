@@ -4,6 +4,7 @@ import BD.JDBCManterConexao;
 import DAO.OSDAO;
 import DAO.OSStatusDAO;
 import DAO.PerfilDAO;
+import DAO.StatusDAO;
 import DAO.UsuarioDAO;
 import Domain.OSStatus;
 import Domain.OSStatus;
@@ -73,22 +74,23 @@ public class OSStatusDAOImpl implements OSStatusDAO{
         try {
             Connection connection = JDBCManterConexao.getInstancia().getConexao();
 
-            String sql = "SELECT * FROM osStatus WHERE nro_OS = ?";
+            String sql = "SELECT * FROM osStatus WHERE nro_OS = ? ORDER BY dat_ocorrencia";
 
             PreparedStatement pstmt = connection.prepareStatement(sql);
+            pstmt.setLong(1, id);
             ResultSet rs = pstmt.executeQuery();
 
             List<OSStatus> listAll = new ArrayList<>();
             OSDAO osDAOImpl = OSDAOImpl.getInstance();
             UsuarioDAO usuarioDAOImpl = UsuarioDAOImpl.getInstance();
-            //StatusDAO statusDAOImpl = StatusDAOImp.getInstance();
+            StatusDAO statusDAOImpl = StatusDAOImpl.getInstance();
             if (rs.next()) {
                 do {
                     OSStatus osStatus = new OSStatus(
                         osDAOImpl.getOSById(rs.getLong("nro_OS")),
                         rs.getTimestamp("dat_ocorrencia").getTime(),
                         usuarioDAOImpl.consultarPorId(rs.getLong("cod_usuario")),
-                        new Status(rs.getInt("cod_status"))//Modificar futuramente
+                        statusDAOImpl.getStatusById(rs.getInt("cod_status"))
                     );
                     listAll.add(osStatus);
                 } while (rs.next());
