@@ -1,24 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.net.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
 <?import java.net.URL?>
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="1000.0" prefWidth="615.0" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.TelaOSController">
+<AnchorPane id="AnchorPane" prefHeight="1000.0" prefWidth="615.0" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1">
     <stylesheets>
         <URL value="@CSS Botao.css" />
     </stylesheets>
@@ -90,7 +86,6 @@
                               <Button fx:id="excluirBtn" layoutX="284.0" layoutY="918.0" mnemonicParsing="false" onAction="#excluirOS" prefHeight="20.0" prefWidth="70.0" text="Excluir" />
                               <Button fx:id="voltarBtn" layoutX="514.0" layoutY="918.0" mnemonicParsing="false" onAction="#voltarOS" prefHeight="20.0" prefWidth="70.0" text="Voltar" />
                               <TextArea fx:id="textComponentes" editable="false" layoutX="23.0" layoutY="257.0" prefHeight="100.0" prefWidth="200.0" />
-                              <ListView fx:id="listAcessorios" layoutX="26.0" layoutY="415.0" prefHeight="170.0" prefWidth="150.0" />
                               <TextField fx:id="nomeEquipamento" editable="false" layoutX="134.0" layoutY="86.0" />
                               <TextField fx:id="nomeMarca" editable="false" layoutX="134.0" layoutY="121.0" />
                               <TextField fx:id="nomeModelo" editable="false" layoutX="134.0" layoutY="155.0" />
@@ -114,6 +109,11 @@
                               <TextArea fx:id="textObservacao" editable="false" layoutX="327.0" layoutY="415.0" prefHeight="120.0" prefWidth="270.0" />
                               <Label fx:id="statusOS" layoutX="475.0" layoutY="16.0" text="statusOS" />
                               <Label fx:id="dataCriacao" layoutX="475.0" layoutY="51.0" text="dataCriacao" />
+                              <TableView fx:id="listAcessorios" layoutX="34.0" layoutY="415.0" prefHeight="198.0" prefWidth="159.0">
+                                 <columns>
+                                    <TableColumn fx:id="colunaAcessorios" maxWidth="157.0" prefWidth="157.0" text="Acessórios" />
+                                 </columns>
+                              </TableView>
                            </children>
                         </Pane>
                      </children>
