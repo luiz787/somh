@@ -10,6 +10,16 @@ package Domain;
  * @author Luiz
  */
 public class Peca {
+    
+    public Peca(){}
+
+    public Peca(Long id, String descricao, double precoVenda, String marca) {
+        this.id = id;
+        this.descricao = descricao;
+        this.precoVenda = precoVenda;
+        this.marca = marca;
+    }
+    
     private Long id;
     private String descricao;
     private double precoVenda;

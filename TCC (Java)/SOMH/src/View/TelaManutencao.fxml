@@ -12,7 +12,7 @@
 <?import javafx.scene.text.*?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1000.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="TelaManutencaoController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1000.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="Controller.TelaManutencaoController">
   <children>
     <Pane layoutX="0.0" layoutY="-2.0" prefHeight="600.0" prefWidth="1000.0">
       <children>
@@ -57,15 +57,15 @@
         <TextField fx:id="nomePeca" layoutX="263.0" layoutY="441.0" prefWidth="200.0" />
         <TextField fx:id="marcaPeca" layoutX="263.0" layoutY="467.0" prefWidth="200.0" />
         <TextField fx:id="valorPeca" layoutX="263.0" layoutY="497.0" prefWidth="200.0" />
-        <Button fx:id="addPeca" layoutX="392.0" layoutY="528.0" mnemonicParsing="false" text="Adicionar" />
+        <Button fx:id="addPeca" layoutX="392.0" layoutY="528.0" mnemonicParsing="false" onAction="#adicionarPecaEstoque" text="Adicionar" />
         <ListView fx:id="pecasUsadas" layoutX="131.0" layoutY="184.0" prefHeight="157.0" prefWidth="139.0" />
         <ListView fx:id="pecasEstoque" layoutX="368.0" layoutY="184.0" prefHeight="157.0" prefWidth="139.0" />
-        <Button fx:id="removerPeca" layoutX="290.0" layoutY="224.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="56.0" style="" text="&gt;" />
-        <Button fx:id="adicionarPeca" layoutX="290.0" layoutY="269.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="56.0" text="&lt;" />
+        <Button fx:id="removerPeca" layoutX="290.0" layoutY="224.0" mnemonicParsing="false" onAction="#removerPecaUso" prefHeight="27.0" prefWidth="56.0" style="" text="&gt;" />
+        <Button fx:id="adicionarPeca" layoutX="290.0" layoutY="269.0" mnemonicParsing="false" onAction="#adicionarPecaUso" prefHeight="27.0" prefWidth="56.0" text="&lt;" />
         <Label fx:id="codigoOS" font="$x3" layoutX="234.0" layoutY="117.0" prefHeight="25.0" prefWidth="56.0" text="Label" />
         <Label fx:id="dataEntrada" font="$x3" layoutX="421.0" layoutY="120.0" prefWidth="42.0" text="Label" />
         <Label fx:id="descricaoEquipamento" font="$x3" layoutX="680.0" layoutY="122.0" text="Label" />
-        <Label fx:id="precoPecas" font="$x3" layoutX="297.0" layoutY="355.0" prefHeight="18.62109375" text="Label" />
+        <Label fx:id="precoPecas" font="$x3" layoutX="297.0" layoutY="355.0" prefHeight="18.62109375" text="R$0.0" />
         <Label fx:id="nomeTecnico" font="$x3" layoutX="641.0" layoutY="442.0" minHeight="18.62109375" prefHeight="18.62109375" text="Label" />
       </children>
     </Pane>
