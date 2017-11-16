@@ -62,7 +62,7 @@
                   <Font size="10.0" />
                </font>
             </Button>
-            <Button id="btnSair" fx:id="btnSair" layoutX="549.0" layoutY="340.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="97.0" stylesheets="@CSS%20Botao.css" text="Sair" textAlignment="CENTER">
+            <Button id="btnSair" fx:id="btnSair" layoutX="549.0" layoutY="340.0" mnemonicParsing="false" onAction="#sair" prefHeight="27.0" prefWidth="97.0" stylesheets="@CSS%20Botao.css" text="Sair" textAlignment="CENTER">
                <font>
                   <Font size="10.0" />
                </font>

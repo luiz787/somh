@@ -7,17 +7,23 @@ import Exception.ExcecaoPersistencia;
 import Main.Run;
 import Service.ManterUsuario;
 import ServiceImpl.ManterUsuarioImpl;
+import java.io.IOException;
 import java.io.Serializable;
 import java.net.URL;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.AnchorPane;
 
 /**
  * FXML Controller class
@@ -94,12 +100,27 @@ public class CadastroUsuarioController implements Initializable, Serializable {
                 alert.setTitle("Cadastro de Usuario");
                 alert.setHeaderText("Sucesso");
                 alert.setContentText("Funcionário cadastrado com sucesso!");
-
+                alert.showAndWait();
             } catch (ExcecaoPersistencia ex) {
                 System.out.println("Excecao de persistencia!");
             } catch (ExcecaoNegocio ex) {
                 System.out.println("Excecao de negocio!");
             }
+        }
+    }
+    
+    @FXML
+    private void sair(ActionEvent event) {
+        try {
+            FXMLLoader loader = new FXMLLoader();
+
+            loader.setLocation(Run.class.getResource("../View/Login.fxml"));
+            AnchorPane TelaLogin = (AnchorPane) loader.load();
+
+            run.getRootLayout().setCenter(TelaLogin);
+
+        } catch (IOException ex) {
+            Logger.getLogger(Run.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 

@@ -50,21 +50,21 @@ public class UsuarioDAOImpl implements UsuarioDAO, Serializable {
             pstmt.setObject(2, usuario.getPerfil().getId());
             pstmt.setString(3, usuario.getSenha());
             pstmt.executeUpdate();
-                
+            
+            ResultSet rs = pstmt.executeQuery("SELECT LAST_INSERT_ID() FROM usuario");
+            
             Long id = null;
-            /*
             if (rs.next()) {
-                id = new Long(rs.getLong("id"));
+                id = rs.getLong(1);
                 usuario.setId(id);
             }
-
+            
             rs.close();
             pstmt.close();
-            */
-            
             connection.close();
             
             return id;
+            
         } catch (Exception e) {
             e.printStackTrace();
             throw new ExcecaoPersistencia(e.getMessage());
