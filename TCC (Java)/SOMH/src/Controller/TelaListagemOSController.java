@@ -115,7 +115,7 @@ public class TelaListagemOSController implements Initializable {
                 }
             }
             
-            colunaEquipamento.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<String[], String>, ObservableValue<String>>() {
+            colunaCodigo.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<String[], String>, ObservableValue<String>>() {
                 @Override
                 public ObservableValue<String> call(TableColumn.CellDataFeatures<String[], String> p) {
                     String[] x = p.getValue();
@@ -127,7 +127,7 @@ public class TelaListagemOSController implements Initializable {
                 }
             });
             
-            colunaCodigo.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<String[], String>, ObservableValue<String>>() {
+            colunaEquipamento.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<String[], String>, ObservableValue<String>>() {
                 @Override
                 public ObservableValue<String> call(TableColumn.CellDataFeatures<String[], String> p) {
                     String[] x = p.getValue();
@@ -182,18 +182,19 @@ public class TelaListagemOSController implements Initializable {
                 row.setOnMouseClicked(event -> {
                     if (event.getClickCount() == 2 && (! row.isEmpty())) {
                         try{
+                            String[] rowItem = row.getItem();
+                            OS os = manterOS.getOSById(Long.parseLong(rowItem[0]));
+                            TelaOSController controlador = new TelaOSController(os);
+                            controlador.setRun(run);
                             FXMLLoader loader = new FXMLLoader();
-
                             loader.setLocation(Run.class.getResource("../View/TelaOSView.fxml"));
+                            loader.setController(controlador);
                             AnchorPane TelaOS = (AnchorPane) loader.load();
-
                             run.getRootLayout().setCenter(TelaOS);
-
-                            TelaOSController controller = loader.getController();
-                            controller.setRun(run);
-
                         } catch (IOException ex) {
                             Logger.getLogger(Run.class.getName()).log(Level.SEVERE, null, ex);
+                        } catch (ExcecaoPersistencia ex) {
+                            Logger.getLogger(TelaListagemOSController.class.getName()).log(Level.SEVERE, null, ex);
                         }
                     }
                 });

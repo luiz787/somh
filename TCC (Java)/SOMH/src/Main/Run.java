@@ -78,8 +78,8 @@ public class Run extends Application {
         initRootLayout();
         //showCadastroOSView();
         //showLogin();
-        showCadastroUsuario();
-        //showListagemOS();
+        //showCadastroUsuario();
+        showListagemOS();
         //showTelaManutencao();
         //showOS();
     }
