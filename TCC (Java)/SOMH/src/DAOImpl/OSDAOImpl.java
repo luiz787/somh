@@ -113,7 +113,7 @@ public class OSDAOImpl implements OSDAO {
                     + "vlr_desconto=?, "
                     + "per_desconto=?, "
                     + "vlr_frete=?"
-                    + " WHERE seq_equipto=?;";
+                    + " WHERE nro_OS=?;";
 
             PreparedStatement pstmt = connection.prepareStatement(sql);
             pstmt.setLong(1, os.getCliente().getCodCPF_CNPJ());
@@ -134,7 +134,12 @@ public class OSDAOImpl implements OSDAO {
             } else {
                 pstmt.setNull(6, java.sql.Types.NULL);
             }
-            pstmt.setLong(7, os.getId());
+            if(os.getVlrFrete()!=null) {
+                pstmt.setDouble(7, os.getVlrFrete());
+            } else {
+                pstmt.setNull(7, java.sql.Types.NULL);
+            }
+            pstmt.setLong(8, os.getId());
             pstmt.executeUpdate();
 
             pstmt.close();

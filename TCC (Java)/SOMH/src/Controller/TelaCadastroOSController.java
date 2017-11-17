@@ -329,6 +329,16 @@ public class TelaCadastroOSController implements Initializable {
 
             alert.showAndWait();
             
+            FXMLLoader loader = new FXMLLoader();
+            
+            loader.setLocation(Run.class.getResource("../View/TelaListagemOSView.fxml"));
+            AnchorPane TelaListagemOS = (AnchorPane) loader.load();
+            
+            run.getRootLayout().setCenter(TelaListagemOS);
+            
+            TelaListagemOSController controller = loader.getController();
+            controller.setRun(run);
+            
         } catch (Exception ex) {
             System.out.println("Problema ao criar OS: "+ex);
         }
