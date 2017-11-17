@@ -1,5 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.*?>
+<?import java.net.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 <?import java.net.URL?>
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
@@ -14,7 +20,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="1000.0" prefWidth="615.0" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane id="AnchorPane" prefHeight="1000.0" prefWidth="615.0" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
     <stylesheets>
         <URL value="@CSS Botao.css" />
     </stylesheets>
@@ -85,7 +91,7 @@
                               <Button fx:id="alterarBtn" layoutX="22.0" layoutY="918.0" mnemonicParsing="false" onAction="#alterarOS" prefHeight="20.0" prefWidth="70.0" text="Alterar" />
                               <Button fx:id="excluirBtn" layoutX="284.0" layoutY="918.0" mnemonicParsing="false" onAction="#excluirOS" prefHeight="20.0" prefWidth="70.0" text="Excluir" />
                               <Button fx:id="voltarBtn" layoutX="514.0" layoutY="918.0" mnemonicParsing="false" onAction="#voltarOS" prefHeight="20.0" prefWidth="70.0" text="Voltar" />
-                              <TextArea fx:id="textComponentes" editable="false" layoutX="23.0" layoutY="257.0" prefHeight="100.0" prefWidth="200.0" />
+                              <TextArea fx:id="textComponentes" editable="false" layoutX="34.0" layoutY="256.0" prefHeight="100.0" prefWidth="200.0" />
                               <TextField fx:id="nomeEquipamento" editable="false" layoutX="134.0" layoutY="86.0" />
                               <TextField fx:id="nomeMarca" editable="false" layoutX="134.0" layoutY="121.0" />
                               <TextField fx:id="nomeModelo" editable="false" layoutX="134.0" layoutY="155.0" />
@@ -114,6 +120,8 @@
                                     <TableColumn fx:id="colunaAcessorios" maxWidth="157.0" prefWidth="157.0" text="Acessórios" />
                                  </columns>
                               </TableView>
+                              <Button fx:id="salvarBtn" layoutX="22.0" layoutY="918.0" mnemonicParsing="false" onAction="#salvarOS" prefHeight="20.0" prefWidth="70.0" text="Salvar" visible="false" />
+                              <Button fx:id="cancelarBtn" layoutX="514.0" layoutY="918.0" mnemonicParsing="false" onAction="#cancelarOS" prefHeight="20.0" prefWidth="70.0" text="Cancelar" visible="false" />
                            </children>
                         </Pane>
                      </children>

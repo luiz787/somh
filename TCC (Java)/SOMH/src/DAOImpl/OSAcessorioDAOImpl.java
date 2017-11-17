@@ -188,5 +188,25 @@ public class OSAcessorioDAOImpl implements OSAcessorioDAO{
             throw new ExcecaoPersistencia(ex);
         }
     }
+
+    @Override
+    public void deleteAll(Long idOS) throws ExcecaoPersistencia {
+        try {
+            Connection connection = JDBCManterConexao.getInstancia().getConexao();
+
+            String sql = "DELETE FROM osacessorio WHERE nro_OS=?";
+
+            PreparedStatement pstmt = connection.prepareStatement(sql);
+            
+            pstmt.setLong(1, idOS);
+            pstmt.executeUpdate();
+
+            pstmt.close();
+            connection.close();
+        } catch (ClassNotFoundException | SQLException ex) {
+            Logger.getLogger(OSDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
+            throw new ExcecaoPersistencia(ex);
+        }
+    }
     
 }

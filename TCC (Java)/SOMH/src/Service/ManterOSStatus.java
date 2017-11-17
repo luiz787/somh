@@ -7,6 +7,7 @@ import java.util.List;
 
 public interface ManterOSStatus {
     public boolean cadastrarOSStatus(OSStatus osStatus) throws ExcecaoPersistencia, ExcecaoNegocio;
+    public void deletarAllOSStatus(Long id) throws ExcecaoPersistencia;
     public List<OSStatus> getAllByOS(Long id) throws ExcecaoPersistencia;
     public List<OSStatus> getAll() throws ExcecaoPersistencia;
 }

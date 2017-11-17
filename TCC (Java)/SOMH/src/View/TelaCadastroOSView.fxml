@@ -26,7 +26,7 @@
                            <children>
                               <Label layoutX="26.0" layoutY="96.0" text="Nome" />
                               <Label layoutX="342.0" layoutY="167.0" text="Modelo" />
-                              <Button fx:id="cancelar" alignment="CENTER" layoutX="14.0" layoutY="915.0" mnemonicParsing="false" onAction="#redirecionaTelaFuncionario" prefHeight="31.0" prefWidth="90.0" stylesheets="@CSS%20Botao.css" text="Cancelar" textFill="WHITE" />
+                              <Button fx:id="cancelar" alignment="CENTER" layoutX="506.0" layoutY="913.0" mnemonicParsing="false" onAction="#redirecionaTelaFuncionario" prefHeight="31.0" prefWidth="90.0" stylesheets="@CSS%20Botao.css" text="Cancelar" textFill="WHITE" />
                               <Label layoutX="14.0" layoutY="79.0" text="Equipamento" underline="true" />
                               <Label layoutX="27.0" layoutY="561.0" text="Observação" />
                               <TextArea fx:id="reclamacao" layoutX="39.0" layoutY="763.0" prefHeight="110.0" prefWidth="296.0" />
@@ -38,7 +38,7 @@
                               <Label layoutX="26.0" layoutY="532.0" text="Cadastrar Acessório:" />
                               <TextField fx:id="nroSerie" layoutX="346.0" layoutY="252.0" prefHeight="25.0" prefWidth="122.0" />
                               <Label layoutX="12.0" layoutY="8.0" text="Cliente" underline="true" AnchorPane.leftAnchor="12.0" />
-                              <Button fx:id="criar" alignment="CENTER" contentDisplay="RIGHT" layoutX="498.0" layoutY="915.0" maxHeight="31.0" maxWidth="90.0" mnemonicParsing="false" onAction="#criaOS" prefHeight="31.0" prefWidth="90.0" stylesheets="@CSS%20Botao.css" text="Criar" textFill="WHITE" AnchorPane.rightAnchor="10.0" />
+                              <Button fx:id="criar" alignment="CENTER" contentDisplay="RIGHT" layoutX="15.0" layoutY="913.0" maxHeight="31.0" maxWidth="90.0" mnemonicParsing="false" onAction="#criaOS" prefHeight="31.0" prefWidth="90.0" stylesheets="@CSS%20Botao.css" text="Criar" textFill="WHITE" AnchorPane.rightAnchor="506.0" />
                               <TextField fx:id="nomeAcessorioCadastro" layoutX="143.0" layoutY="528.0" prefHeight="25.0" prefWidth="241.0" />
                               <Label layoutX="17.0" layoutY="715.0" text="Problema" underline="true" />
                               <TextField fx:id="modelo" layoutX="346.0" layoutY="191.0" prefHeight="25.0" prefWidth="122.0" />

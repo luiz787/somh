@@ -31,5 +31,10 @@ public class ManterOSStatusImpl implements ManterOSStatus{
         List<OSStatus> result = osStatusDAO.listAll();
         return result;
     }
+
+    @Override
+    public void deletarAllOSStatus(Long id) throws ExcecaoPersistencia {
+        osStatusDAO.deleteAll(id);
+    }
     
 }

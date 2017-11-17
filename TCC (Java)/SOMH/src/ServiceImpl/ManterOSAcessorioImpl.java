@@ -43,4 +43,9 @@ public class ManterOSAcessorioImpl implements ManterOSAcessorio{
         List<OSAcessorio> result = osAcessorioDAO.listAll();
         return result;
     }
+
+    @Override
+    public void deletarAllOSAcessorio(Long idOS) throws ExcecaoPersistencia {
+        osAcessorioDAO.deleteAll(idOS);
+    }
 }

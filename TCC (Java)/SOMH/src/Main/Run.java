@@ -76,11 +76,11 @@ public class Run extends Application {
         this.primaryStage = primaryStage;
         this.primaryStage.setTitle("SOHM");
         initRootLayout();
-        //showCadastroOSView();
+        showCadastroOSView();
         //showLogin();
         //showCadastroUsuario();
         //showListagemOS();
-        showTelaManutencao();
+        //showTelaManutencao();
         //showOS();
     }
 
