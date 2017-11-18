@@ -5,6 +5,7 @@
  */
 package Controller;
 
+import Main.Run;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
@@ -14,6 +15,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
@@ -34,10 +36,17 @@ public class TelaTecnicoViewController implements Initializable {
     private Button sair;
     @FXML
     private Label nomeFuncionario;
+    
+    private Run run;
 
-    /**
-     * Initializes the controller class.
-     */
+    public Run getRun() {
+        return run;
+    }
+
+    public void setRun(Run run) {
+        this.run = run;
+    }
+    
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         System.out.println("Inicializando tela do técnico...");
@@ -52,11 +61,15 @@ public class TelaTecnicoViewController implements Initializable {
     }
 
     public void procuraOS() throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource("../View/BuscaOSView.fxml"));
-        Scene scene = new Scene(root);
-        Stage stage = new Stage();
-        stage.setScene(scene);
-        stage.show();
+        FXMLLoader loader = new FXMLLoader();
+
+        loader.setLocation(Run.class.getResource("../View/TelaListagemOSView.fxml"));
+        AnchorPane TelaFuncionario = (AnchorPane) loader.load();
+
+        run.getRootLayout().setCenter(TelaFuncionario);
+
+        TelaListagemOSController controller = loader.getController();
+        controller.setRun(run);
     }
 
     public void sair() throws Exception {

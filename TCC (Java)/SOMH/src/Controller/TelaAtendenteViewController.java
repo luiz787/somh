@@ -5,6 +5,7 @@
  */
 package Controller;
 
+import Main.Run;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
@@ -36,10 +37,17 @@ public class TelaAtendenteViewController implements Initializable {
     private Button sair;
     @FXML
     private Label nomeFuncionario;
-    /**
-     * Initializes the controller class.
-     */
-      
+    
+    private Run run;
+
+    public Run getRun() {
+        return run;
+    }
+
+    public void setRun(Run run) {
+        this.run = run;
+    }
+    
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         System.out.println("Inicializando tela do atendente...");

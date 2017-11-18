@@ -33,6 +33,13 @@
                      <children>
                         <Pane fx:id="painel" prefHeight="958.0" prefWidth="611.0">
                            <children>
+                              <TextField fx:id="nomeEquipamento" editable="false" layoutX="134.0" layoutY="86.0" />
+                              <TextField fx:id="nomeMarca" editable="false" layoutX="134.0" layoutY="121.0" />
+                              <TextField fx:id="nomeModelo" editable="false" layoutX="134.0" layoutY="155.0" />
+                              <TextField fx:id="nroSerie" editable="false" layoutX="134.0" layoutY="188.0" />
+                              <TextArea fx:id="textComponentes" editable="false" layoutX="34.0" layoutY="256.0" prefHeight="100.0" prefWidth="200.0" />
+                              <TextArea fx:id="textObservacao" editable="false" layoutX="327.0" layoutY="415.0" prefHeight="120.0" prefWidth="270.0" />
+                              <TextArea fx:id="textReclamacao" editable="false" layoutX="21.0" layoutY="643.0" prefHeight="120.0" prefWidth="300.0" />
                               <Label layoutX="10.0" layoutY="11.0" prefHeight="26.0" prefWidth="161.0" text="Ordem de Serviço: ">
                                  <font>
                                     <Font size="17.0" />
@@ -91,12 +98,6 @@
                               <Button fx:id="alterarBtn" layoutX="22.0" layoutY="918.0" mnemonicParsing="false" onAction="#alterarOS" prefHeight="20.0" prefWidth="70.0" text="Alterar" />
                               <Button fx:id="excluirBtn" layoutX="284.0" layoutY="918.0" mnemonicParsing="false" onAction="#excluirOS" prefHeight="20.0" prefWidth="70.0" text="Excluir" />
                               <Button fx:id="voltarBtn" layoutX="514.0" layoutY="918.0" mnemonicParsing="false" onAction="#voltarOS" prefHeight="20.0" prefWidth="70.0" text="Voltar" />
-                              <TextArea fx:id="textComponentes" editable="false" layoutX="34.0" layoutY="256.0" prefHeight="100.0" prefWidth="200.0" />
-                              <TextField fx:id="nomeEquipamento" editable="false" layoutX="134.0" layoutY="86.0" />
-                              <TextField fx:id="nomeMarca" editable="false" layoutX="134.0" layoutY="121.0" />
-                              <TextField fx:id="nomeModelo" editable="false" layoutX="134.0" layoutY="155.0" />
-                              <TextField fx:id="nroSerie" editable="false" layoutX="134.0" layoutY="188.0" />
-                              <TextArea fx:id="textReclamacao" editable="false" layoutX="21.0" layoutY="643.0" prefHeight="120.0" prefWidth="300.0" />
                               <Label layoutX="368.0" layoutY="14.0" text="Status atual: ">
                                  <font>
                                     <Font size="14.0" />
@@ -112,7 +113,6 @@
                                     <Font size="14.0" />
                                  </font>
                               </Label>
-                              <TextArea fx:id="textObservacao" editable="false" layoutX="327.0" layoutY="415.0" prefHeight="120.0" prefWidth="270.0" />
                               <Label fx:id="statusOS" layoutX="475.0" layoutY="16.0" text="statusOS" />
                               <Label fx:id="dataCriacao" layoutX="475.0" layoutY="51.0" text="dataCriacao" />
                               <TableView fx:id="listAcessorios" layoutX="34.0" layoutY="415.0" prefHeight="198.0" prefWidth="159.0">

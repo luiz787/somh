@@ -111,9 +111,7 @@ public class TelaOSController implements Initializable {
     }
 
     public TelaOSController(OS os) {
-        System.out.println("Salve!");
         this.os = os;
-        System.out.println("OSzinha: "+os.getEquipamento().getDesEquipto());
     }
     
     @Override

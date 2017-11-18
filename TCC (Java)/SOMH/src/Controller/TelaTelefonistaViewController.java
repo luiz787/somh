@@ -28,9 +28,16 @@ public class TelaTelefonistaViewController implements Initializable {
     @FXML
     private Button sair;
     
-    /**
-     * Initializes the controller class.
-     */
+    private Run run;
+
+    public Run getRun() {
+        return run;
+    }
+
+    public void setRun(Run run) {
+        this.run = run;
+    }
+    
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         System.out.println("Inicializando tela do telefonista...");

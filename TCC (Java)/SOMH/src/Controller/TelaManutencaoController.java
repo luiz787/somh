@@ -6,6 +6,7 @@
 package Controller;
 
 import DAOImpl.PecaDAOImpl;
+import Domain.OS;
 import Domain.Peca;
 import Exception.ExcecaoNegocio;
 import Exception.ExcecaoPersistencia;
@@ -95,13 +96,26 @@ public class TelaManutencaoController implements Initializable {
     private TextField valorTotal;
 
     private Run run;
+    private OS os;
 
     private ObservableList<String> pecasEstoqueString;
     private ObservableList<String> pecasUsadasString;
     private ArrayList<Peca> pecas;
 
+    public OS getOs() {
+        return os;
+    }
+
+    public void setOs(OS os) {
+        this.os = os;
+    }
+    
     public void setRun(Run run) {
         this.run = run;
+    }
+
+    public TelaManutencaoController(OS os) {
+        this.os = os;
     }
 
     @Override
