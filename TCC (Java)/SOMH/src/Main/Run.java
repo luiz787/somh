@@ -5,7 +5,6 @@
  */
 package Main;
 
-import Domain.Acessorio;
 import Controller.TelaCadastroOSController;
 import Controller.CadastroUsuarioController;
 import Controller.LoginController;
@@ -14,20 +13,13 @@ import Controller.TelaManutencaoController;
 import Controller.TelaOSController;
 import Domain.Cliente;
 import java.io.IOException;
-import java.time.LocalDate;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.application.Application;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 
 /**
@@ -35,12 +27,11 @@ import javafx.stage.Stage;
  * @author andro
  */
 public class Run extends Application {
-    
-    private Stage primaryStage; 
+
+    private Stage primaryStage;
     private BorderPane rootLayout;
     private Cliente cliente;
-    
-    
+
     public Run() {
     }
 
@@ -67,24 +58,20 @@ public class Run extends Application {
     public void setCliente(Cliente cliente) {
         this.cliente = cliente;
     }
-    
-    
-    
-    
+
     @Override
     public void start(Stage primaryStage) {
         this.primaryStage = primaryStage;
         this.primaryStage.setTitle("SOHM");
         initRootLayout();
-        showCadastroOSView();
-        //showLogin();
+        //showCadastroOSView();
+        showLogin();
         //showCadastroUsuario();
         //showListagemOS();
         //showTelaManutencao();
         //showOS();
     }
 
-    
     public void initRootLayout() {
         try {
             // Carrega o root layout do arquivo fxml.
@@ -99,41 +86,41 @@ public class Run extends Application {
             e.printStackTrace();
         }
     }
-    
+
     public void showCadastroOSView() {
-        try{
+        try {
             FXMLLoader loader = new FXMLLoader();
-            
+
             loader.setLocation(Run.class.getResource("../View/TelaCadastroOSView.fxml"));
             AnchorPane CadastroOSView = (AnchorPane) loader.load();
-            
+
             rootLayout.setCenter(CadastroOSView);
-            
+
             TelaCadastroOSController controller = loader.getController();
             controller.setRun(this);
-        
+
         } catch (IOException ex) {
             Logger.getLogger(Run.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
+
     public void showListagemOS() {
-        try{
+        try {
             FXMLLoader loader = new FXMLLoader();
-            
+
             loader.setLocation(Run.class.getResource("../View/TelaListagemOSView.fxml"));
             AnchorPane TelaListagemOS = (AnchorPane) loader.load();
-            
+
             rootLayout.setCenter(TelaListagemOS);
-            
+
             TelaListagemOSController controller = loader.getController();
             controller.setRun(this);
-        
+
         } catch (IOException ex) {
             Logger.getLogger(Run.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
+
     public void showTelaManutencao() {
         try {
             FXMLLoader loader = new FXMLLoader();
@@ -144,29 +131,29 @@ public class Run extends Application {
             controller.setRun(this);
             primaryStage.setWidth(1000);
             primaryStage.setHeight(600);
-        } catch (IOException ex){
-            Logger.getLogger(Run.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
-    
-    public void showOS() {
-        try{
-            FXMLLoader loader = new FXMLLoader();
-            
-            loader.setLocation(Run.class.getResource("../View/TelaOSView.fxml"));
-            AnchorPane TelaOS = (AnchorPane) loader.load();
-            
-            rootLayout.setCenter(TelaOS);
-            
-            TelaOSController controller = loader.getController();
-            controller.setRun(this);
-        
         } catch (IOException ex) {
             Logger.getLogger(Run.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
-    public void showLogin(){
+
+    public void showOS() {
+        try {
+            FXMLLoader loader = new FXMLLoader();
+
+            loader.setLocation(Run.class.getResource("../View/TelaOSView.fxml"));
+            AnchorPane TelaOS = (AnchorPane) loader.load();
+
+            rootLayout.setCenter(TelaOS);
+
+            TelaOSController controller = loader.getController();
+            controller.setRun(this);
+
+        } catch (IOException ex) {
+            Logger.getLogger(Run.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    public void showLogin() {
         try {
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(Run.class.getResource("../View/Login.fxml"));
@@ -174,12 +161,12 @@ public class Run extends Application {
             rootLayout.setCenter(Login);
             LoginController controller = loader.getController();
             controller.setRun(this);
-        } catch (IOException ex){
+        } catch (IOException ex) {
             Logger.getLogger(Run.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
-    public void showCadastroUsuario(){
+
+    public void showCadastroUsuario() {
         try {
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(Run.class.getResource("../View/CadastroUsuario.fxml"));
@@ -187,13 +174,13 @@ public class Run extends Application {
             rootLayout.setCenter(Login);
             CadastroUsuarioController controller = loader.getController();
             controller.setRun(this);
-        } catch (IOException ex){
+        } catch (IOException ex) {
             Logger.getLogger(Run.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
+
     public static void main(String[] args) {
         launch(args);
     }
-    
+
 }

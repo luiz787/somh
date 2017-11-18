@@ -15,28 +15,26 @@ import Service.ManterPeca;
 import ServiceImpl.ManterPecaImpl;
 import java.net.URL;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
-import javafx.util.Callback;
 
 /**
  *
  * @author Luiz
  */
 public class TelaManutencaoController implements Initializable {
+    
+    public TelaManutencaoController(){}
 
     @FXML
     private Button addPeca;
@@ -138,9 +136,10 @@ public class TelaManutencaoController implements Initializable {
         }
         pecasEstoque.setItems(pecasEstoqueString);
         pecasUsadasString = FXCollections.observableArrayList();
-        pecasUsadas.setItems(pecasUsadasString);
-        //inicializar demais campos
-
+        /*pecasUsadas.setItems(pecasUsadasString);
+        codigoOS.setText(String.valueOf(os.getId()));
+        //dataEntrada.setText(ManterOSStatus.getByStatusId("entrada",os.getId()));
+        descricaoEquipamento.setText(os.getEquipamento().getDesEquipto());*/
     }
 
     public void adicionarPecaUso() {
@@ -192,6 +191,16 @@ public class TelaManutencaoController implements Initializable {
                 pecasEstoqueString.add(x1.getDescricao());
             }
         }
+    }
+    
+    public void setIrrecuperavel(){
+        //set próximo status da OS como irrecuperável
+        //retornar para listagem de OS
+    }
+    
+    public void setAguardandoAprovacao(){
+        //set próximo status da OS como aguardando aprovação
+        //retornar para listagem de OS
     }
     
     
