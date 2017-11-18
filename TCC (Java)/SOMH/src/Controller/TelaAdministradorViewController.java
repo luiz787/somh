@@ -45,9 +45,17 @@ public class TelaAdministradorViewController extends Run implements Initializabl
     @FXML
     private Button procuraCliente;
 
-    /**
-     * Initializes the controller class.
-     */
+    private Run run;
+
+    public Run getRun() {
+        return run;
+    }
+
+    public void setRun(Run run) {
+        this.run = run;
+    }
+    
+    
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         System.out.println("Inicializando tela do administrador...");

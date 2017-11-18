@@ -118,10 +118,24 @@ public class TelaCadastroOSController implements Initializable {
     private Button excluirAcessorio;
     @FXML
     private Label faixa;
+    
+    private Usuario usuarioLogado;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         try {
+            Usuario usuario = new Usuario();
+            usuario.setId(2L);
+            usuario.setNome("Victor");
+            Perfil perfil = new Perfil();
+            perfil.setId(4L);
+            perfil.setDescricao("técnico");
+            usuario.setPerfil(perfil);
+            usuario.setSenha("123");
+            
+            LoginController.setUsuarioLogado(usuario);
+            usuarioLogado = LoginController.getUsuarioLogado();
+            
             carregaForm();
             
             acessoriosCadastrados.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
@@ -497,13 +511,62 @@ public class TelaCadastroOSController implements Initializable {
     @FXML
     private void redirecionaTelaFuncionario() {
         try{
-            FXMLLoader loader = new FXMLLoader();
+            String telaUsuario="";
+            FXMLLoader loader;
+            switch(Integer.parseInt(usuarioLogado.getPerfil().getId().toString())) {
+                case 1: 
+                    telaUsuario = "TelaAdministradorView.fxml";
+                    
+                    loader = new FXMLLoader();
             
-            loader.setLocation(Run.class.getResource("../View/teste.fxml"));
-            AnchorPane TelaFuncionario = (AnchorPane) loader.load();
+                    loader.setLocation(Run.class.getResource("../View/"+telaUsuario));
+                    AnchorPane TelaAdministrador = (AnchorPane) loader.load();
+
+                    run.getRootLayout().setCenter(TelaAdministrador);
+
+                    TelaAdministradorViewController controllerAdministrador = loader.getController();
+                    controllerAdministrador.setRun(run);
+                break;
+                case 2:
+                    telaUsuario = "TelaAtendenteView.fxml";
+                    
+                    loader = new FXMLLoader();
             
-            run.getRootLayout().setCenter(TelaFuncionario);
-        
+                    loader.setLocation(Run.class.getResource("../View/"+telaUsuario));
+                    AnchorPane TelaAtendente = (AnchorPane) loader.load();
+
+                    run.getRootLayout().setCenter(TelaAtendente);
+
+                    TelaAtendenteViewController controllerAtendente = loader.getController();
+                    controllerAtendente.setRun(run);
+                break;
+                case 3:
+                    telaUsuario = "TelaTelefonistaView.fxml";
+                    
+                    loader = new FXMLLoader();
+            
+                    loader.setLocation(Run.class.getResource("../View/"+telaUsuario));
+                    AnchorPane TelaTelefonista = (AnchorPane) loader.load();
+
+                    run.getRootLayout().setCenter(TelaTelefonista);
+
+                    TelaTelefonistaViewController controllerTelefonista = loader.getController();
+                    controllerTelefonista.setRun(run);
+                break;
+                case 4:
+                    telaUsuario = "TelaTecnicoView.fxml";
+                    
+                    loader = new FXMLLoader();
+            
+                    loader.setLocation(Run.class.getResource("../View/"+telaUsuario));
+                    AnchorPane TelaTecnico = (AnchorPane) loader.load();
+
+                    run.getRootLayout().setCenter(TelaTecnico);
+
+                    TelaTecnicoViewController controllerTecnico = loader.getController();
+                    controllerTecnico.setRun(run);
+                break;
+            }
         } catch (IOException ex) {
             Logger.getLogger(Run.class.getName()).log(Level.SEVERE, null, ex);
         }
