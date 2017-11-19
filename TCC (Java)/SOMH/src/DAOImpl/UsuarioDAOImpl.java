@@ -20,14 +20,16 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 /**
  *
  * @author aluno
  */
 public class UsuarioDAOImpl implements UsuarioDAO, Serializable {
+
     private static UsuarioDAOImpl usuarioDAO = null;
-    
+
     private UsuarioDAOImpl() {
     }
 
@@ -39,7 +41,7 @@ public class UsuarioDAOImpl implements UsuarioDAO, Serializable {
 
         return usuarioDAO;
     }
-    
+
     @Override
     public Long inserir(Usuario usuario) throws ExcecaoPersistencia {
         try {
@@ -50,21 +52,21 @@ public class UsuarioDAOImpl implements UsuarioDAO, Serializable {
             pstmt.setObject(2, usuario.getPerfil().getId());
             pstmt.setString(3, usuario.getSenha());
             pstmt.executeUpdate();
-            
+
             ResultSet rs = pstmt.executeQuery("SELECT LAST_INSERT_ID() FROM usuario");
-            
+
             Long id = null;
             if (rs.next()) {
                 id = rs.getLong(1);
                 usuario.setId(id);
             }
-            
+
             rs.close();
             pstmt.close();
             connection.close();
-            
+
             return id;
-            
+
         } catch (Exception e) {
             e.printStackTrace();
             throw new ExcecaoPersistencia(e.getMessage());
@@ -119,6 +121,34 @@ public class UsuarioDAOImpl implements UsuarioDAO, Serializable {
     }
 
     @Override
+    public boolean consultarExistencia(String nome) throws ExcecaoPersistencia {
+        boolean existe;
+
+        try {
+            Connection connection = JDBCManterConexao.getInstancia().getConexao();
+
+            String sql = "SELECT nom_usuario FROM usuario WHERE nom_usuario = " + "\'" + nome + "\'";
+
+            PreparedStatement pstmt = connection.prepareStatement(sql);
+            ResultSet rs = pstmt.executeQuery();
+
+            if (rs.next()) {
+                existe = false;
+            } else {
+                existe = true;
+            }
+
+            pstmt.close();
+            connection.close();
+            return existe;
+            
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw new ExcecaoPersistencia(e.getMessage());
+        }
+    }
+
+    @Override
     public List<Usuario> listarTodos() throws ExcecaoPersistencia {
         try {
             Connection connection = JDBCManterConexao.getInstancia().getConexao();
@@ -135,7 +165,7 @@ public class UsuarioDAOImpl implements UsuarioDAO, Serializable {
                     Usuario usuario = new Usuario();
                     usuario.setId(rs.getLong("id"));
                     usuario.setNome(rs.getString("nome"));
-                    usuario.setPerfil((Perfil)rs.getObject("perfil"));
+                    usuario.setPerfil((Perfil) rs.getObject("perfil"));
                     usuario.setSenha(rs.getString("senha"));
                     listAll.add(usuario);
                 } while (rs.next());
@@ -186,14 +216,14 @@ public class UsuarioDAOImpl implements UsuarioDAO, Serializable {
     }
 
     @Override
-    public Usuario consultarPorEmailSenha(String email, String senha) throws ExcecaoPersistencia {
+    public Usuario consultarPorNomeSenha(String nome, String senha) throws ExcecaoPersistencia {
         try {
             Connection connection = JDBCManterConexao.getInstancia().getConexao();
 
             String sql = "SELECT * FROM usuario WHERE nom_usuario = ? AND txt_senha = md5(?)";
 
             PreparedStatement pstmt = connection.prepareStatement(sql);
-            pstmt.setString(1, email);
+            pstmt.setString(1, nome);
             pstmt.setString(2, senha);
             ResultSet rs = pstmt.executeQuery();
 

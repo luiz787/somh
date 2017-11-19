@@ -10,10 +10,12 @@ public interface UsuarioDAO {
     public boolean atualizar(Usuario usuario) throws ExcecaoPersistencia;
 
     public boolean delete(Usuario usuario) throws ExcecaoPersistencia;
+    
+    public boolean consultarExistencia(String nome) throws ExcecaoPersistencia;
 
     public List<Usuario> listarTodos() throws ExcecaoPersistencia;
 
     public Usuario consultarPorId(Long id) throws ExcecaoPersistencia;
     
-    public Usuario consultarPorEmailSenha(String email, String senha) throws ExcecaoPersistencia;
+    public Usuario consultarPorNomeSenha(String nome, String senha) throws ExcecaoPersistencia;
 }
