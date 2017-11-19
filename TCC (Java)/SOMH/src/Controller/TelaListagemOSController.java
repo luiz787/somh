@@ -210,14 +210,26 @@ public class TelaListagemOSController implements Initializable {
                         try{
                             String[] rowItem = row.getItem();
                             OS os = manterOS.getOSById(Long.parseLong(rowItem[0]));
+                            OSStatus osStatus = manterOSStatus.getAllByOS(
+                            os.getId()).get(manterOSStatus.getAllByOS(os.getId()).size()-1);
                             if(usuarioLogado.getPerfil().getDescricao().equals("técnico")) {
-                                TelaManutencaoController controlador = new TelaManutencaoController(os);
-                                controlador.setRun(run);
-                                FXMLLoader loader = new FXMLLoader();
-                                loader.setLocation(Run.class.getResource("../View/TelaManutencao.fxml"));
-                                loader.setController(controlador);
-                                AnchorPane TelaManutencao = (AnchorPane) loader.load();
-                                run.getRootLayout().setCenter(TelaManutencao);
+                                if(osStatus.getStatus().getNome().equals("Em orçamento")) {
+                                    TelaOrcamentoViewController controlador = new TelaOrcamentoViewController(os);
+                                    controlador.setRun(run);
+                                    FXMLLoader loader = new FXMLLoader();
+                                    loader.setLocation(Run.class.getResource("../View/TelaOrcamentoView.fxml"));
+                                    loader.setController(controlador);
+                                    AnchorPane TelaOrcamento = (AnchorPane) loader.load();
+                                    run.getRootLayout().setCenter(TelaOrcamento);
+                                } else {
+                                    TelaManutencaoController controlador = new TelaManutencaoController(os);
+                                    controlador.setRun(run);
+                                    FXMLLoader loader = new FXMLLoader();
+                                    loader.setLocation(Run.class.getResource("../View/TelaManutencao.fxml"));
+                                    loader.setController(controlador);
+                                    AnchorPane TelaManutencao = (AnchorPane) loader.load();
+                                    run.getRootLayout().setCenter(TelaManutencao);
+                                }
                             } else {
                                 TelaOSController controlador = new TelaOSController(os);
                                 controlador.setRun(run);

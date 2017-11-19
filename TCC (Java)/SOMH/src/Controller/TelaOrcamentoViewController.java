@@ -54,7 +54,25 @@ public class TelaOrcamentoViewController implements Initializable {
     private Label descDefeitos;
     @FXML
     private Label datEntrada;
+    
+    private OS os;
+    
+    public OS getOs() {
+        return os;
+    }
 
+    public void setOs(OS os) {
+        this.os = os;
+    }
+
+    public void setRun(Run run) {
+        this.run = run;
+    }
+
+    public TelaOrcamentoViewController(OS os) {
+        this.os = os;
+    }
+    
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         System.out.println("Iniciando tela de orçamento...");
