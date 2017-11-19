@@ -33,8 +33,9 @@ import javafx.scene.control.TextField;
  * @author Luiz
  */
 public class TelaManutencaoController implements Initializable {
-    
-    public TelaManutencaoController(){}
+
+    public TelaManutencaoController() {
+    }
 
     @FXML
     private Button addPeca;
@@ -107,7 +108,7 @@ public class TelaManutencaoController implements Initializable {
     public void setOs(OS os) {
         this.os = os;
     }
-    
+
     public void setRun(Run run) {
         this.run = run;
     }
@@ -136,8 +137,8 @@ public class TelaManutencaoController implements Initializable {
         }
         pecasEstoque.setItems(pecasEstoqueString);
         pecasUsadasString = FXCollections.observableArrayList();
-        /*pecasUsadas.setItems(pecasUsadasString);
-        codigoOS.setText(String.valueOf(os.getId()));
+        pecasUsadas.setItems(pecasUsadasString);
+        /*codigoOS.setText(String.valueOf(os.getId()));
         //dataEntrada.setText(ManterOSStatus.getByStatusId("entrada",os.getId()));
         descricaoEquipamento.setText(os.getEquipamento().getDesEquipto());*/
     }
@@ -157,21 +158,21 @@ public class TelaManutencaoController implements Initializable {
             recalcularPrecoPecas();
         }
     }
-    
-    public void recalcularPrecoPecas(){
-        double total=0.0;
-        for (int i=0; i<pecasUsadasString.size(); i++){
+
+    public void recalcularPrecoPecas() {
+        double total = 0.0;
+        for (int i = 0; i < pecasUsadasString.size(); i++) {
             //procurar no array
             for (Peca peca : pecas) {
-                if (peca.getDescricao().equals(pecasUsadasString.get(i))){
-                    total+=peca.getPrecoVenda();
+                if (peca.getDescricao().equals(pecasUsadasString.get(i))) {
+                    total += peca.getPrecoVenda();
                 }
             }
         }
-        precoPecas.setText("R$"+String.valueOf(total));
+        precoPecas.setText("R$" + String.valueOf(total));
     }
-    
-    public void adicionarPecaEstoque() throws ExcecaoNegocio, ExcecaoPersistencia{
+
+    public void adicionarPecaEstoque() throws ExcecaoNegocio, ExcecaoPersistencia {
         Peca p = new Peca();
         p.setDescricao(nomePeca.getText());
         p.setPrecoVenda(Double.parseDouble(valorPeca.getText()));
@@ -182,27 +183,25 @@ public class TelaManutencaoController implements Initializable {
         refreshPecasEstoqueString();
         recalcularPrecoPecas();
     }
-    
-    public void refreshPecasEstoqueString() throws ExcecaoPersistencia{
+
+    public void refreshPecasEstoqueString() throws ExcecaoPersistencia {
         ManterPeca manterPeca = new ManterPecaImpl(new PecaDAOImpl());
         pecas = (ArrayList<Peca>) manterPeca.listAll();
         for (Peca x1 : pecas) {
-            if (!pecasEstoqueString.contains(x1.getDescricao()) && !pecasUsadasString.contains(x1.getDescricao())){
+            if (!pecasEstoqueString.contains(x1.getDescricao()) && !pecasUsadasString.contains(x1.getDescricao())) {
                 pecasEstoqueString.add(x1.getDescricao());
             }
         }
     }
-    
-    public void setIrrecuperavel(){
+
+    public void setIrrecuperavel() {
         //set próximo status da OS como irrecuperável
         //retornar para listagem de OS
     }
-    
-    public void setAguardandoAprovacao(){
+
+    public void setAguardandoAprovacao() {
         //set próximo status da OS como aguardando aprovação
         //retornar para listagem de OS
     }
-    
-    
 
 }
