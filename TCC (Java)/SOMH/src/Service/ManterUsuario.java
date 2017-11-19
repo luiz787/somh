@@ -18,7 +18,8 @@ public interface ManterUsuario {
     public Long cadastrar(Usuario usuario) throws ExcecaoPersistencia, ExcecaoNegocio;
     public boolean alterar(Usuario usuario) throws ExcecaoPersistencia, ExcecaoNegocio;
     public boolean excluir(Usuario usuario) throws ExcecaoPersistencia, ExcecaoNegocio;
+    public boolean verificarExistencia(String nome) throws ExcecaoPersistencia;
     public List<Usuario> pesquisarTodos() throws ExcecaoPersistencia;
     public Usuario pesquisarPorId(Long id) throws ExcecaoPersistencia;
-    public Usuario getUsuarioByEmailSenha(String email, String senha) throws ExcecaoPersistencia;
+    public Usuario getUsuarioByNomeSenha(String nome, String senha) throws ExcecaoPersistencia;
 }

@@ -60,6 +60,8 @@ public class CadastroUsuarioController implements Initializable, Serializable {
 
     @FXML
     private void cadastraUsuario() {
+        ManterUsuario manterUser = new ManterUsuarioImpl();
+
         if (!validacao() && !txt_senha.getText().equals(confirmaSenha.getText())) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Cadastro de Usuario");
@@ -68,17 +70,24 @@ public class CadastroUsuarioController implements Initializable, Serializable {
             alert.showAndWait();
         }
 
-        if (!validacao() && txt_senha.getText().equals(confirmaSenha.getText())) {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Cadastro de Usuario");
-            alert.setHeaderText("Erro de cadastro");
-            alert.setContentText("Preencha todos os campos!!!");
-            alert.showAndWait();
-        }
+        try {
+            if (!validacao() && txt_senha.getText().equals(confirmaSenha.getText()) && manterUser.verificarExistencia(nom_usuario.getText())) {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Cadastro de Usuario");
+                alert.setHeaderText("Erro de cadastro");
+                alert.setContentText("Preencha todos os campos!!!");
+                alert.showAndWait();
+            }
 
-        if (validacao()) {
-            try {
-                ManterUsuario manterUser = new ManterUsuarioImpl();
+            if (!validacao() && !manterUser.verificarExistencia(nom_usuario.getText())) {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Cadastro de Usuario");
+                alert.setHeaderText("Erro de cadastro");
+                alert.setContentText("Já existe um usuário com esse nome!!!");
+                alert.showAndWait();
+            }
+
+            if (validacao()) {
                 Usuario user = new Usuario();
                 Perfil perfil = new Perfil();
 
@@ -88,9 +97,15 @@ public class CadastroUsuarioController implements Initializable, Serializable {
                 perfil.setDescricao(des_perfil.getValue());
 
                 switch (des_perfil.getValue()) {
-                    case "Técnico": perfil.setId((long) 1); break;
-                    case "Atendente": perfil.setId((long) 2); break;
-                    case "Telefonista": perfil.setId((long) 3); break;
+                    case "Técnico":
+                        perfil.setId((long) 1);
+                        break;
+                    case "Atendente":
+                        perfil.setId((long) 2);
+                        break;
+                    case "Telefonista":
+                        perfil.setId((long) 3);
+                        break;
                 }
 
                 user.setPerfil(perfil);
@@ -101,20 +116,20 @@ public class CadastroUsuarioController implements Initializable, Serializable {
                 alert.setHeaderText("Sucesso");
                 alert.setContentText("Funcionário cadastrado com sucesso!");
                 alert.showAndWait();
-            } catch (ExcecaoPersistencia ex) {
-                System.out.println("Excecao de persistencia!");
-            } catch (ExcecaoNegocio ex) {
-                System.out.println("Excecao de negocio!");
             }
+        } catch (ExcecaoPersistencia ex) {
+            System.out.println("Excecao de persistencia!");
+        } catch (ExcecaoNegocio ex) {
+            System.out.println("Excecao de negocio!");
         }
     }
-    
+
     @FXML
     private void sair(ActionEvent event) {
         try {
             FXMLLoader loader = new FXMLLoader();
 
-            loader.setLocation(Run.class.getResource("../View/Login.fxml"));
+            loader.setLocation(Run.class.getResource("../View/TelaAdministradorView.fxml"));
             AnchorPane TelaLogin = (AnchorPane) loader.load();
 
             run.getRootLayout().setCenter(TelaLogin);
@@ -126,27 +141,35 @@ public class CadastroUsuarioController implements Initializable, Serializable {
 
     private boolean validacao() {
         boolean validacao = true;
+        ManterUsuario manterUser = new ManterUsuarioImpl();
 
-        if (nom_usuario.getText().isEmpty()) {
-            validacao = false;
+        try {
+            if (nom_usuario.getText().isEmpty()) {
+                validacao = false;
+            }
+
+            if (txt_senha.getText().isEmpty()) {
+                validacao = false;
+            }
+
+            if (confirmaSenha.getText().isEmpty()) {
+                validacao = false;
+            }
+
+            if (des_perfil.getValue() == null) {
+                validacao = false;
+            }
+
+            if (!txt_senha.getText().equals(confirmaSenha.getText())) {
+                validacao = false;
+            }
+
+            if (!manterUser.verificarExistencia(nom_usuario.getText())) {
+                validacao = false;
+            }
+        } catch (ExcecaoPersistencia ex) {
+            Logger.getLogger(CadastroUsuarioController.class.getName()).log(Level.SEVERE, null, ex);
         }
-
-        if (txt_senha.getText().isEmpty()) {
-            validacao = false;
-        }
-
-        if (confirmaSenha.getText().isEmpty()) {
-            validacao = false;
-        }
-
-        if (des_perfil.getValue() == null) {
-            validacao = false;
-        }
-
-        if (!txt_senha.getText().equals(confirmaSenha.getText())) {
-            validacao = false;
-        }
-
         return validacao;
     }
 }

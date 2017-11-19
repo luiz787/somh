@@ -80,6 +80,11 @@ public class ManterUsuarioImpl implements ManterUsuario {
         }
         return usuarioDAO.delete(usuario);
     }
+    
+    @Override
+    public boolean verificarExistencia(String nome) throws ExcecaoPersistencia {
+        return usuarioDAO.consultarExistencia(nome);
+    }
 
     @Override
     public List<Usuario> pesquisarTodos() throws ExcecaoPersistencia {
@@ -92,8 +97,8 @@ public class ManterUsuarioImpl implements ManterUsuario {
     }
 
     @Override
-    public Usuario getUsuarioByEmailSenha(String email, String senha) throws ExcecaoPersistencia {
-        return usuarioDAO.consultarPorEmailSenha(email, senha);
+    public Usuario getUsuarioByNomeSenha(String nome, String senha) throws ExcecaoPersistencia {
+        return usuarioDAO.consultarPorNomeSenha(nome, senha);
     }
     
 }
