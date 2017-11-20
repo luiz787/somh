@@ -5,6 +5,7 @@
  */
 package Main;
 
+import Controller.CadastroClienteViewController;
 import Controller.TelaCadastroOSController;
 import Controller.CadastroUsuarioController;
 import Controller.LoginController;
