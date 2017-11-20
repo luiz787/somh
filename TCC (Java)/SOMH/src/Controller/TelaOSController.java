@@ -1,5 +1,6 @@
 package Controller;
 
+import DAOImpl.AcessorioDAOImpl;
 import DAOImpl.EquipamentoDAOImpl;
 import DAOImpl.OSAcessorioDAOImpl;
 import DAOImpl.OSDAOImpl;
@@ -15,11 +16,13 @@ import Domain.Status;
 import Exception.ExcecaoNegocio;
 import Exception.ExcecaoPersistencia;
 import Main.Run;
+import Service.ManterAcessorio;
 import Service.ManterEquipamento;
 import Service.ManterOS;
 import Service.ManterOSAcessorio;
 import Service.ManterOSStatus;
 import Service.ManterStatus;
+import ServiceImpl.ManterAcessorioImpl;
 import ServiceImpl.ManterEquipamentoImpl;
 import ServiceImpl.ManterOSAcessorioImpl;
 import ServiceImpl.ManterOSImpl;
@@ -30,6 +33,7 @@ import java.net.URL;
 import java.sql.Date;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -44,6 +48,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.ScrollPane;
+import javafx.scene.control.SelectionMode;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextArea;
@@ -94,13 +99,34 @@ public class TelaOSController implements Initializable {
     private Label statusOS;
     @FXML
     private Label dataCriacao;
-
-    private Run run;
-    private OS os;
+    
     @FXML
     private Button salvarBtn;
     @FXML
     private Button cancelarBtn;
+    @FXML
+    private Button excluirAcessorio;
+    @FXML
+    private TableView<Acessorio> acessoriosSelecionados;
+    @FXML
+    private TableColumn<Acessorio, String> colunaAcessoriosSelecionados;
+    @FXML
+    private Button removeAcessorio;
+    @FXML
+    private Button adicionaAcessorio;
+    @FXML
+    private TableView<Acessorio> acessoriosCadastrados;
+    @FXML
+    private TableColumn<Acessorio, String> colunaAcessoriosCadastrados;
+    @FXML
+    private Button cadastrarAcessorio;
+    @FXML
+    private TextField nomeAcessorioCadastro;
+    @FXML
+    private Label cadastrarAcessorioLB;
+    
+    private Run run;
+    private OS os;
 
     public OS getOs() {
         return os;
@@ -127,6 +153,7 @@ public class TelaOSController implements Initializable {
             Status status = osStatus.get(osStatus.size()-1).getStatus();
             if(!status.getNome().equals("Em orçamento")) {
                 excluirBtn.setVisible(false);
+                alterarBtn.setVisible(false);
             }
             long val = osStatus.get(0).getDatOcorrencia();
             Date date = new Date(val);
@@ -145,11 +172,18 @@ public class TelaOSController implements Initializable {
             nomeEquipamento.setText(os.getEquipamento().getDesEquipto());
             nomeMarca.setText(os.getEquipamento().getDesMarca());
             nomeModelo.setText(os.getEquipamento().getDesModelo());
-            nroSerie.setText(os.getEquipamento().getNroSerie().toString());
+            if(os.getEquipamento().getNroSerie()!=0) {
+                nroSerie.setText(os.getEquipamento().getNroSerie().toString());    
+            }
             textComponentes.setText(os.getEquipamento().getDesComponentes());
             listAcessorios.setItems(acessoriosList);
             textObservacao.setText(os.getTxtObservacaoAcessorios());
             textReclamacao.setText(os.getTxtReclamacao());
+            
+            acessoriosCadastrados.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
+            acessoriosSelecionados.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
+            colunaAcessoriosCadastrados.setCellValueFactory(cellData -> cellData.getValue().NomeAcessorioProperty());
+            colunaAcessoriosSelecionados.setCellValueFactory(cellData -> cellData.getValue().NomeAcessorioProperty());
         } catch (ExcecaoPersistencia ex) {
             Logger.getLogger(TelaOSController.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -175,7 +209,7 @@ public class TelaOSController implements Initializable {
     }
 
     @FXML
-    private void alterarOS(ActionEvent event) {
+    private void alterarOS(ActionEvent event) throws ExcecaoPersistencia {
         nomeEquipamento.setEditable(true);
         nomeMarca.setEditable(true);
         nomeModelo.setEditable(true);
@@ -188,6 +222,27 @@ public class TelaOSController implements Initializable {
         voltarBtn.setVisible(false);
         salvarBtn.setVisible(true);
         cancelarBtn.setVisible(true);
+        
+        excluirAcessorio.setVisible(true);
+        acessoriosSelecionados.setVisible(true);
+        removeAcessorio.setVisible(true);
+        adicionaAcessorio.setVisible(true);
+        acessoriosCadastrados.setVisible(true);
+        cadastrarAcessorio.setVisible(true);
+        nomeAcessorioCadastro.setVisible(true);
+        cadastrarAcessorioLB.setVisible(true);
+        listAcessorios.setVisible(false);
+        
+        ManterAcessorio manterAcessorio = new ManterAcessorioImpl(AcessorioDAOImpl.getInstance());
+            
+        List<Acessorio> listaAcessorio = manterAcessorio.getAll();
+
+        ObservableList<Acessorio> novoAcessorioData = FXCollections.observableArrayList();
+        for(int i=0; i<listaAcessorio.size(); i++) {
+            novoAcessorioData.add(listaAcessorio.get(i));
+        }
+
+        acessoriosCadastrados.setItems(novoAcessorioData);
     }
 
     @FXML
@@ -253,7 +308,9 @@ public class TelaOSController implements Initializable {
             equipamentoAlterado.setDesEquipto(nomeEquipamento.getText());
             equipamentoAlterado.setDesMarca(nomeMarca.getText());
             equipamentoAlterado.setDesModelo(nomeModelo.getText());
-            equipamentoAlterado.setNroSerie(Integer.parseInt(nroSerie.getText()));
+            if(os.getEquipamento().getNroSerie()!=0) {
+                equipamentoAlterado.setNroSerie(Integer.parseInt(nroSerie.getText()));
+            }
             equipamentoAlterado.setDesComponentes(textComponentes.getText());
             
             osAlterada.setEquipamento(equipamentoAlterado);
@@ -267,6 +324,49 @@ public class TelaOSController implements Initializable {
             manterOS.alterarOS(osAlterada);
             manterEquipamento.alterarEquipamento(equipamentoAlterado);
             
+            ArrayList<Acessorio> acessorios = new ArrayList<Acessorio>();
+            OSAcessorio osAcessorio = new OSAcessorio();
+            ManterAcessorio manterAcessorio = new ManterAcessorioImpl(AcessorioDAOImpl.getInstance());
+            ManterOSAcessorio manterOSAcessorio = new ManterOSAcessorioImpl(OSAcessorioDAOImpl.getInstance());
+            if(!(acessoriosSelecionados.getItems().isEmpty())) {
+                long codAcessorio=1;
+                for (Acessorio acessorio : acessoriosSelecionados.getItems()) {
+                    System.out.println(acessorio.getId());
+                    acessorios.add(acessorio);
+                    codAcessorio++;
+                }
+            }
+            
+            List<Acessorio> cadastrados = new ArrayList<Acessorio>();
+            cadastrados = manterAcessorio.getAll();
+            ArrayList<String> cadastradosString = new ArrayList<String>();
+            for(int i=0; i<cadastrados.size(); i++) {
+                cadastradosString.add(cadastrados.get(i).getNomeAcessorio());
+            }
+            manterOSAcessorio.deletarAllOSAcessorio(os.getId());
+            for(int i=0; i<acessorios.size(); i++) {
+                if(!(cadastradosString.contains(acessorios.get(i).getNomeAcessorio()))) {
+                    Long idAcessorio = manterAcessorio.cadastrarAcessorio(acessorios.get(i));
+                    
+                    osAcessorio.setOs(os);
+                    osAcessorio.setAcessorio(acessorios.get(i));
+                    
+                    boolean check = manterOSAcessorio.cadastrarOSAcessorio(osAcessorio);
+                } else {
+                    osAcessorio.setOs(os);
+                    osAcessorio.setAcessorio(acessorios.get(i));
+                    boolean check = manterOSAcessorio.cadastrarOSAcessorio(osAcessorio);
+                }
+            }
+            
+            ObservableList<Acessorio> acessoriosList = FXCollections.observableArrayList();
+            ArrayList<OSAcessorio> osAcessorioList = (ArrayList<OSAcessorio>) manterOSAcessorio.getAllByOS(os.getId());
+            for(OSAcessorio osAcessorioFor : osAcessorioList) {
+                acessoriosList.add(osAcessorioFor.getAcessorio());
+            }
+            
+            listAcessorios.setItems(acessoriosList);
+            
             nomeEquipamento.setEditable(false);
             nomeMarca.setEditable(false);
             nomeModelo.setEditable(false);
@@ -279,6 +379,16 @@ public class TelaOSController implements Initializable {
             voltarBtn.setVisible(true);
             salvarBtn.setVisible(false);
             cancelarBtn.setVisible(false);
+            
+            excluirAcessorio.setVisible(false);
+            acessoriosSelecionados.setVisible(false);
+            removeAcessorio.setVisible(false);
+            adicionaAcessorio.setVisible(false);
+            acessoriosCadastrados.setVisible(false);
+            cadastrarAcessorio.setVisible(false);
+            nomeAcessorioCadastro.setVisible(false);
+            cadastrarAcessorioLB.setVisible(false);
+            listAcessorios.setVisible(true);
             
             Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
             alert.setTitle("Alteração de OS");
@@ -303,8 +413,182 @@ public class TelaOSController implements Initializable {
         alterarBtn.setVisible(true);
         excluirBtn.setVisible(true);
         voltarBtn.setVisible(true);
-        salvarBtn.setVisible(false);
+        salvarBtn.setVisible(true);
         cancelarBtn.setVisible(false);
+        
+        excluirAcessorio.setVisible(false);
+        acessoriosSelecionados.setVisible(false);
+        removeAcessorio.setVisible(false);
+        adicionaAcessorio.setVisible(false);
+        acessoriosCadastrados.setVisible(false);
+        cadastrarAcessorio.setVisible(false);
+        nomeAcessorioCadastro.setVisible(false);
+        cadastrarAcessorioLB.setVisible(false);
+        listAcessorios.setVisible(true);
+    }
+
+    @FXML
+    private void excluirAcessorio() throws Exception {
+        if(!acessoriosCadastrados.getSelectionModel().getSelectedItems().isEmpty()) {
+            try {
+                ObservableList<Acessorio> novoAcessorioData = FXCollections.observableArrayList();
+                
+                ArrayList<String> acessoriosSelecionadosString = new ArrayList<>();
+                for (int i=0; i<acessoriosCadastrados.getSelectionModel().getSelectedItems().size(); i++) {
+                    acessoriosSelecionadosString.add(acessoriosCadastrados.getSelectionModel().getSelectedItems().get(i).getNomeAcessorio());
+                }
+                
+                ManterOSAcessorio manterOSAcessorio = new ManterOSAcessorioImpl(OSAcessorioDAOImpl.getInstance());
+                List<OSAcessorio> listaOSAcessorio = manterOSAcessorio.getAll();
+                
+                int erro=0;
+                int contador=0;
+                while(contador!=listaOSAcessorio.size() && erro==0) {
+                    OSAcessorio osAcessorio = listaOSAcessorio.get(contador);
+                    if(acessoriosSelecionadosString.contains(osAcessorio.getAcessorio().getNomeAcessorio())) {
+                        erro=1;
+                    }
+                    contador++;
+                }
+                
+                for(int i=0; i<acessoriosSelecionados.getItems().size(); i++) {
+                    if(acessoriosSelecionadosString.contains(
+                        acessoriosSelecionados.getItems().get(i).getNomeAcessorio())) {
+                        erro=2;
+                    }
+                }
+                
+                if(erro==0) {
+                    ManterAcessorio manterAcessorio = new ManterAcessorioImpl(AcessorioDAOImpl.getInstance());
+                    List<Acessorio> listaAcessorio = manterAcessorio.getAll();
+                    for (int i=0; i<listaAcessorio.size(); i++) {
+                        if(acessoriosSelecionadosString.contains(listaAcessorio.get(i).getNomeAcessorio())) {
+                            manterAcessorio.deletarAcessorio(listaAcessorio.get(i).getId());
+                        }
+                    }
+                    listaAcessorio = manterAcessorio.getAll();
+                    for (int i=0; i<listaAcessorio.size(); i++) {
+                        novoAcessorioData.add(listaAcessorio.get(i));
+                    }
+                    acessoriosCadastrados.setItems(novoAcessorioData);
+                } else if(erro==1) {
+                    Alert alert = new Alert(Alert.AlertType.ERROR);
+                    alert.setTitle("Cadastro de OS");
+                    alert.setHeaderText("Erro");
+                    alert.setContentText("Você não pode excluir um acessorio "
+                            + "utilizado por uma OS já cadastrada!");
+
+                    alert.showAndWait();
+                } else {
+                    Alert alert = new Alert(Alert.AlertType.ERROR);
+                    alert.setTitle("Cadastro de OS");
+                    alert.setHeaderText("Erro");
+                    alert.setContentText("Você não pode excluir um acessorio "
+                            + "da tabela selecionados!");
+
+                    alert.showAndWait();
+                }
+                limpaSelecaoTabela(acessoriosCadastrados);    
+            } catch (Exception ex) {
+                System.out.println("Problema ao excluir Acessório: "+ex);
+            }
+        } else {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Cadastro de OS");
+            alert.setHeaderText("Erro");
+            alert.setContentText("Selecione os acessórios a serem excluídos!");
+
+            alert.showAndWait();
+        }
+    }
+
+    @FXML
+    private void removeAcessorio() {
+        if(!acessoriosSelecionados.getSelectionModel().getSelectedItems().isEmpty()) {
+            ObservableList<Acessorio> novoAcessorioData = FXCollections.observableArrayList();
+            acessoriosSelecionados.getItems().removeAll(
+                 acessoriosSelecionados.getSelectionModel().getSelectedItems()
+            ); 
+            
+            for (int i=0; i<acessoriosSelecionados.getItems().size(); i++) {
+                    Acessorio acessorioContido = acessoriosSelecionados.getItems().get(i);
+                    novoAcessorioData.add(acessorioContido);
+            }
+            acessoriosSelecionados.setItems(novoAcessorioData);
+            limpaSelecaoTabela(acessoriosSelecionados);
+        }
+    }
+
+    @FXML
+    private void selecionaAcessorio() {
+        if(!acessoriosCadastrados.getSelectionModel().getSelectedItems().isEmpty()) {
+            ObservableList<Acessorio> novoAcessorioData = FXCollections.observableArrayList();
+            //Mantem os acessorios já contidos na colunaAcessoriosSelecionados
+            for (int i=0; i<acessoriosSelecionados.getItems().size(); i++) {
+                    Acessorio acessorioContido = acessoriosSelecionados.getItems().get(i);
+                    novoAcessorioData.add(acessorioContido);
+            }
+            //Adiciona os novos acessorios selecionados à colunaAcessoriosSelecionados
+            for (int i=0; i<acessoriosCadastrados.getSelectionModel().getSelectedItems().size(); i++) {
+                Acessorio acessorioSelecionado = acessoriosCadastrados.getSelectionModel().getSelectedItems().get(i);
+
+                if(!(novoAcessorioData.contains(acessorioSelecionado))) {
+                    novoAcessorioData.add(acessorioSelecionado);
+                }
+            }
+            acessoriosSelecionados.setItems(novoAcessorioData);
+            limpaSelecaoTabela(acessoriosCadastrados);
+        }
+    }
+    
+    private void limpaSelecaoTabela(TableView<Acessorio> tabela) {
+        tabela.getSelectionModel().clearSelection();
+    }
+
+    @FXML
+    private void cadastrarAcessorio(ActionEvent event) {
+        if(!(nomeAcessorioCadastro.getText().isEmpty())) {
+            try {
+                ManterAcessorio manterAcessorio = new ManterAcessorioImpl(AcessorioDAOImpl.getInstance());
+                
+                List<Acessorio> cadastrados = new ArrayList<Acessorio>();
+                cadastrados = manterAcessorio.getAll();
+                ArrayList<String> cadastradosString = new ArrayList<String>();
+                for(int i=0; i<cadastrados.size(); i++) {
+                    cadastradosString.add(cadastrados.get(i).getNomeAcessorio());
+                }
+                
+                if(!(cadastradosString.contains(nomeAcessorioCadastro.getText()))) {
+                    long fakeId = 1;
+                    Acessorio novoAcessorio = new Acessorio(fakeId, nomeAcessorioCadastro.getText());
+                    Long idAcessorio = manterAcessorio.cadastrarAcessorio(novoAcessorio);
+                    
+                    ArrayList<Acessorio> acessorioList = (ArrayList<Acessorio>)manterAcessorio.getAll();
+                    ObservableList<Acessorio> novoAcessorioData = FXCollections.observableArrayList();
+                    for(Acessorio acessorio : acessorioList) {
+                        novoAcessorioData.add(acessorio);
+                    }
+
+                    acessoriosCadastrados.setItems(novoAcessorioData);
+                } else {
+                    Alert alert = new Alert(Alert.AlertType.ERROR);
+                    alert.setTitle("Cadastro de OS");
+                    alert.setHeaderText("Erro");
+                    alert.setContentText("Acessório já cadastrado!");
+
+                    alert.showAndWait();
+                }
+            } catch (Exception ex) {
+                System.out.println("Problema ao cadastrar Acessório: "+ex);
+            }
+        } else {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Cadastro de OS");
+            alert.setHeaderText("Erro");
+            alert.setContentText("Informe o nome do acessório a ser cadastrado!");
+
+            alert.showAndWait();
+        }
     }
     
 }

@@ -1,6 +1,5 @@
 package Controller;
 
-import BD.JDBCManterConexao;
 import DAOImpl.AcessorioDAOImpl;
 import DAOImpl.EquipamentoDAOImpl;
 import DAOImpl.OSAcessorioDAOImpl;
@@ -29,10 +28,6 @@ import ServiceImpl.ManterOSImpl;
 import ServiceImpl.ManterOSStatusImpl;
 import java.io.IOException;
 import java.net.URL;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
