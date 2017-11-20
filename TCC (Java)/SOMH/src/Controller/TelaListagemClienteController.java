@@ -87,6 +87,18 @@ public class TelaListagemClienteController implements Initializable {
     
     private Run run;
     
+    private boolean criaOS;
+
+    public boolean isCriaOS() {
+        return criaOS;
+    }
+
+    public void setCriaOS(boolean criaOS) {
+        this.criaOS = criaOS;
+    }
+    
+    
+    
     ManterCliente mantercliente = new ManterClienteImpl(ClienteDAOImpl.getInstance());
     
     public ObservableList<Cliente> listCliente;
@@ -127,8 +139,31 @@ public class TelaListagemClienteController implements Initializable {
             @Override
             public void handle(MouseEvent click) {
                 if (click.getClickCount() == 2) {
-                    ClienteSelect = listaCliente.getSelectionModel().getSelectedItem().getCodCPF_CNPJ(); //seta o id do cliente selecionado
-                    run.showCadastroClienteView(); // mostra o cliente selecionado
+                    if(criaOS) {
+                        try {
+                            System.out.println("Hy");
+                            ManterCliente manterCliente = new ManterClienteImpl(ClienteDAOImpl.getInstance());
+                            Cliente cliente = manterCliente.getClienteById(
+                                    listaCliente.getSelectionModel().getSelectedItem().getCodCPF_CNPJ());
+                            try {
+                                TelaCadastroOSController controlador = new TelaCadastroOSController(cliente);
+                                controlador.setRun(run);
+                                controlador.setListagemCliente(true);
+                                FXMLLoader loader = new FXMLLoader();
+                                loader.setLocation(Run.class.getResource("../View/TelaCadastroOSView.fxml"));
+                                loader.setController(controlador);
+                                AnchorPane TelaCadastroOS = (AnchorPane) loader.load();
+                                run.getRootLayout().setCenter(TelaCadastroOS);
+                            } catch (IOException ex) {
+                                Logger.getLogger(Run.class.getName()).log(Level.SEVERE, null, ex);
+                            }
+                        } catch (ExcecaoPersistencia ex) {
+                            Logger.getLogger(TelaListagemClienteController.class.getName()).log(Level.SEVERE, null, ex);
+                        }
+                    } else {
+                        ClienteSelect = listaCliente.getSelectionModel().getSelectedItem().getCodCPF_CNPJ(); //seta o id do cliente selecionado
+                        run.showCadastroClienteView(); // mostra o cliente selecionado
+                    }
                 }
             }
         });
