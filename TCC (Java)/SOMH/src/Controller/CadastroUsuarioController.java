@@ -98,7 +98,7 @@ public class CadastroUsuarioController implements Initializable, Serializable {
 
                 switch (des_perfil.getValue()) {
                     case "Técnico":
-                        perfil.setId((long) 1);
+                        perfil.setId((long) 4);
                         break;
                     case "Atendente":
                         perfil.setId((long) 2);
