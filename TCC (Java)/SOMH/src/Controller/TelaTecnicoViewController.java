@@ -6,6 +6,7 @@
 package Controller;
 
 import Main.Run;
+import static com.sun.glass.ui.Application.run;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
@@ -36,28 +37,26 @@ public class TelaTecnicoViewController implements Initializable {
     private Button sair;
     @FXML
     private Label nomeFuncionario;
-    
     private Run run;
 
-    public Run getRun() {
-        return run;
-    }
-
-    public void setRun(Run run) {
-        this.run = run;
-    }
-    
+    /**
+     * Initializes the controller class.
+     */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         System.out.println("Inicializando tela do técnico...");
     }
 
     public void cadastroOrcamento() throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource("../View/CadastroOrcamentoView.fxml"));
-        Scene scene = new Scene(root);
-        Stage stage = new Stage();
-        stage.setScene(scene);
-        stage.show();
+        FXMLLoader loader = new FXMLLoader();
+
+        loader.setLocation(Run.class.getResource("../View/TelaOrcamentoView.fxml"));
+        AnchorPane TelaFuncionario = (AnchorPane) loader.load();
+
+        run.getRootLayout().setCenter(TelaFuncionario);
+
+        TelaListagemOSController controller = loader.getController();
+        controller.setRun(run);
     }
 
     public void procuraOS() throws Exception {
@@ -74,5 +73,9 @@ public class TelaTecnicoViewController implements Initializable {
 
     public void sair() throws Exception {
         System.exit(0);
+    }
+
+    public void setRun(Run run) {
+        this.run = run;
     }
 }

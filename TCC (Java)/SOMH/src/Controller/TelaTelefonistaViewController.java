@@ -14,6 +14,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
 /**
@@ -30,29 +31,32 @@ public class TelaTelefonistaViewController implements Initializable {
     
     private Run run;
 
-    public Run getRun() {
-        return run;
-    }
-
-    public void setRun(Run run) {
-        this.run = run;
-    }
-    
+    /**
+     * Initializes the controller class.
+     */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         System.out.println("Inicializando tela do telefonista...");
-    }    
-    
+    }
+
     public void procuraCliente() throws Exception {
-       Parent root = FXMLLoader.load(getClass().getResource("../View/BuscaClienteView.fxml"));
-        Scene scene = new Scene(root);
-        Stage stage = new Stage();
-        stage.setScene(scene);
-        stage.show();
+        FXMLLoader loader = new FXMLLoader();
+
+        loader.setLocation(Run.class.getResource("../View/TelaListagemClienteView.fxml"));
+        AnchorPane TelaFuncionario = (AnchorPane) loader.load();
+
+        run.getRootLayout().setCenter(TelaFuncionario);
+
+        TelaListagemClienteController controller = loader.getController();
+        controller.setRun(run);
     }
 
     public void sair() throws Exception {
         System.exit(0);
     }
     
+    public void setRun(Run run){
+        this.run = run;
+    }
+
 }

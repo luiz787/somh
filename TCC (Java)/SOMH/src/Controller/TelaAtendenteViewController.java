@@ -15,6 +15,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
@@ -39,46 +40,57 @@ public class TelaAtendenteViewController implements Initializable {
     private Label nomeFuncionario;
     
     private Run run;
-
-    public Run getRun() {
-        return run;
-    }
-
-    public void setRun(Run run) {
-        this.run = run;
-    }
-    
+    /**
+     * Initializes the controller class.
+     */
+      
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         System.out.println("Inicializando tela do atendente...");
     }
 
     public void cadastroOS() throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource("../View/CadastroOSView.fxml"));
-        Scene scene = new Scene(root);
-        Stage stage = new Stage();
-        stage.setScene(scene);
-        stage.show();
+        FXMLLoader loader = new FXMLLoader();
+
+        loader.setLocation(Run.class.getResource("../View/TelaCadastroOSView.fxml"));
+        AnchorPane TelaFuncionario = (AnchorPane) loader.load();
+
+        run.getRootLayout().setCenter(TelaFuncionario);
+
+        TelaCadastroOSController controller = loader.getController();
+        controller.setRun(run);
     }
     
     public void cadastroCliente() throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource("../View/CadastroClienteView.fxml"));
-        Scene scene = new Scene(root);
-        Stage stage = new Stage();
-        stage.setScene(scene);
-        stage.show();
+        FXMLLoader loader = new FXMLLoader();
+
+        loader.setLocation(Run.class.getResource("../View/CadastroClienteView.fxml"));
+        AnchorPane TelaFuncionario = (AnchorPane) loader.load();
+
+        run.getRootLayout().setCenter(TelaFuncionario);
+
+        CadastroClienteViewController controller = loader.getController();
+        controller.setRun(run);
     }        
 
 
     public void procuraOS() throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource("../View/BuscaOSView.fxml"));
-        Scene scene = new Scene(root);
-        Stage stage = new Stage();
-        stage.setScene(scene);
-        stage.show();
+        FXMLLoader loader = new FXMLLoader();
+
+        loader.setLocation(Run.class.getResource("../View/TelaListagemOSView.fxml"));
+        AnchorPane TelaFuncionario = (AnchorPane) loader.load();
+
+        run.getRootLayout().setCenter(TelaFuncionario);
+
+        TelaListagemOSController controller = loader.getController();
+        controller.setRun(run);
     }
 
     public void sair() throws Exception {
         System.exit(0);
+    }
+    
+    public void setRun(Run run){
+        this.run = run;
     }
 }
