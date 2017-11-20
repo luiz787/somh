@@ -106,7 +106,24 @@ public class Run extends Application {
             Logger.getLogger(Run.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+    
+    public void showCadastroClienteView() {
+        try {
+            FXMLLoader loader = new FXMLLoader();
 
+            loader.setLocation(Run.class.getResource("../View/CadastroClienteView.fxml"));
+            AnchorPane CadastroClienteView = (AnchorPane) loader.load();
+
+            rootLayout.setCenter(CadastroClienteView);
+
+            CadastroClienteViewController controller = loader.getController();
+            controller.setRun(this);
+
+        } catch (IOException ex) {
+            Logger.getLogger(Run.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
     public void showListagemOS() {
         try {
             FXMLLoader loader = new FXMLLoader();
