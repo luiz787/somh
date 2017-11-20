@@ -2,6 +2,7 @@ package DAOImpl;
 
 import BD.JDBCManterConexao;
 import DAO.AcessorioDAO;
+import DAO.ClienteDAO;
 import DAO.EquipamentoDAO;
 import DAO.OSDAO;
 import Domain.Cliente;
@@ -225,13 +226,13 @@ public class OSDAOImpl implements OSDAO {
             ResultSet rs = pstmt.executeQuery();
 
             List<OS> listAll = new ArrayList<>();
-            //ClienteDAO clienteDAOImpl = ClienteDAOImpl.getInstance();
+            ClienteDAO clienteDAOImpl = ClienteDAOImpl.getInstance();
             EquipamentoDAO equipamentoDAOImpl = EquipamentoDAOImpl.getInstance();
             if (rs.next()) {
                 do {
                     OS os = new OS(
                         rs.getLong("nro_OS"),
-                        new Cliente(rs.getLong("cod_cpf_cnpj")),//Modificar futuramente
+                        clienteDAOImpl.getClienteById(rs.getLong("cod_cpf_cnpj")),
                         equipamentoDAOImpl.getEquipamentoById(rs.getLong("seq_equipto")),
                         rs.getString("txt_reclamacao"),
                         rs.getString("txt_observacao_acessorios"),

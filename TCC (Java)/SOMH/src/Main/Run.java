@@ -67,8 +67,8 @@ public class Run extends Application {
         //showCadastroOSView();
         //showLogin();
         //showCadastroUsuario();
-        //showListagemOS();
-        showTelaManutencao();
+        showListagemOS();
+        //showTelaManutencao();
         //showOS();
     }
 

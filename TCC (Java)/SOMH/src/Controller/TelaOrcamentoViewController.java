@@ -105,8 +105,4 @@ public class TelaOrcamentoViewController implements Initializable {
         }
 
     }
-
-    public void setRun(Run run) {
-        this.run = run;
-    }
 }

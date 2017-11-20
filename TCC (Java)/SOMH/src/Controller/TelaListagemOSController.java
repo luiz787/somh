@@ -77,6 +77,10 @@ public class TelaListagemOSController implements Initializable {
 
     private Run run;
     
+    public void setRun(Run run) {
+        this.run = run;
+    }
+    
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         try {
@@ -84,8 +88,8 @@ public class TelaListagemOSController implements Initializable {
             usuario.setId(2L);
             usuario.setNome("Victor");
             Perfil perfil = new Perfil();
-            perfil.setId(4L);
-            perfil.setDescricao("técnico");
+            perfil.setId(2L);
+            perfil.setDescricao("atendente");
             usuario.setPerfil(perfil);
             usuario.setSenha("123");
             
@@ -102,32 +106,66 @@ public class TelaListagemOSController implements Initializable {
             ManterOSStatus manterOSStatus = new ManterOSStatusImpl(OSStatusDAOImpl.getInstance());
             ArrayList<OS> listOS = (ArrayList<OS>) manterOS.getAll();
             
-            String[][] data = new String[listOS.size()][6];
+            
+            ArrayList<OS> osList = new ArrayList<OS>();
             
             for(int i=0; i<listOS.size(); i++) {
                 OS os = listOS.get(i);
                 ArrayList<OSStatus> listOSStatus = 
                 (ArrayList<OSStatus>) manterOSStatus.getAllByOS(os.getId());
-                
+                if(usuarioLogado.getPerfil().getDescricao().equals("adm")) {
+                    osList.add(os);
+                } else if(usuarioLogado.getPerfil().getDescricao().equals("atendente")) {
+                    String osStatus = listOSStatus.get(listOSStatus.size()-1).getStatus().getNome();
+                    if(osStatus.equals("Em orçamento") || osStatus.equals("Orçado")
+                       || osStatus.equals("Avisado") || osStatus.equals("Entregue")
+                       || osStatus.equals("Garantia") || osStatus.equals("Recusado")) {
+                        osList.add(os);
+                    }
+                } else if(usuarioLogado.getPerfil().getDescricao().equals("telefonista")) {
+                    String osStatus = listOSStatus.get(listOSStatus.size()-1).getStatus().getNome();
+                    if(osStatus.equals("Aguardando cliente") || osStatus.equals("Pronto")) {
+                        osList.add(os);
+                    }
+                } else if(usuarioLogado.getPerfil().getDescricao().equals("técnico")) {
+                    String osStatus = listOSStatus.get(listOSStatus.size()-1).getStatus().getNome();
+                    if(osStatus.equals("Em orçamento") || osStatus.equals("Orçado")
+                       || osStatus.equals("Aprovado") || osStatus.equals("Aguardando peça")) {
+                        osList.add(os);
+                    }
+                    
+                }
+            }
+            
+            int i = 0;
+            String[][] data = new String[osList.size()][6];
+            for(OS os : osList) {
+                ArrayList<OSStatus> listOSStatus = 
+                (ArrayList<OSStatus>) manterOSStatus.getAllByOS(os.getId());
                 Equipamento equipamento = os.getEquipamento();
-                
+
                 long val = listOSStatus.get(0).getDatOcorrencia();
                 Date date=new Date(val);
                 SimpleDateFormat df2 = new SimpleDateFormat("dd/MM/yy");
                 String dateText = df2.format(date);
-                
+
                 data[i][0] = os.getId().toString();
                 data[i][1] = equipamento.getDesEquipto();
                 data[i][2] = os.getCliente().getNome();
                 data[i][3] = dateText;
                 data[i][4] = listOSStatus.get(0).getStatus().getNome();
-                if(listOSStatus.get(listOSStatus.size()-1).equals("Entregue")) {
-                    data[i][5] = listOSStatus.get(listOSStatus.size()-1).getDatOcorrencia().toString();
+                if(listOSStatus.get(listOSStatus.size()-1).getStatus().getNome().equals("Entregue")) {
+                    long val2 = listOSStatus.get(listOSStatus.size()-1).getDatOcorrencia();
+                    Date date2 = new Date(val);
+                    SimpleDateFormat df3 = new SimpleDateFormat("dd/MM/yy");
+                    String dateText2 = df3.format(date2);
+                    data[i][5] = dateText2;
                 } else {
                     data[i][5] = "---";
                 }
-                
+                i++;
             }
+            
             
             colunaCodigo.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<String[], String>, ObservableValue<String>>() {
                 @Override
@@ -136,7 +174,7 @@ public class TelaListagemOSController implements Initializable {
                     if (x != null && x.length>0) {
                         return new SimpleStringProperty(x[0]);
                     } else {
-                        return new SimpleStringProperty("<no name>");
+                        return new SimpleStringProperty("---");
                     }
                 }
             });
@@ -148,7 +186,7 @@ public class TelaListagemOSController implements Initializable {
                     if (x != null && x.length>1) {
                         return new SimpleStringProperty(x[1]);
                     } else {
-                        return new SimpleStringProperty("<no name>");
+                        return new SimpleStringProperty("---");
                     }
                 }
             });
@@ -160,7 +198,7 @@ public class TelaListagemOSController implements Initializable {
                     if (x != null && x.length>2) {
                         return new SimpleStringProperty(x[2]);
                     } else {
-                        return new SimpleStringProperty("<no name>");
+                        return new SimpleStringProperty("---");
                     }
                 }
             });
@@ -172,7 +210,7 @@ public class TelaListagemOSController implements Initializable {
                     if (x != null && x.length>3) {
                         return new SimpleStringProperty(x[3]);
                     } else {
-                        return new SimpleStringProperty("<no name>");
+                        return new SimpleStringProperty("---");
                     }
                 }
             });
@@ -184,7 +222,7 @@ public class TelaListagemOSController implements Initializable {
                     if (x != null && x.length>4) {
                         return new SimpleStringProperty(x[4]);
                     } else {
-                        return new SimpleStringProperty("<no name>");
+                        return new SimpleStringProperty("---");
                     }
                 }
             });
@@ -196,7 +234,7 @@ public class TelaListagemOSController implements Initializable {
                     if (x != null && x.length>5) {
                         return new SimpleStringProperty(x[5]);
                     } else {
-                        return new SimpleStringProperty("<no name>");
+                        return new SimpleStringProperty("---");
                     }
                 }
             });
@@ -210,10 +248,12 @@ public class TelaListagemOSController implements Initializable {
                         try{
                             String[] rowItem = row.getItem();
                             OS os = manterOS.getOSById(Long.parseLong(rowItem[0]));
-                            OSStatus osStatus = manterOSStatus.getAllByOS(
-                            os.getId()).get(manterOSStatus.getAllByOS(os.getId()).size()-1);
+                            
+                            String osStatus = manterOSStatus.getAllByOS(
+                            os.getId()).get(manterOSStatus.getAllByOS(os.getId()).size()-1).getStatus().getNome();
+                            
                             if(usuarioLogado.getPerfil().getDescricao().equals("técnico")) {
-                                if(osStatus.getStatus().getNome().equals("Em orçamento")) {
+                                if(osStatus.equals("Em orçamento") || osStatus.equals("Orçado")) {
                                     TelaOrcamentoViewController controlador = new TelaOrcamentoViewController(os);
                                     controlador.setRun(run);
                                     FXMLLoader loader = new FXMLLoader();
@@ -221,7 +261,7 @@ public class TelaListagemOSController implements Initializable {
                                     loader.setController(controlador);
                                     AnchorPane TelaOrcamento = (AnchorPane) loader.load();
                                     run.getRootLayout().setCenter(TelaOrcamento);
-                                } else {
+                                } else if(osStatus.equals("Aprovado") || osStatus.equals("Aguardando peça")){
                                     TelaManutencaoController controlador = new TelaManutencaoController(os);
                                     controlador.setRun(run);
                                     FXMLLoader loader = new FXMLLoader();
@@ -253,7 +293,25 @@ public class TelaListagemOSController implements Initializable {
             ObservableList<String> observableStatusList = FXCollections.observableArrayList();
             observableStatusList.add("Todos");
             for(Status status : statusList) {
-                observableStatusList.add(status.getNome());
+                String osStatus = status.getNome();
+                if(usuarioLogado.getPerfil().getDescricao().equals("técnico")) {
+                    if(osStatus.equals("Em orçamento") || osStatus.equals("Orçado")
+                       || osStatus.equals("Aprovado") || osStatus.equals("Aguardando peça")) {
+                        observableStatusList.add(status.getNome());
+                    }
+                } else if(usuarioLogado.getPerfil().getDescricao().equals("telefonista")) {
+                    if(osStatus.equals("Aguardando cliente") || osStatus.equals("Pronto")) {
+                        observableStatusList.add(status.getNome());
+                    }
+                } else if(usuarioLogado.getPerfil().getDescricao().equals("atendente")) {
+                    if(osStatus.equals("Em orçamento") || osStatus.equals("Orçado")
+                       || osStatus.equals("Avisado") || osStatus.equals("Entregue")
+                       || osStatus.equals("Garantia") || osStatus.equals("Recusado")) {
+                        observableStatusList.add(status.getNome());
+                    }
+                } else if(usuarioLogado.getPerfil().getDescricao().equals("adm")) {
+                    observableStatusList.add(status.getNome());
+                }
             }
             filtroOS.setItems(observableStatusList);
             filtroOS.getSelectionModel().select(0);
@@ -264,19 +322,20 @@ public class TelaListagemOSController implements Initializable {
                                 Number value, Number new_value) {
                                     String status = filtroOS.getItems().get(Integer.parseInt(new_value.toString()));
                                     if(status!="Todos") {
-                                        ArrayList newDataList = new ArrayList();
+                                        ArrayList<Integer> newDataList = new ArrayList();
                                         for(int i=0; i<data.length; i++) {
-                                            if(data[i][3].equals(status)) {
+                                            if(data[i][4].equals(status)) {
                                                 newDataList.add(i);
                                             }
                                         }
-                                        String[][] newData = new String[newDataList.size()][5];
+                                        String[][] newData = new String[newDataList.size()][6];
                                         for(int i=0; i<newData.length; i++) {
-                                            newData[i][0] = data[i][0];
-                                            newData[i][1] = data[i][1];
-                                            newData[i][2] = data[i][2];
-                                            newData[i][3] = data[i][3];
-                                            newData[i][4] = data[i][4];
+                                            newData[i][0] = data[newDataList.get(i)][0];
+                                            newData[i][1] = data[newDataList.get(i)][1];
+                                            newData[i][2] = data[newDataList.get(i)][2];
+                                            newData[i][3] = data[newDataList.get(i)][3];
+                                            newData[i][4] = data[newDataList.get(i)][4];
+                                            newData[i][5] = data[newDataList.get(i)][5];
                                         }
                                         listaOS.getItems().clear();
                                         listaOS.getItems().addAll(Arrays.asList(newData));
@@ -290,10 +349,5 @@ public class TelaListagemOSController implements Initializable {
         } catch (ExcecaoPersistencia ex) {
             Logger.getLogger(TelaListagemOSController.class.getName()).log(Level.SEVERE, null, ex);
         }
-    }    
-    
-    public void setRun(Run run) {
-        this.run = run;
     }
-    
 }

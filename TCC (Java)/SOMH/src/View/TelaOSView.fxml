@@ -20,26 +20,26 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="1000.0" prefWidth="615.0" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane id="AnchorPane" prefHeight="1114.0" prefWidth="615.0" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
     <stylesheets>
         <URL value="@CSS Botao.css" />
     </stylesheets>
    <children>
       <ScrollPane fx:id="scrollPane" fitToHeight="true" fitToWidth="true" prefHeight="550.0" prefViewportHeight="835.0" prefViewportWidth="600.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <content>
-            <AnchorPane fx:id="fundo" layoutX="10.0" layoutY="10.0" prefHeight="917.0" prefWidth="598.0">
+            <AnchorPane fx:id="fundo" layoutX="10.0" layoutY="10.0" prefHeight="1028.0" prefWidth="613.0">
                <children>
                   <HBox alignment="CENTER" layoutX="22.0" layoutY="49.0" prefHeight="960.0" prefWidth="598.0" stylesheets="@CSS%20Botao.css" AnchorPane.bottomAnchor="-2.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="42.0">
                      <children>
-                        <Pane fx:id="painel" prefHeight="958.0" prefWidth="611.0">
+                        <Pane fx:id="painel" prefHeight="1001.0" prefWidth="611.0">
                            <children>
-                              <TextField fx:id="nomeEquipamento" editable="false" layoutX="134.0" layoutY="86.0" />
-                              <TextField fx:id="nomeMarca" editable="false" layoutX="134.0" layoutY="121.0" />
-                              <TextField fx:id="nomeModelo" editable="false" layoutX="134.0" layoutY="155.0" />
-                              <TextField fx:id="nroSerie" editable="false" layoutX="134.0" layoutY="188.0" />
-                              <TextArea fx:id="textComponentes" editable="false" layoutX="34.0" layoutY="256.0" prefHeight="100.0" prefWidth="200.0" />
-                              <TextArea fx:id="textObservacao" editable="false" layoutX="327.0" layoutY="415.0" prefHeight="120.0" prefWidth="270.0" />
-                              <TextArea fx:id="textReclamacao" editable="false" layoutX="21.0" layoutY="643.0" prefHeight="120.0" prefWidth="300.0" />
+                              <TextField fx:id="nomeEquipamento" editable="false" focusTraversable="false" layoutX="134.0" layoutY="86.0" />
+                              <TextField fx:id="nomeMarca" editable="false" focusTraversable="false" layoutX="134.0" layoutY="121.0" />
+                              <TextField fx:id="nomeModelo" editable="false" focusTraversable="false" layoutX="134.0" layoutY="155.0" />
+                              <TextField fx:id="nroSerie" editable="false" focusTraversable="false" layoutX="134.0" layoutY="188.0" />
+                              <TextArea fx:id="textComponentes" editable="false" focusTraversable="false" layoutX="34.0" layoutY="256.0" prefHeight="100.0" prefWidth="200.0" />
+                              <TextArea fx:id="textObservacao" editable="false" focusTraversable="false" layoutX="26.0" layoutY="702.0" prefHeight="123.0" prefWidth="270.0" />
+                              <TextArea fx:id="textReclamacao" editable="false" focusTraversable="false" layoutX="21.0" layoutY="864.0" prefHeight="120.0" prefWidth="300.0" />
                               <Label layoutX="10.0" layoutY="11.0" prefHeight="26.0" prefWidth="161.0" text="Ordem de Serviço: ">
                                  <font>
                                     <Font size="17.0" />
@@ -90,14 +90,14 @@
                                     <Font size="14.0" />
                                  </font>
                               </Label>
-                              <Label layoutX="10.0" layoutY="616.0" text="Reclamação: ">
+                              <Label layoutX="10.0" layoutY="838.0" text="Reclamação: ">
                                  <font>
                                     <Font size="14.0" />
                                  </font>
                               </Label>
-                              <Button fx:id="alterarBtn" layoutX="22.0" layoutY="918.0" mnemonicParsing="false" onAction="#alterarOS" prefHeight="20.0" prefWidth="70.0" text="Alterar" />
-                              <Button fx:id="excluirBtn" layoutX="284.0" layoutY="918.0" mnemonicParsing="false" onAction="#excluirOS" prefHeight="20.0" prefWidth="70.0" text="Excluir" />
-                              <Button fx:id="voltarBtn" layoutX="514.0" layoutY="918.0" mnemonicParsing="false" onAction="#voltarOS" prefHeight="20.0" prefWidth="70.0" text="Voltar" />
+                              <Button fx:id="alterarBtn" focusTraversable="false" layoutX="15.0" layoutY="1033.0" mnemonicParsing="false" onAction="#alterarOS" prefHeight="20.0" prefWidth="70.0" text="Alterar" />
+                              <Button fx:id="excluirBtn" focusTraversable="false" layoutX="284.0" layoutY="1033.0" mnemonicParsing="false" onAction="#excluirOS" prefHeight="20.0" prefWidth="70.0" text="Excluir" />
+                              <Button fx:id="voltarBtn" focusTraversable="false" layoutX="525.0" layoutY="1033.0" mnemonicParsing="false" onAction="#voltarOS" prefHeight="20.0" prefWidth="70.0" text="Voltar" />
                               <Label layoutX="368.0" layoutY="14.0" text="Status atual: ">
                                  <font>
                                     <Font size="14.0" />
@@ -108,25 +108,41 @@
                                     <Font size="14.0" />
                                  </font>
                               </Label>
-                              <Label layoutX="314.0" layoutY="387.0" text="Observação: ">
+                              <Label layoutX="16.0" layoutY="675.0" text="Observação: ">
                                  <font>
                                     <Font size="14.0" />
                                  </font>
                               </Label>
                               <Label fx:id="statusOS" layoutX="475.0" layoutY="16.0" text="statusOS" />
                               <Label fx:id="dataCriacao" layoutX="475.0" layoutY="51.0" text="dataCriacao" />
-                              <TableView fx:id="listAcessorios" layoutX="34.0" layoutY="415.0" prefHeight="198.0" prefWidth="159.0">
+                              <TableView fx:id="listAcessorios" focusTraversable="false" layoutX="34.0" layoutY="415.0" prefHeight="198.0" prefWidth="159.0">
                                  <columns>
                                     <TableColumn fx:id="colunaAcessorios" maxWidth="157.0" prefWidth="157.0" text="Acessórios" />
                                  </columns>
                               </TableView>
-                              <Button fx:id="salvarBtn" layoutX="22.0" layoutY="918.0" mnemonicParsing="false" onAction="#salvarOS" prefHeight="20.0" prefWidth="70.0" text="Salvar" visible="false" />
-                              <Button fx:id="cancelarBtn" layoutX="514.0" layoutY="918.0" mnemonicParsing="false" onAction="#cancelarOS" prefHeight="20.0" prefWidth="70.0" text="Cancelar" visible="false" />
+                              <Button fx:id="salvarBtn" layoutX="15.0" layoutY="1033.0" mnemonicParsing="false" onAction="#salvarOS" prefHeight="20.0" prefWidth="70.0" text="Salvar" visible="false" />
+                              <Button fx:id="cancelarBtn" layoutX="525.0" layoutY="1033.0" mnemonicParsing="false" onAction="#cancelarOS" prefHeight="20.0" prefWidth="70.0" text="Cancelar" visible="false" />
+                              <Button fx:id="excluirAcessorio" layoutX="202.0" layoutY="567.0" mnemonicParsing="false" onAction="#excluirAcessorio" text="Excluir" visible="false" />
+                              <TableView fx:id="acessoriosSelecionados" layoutX="265.0" layoutY="415.0" prefHeight="198.0" prefWidth="159.0" visible="false">
+                                 <columns>
+                                    <TableColumn fx:id="colunaAcessoriosSelecionados" maxWidth="157.0" prefWidth="157.0" text="Acessórios Selecionados" />
+                                 </columns>
+                              </TableView>
+                              <Button fx:id="removeAcessorio" layoutX="214.0" layoutY="514.0" mnemonicParsing="false" onAction="#removeAcessorio" text="&lt;" visible="false" />
+                              <Button fx:id="adicionaAcessorio" layoutX="214.0" layoutY="472.0" mnemonicParsing="false" onAction="#selecionaAcessorio" text="&gt;" visible="false" />
+                              <TableView fx:id="acessoriosCadastrados" layoutX="34.0" layoutY="415.0" prefHeight="198.0" prefWidth="159.0" visible="false">
+                                 <columns>
+                                    <TableColumn fx:id="colunaAcessoriosCadastrados" maxWidth="157.0" prefWidth="157.0" text="Acessórios Cadastrados" />
+                                 </columns>
+                              </TableView>
+                              <Button fx:id="cadastrarAcessorio" layoutX="404.0" layoutY="630.0" mnemonicParsing="false" onAction="#cadastrarAcessorio" text="Cadastrar" visible="false" />
+                              <TextField fx:id="nomeAcessorioCadastro" layoutX="144.0" layoutY="630.0" prefHeight="25.0" prefWidth="241.0" visible="false" />
+                              <Label fx:id="cadastrarAcessorioLB" layoutX="32.0" layoutY="634.0" text="Cadastrar Acessório:" visible="false" />
                            </children>
                         </Pane>
                      </children>
                   </HBox>
-                  <Label fx:id="faixa" alignment="CENTER" prefHeight="40.0" prefWidth="600.0" stylesheets="@CSS%20Botao.css" text="Tela de OS" textAlignment="JUSTIFY" textFill="WHITE" AnchorPane.bottomAnchor="958.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
+                  <Label fx:id="faixa" alignment="CENTER" prefHeight="40.0" prefWidth="600.0" stylesheets="@CSS%20Botao.css" text="Tela de OS" textAlignment="JUSTIFY" textFill="WHITE" AnchorPane.bottomAnchor="1072.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
                </children>
             </AnchorPane>
          </content>
