@@ -1,12 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.net.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
-<?import java.net.URL?>
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
@@ -20,16 +13,13 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="1114.0" prefWidth="615.0" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
-    <stylesheets>
-        <URL value="@CSS Botao.css" />
-    </stylesheets>
+<AnchorPane id="AnchorPane" prefHeight="1114.0" prefWidth="615.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <ScrollPane fx:id="scrollPane" fitToHeight="true" fitToWidth="true" prefHeight="550.0" prefViewportHeight="835.0" prefViewportWidth="600.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <content>
             <AnchorPane fx:id="fundo" layoutX="10.0" layoutY="10.0" prefHeight="1028.0" prefWidth="613.0">
                <children>
-                  <HBox alignment="CENTER" layoutX="22.0" layoutY="49.0" prefHeight="960.0" prefWidth="598.0" stylesheets="@CSS%20Botao.css" AnchorPane.bottomAnchor="-2.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="42.0">
+                  <HBox fx:id="hbox" alignment="CENTER" layoutY="39.0" prefHeight="960.0" prefWidth="598.0" stylesheets="@CSS%20Botao.css" AnchorPane.bottomAnchor="-2.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="42.0">
                      <children>
                         <Pane fx:id="painel" prefHeight="1001.0" prefWidth="611.0">
                            <children>
@@ -143,6 +133,7 @@
                      </children>
                   </HBox>
                   <Label fx:id="faixa" alignment="CENTER" prefHeight="40.0" prefWidth="600.0" stylesheets="@CSS%20Botao.css" text="Tela de OS" textAlignment="JUSTIFY" textFill="WHITE" AnchorPane.bottomAnchor="1072.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
+                  <Button fx:id="menu" layoutX="6.0" layoutY="8.0" mnemonicParsing="false" onAction="#redirecionaTelaFuncionario" stylesheets="@CSS%20Botao.css" text="Menu" />
                </children>
             </AnchorPane>
          </content>
