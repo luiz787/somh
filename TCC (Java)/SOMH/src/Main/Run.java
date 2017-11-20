@@ -8,6 +8,7 @@ package Main;
 import Controller.TelaCadastroOSController;
 import Controller.CadastroUsuarioController;
 import Controller.LoginController;
+import Controller.TelaListagemClienteController;
 import Controller.TelaListagemOSController;
 import Controller.TelaManutencaoController;
 import Controller.TelaOSController;
@@ -67,8 +68,10 @@ public class Run extends Application {
         //showCadastroOSView();
         //showLogin();
         //showCadastroUsuario();
-        showListagemOS();
+        //showListagemOS();
         //showTelaManutencao();
+        showListagemCliente();
+        
         //showOS();
     }
 
@@ -114,6 +117,23 @@ public class Run extends Application {
             rootLayout.setCenter(TelaListagemOS);
 
             TelaListagemOSController controller = loader.getController();
+            controller.setRun(this);
+
+        } catch (IOException ex) {
+            Logger.getLogger(Run.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+     public void showListagemCliente() {
+        try {
+            FXMLLoader loader = new FXMLLoader();
+
+            loader.setLocation(Run.class.getResource("../View/TelaListagemClienteView.fxml"));
+            AnchorPane TelaListagemCliente = (AnchorPane) loader.load();
+
+            rootLayout.setCenter(TelaListagemCliente);
+
+            TelaListagemClienteController controller = loader.getController();
             controller.setRun(this);
 
         } catch (IOException ex) {
