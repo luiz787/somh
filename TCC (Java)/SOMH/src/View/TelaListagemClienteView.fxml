@@ -20,7 +20,7 @@
             <AnchorPane fx:id="fundo" layoutX="10.0" layoutY="10.0" prefHeight="974.0" prefWidth="613.0">
                <children>
                   <Label fx:id="faixa" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="39.0" prefHeight="39.0" prefWidth="600.0" stylesheets="@CSS%20Botao.css" text="Listagem de Clientes" textAlignment="JUSTIFY" textFill="WHITE" AnchorPane.bottomAnchor="958.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
-                  <TableView fx:id="listaCliente" layoutX="6.0" layoutY="124.0" prefHeight="873.0" prefWidth="760.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="7.0" AnchorPane.rightAnchor="7.0" AnchorPane.topAnchor="124.0">
+                  <TableView fx:id="listaCliente" layoutX="6.0" layoutY="124.0" prefHeight="816.0" prefWidth="760.0" AnchorPane.bottomAnchor="57.0" AnchorPane.leftAnchor="7.0" AnchorPane.rightAnchor="7.0" AnchorPane.topAnchor="124.0">
                      <columns>
                         <TableColumn fx:id="colunaCPF" editable="false" minWidth="0.0" prefWidth="67.0" text="CPF/CNPJ" />
                         <TableColumn fx:id="colunaNome" editable="false" minWidth="100.0" prefWidth="166.0" text="Nome" />
@@ -33,12 +33,13 @@
                      </columnResizePolicy>
                   </TableView>
                   <TextField fx:id="textoPesquisa" layoutX="200.0" layoutY="70.0" maxWidth="200.0" prefHeight="25.0" prefWidth="334.0" AnchorPane.leftAnchor="200.0" AnchorPane.rightAnchor="48.0" />
-                  <Button fx:id="pesquisa" layoutX="733.0" layoutY="82.0" mnemonicParsing="false" onAction="#realizarPesquisa" prefHeight="16.0" prefWidth="34.0" stylesheets="@CSS%20Botao.css" AnchorPane.rightAnchor="7.0" />
+                  <Button fx:id="pesquisa" layoutX="733.0" layoutY="69.0" mnemonicParsing="false" onAction="#realizarPesquisa" prefHeight="16.0" prefWidth="34.0" stylesheets="@CSS%20Botao.css" AnchorPane.rightAnchor="7.0" />
                   <Pane layoutX="7.0" layoutY="56.0" prefHeight="50.0" prefWidth="180.0" AnchorPane.leftAnchor="7.0">
                      <children>
                         <ChoiceBox fx:id="filtroCliente" layoutY="13.0" prefHeight="25.0" prefWidth="180.0" />
                      </children>
                   </Pane>
+                  <Button fx:id="voltar" layoutX="71.0" layoutY="950.0" mnemonicParsing="false" onAction="#Voltar" text="Voltar" />
                </children>
             </AnchorPane>
          </content>
