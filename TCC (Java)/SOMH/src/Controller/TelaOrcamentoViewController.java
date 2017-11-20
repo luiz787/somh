@@ -79,15 +79,14 @@ public class TelaOrcamentoViewController implements Initializable {
 
         ManterOS manterOS;
         ManterOSAcessorio manterOSAcessorio;
-        OS os;
+        //OS os;
         List<OSAcessorio> osAcessorios;
         String acessorios = "";
         
         try {
             manterOS = new ManterOSImpl(OSDAOImpl.getInstance());
-            os = manterOS.getOSById(TelaListagemOSController.getIdOsSelecionada());
             manterOSAcessorio = new ManterOSAcessorioImpl (OSAcessorioDAOImpl.getInstance());
-            osAcessorios = manterOSAcessorio.getAllByOS(TelaListagemOSController.getIdOsSelecionada());
+            osAcessorios = manterOSAcessorio.getAllByOS(os.getId());
             
             for (int i = 0; i < osAcessorios.size(); i++){
                 acessorios += osAcessorios.get(i).getAcessorio().getNomeAcessorio() + ", ";                        
