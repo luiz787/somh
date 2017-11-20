@@ -1,6 +1,7 @@
 package Controller;
 
 import DAOImpl.AcessorioDAOImpl;
+import DAOImpl.ClienteDAOImpl;
 import DAOImpl.EquipamentoDAOImpl;
 import DAOImpl.OSAcessorioDAOImpl;
 import DAOImpl.OSDAOImpl;
@@ -17,11 +18,13 @@ import Domain.Perfil;
 import Domain.Status;
 import Domain.Usuario;
 import Service.ManterAcessorio;
+import Service.ManterCliente;
 import Service.ManterEquipamento;
 import Service.ManterOS;
 import Service.ManterOSAcessorio;
 import Service.ManterOSStatus;
 import ServiceImpl.ManterAcessorioImpl;
+import ServiceImpl.ManterClienteImpl;
 import ServiceImpl.ManterEquipamentoImpl;
 import ServiceImpl.ManterOSAcessorioImpl;
 import ServiceImpl.ManterOSImpl;
@@ -40,6 +43,8 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
@@ -53,6 +58,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
+import javafx.stage.Stage;
 
 public class TelaCadastroOSController implements Initializable {
 
@@ -117,11 +123,33 @@ public class TelaCadastroOSController implements Initializable {
     
     private Run run;
     private Usuario usuarioLogado;
+    private Cliente cliente;
+    private boolean listagemCliente;
+
+    public Cliente getCliente() {
+        return cliente;
+    }
+
+    public void setCliente(Cliente cliente) {
+        this.cliente = cliente;
+    }
+    
+    public boolean isListagemCliente() {
+        return listagemCliente;
+    }
+
+    public void setListagemCliente(boolean listagemCliente) {
+        this.listagemCliente = listagemCliente;
+    }
     
     public void setRun(Run run) {
         this.run = run;
     }
 
+    public TelaCadastroOSController(Cliente cliente) {
+        this.cliente = cliente;
+    }
+    
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         try {
@@ -149,7 +177,9 @@ public class TelaCadastroOSController implements Initializable {
                 OS ultimaOS = listaOS.get(listaOS.size()-1);
                 nroOS.setText(String.valueOf(ultimaOS.getId()+1));
             }
-            
+            if(cliente!=null) {
+                nomeCliente.setText(cliente.getNome());
+            }
             data.setText(DateUtil.format(LocalDate.now()));
             
             ManterAcessorio manterAcessorio = new ManterAcessorioImpl(AcessorioDAOImpl.getInstance());
@@ -224,7 +254,6 @@ public class TelaCadastroOSController implements Initializable {
             
             Equipamento equipamento = new Equipamento();
             OS os = new OS();
-            Cliente cliente = new Cliente();
             ArrayList<Acessorio> acessorios = new ArrayList<Acessorio>();
             OSAcessorio osAcessorio = new OSAcessorio();
             OSStatus osStatus = new OSStatus();
@@ -254,7 +283,6 @@ public class TelaCadastroOSController implements Initializable {
                 equipamento.setNroSerie(Integer.parseInt(nroSerie.getText()));
             }
             
-            cliente.setCodCPF_CNPJ(Long.parseLong("10213683695"));//Substituir quando cliente estiver pronto
             os.setCliente(cliente);
             
             os.setTxtReclamacao(reclamacao.getText());
@@ -543,7 +571,6 @@ public class TelaCadastroOSController implements Initializable {
     @FXML
     private void cadastrarCliente(ActionEvent event) {
         try {
-            System.out.println("Hy");
             FXMLLoader loader = new FXMLLoader();
             
             loader.setLocation(Run.class.getResource("../View/CadastroCliente.fxml"));
@@ -556,10 +583,25 @@ public class TelaCadastroOSController implements Initializable {
         } catch (IOException ex) {
             Logger.getLogger(TelaCadastroOSController.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
     }
 
     @FXML
     private void pesquisarCliente(ActionEvent event) {
+        try {
+            
+            FXMLLoader loader = new FXMLLoader();
+            
+            loader.setLocation(Run.class.getResource("../View/TelaListagemClienteView.fxml"));
+            AnchorPane TelaCadastroCliente = (AnchorPane) loader.load();
+            
+            run.getRootLayout().setCenter(TelaCadastroCliente);
+            
+            TelaListagemClienteController controller = loader.getController();
+            controller.setCriaOS(true);
+            controller.setRun(run);
+            
+        } catch (IOException ex) {
+            Logger.getLogger(TelaCadastroOSController.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 }

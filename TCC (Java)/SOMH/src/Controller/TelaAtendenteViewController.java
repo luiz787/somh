@@ -51,7 +51,8 @@ public class TelaAtendenteViewController implements Initializable {
 
     public void cadastroOS() throws Exception {
         FXMLLoader loader = new FXMLLoader();
-
+        TelaCadastroOSController controlador = new TelaCadastroOSController(null);
+        loader.setController(controlador);
         loader.setLocation(Run.class.getResource("../View/TelaCadastroOSView.fxml"));
         AnchorPane TelaFuncionario = (AnchorPane) loader.load();
 

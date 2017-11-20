@@ -175,8 +175,7 @@ public class TelaOSController implements Initializable {
             }
             
             nroOS.setText(os.getId().toString());
-            //System.out.println("Q? "+os.getCliente().getNome());
-            //nomeCliente.setText(os.getCliente().getNome());
+            nomeCliente.setText(os.getCliente().getNome());
             statusOS.setText(status.getNome());
             dataCriacao.setText(dataCriacaoString);
             nomeEquipamento.setText(os.getEquipamento().getDesEquipto());
