@@ -97,7 +97,8 @@ public class TelaListagemClienteController implements Initializable {
     public TelaListagemClienteController() {
         try {
             listCliente = FXCollections.observableArrayList(mantercliente.getAll()); //prenche a lista de clientes
-            
+            long aux = 0; 
+            ClienteSelect = aux;
         } catch (ExcecaoPersistencia ex) {
             Logger.getLogger(TelaListagemClienteController.class.getName()).log(Level.SEVERE, null, ex);
         }

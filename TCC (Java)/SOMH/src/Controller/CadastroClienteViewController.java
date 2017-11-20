@@ -119,8 +119,8 @@ public class CadastroClienteViewController implements Initializable {
                 ufs.add(esta.getAll().get(x).getId());
             }
             estado.setItems(ufs); //preemche a lista de estado
-            
-            if(listacliente.ClienteSelect != null || listacliente.ClienteSelect !=0){   //verifica se
+            listacliente = new TelaListagemClienteController();
+            if(listacliente.ClienteSelect != 0){   //verifica se
                 Cliente clienteaux = new Cliente();
                 clienteaux = mantercliente.getClienteById(listacliente.ClienteSelect);
                 id_cliente.setEditable(false);
@@ -202,7 +202,6 @@ public class CadastroClienteViewController implements Initializable {
             
             cep.setCidade(city);
             cep.setNroCEP(Integer.parseInt(CEP_cliente.getText()));
-            
             cliente.setCep(cep);
             cliente.setCodCPF_CNPJ(Long.parseLong(id_cliente.getText()));
             cliente.setEmail(email_cliente.getText());
@@ -225,14 +224,17 @@ public class CadastroClienteViewController implements Initializable {
                mantercep.cadastrarCEP(cep);
                
            }
-           
-            if(listacliente.ClienteSelect != null || listacliente.ClienteSelect !=0){
-                listacliente.ClienteSelect = null; //reseta cliente selecionado
+            
+            if(listacliente.ClienteSelect != 0){
+                System.out.println("cusao DA PORRA");
+                long aux=0;
+                listacliente.ClienteSelect = aux; //reseta cliente selecionado
                 mantercliente.alterarCliente(cliente);
             }else{
+                System.out.println("cusao");
                 mantercliente.cadastrarCliente(cliente);
             }
-            
+            System.out.println("debug");
             Alert alert = new Alert(AlertType.CONFIRMATION);
             alert.setTitle("Cadastro de Cliente");
             alert.setHeaderText("Concluído");
