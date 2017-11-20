@@ -63,7 +63,7 @@ public class LoginController implements Initializable {
         String senha = password.getText();
         System.out.println(nomeUsuario + ", " + senha);
         ManterUsuario manterUsuario = new ManterUsuarioImpl();
-        usuarioLogado = manterUsuario.getUsuarioByEmailSenha(nomeUsuario, senha);
+        usuarioLogado = manterUsuario.getUsuarioByNomeSenha(nomeUsuario, senha);
         System.out.println(usuarioLogado == null);
         if (usuarioLogado != null) {
             codPerfil = usuarioLogado.getPerfil().getId().intValue();
@@ -130,6 +130,9 @@ public class LoginController implements Initializable {
             AnchorPane TelaAdm = (AnchorPane) loader.load();
 
             run.getRootLayout().setCenter(TelaAdm);
+
+            TelaAdministradorViewController controllerAdministrador = loader.getController();
+            controllerAdministrador.setRun(run);
 
         } catch (IOException ex) {
             Logger.getLogger(Run.class.getName()).log(Level.SEVERE, null, ex);

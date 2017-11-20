@@ -33,6 +33,7 @@ import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -43,6 +44,7 @@ import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableRow;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.util.Callback;
 
@@ -72,10 +74,14 @@ public class TelaListagemOSController implements Initializable {
     private Button pesquisa;
     @FXML
     private ChoiceBox<String> filtroOS;
+    @FXML
+    private TextField textoPesquisa;
+    @FXML
+    private Button menu;
     
     private Usuario usuarioLogado;
-
     private Run run;
+    private String[][] data;
     
     public void setRun(Run run) {
         this.run = run;
@@ -84,16 +90,6 @@ public class TelaListagemOSController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         try {
-            Usuario usuario = new Usuario();
-            usuario.setId(2L);
-            usuario.setNome("Victor");
-            Perfil perfil = new Perfil();
-            perfil.setId(2L);
-            perfil.setDescricao("atendente");
-            usuario.setPerfil(perfil);
-            usuario.setSenha("123");
-            
-            LoginController.setUsuarioLogado(usuario);
             usuarioLogado = LoginController.getUsuarioLogado();
             
             
@@ -138,7 +134,7 @@ public class TelaListagemOSController implements Initializable {
             }
             
             int i = 0;
-            String[][] data = new String[osList.size()][6];
+            data = new String[osList.size()][6];
             for(OS os : osList) {
                 ArrayList<OSStatus> listOSStatus = 
                 (ArrayList<OSStatus>) manterOSStatus.getAllByOS(os.getId());
@@ -348,6 +344,149 @@ public class TelaListagemOSController implements Initializable {
             );
         } catch (ExcecaoPersistencia ex) {
             Logger.getLogger(TelaListagemOSController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    @FXML
+    private void filtrarPesquisa(ActionEvent event) {
+        String texto = textoPesquisa.getText();
+        if(!texto.isEmpty()) {
+            if(listaOS.getItems().isEmpty()) {
+                String status = filtroOS.getSelectionModel().getSelectedItem().toString();
+                if(status!="Todos") {
+                    ArrayList<Integer> newDataList = new ArrayList();
+                    for(int i=0; i<data.length; i++) {
+                        if(data[i][4].equals(status)) {
+                            newDataList.add(i);
+                        }
+                    }
+                    String[][] newData = new String[newDataList.size()][6];
+                    for(int i=0; i<newData.length; i++) {
+                        newData[i][0] = data[newDataList.get(i)][0];
+                        newData[i][1] = data[newDataList.get(i)][1];
+                        newData[i][2] = data[newDataList.get(i)][2];
+                        newData[i][3] = data[newDataList.get(i)][3];
+                        newData[i][4] = data[newDataList.get(i)][4];
+                        newData[i][5] = data[newDataList.get(i)][5];
+                    }
+                    listaOS.getItems().clear();
+                    listaOS.getItems().addAll(Arrays.asList(newData));
+                } else {
+                    listaOS.getItems().clear();
+                    listaOS.getItems().addAll(Arrays.asList(data));
+                }
+            }
+            ObservableList<String[]> itemList = listaOS.getItems();
+            ArrayList<String[]> newDataList = new ArrayList();
+
+            int index=0;
+            for(String[] item : itemList) {
+                if(item[0].contains(texto) ||
+                   item[1].contains(texto) ||
+                   item[2].contains(texto) ||
+                   item[3].contains(texto) ||
+                   item[4].contains(texto) ||
+                   item[5].contains(texto)) {
+                    newDataList.add(item);
+                }
+            }
+
+            String[][] newData = new String[newDataList.size()][6];
+
+            for(int i=0; i<newDataList.size(); i++) {
+                newData[i] = newDataList.get(i);
+            }
+
+            listaOS.getItems().clear();
+            listaOS.getItems().addAll(Arrays.asList(newData));
+        } else {
+            String status = filtroOS.getSelectionModel().getSelectedItem().toString();
+            if(status!="Todos") {
+                ArrayList<Integer> newDataList = new ArrayList();
+                for(int i=0; i<data.length; i++) {
+                    if(data[i][4].equals(status)) {
+                        newDataList.add(i);
+                    }
+                }
+                String[][] newData = new String[newDataList.size()][6];
+                for(int i=0; i<newData.length; i++) {
+                    newData[i][0] = data[newDataList.get(i)][0];
+                    newData[i][1] = data[newDataList.get(i)][1];
+                    newData[i][2] = data[newDataList.get(i)][2];
+                    newData[i][3] = data[newDataList.get(i)][3];
+                    newData[i][4] = data[newDataList.get(i)][4];
+                    newData[i][5] = data[newDataList.get(i)][5];
+                }
+                listaOS.getItems().clear();
+                listaOS.getItems().addAll(Arrays.asList(newData));
+            } else {
+                listaOS.getItems().clear();
+                listaOS.getItems().addAll(Arrays.asList(data));
+            }
+        }
+    }
+
+    @FXML
+    private void redirecionaTelaFuncionario(ActionEvent event) {
+        try{
+            String telaUsuario="";
+            FXMLLoader loader;
+            switch(Integer.parseInt(usuarioLogado.getPerfil().getId().toString())) {
+                case 1: 
+                    telaUsuario = "TelaAdministradorView.fxml";
+                    
+                    loader = new FXMLLoader();
+            
+                    loader.setLocation(Run.class.getResource("../View/"+telaUsuario));
+                    AnchorPane TelaAdministrador = (AnchorPane) loader.load();
+
+                    run.getRootLayout().setCenter(TelaAdministrador);
+
+                    TelaAdministradorViewController controllerAdministrador = loader.getController();
+                    controllerAdministrador.setRun(run);
+                break;
+                case 2:
+                    telaUsuario = "TelaAtendenteView.fxml";
+                    
+                    loader = new FXMLLoader();
+            
+                    loader.setLocation(Run.class.getResource("../View/"+telaUsuario));
+                    AnchorPane TelaAtendente = (AnchorPane) loader.load();
+
+                    run.getRootLayout().setCenter(TelaAtendente);
+
+                    TelaAtendenteViewController controllerAtendente = loader.getController();
+                    controllerAtendente.setRun(run);
+                break;
+                case 3:
+                    telaUsuario = "TelaTelefonistaView.fxml";
+                    
+                    loader = new FXMLLoader();
+            
+                    loader.setLocation(Run.class.getResource("../View/"+telaUsuario));
+                    AnchorPane TelaTelefonista = (AnchorPane) loader.load();
+
+                    run.getRootLayout().setCenter(TelaTelefonista);
+
+                    TelaTelefonistaViewController controllerTelefonista = loader.getController();
+                    controllerTelefonista.setRun(run);
+                break;
+                case 4:
+                    telaUsuario = "TelaTecnicoView.fxml";
+                    
+                    loader = new FXMLLoader();
+            
+                    loader.setLocation(Run.class.getResource("../View/"+telaUsuario));
+                    AnchorPane TelaTecnico = (AnchorPane) loader.load();
+
+                    run.getRootLayout().setCenter(TelaTecnico);
+
+                    TelaTecnicoViewController controllerTecnico = loader.getController();
+                    controllerTecnico.setRun(run);
+                break;
+            }
+        } catch (IOException ex) {
+            Logger.getLogger(Run.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 }

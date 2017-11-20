@@ -13,6 +13,7 @@ import Domain.OS;
 import Domain.OSAcessorio;
 import Domain.OSStatus;
 import Domain.Status;
+import Domain.Usuario;
 import Exception.ExcecaoNegocio;
 import Exception.ExcecaoPersistencia;
 import Main.Run;
@@ -124,9 +125,12 @@ public class TelaOSController implements Initializable {
     private TextField nomeAcessorioCadastro;
     @FXML
     private Label cadastrarAcessorioLB;
+    @FXML
+    private Button menu;
     
     private Run run;
     private OS os;
+    private Usuario usuarioLogado;
 
     public OS getOs() {
         return os;
@@ -143,6 +147,8 @@ public class TelaOSController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         try {
+            usuarioLogado = LoginController.getUsuarioLogado();
+            
             colunaAcessorios.setCellValueFactory(cellData -> cellData.getValue().NomeAcessorioProperty());
             ManterOS manterOS = new ManterOSImpl(OSDAOImpl.getInstance());
             ManterStatus manterStatus = new ManterStatusImpl(StatusDAOImpl.getInstance());
@@ -329,11 +335,8 @@ public class TelaOSController implements Initializable {
             ManterAcessorio manterAcessorio = new ManterAcessorioImpl(AcessorioDAOImpl.getInstance());
             ManterOSAcessorio manterOSAcessorio = new ManterOSAcessorioImpl(OSAcessorioDAOImpl.getInstance());
             if(!(acessoriosSelecionados.getItems().isEmpty())) {
-                long codAcessorio=1;
                 for (Acessorio acessorio : acessoriosSelecionados.getItems()) {
-                    System.out.println(acessorio.getId());
                     acessorios.add(acessorio);
-                    codAcessorio++;
                 }
             }
             
@@ -413,9 +416,9 @@ public class TelaOSController implements Initializable {
         alterarBtn.setVisible(true);
         excluirBtn.setVisible(true);
         voltarBtn.setVisible(true);
-        salvarBtn.setVisible(true);
+        salvarBtn.setVisible(false);
         cancelarBtn.setVisible(false);
-        
+
         excluirAcessorio.setVisible(false);
         acessoriosSelecionados.setVisible(false);
         removeAcessorio.setVisible(false);
@@ -590,5 +593,68 @@ public class TelaOSController implements Initializable {
             alert.showAndWait();
         }
     }
-    
+
+    @FXML
+    private void redirecionaTelaFuncionario(ActionEvent event) {
+        try{
+            String telaUsuario="";
+            FXMLLoader loader;
+            switch(Integer.parseInt(usuarioLogado.getPerfil().getId().toString())) {
+                case 1: 
+                    telaUsuario = "TelaAdministradorView.fxml";
+                    
+                    loader = new FXMLLoader();
+            
+                    loader.setLocation(Run.class.getResource("../View/"+telaUsuario));
+                    AnchorPane TelaAdministrador = (AnchorPane) loader.load();
+
+                    run.getRootLayout().setCenter(TelaAdministrador);
+
+                    TelaAdministradorViewController controllerAdministrador = loader.getController();
+                    controllerAdministrador.setRun(run);
+                break;
+                case 2:
+                    telaUsuario = "TelaAtendenteView.fxml";
+                    
+                    loader = new FXMLLoader();
+            
+                    loader.setLocation(Run.class.getResource("../View/"+telaUsuario));
+                    AnchorPane TelaAtendente = (AnchorPane) loader.load();
+
+                    run.getRootLayout().setCenter(TelaAtendente);
+
+                    TelaAtendenteViewController controllerAtendente = loader.getController();
+                    controllerAtendente.setRun(run);
+                break;
+                case 3:
+                    telaUsuario = "TelaTelefonistaView.fxml";
+                    
+                    loader = new FXMLLoader();
+            
+                    loader.setLocation(Run.class.getResource("../View/"+telaUsuario));
+                    AnchorPane TelaTelefonista = (AnchorPane) loader.load();
+
+                    run.getRootLayout().setCenter(TelaTelefonista);
+
+                    TelaTelefonistaViewController controllerTelefonista = loader.getController();
+                    controllerTelefonista.setRun(run);
+                break;
+                case 4:
+                    telaUsuario = "TelaTecnicoView.fxml";
+                    
+                    loader = new FXMLLoader();
+            
+                    loader.setLocation(Run.class.getResource("../View/"+telaUsuario));
+                    AnchorPane TelaTecnico = (AnchorPane) loader.load();
+
+                    run.getRootLayout().setCenter(TelaTecnico);
+
+                    TelaTecnicoViewController controllerTecnico = loader.getController();
+                    controllerTecnico.setRun(run);
+                break;
+            }
+        } catch (IOException ex) {
+            Logger.getLogger(Run.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
 }

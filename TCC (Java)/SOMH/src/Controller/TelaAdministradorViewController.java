@@ -66,6 +66,7 @@ public class TelaAdministradorViewController extends Run implements Initializabl
     }
 
     public void procuraOS() throws Exception {
+        
         FXMLLoader loader = new FXMLLoader();
 
         loader.setLocation(Run.class.getResource("../View/TelaListagemOSView.fxml"));
@@ -75,6 +76,7 @@ public class TelaAdministradorViewController extends Run implements Initializabl
 
         TelaListagemOSController controller = loader.getController();
         controller.setRun(run);
+        
     }
 
     public void cadastroFuncionario() throws Exception {
