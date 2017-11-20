@@ -106,7 +106,7 @@ public class LoginController implements Initializable {
 
     }
 
-    private void redirecionaTelaFuncionario() {
+    /*private void redirecionaTelaFuncionario() {
         System.out.println("tela de funcionario");
         try {
             FXMLLoader loader = new FXMLLoader();
@@ -115,11 +115,13 @@ public class LoginController implements Initializable {
             AnchorPane TelaFuncionario = (AnchorPane) loader.load();
 
             run.getRootLayout().setCenter(TelaFuncionario);
+            TelaFuncionarioV controllerAdministrador = loader.getController();
+            controller.setRun(run);
 
         } catch (IOException ex) {
             Logger.getLogger(Run.class.getName()).log(Level.SEVERE, null, ex);
         }
-    }
+    }*/
 
     private void showTelaAdministradorView() {
         System.out.println("Tela Administrador");
@@ -148,6 +150,8 @@ public class LoginController implements Initializable {
             AnchorPane TelaAtendente = (AnchorPane) loader.load();
 
             run.getRootLayout().setCenter(TelaAtendente);
+            TelaAtendenteViewController controllerAtendente = loader.getController();
+            controllerAtendente.setRun(run);
 
         } catch (IOException ex) {
             Logger.getLogger(Run.class.getName()).log(Level.SEVERE, null, ex);
@@ -163,6 +167,8 @@ public class LoginController implements Initializable {
             AnchorPane TelaTelefonista = (AnchorPane) loader.load();
 
             run.getRootLayout().setCenter(TelaTelefonista);
+            TelaTelefonistaViewController controllerTelefonista = loader.getController();
+            controllerTelefonista.setRun(run);
 
         } catch (IOException ex) {
             Logger.getLogger(Run.class.getName()).log(Level.SEVERE, null, ex);
@@ -178,6 +184,8 @@ public class LoginController implements Initializable {
             AnchorPane TelaTecnico = (AnchorPane) loader.load();
 
             run.getRootLayout().setCenter(TelaTecnico);
+            TelaTecnicoViewController controllerTecnico = loader.getController();
+            controllerTecnico.setRun(run);
 
         } catch (IOException ex) {
             Logger.getLogger(Run.class.getName()).log(Level.SEVERE, null, ex);

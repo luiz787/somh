@@ -122,8 +122,9 @@ public class TelaListagemClienteController implements Initializable {
                     System.out.println(ClienteSelect);
                 }
             }
-        }} 
-    
+        });
+    } 
+
     
      public void setRun(Run run) {
         this.run = run;
