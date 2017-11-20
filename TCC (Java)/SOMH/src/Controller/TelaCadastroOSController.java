@@ -36,6 +36,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -537,5 +538,28 @@ public class TelaCadastroOSController implements Initializable {
         } catch (IOException ex) {
             Logger.getLogger(Run.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }
+
+    @FXML
+    private void cadastrarCliente(ActionEvent event) {
+        try {
+            System.out.println("Hy");
+            FXMLLoader loader = new FXMLLoader();
+            
+            loader.setLocation(Run.class.getResource("../View/CadastroCliente.fxml"));
+            AnchorPane TelaCadastroCliente = (AnchorPane) loader.load();
+            
+            run.getRootLayout().setCenter(TelaCadastroCliente);
+            
+            CadastroClienteViewController controller = loader.getController();
+            controller.setRun(run);
+        } catch (IOException ex) {
+            Logger.getLogger(TelaCadastroOSController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+    }
+
+    @FXML
+    private void pesquisarCliente(ActionEvent event) {
     }
 }

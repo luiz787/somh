@@ -56,6 +56,7 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 
 public class TelaOSController implements Initializable {
@@ -70,8 +71,6 @@ public class TelaOSController implements Initializable {
     private Pane painel;
     @FXML
     private Label nroOS;
-    @FXML
-    private Label nomeCliente;
     @FXML
     private Button alterarBtn;
     @FXML
@@ -100,7 +99,6 @@ public class TelaOSController implements Initializable {
     private Label statusOS;
     @FXML
     private Label dataCriacao;
-    
     @FXML
     private Button salvarBtn;
     @FXML
@@ -127,10 +125,15 @@ public class TelaOSController implements Initializable {
     private Label cadastrarAcessorioLB;
     @FXML
     private Button menu;
+    @FXML
+    private HBox hbox;
+    @FXML
+    private Label nomeCliente;
     
     private Run run;
     private OS os;
     private Usuario usuarioLogado;
+    
 
     public OS getOs() {
         return os;
@@ -172,7 +175,8 @@ public class TelaOSController implements Initializable {
             }
             
             nroOS.setText(os.getId().toString());
-            nomeCliente.setText(os.getCliente().getNome());
+            //System.out.println("Q? "+os.getCliente().getNome());
+            //nomeCliente.setText(os.getCliente().getNome());
             statusOS.setText(status.getNome());
             dataCriacao.setText(dataCriacaoString);
             nomeEquipamento.setText(os.getEquipamento().getDesEquipto());
@@ -199,7 +203,6 @@ public class TelaOSController implements Initializable {
         this.run = run;
     }
     
-    @FXML
     private void redirecionaTelaCliente(MouseEvent event) {
         try{
             FXMLLoader loader = new FXMLLoader();
