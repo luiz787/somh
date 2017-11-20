@@ -10,12 +10,14 @@ import DAOImpl.UfDAOImpl;
 import Domain.Cidade;
 import Domain.Cliente;
 import Domain.UF;
+import Domain.Usuario;
 import Exception.ExcecaoPersistencia;
 import Main.Run;
 import Service.ManterCliente;
 import Service.ManterUF;
 import ServiceImpl.ManterClienteImpl;
 import ServiceImpl.ManterUFImpl;
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
@@ -25,6 +27,7 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
@@ -78,7 +81,9 @@ public class TelaListagemClienteController implements Initializable {
     @FXML
     private ChoiceBox filtroCliente;
     @FXML
-    private CheckBox exibirEndereco;
+    private Button voltar;
+    
+    private Usuario usuarioLogado;
     
     private Run run;
     
@@ -87,10 +92,11 @@ public class TelaListagemClienteController implements Initializable {
     public ObservableList<Cliente> listCliente;
     public ObservableList<Cliente> listClienteaux; //lista de Clientes após filtro de pesquisa
     
+    
 
     public TelaListagemClienteController() {
         try {
-            listCliente = FXCollections.observableArrayList(mantercliente.getAll());
+            listCliente = FXCollections.observableArrayList(mantercliente.getAll()); //prenche a lista de clientes
             
         } catch (ExcecaoPersistencia ex) {
             Logger.getLogger(TelaListagemClienteController.class.getName()).log(Level.SEVERE, null, ex);
@@ -101,7 +107,8 @@ public class TelaListagemClienteController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         try {
             filtroCliente.setItems(parametros);
-          
+            usuarioLogado = LoginController.getUsuarioLogado();
+            
            colunaCPF.setCellValueFactory(new PropertyValueFactory<Cliente, Long>("codCPF_CNPJ"));
            colunaNome.setCellValueFactory(new PropertyValueFactory<Cliente, String>("nome"));
            colunaEmail.setCellValueFactory(new PropertyValueFactory<Cliente, String>("email"));
@@ -109,17 +116,18 @@ public class TelaListagemClienteController implements Initializable {
            colunaCel.setCellValueFactory(new PropertyValueFactory<Cliente, String>("nroTelefoneCelular"));
            
            
-           listaCliente.setItems(listCliente);
+           listaCliente.setItems(listCliente); //prenche a lista de clientes
            
            } catch (Exception ex) {
             System.out.println("Problema ao carregar clientes: "+ex);
-        }
-        listaCliente.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            }
+        
+        listaCliente.setOnMouseClicked(new EventHandler<MouseEvent>() { //seleciona o cliente clicado
             @Override
             public void handle(MouseEvent click) {
                 if (click.getClickCount() == 2) {
-                    ClienteSelect = listaCliente.getSelectionModel().getSelectedItem().getCodCPF_CNPJ();
-                    System.out.println(ClienteSelect);
+                    ClienteSelect = listaCliente.getSelectionModel().getSelectedItem().getCodCPF_CNPJ(); //seta o id do cliente selecionado
+                    run.showCadastroClienteView(); // mostra o cliente selecionado
                 }
             }
         });
@@ -174,6 +182,70 @@ public class TelaListagemClienteController implements Initializable {
             
         } catch (Exception ex) {
             System.out.println("Problema ao criar Cliente: "+ex);
+        }
+    }
+
+    @FXML
+    private void Voltar(ActionEvent event) {
+        try{
+            String telaUsuario="";
+            FXMLLoader loader;
+            switch(Integer.parseInt(usuarioLogado.getPerfil().getId().toString())) {
+                case 1: 
+                    telaUsuario = "TelaAdministradorView.fxml";
+                    
+                    loader = new FXMLLoader();
+            
+                    loader.setLocation(Run.class.getResource("../View/"+telaUsuario));
+                    AnchorPane TelaAdministrador = (AnchorPane) loader.load();
+
+                    run.getRootLayout().setCenter(TelaAdministrador);
+
+                    TelaAdministradorViewController controllerAdministrador = loader.getController();
+                    controllerAdministrador.setRun(run);
+                break;
+                case 2:
+                    telaUsuario = "TelaAtendenteView.fxml";
+                    
+                    loader = new FXMLLoader();
+            
+                    loader.setLocation(Run.class.getResource("../View/"+telaUsuario));
+                    AnchorPane TelaAtendente = (AnchorPane) loader.load();
+
+                    run.getRootLayout().setCenter(TelaAtendente);
+
+                    TelaAtendenteViewController controllerAtendente = loader.getController();
+                    controllerAtendente.setRun(run);
+                break;
+                case 3:
+                    telaUsuario = "TelaTelefonistaView.fxml";
+                    
+                    loader = new FXMLLoader();
+            
+                    loader.setLocation(Run.class.getResource("../View/"+telaUsuario));
+                    AnchorPane TelaTelefonista = (AnchorPane) loader.load();
+
+                    run.getRootLayout().setCenter(TelaTelefonista);
+
+                    TelaTelefonistaViewController controllerTelefonista = loader.getController();
+                    controllerTelefonista.setRun(run);
+                break;
+                case 4:
+                    telaUsuario = "TelaTecnicoView.fxml";
+                    
+                    loader = new FXMLLoader();
+            
+                    loader.setLocation(Run.class.getResource("../View/"+telaUsuario));
+                    AnchorPane TelaTecnico = (AnchorPane) loader.load();
+
+                    run.getRootLayout().setCenter(TelaTecnico);
+
+                    TelaTecnicoViewController controllerTecnico = loader.getController();
+                    controllerTecnico.setRun(run);
+                break;
+            }
+        } catch (IOException ex) {
+            Logger.getLogger(Run.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 }

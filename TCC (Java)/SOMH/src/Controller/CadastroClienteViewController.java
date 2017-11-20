@@ -13,6 +13,7 @@ import Domain.CEP;
 import Domain.Cidade;
 import Domain.Cliente;
 import Domain.UF;
+import Domain.Usuario;
 import Main.Run;
 import Service.ManterCEP;
 import Service.ManterCidade;
@@ -22,12 +23,16 @@ import ServiceImpl.ManterCEPImpl;
 import ServiceImpl.ManterCidadeImpl;
 import ServiceImpl.ManterClienteImpl;
 import ServiceImpl.ManterUFImpl;
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
@@ -48,7 +53,13 @@ import javafx.scene.layout.HBox;
  */
 public class CadastroClienteViewController implements Initializable {
 
-    ObservableList<String> ufs;
+    ObservableList<String> ufs; //variável com lista de ufs
+    private TelaListagemClienteController listacliente; //instancia para pegar cliente escolhido na lista
+    
+    ManterCEP mantercep = new ManterCEPImpl(CEPDAOImpl.getInstance());
+    ManterCidade mantercidade = new ManterCidadeImpl(CidadeDAOImpl.getInstance());
+    ManterUF manteruf = new ManterUFImpl(UfDAOImpl.getInstance());
+    ManterCliente mantercliente = new ManterClienteImpl(ClienteDAOImpl.getInstance()); //inicia classes DAO
     
     @FXML
     private ScrollPane scrollPane;
@@ -87,6 +98,8 @@ public class CadastroClienteViewController implements Initializable {
     @FXML
     private Label faixa;
     private Run run;
+    
+     private Usuario usuarioLogado;
 
     /**
      * Initializes the controller class.
@@ -99,30 +112,55 @@ public class CadastroClienteViewController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         try {
-            
+            usuarioLogado = LoginController.getUsuarioLogado();
             ManterUF esta= new ManterUFImpl(UfDAOImpl.getInstance());
             ufs = FXCollections.observableArrayList();
             for(int x=1;x<esta.getAll().size();x++){
                 ufs.add(esta.getAll().get(x).getId());
             }
-            estado.setItems(ufs);
-            estado.setValue("MG");
+            estado.setItems(ufs); //preemche a lista de estado
+            
+            if(listacliente.ClienteSelect != null || listacliente.ClienteSelect !=0){   //verifica se
+                Cliente clienteaux = new Cliente();
+                clienteaux = mantercliente.getClienteById(listacliente.ClienteSelect);
+                id_cliente.setEditable(false);
+                id_cliente.setText(clienteaux.getCodCPF_CNPJ().toString());
+                nom_cliente.setText(clienteaux.getNome());
+                email_cliente.setText(clienteaux.getEmail());
+                if(clienteaux.getNroTelefoneFixo() != null){
+                    tel_cliente.setText(clienteaux.getNroTelefoneFixo());
+                }
+                cel_cliente.setText(clienteaux.getNroTelefoneCelular());
+                CEP_cliente.setText(clienteaux.getCep().getNroCEP().toString());
+                estado.setValue(clienteaux.getCep().getCidade().getUf().getId());
+                cidade.setText(clienteaux.getCep().getCidade().getNome());
+                rua.setText(clienteaux.getEndereco());
+                if(clienteaux.getNroEndereco() != null){
+                    numero.setText(clienteaux.getNroEndereco().toString());
+                }
+                if(clienteaux.getDescricaoComplemento() != null){
+                    complemento.setText(clienteaux.getDescricaoComplemento());
+                }
+                
+            }else{
+                estado.setValue("MG");
+            }
+            
         } catch (Exception ex) {
             System.out.println("Problema ao carregar formulario: "+ex);
         }
         
     }    
     @FXML
-    public void Cancelar(ActionEvent event){}
+    public void Cancelar(ActionEvent event){
+        voltar();
+    }
     @FXML
     private void cadastraCliente(ActionEvent event) {
         
         try {
            
-            ManterCEP mantercep = new ManterCEPImpl(CEPDAOImpl.getInstance());
-            ManterCidade mantercidade = new ManterCidadeImpl(CidadeDAOImpl.getInstance());
-            ManterUF manteruf = new ManterUFImpl(UfDAOImpl.getInstance());
-            ManterCliente mantercliente = new ManterClienteImpl(ClienteDAOImpl.getInstance());
+            
             
             
             Cliente cliente = new Cliente();
@@ -188,14 +226,20 @@ public class CadastroClienteViewController implements Initializable {
                
            }
            
-            mantercliente.cadastrarCliente(cliente);
+            if(listacliente.ClienteSelect != null || listacliente.ClienteSelect !=0){
+                listacliente.ClienteSelect = null; //reseta cliente selecionado
+                mantercliente.alterarCliente(cliente);
+            }else{
+                mantercliente.cadastrarCliente(cliente);
+            }
+            
             Alert alert = new Alert(AlertType.CONFIRMATION);
             alert.setTitle("Cadastro de Cliente");
             alert.setHeaderText("Concluído");
             alert.setContentText("O Cliente foi cadastrada com sucesso");
 
             alert.showAndWait();
-            
+            voltar();
         } catch (Exception ex) {
             System.out.println("Problema ao criar Cliente: "+ex);
         }
@@ -227,6 +271,69 @@ public class CadastroClienteViewController implements Initializable {
         }
        
         return validacao;
+    }
+    
+    private void voltar(){
+        try{
+            String telaUsuario="";
+            FXMLLoader loader;
+            switch(Integer.parseInt(usuarioLogado.getPerfil().getId().toString())) {
+                case 1: 
+                    telaUsuario = "TelaAdministradorView.fxml";
+                    
+                    loader = new FXMLLoader();
+            
+                    loader.setLocation(Run.class.getResource("../View/"+telaUsuario));
+                    AnchorPane TelaAdministrador = (AnchorPane) loader.load();
+
+                    run.getRootLayout().setCenter(TelaAdministrador);
+
+                    TelaAdministradorViewController controllerAdministrador = loader.getController();
+                    controllerAdministrador.setRun(run);
+                break;
+                case 2:
+                    telaUsuario = "TelaAtendenteView.fxml";
+                    
+                    loader = new FXMLLoader();
+            
+                    loader.setLocation(Run.class.getResource("../View/"+telaUsuario));
+                    AnchorPane TelaAtendente = (AnchorPane) loader.load();
+
+                    run.getRootLayout().setCenter(TelaAtendente);
+
+                    TelaAtendenteViewController controllerAtendente = loader.getController();
+                    controllerAtendente.setRun(run);
+                break;
+                case 3:
+                    telaUsuario = "TelaTelefonistaView.fxml";
+                    
+                    loader = new FXMLLoader();
+            
+                    loader.setLocation(Run.class.getResource("../View/"+telaUsuario));
+                    AnchorPane TelaTelefonista = (AnchorPane) loader.load();
+
+                    run.getRootLayout().setCenter(TelaTelefonista);
+
+                    TelaTelefonistaViewController controllerTelefonista = loader.getController();
+                    controllerTelefonista.setRun(run);
+                break;
+                case 4:
+                    telaUsuario = "TelaTecnicoView.fxml";
+                    
+                    loader = new FXMLLoader();
+            
+                    loader.setLocation(Run.class.getResource("../View/"+telaUsuario));
+                    AnchorPane TelaTecnico = (AnchorPane) loader.load();
+
+                    run.getRootLayout().setCenter(TelaTecnico);
+
+                    TelaTecnicoViewController controllerTecnico = loader.getController();
+                    controllerTecnico.setRun(run);
+                break;
+            }
+        } catch (IOException ex) {
+            Logger.getLogger(Run.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     
