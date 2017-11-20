@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ScrollPane?>
@@ -13,7 +12,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="1114.0" prefWidth="615.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane id="AnchorPane" prefHeight="1114.0" prefWidth="615.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.TelaOSController">
    <children>
       <ScrollPane fx:id="scrollPane" fitToHeight="true" fitToWidth="true" prefHeight="550.0" prefViewportHeight="835.0" prefViewportWidth="600.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <content>
@@ -44,11 +43,6 @@
                                  <font>
                                     <Font size="14.0" />
                                  </font>
-                              </Label>
-                              <Label fx:id="nomeCliente" layoutX="67.0" layoutY="52.0" onMouseClicked="#redirecionaTelaCliente" text="nomeCliente" textFill="#0957ff" underline="true">
-                                 <cursor>
-                                    <Cursor fx:constant="HAND" />
-                                 </cursor>
                               </Label>
                               <Label layoutX="12.0" layoutY="89.0" text="Equipamento: ">
                                  <font>
@@ -128,6 +122,7 @@
                               <Button fx:id="cadastrarAcessorio" layoutX="404.0" layoutY="630.0" mnemonicParsing="false" onAction="#cadastrarAcessorio" text="Cadastrar" visible="false" />
                               <TextField fx:id="nomeAcessorioCadastro" layoutX="144.0" layoutY="630.0" prefHeight="25.0" prefWidth="241.0" visible="false" />
                               <Label fx:id="cadastrarAcessorioLB" layoutX="32.0" layoutY="634.0" text="Cadastrar Acessório:" visible="false" />
+                              <Label fx:id="nomeCliente" layoutX="64.0" layoutY="51.0" text="nomeCliente" />
                            </children>
                         </Pane>
                      </children>
