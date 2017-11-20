@@ -11,6 +11,7 @@ import Domain.Peca;
 import Exception.ExcecaoNegocio;
 import Exception.ExcecaoPersistencia;
 import Main.Run;
+import Service.ManterOSStatus;
 import Service.ManterPeca;
 import ServiceImpl.ManterPecaImpl;
 import java.net.URL;
@@ -138,9 +139,9 @@ public class TelaManutencaoController implements Initializable {
         pecasEstoque.setItems(pecasEstoqueString);
         pecasUsadasString = FXCollections.observableArrayList();
         pecasUsadas.setItems(pecasUsadasString);
-        /*codigoOS.setText(String.valueOf(os.getId()));
-        //dataEntrada.setText(ManterOSStatus.getByStatusId("entrada",os.getId()));
-        descricaoEquipamento.setText(os.getEquipamento().getDesEquipto());*/
+        codigoOS.setText(String.valueOf(os.getId()));
+        //dataEntrada.setText(ManterOSStatus.getByOSStatusId("entrada",os.getId()));
+        descricaoEquipamento.setText(os.getEquipamento().getDesEquipto());
     }
 
     public void adicionarPecaUso() {
