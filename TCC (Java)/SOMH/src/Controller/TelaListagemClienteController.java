@@ -23,6 +23,7 @@ import java.util.logging.Logger;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
@@ -36,6 +37,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.util.Callback;
 
@@ -48,6 +50,8 @@ public class TelaListagemClienteController implements Initializable {
     
     
     ObservableList<String> parametros =FXCollections.observableArrayList("Nome","CPF/CNPJ");
+    
+    public static Long ClienteSelect;
     
     @FXML
     private ScrollPane scrollPane;
@@ -68,14 +72,6 @@ public class TelaListagemClienteController implements Initializable {
     @FXML
     private TableColumn<Cliente, String> colunaCel;
     @FXML
-    private TableColumn<Cliente, String> colunaRua;
-    @FXML
-    private TableColumn<Cliente, Integer> colunaNumero;
-    @FXML
-    private TableColumn<UF, String> colunaUF;
-    @FXML
-    private TableColumn<Cidade, String> colunaCidade;
-    @FXML
     private TextField textoPesquisa;
     @FXML
     private Button pesquisa;
@@ -90,18 +86,12 @@ public class TelaListagemClienteController implements Initializable {
     
     public ObservableList<Cliente> listCliente;
     public ObservableList<Cliente> listClienteaux; //lista de Clientes após filtro de pesquisa
-    public ObservableList<Cidade> listCidade;
-    public ObservableList<UF> listUF;
+    
 
     public TelaListagemClienteController() {
         try {
             listCliente = FXCollections.observableArrayList(mantercliente.getAll());
-            listCidade = FXCollections.observableArrayList();
-            listUF = FXCollections.observableArrayList();
-            for(int i=0; i<listCliente.size();i++){
-                listCidade.add(listCliente.get(i).getCep().getCidade());
-                listUF.add(listCliente.get(i).getCep().getCidade().getUf());
-            }
+            
         } catch (ExcecaoPersistencia ex) {
             Logger.getLogger(TelaListagemClienteController.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -111,54 +101,50 @@ public class TelaListagemClienteController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         try {
             filtroCliente.setItems(parametros);
-           if(!exibirEndereco.isSelected()){
-               colunaUF.setVisible(false);
-               colunaNumero.setVisible(false);
-               colunaRua.setVisible(false);
-               colunaCidade.setVisible(false);
-           }
+          
            colunaCPF.setCellValueFactory(new PropertyValueFactory<Cliente, Long>("codCPF_CNPJ"));
            colunaNome.setCellValueFactory(new PropertyValueFactory<Cliente, String>("nome"));
            colunaEmail.setCellValueFactory(new PropertyValueFactory<Cliente, String>("email"));
            colunaTel.setCellValueFactory(new PropertyValueFactory<Cliente, String>("nroTelefoneFixo"));
            colunaCel.setCellValueFactory(new PropertyValueFactory<Cliente, String>("nroTelefoneCelular"));
-           colunaNumero.setCellValueFactory(new PropertyValueFactory<Cliente, Integer>("nroEndereco"));
-           colunaRua.setCellValueFactory(new PropertyValueFactory<Cliente, String>("endereco"));
-           //colunaUF.setCellValueFactory(new Callback new PropertyValueFactory<UF, String>("id"));
-         // colunaUF.
+           
            
            listaCliente.setItems(listCliente);
-           colunaCidade.setCellValueFactory(new PropertyValueFactory<Cidade, String>("nome"));
            
-        } catch (Exception ex) {
+           } catch (Exception ex) {
             System.out.println("Problema ao carregar clientes: "+ex);
         }
-    } 
+        listaCliente.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent click) {
+                if (click.getClickCount() == 2) {
+                    ClienteSelect = listaCliente.getSelectionModel().getSelectedItem().getCodCPF_CNPJ();
+                    System.out.println(ClienteSelect);
+                }
+            }
+        }} 
     
     
      public void setRun(Run run) {
         this.run = run;
     }
 
+        
+    
     @FXML
     private void realizarPesquisa(ActionEvent event) {
         try {
            
+           ClienteSelect = listaCliente.getSelectionModel().getSelectedItem().getCodCPF_CNPJ();
+                        System.out.println(ClienteSelect);
+          
             
-            if(!exibirEndereco.isSelected()){  //exibe ou não informações sobre endereço
-                colunaUF.setVisible(false);
-               colunaNumero.setVisible(false);
-               colunaRua.setVisible(false);
-               colunaCidade.setVisible(false);
-           }else{
-                colunaUF.setVisible(true);
-               colunaNumero.setVisible(true);
-               colunaRua.setVisible(true);
-               colunaCidade.setVisible(true);
-            }
             listCliente.clear(); 
             listCliente = FXCollections.observableArrayList(mantercliente.getAll()); //repopula a lista de clientes
+            
             listClienteaux = FXCollections.observableArrayList(); //inicia lista auxiliar
+            
+            
             for(int i=0; i<listCliente.size();i++){
                 
                 if(listCliente.get(i).getCodCPF_CNPJ().toString().contains(textoPesquisa.getText()) && filtroCliente.getValue().toString().contains("CPF/CNPJ")){
