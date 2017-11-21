@@ -129,7 +129,15 @@ public class TelaAdministradorViewController extends Run implements Initializabl
     }
 
     public void sair() throws Exception {
-        System.exit(0);
+        FXMLLoader loader = new FXMLLoader();
+
+        loader.setLocation(Run.class.getResource("../View/Login.fxml"));
+        AnchorPane TelaFuncionario = (AnchorPane) loader.load();
+
+        run.getRootLayout().setCenter(TelaFuncionario);
+
+        LoginController controller = loader.getController();
+        controller.setRun(run);
     }
     
     public void setRun (Run run){
