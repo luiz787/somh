@@ -5,29 +5,42 @@
  */
 package Controller;
 
+import DAOImpl.OSItemPecaDAOImpl;
+import DAOImpl.OSStatusDAOImpl;
 import DAOImpl.PecaDAOImpl;
 import Domain.OS;
+import Domain.OSItemPeca;
+import Domain.OSStatus;
 import Domain.Peca;
+import Domain.Status;
 import Exception.ExcecaoNegocio;
 import Exception.ExcecaoPersistencia;
 import Main.Run;
+import Service.ManterOSItemPeca;
 import Service.ManterOSStatus;
 import Service.ManterPeca;
+import ServiceImpl.ManterOSItemPecaImpl;
+import ServiceImpl.ManterOSStatusImpl;
 import ServiceImpl.ManterPecaImpl;
+import java.io.IOException;
 import java.net.URL;
+import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.AnchorPane;
 
 /**
  *
@@ -120,7 +133,6 @@ public class TelaManutencaoController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        System.out.println("test");
         if (LoginController.getUsuarioLogado() == null) {
             nomeTecnico.setText("-");
         } else {
@@ -140,7 +152,12 @@ public class TelaManutencaoController implements Initializable {
         pecasUsadasString = FXCollections.observableArrayList();
         pecasUsadas.setItems(pecasUsadasString);
         codigoOS.setText(String.valueOf(os.getId()));
-        //dataEntrada.setText(ManterOSStatus.getByOSStatusId("entrada",os.getId()));
+        ManterOSStatus manterOSStatus = new ManterOSStatusImpl(OSStatusDAOImpl.getInstance());
+        try {
+            dataEntrada.setText(String.valueOf(new Timestamp(manterOSStatus.getAllByOS(os.getId()).get(0).getDatOcorrencia())).substring(0, 10));
+        } catch (ExcecaoPersistencia ex) {
+            Logger.getLogger(TelaManutencaoController.class.getName()).log(Level.SEVERE, null, ex);
+        }
         descricaoEquipamento.setText(os.getEquipamento().getDesEquipto());
     }
 
@@ -195,13 +212,62 @@ public class TelaManutencaoController implements Initializable {
         }
     }
 
-    public void setIrrecuperavel() {
+    public void setIrrecuperavel() throws ExcecaoPersistencia, ExcecaoNegocio {
         //set próximo status da OS como irrecuperável
+        ManterOSStatus manterOSStatus = new ManterOSStatusImpl(OSStatusDAOImpl.getInstance());
+        manterOSStatus.cadastrarOSStatus(new OSStatus(os, new Date().getTime(), LoginController.getUsuarioLogado(), new Status(11)));
+        //cadastra um novo status da OS atual, informando a data atual, o funcionário responsável, e o status 11 (irrecuperavel)
+        FXMLLoader loader = new FXMLLoader();
+
+        loader.setLocation(Run.class.getResource("../View/TelaListagemOSView.fxml"));
+        AnchorPane TelaFuncionario = null;
+        try {
+            TelaFuncionario = (AnchorPane) loader.load();
+        } catch (IOException ex) {
+            Logger.getLogger(TelaManutencaoController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        run.getRootLayout().setCenter(TelaFuncionario);
+
+        TelaListagemOSController controller = loader.getController();
+        controller.setRun(run);
         //retornar para listagem de OS
     }
 
-    public void setAguardandoAprovacao() {
-        //set próximo status da OS como aguardando aprovação
+    public void setPronto() throws ExcecaoPersistencia, ExcecaoNegocio {
+        //set próximo status da OS como pronto
+        ManterOSStatus manterOSStatus = new ManterOSStatusImpl(OSStatusDAOImpl.getInstance());
+        manterOSStatus.cadastrarOSStatus(new OSStatus(os, new Date().getTime(), LoginController.getUsuarioLogado(), new Status(7)));
+        //cadastra um novo status da OS atual, informando a data atual, o funcionário responsável, e o status 7 (pronto)
+        ManterPeca manterPeca = new ManterPecaImpl(new PecaDAOImpl());
+        ManterOSItemPeca manterOSItemPeca = new ManterOSItemPecaImpl(OSItemPecaDAOImpl.getInstance());
+        for (Peca x1 : pecas) {
+            if (pecasEstoqueString.contains(x1.getDescricao())) {
+                OSItemPeca osItemPeca = new OSItemPeca();
+                osItemPeca.setOs(os);
+                osItemPeca.setId(x1.getId());
+                osItemPeca.setQtd(1);
+                osItemPeca.setValorVenda(x1.getPrecoVenda());
+                osItemPeca.setSituacao("Peça trocada");
+                manterOSItemPeca.cadastrarOSItemPeca(osItemPeca);
+            }
+        }
+        //cadastra os objetos de OSItemPeca, fazendo a relacao entre a OS
+        //e as pecas utilizadas por ela.
+        FXMLLoader loader = new FXMLLoader();
+
+        loader.setLocation(Run.class.getResource("../View/TelaListagemOSView.fxml"));
+        AnchorPane TelaFuncionario = null;
+        try {
+            TelaFuncionario = (AnchorPane) loader.load();
+        } catch (IOException ex) {
+            Logger.getLogger(TelaManutencaoController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        run.getRootLayout().setCenter(TelaFuncionario);
+
+        TelaListagemOSController controller = loader.getController();
+        controller.setRun(run);
         //retornar para listagem de OS
     }
 
