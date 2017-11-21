@@ -1,59 +1,131 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.effect.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.effect.Blend?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.StackPane?>
 
-<AnchorPane fx:id="painel" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="375.0" prefWidth="600.0" stylesheets="@CSS%20Botao.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane fx:id="painel" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="375.0" prefWidth="600.0" stylesheets="@CSS%20Botao.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.TelaOrcamentoViewController">
    <children>
-      <Button fx:id="criar" alignment="CENTER" contentDisplay="RIGHT" layoutX="450.0" layoutY="296.0" maxHeight="31.0" maxWidth="90.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="90.0" stylesheets="@CSS%20Botao.css" text="Prosseguir" textFill="WHITE" AnchorPane.rightAnchor="60.0" />
-      <Label layoutX="26.0" layoutY="49.0" text="Código da OS:">
-         <effect>
-            <Blend />
-         </effect>
-      </Label>
-      <Label fx:id="codOs" layoutX="122.0" layoutY="49.0" text="codOs" textFill="#ff4000" />
-      <Label layoutX="300.0" layoutY="49.0" text="Data de entrada:">
-         <effect>
-            <Blend />
-         </effect>
-      </Label>
-      <Label layoutX="27.0" layoutY="74.0" text="Equipamento:">
-         <effect>
-            <Blend />
-         </effect>
-      </Label>
-      <Label layoutX="27.0" layoutY="100.0" text="Nro. de série:">
-         <effect>
-            <Blend />
-         </effect>
-      </Label>
-      <Label layoutX="28.0" layoutY="123.0" text="Acessórios:">
-         <effect>
-            <Blend />
-         </effect>
-      </Label>
-      <Label layoutX="28.0" layoutY="158.0" text="Observações:">
-         <effect>
-            <Blend />
-         </effect>
-      </Label>
-      <Label layoutX="26.0" layoutY="223.0" text="Defeitos reclamados:">
-         <effect>
-            <Blend />
-         </effect>
-      </Label>
-      <Label fx:id="descEquip" layoutX="122.0" layoutY="74.0" text="descEquip" />
-      <Label fx:id="nroSerie" layoutX="123.0" layoutY="100.0" text="nroSerie" />
-      <Label fx:id="descAcessorios" layoutX="123.0" layoutY="123.0" text="descAcessorios" />
-      <Label fx:id="txtObs" layoutX="124.0" layoutY="158.0" text="txtObs" />
-      <Label fx:id="descDefeitos" layoutX="154.0" layoutY="223.0" text="descDefeitos" />
-      <Label fx:id="datEntrada" layoutX="404.0" layoutY="49.0" text="datEntrada" />
+      <BorderPane prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <center>
+            <StackPane prefHeight="150.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+               <children>
+                  <Button fx:id="criar" alignment="CENTER" contentDisplay="RIGHT" maxHeight="31.0" maxWidth="90.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="90.0" stylesheets="@CSS%20Botao.css" text="Prosseguir" textFill="WHITE" StackPane.alignment="BOTTOM_RIGHT">
+                     <StackPane.margin>
+                        <Insets bottom="10.0" right="20.0" />
+                     </StackPane.margin>
+                  </Button>
+                  <Label fx:id="faixa" alignment="CENTER" contentDisplay="TOP" prefHeight="39.0" prefWidth="2000.0" stylesheets="@CSS%20Botao.css" text="Orçamento" textAlignment="JUSTIFY" textFill="WHITE" StackPane.alignment="TOP_CENTER" />
+                  <StackPane StackPane.alignment="CENTER">
+                     <children>
+                        <Label text="Código da OS:" StackPane.alignment="CENTER">
+                           <effect>
+                              <Blend />
+                           </effect>
+                           <StackPane.margin>
+                              <Insets left="-350.0" top="-150.0" />
+                           </StackPane.margin>
+                        </Label>
+                        <Label fx:id="codOs" text="codOs" textFill="#ff4000" StackPane.alignment="CENTER">
+                           <StackPane.margin>
+                              <Insets right="210.0" top="-150.0" />
+                           </StackPane.margin>
+                        </Label>
+                        <Label text="Data de entrada:" StackPane.alignment="CENTER">
+                           <effect>
+                              <Blend />
+                           </effect>
+                           <StackPane.margin>
+                              <Insets right="-100.0" top="-150.0" />
+                           </StackPane.margin>
+                        </Label>
+                        <Label text="Equipamento:" StackPane.alignment="CENTER">
+                           <effect>
+                              <Blend />
+                           </effect>
+                           <StackPane.margin>
+                              <Insets left="-350.0" top="-100.0" />
+                           </StackPane.margin>
+                        </Label>
+                        <Label text="Nro. de série:" StackPane.alignment="CENTER">
+                           <effect>
+                              <Blend />
+                           </effect>
+                           <StackPane.margin>
+                              <Insets left="-350.0" top="-50.0" />
+                           </StackPane.margin>
+                        </Label>
+                        <Label text="Acessórios:" StackPane.alignment="CENTER">
+                           <effect>
+                              <Blend />
+                           </effect>
+                           <StackPane.margin>
+                              <Insets left="-360.0" />
+                           </StackPane.margin>
+                        </Label>
+                        <Label text="Observações:" StackPane.alignment="CENTER">
+                           <effect>
+                              <Blend />
+                           </effect>
+                           <StackPane.margin>
+                              <Insets right="-80.0" top="-100.0" />
+                           </StackPane.margin>
+                        </Label>
+                        <Label text="Defeitos reclamados:" StackPane.alignment="CENTER">
+                           <effect>
+                              <Blend />
+                           </effect>
+                           <StackPane.margin>
+                              <Insets right="320.0" top="120.0" />
+                           </StackPane.margin>
+                        </Label>
+                        <Label fx:id="descEquip" text="descEquip">
+                           <StackPane.margin>
+                              <Insets right="200.0" top="-100.0" />
+                           </StackPane.margin>
+                        </Label>
+                        <Label fx:id="nroSerie" text="nroSerie">
+                           <StackPane.margin>
+                              <Insets right="210.0" top="-50.0" />
+                           </StackPane.margin>
+                        </Label>
+                        <Label fx:id="descAcessorios" text="descAcessorios" StackPane.alignment="CENTER">
+                           <StackPane.margin>
+                              <Insets right="200.0" />
+                           </StackPane.margin>
+                        </Label>
+                        <Label fx:id="txtObs" text="txtObs">
+                           <StackPane.margin>
+                              <Insets right="-200.0" top="-100.0" />
+                           </StackPane.margin>
+                        </Label>
+                        <Label fx:id="descDefeitos" text="descDefeitos" StackPane.alignment="CENTER">
+                           <StackPane.margin>
+                              <Insets right="120.0" top="120.0" />
+                           </StackPane.margin>
+                        </Label>
+                        <Label fx:id="datEntrada" text="datEntrada">
+                           <StackPane.margin>
+                              <Insets right="-260.0" top="-150.0" />
+                           </StackPane.margin>
+                        </Label>
+                     </children>
+                     <StackPane.margin>
+                        <Insets bottom="50.0" left="50.0" right="50.0" top="50.0" />
+                     </StackPane.margin>
+                  </StackPane>
+                  <Button fx:id="menu" mnemonicParsing="false" onAction="#redirecionaTelaFuncionario" stylesheets="@CSS%20Botao.css" text="Menu" StackPane.alignment="TOP_LEFT">
+                     <StackPane.margin>
+                        <Insets left="5.0" top="5.0" />
+                     </StackPane.margin>
+                  </Button>
+               </children>
+            </StackPane>
+         </center>
+      </BorderPane>
    </children>
 </AnchorPane>

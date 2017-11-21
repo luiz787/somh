@@ -1,19 +1,69 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.StackPane?>
 
 <AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.TelaAdministradorViewController">
    <children>
-      <Label alignment="CENTER" prefHeight="39.0" prefWidth="614.0" stylesheets="@CSS%20Botao.css" style="-fx-background-color: #000000;" text="Administrador" textAlignment="JUSTIFY" textFill="WHITE" />
-      <Button fx:id="cadastroCliente" layoutX="60.0" layoutY="106.0" mnemonicParsing="false" stylesheets="@CSS%20Botao.css" onAction="#cadastroCliente" prefHeight="31.0" prefWidth="237.0" text="Cadastrar novo cliente" />
-      <Button fx:id="cadastroOS" layoutX="60.0" layoutY="176.0" mnemonicParsing="false" stylesheets="@CSS%20Botao.css" onAction="#cadastroOS" prefHeight="31.0" prefWidth="237.0" text="Criar nova ordem de serviço" />
-      <Label layoutX="14.0" layoutY="365.0" text="Logado como administrador" />
-      <Button fx:id="procuraOS" layoutX="325.0" layoutY="176.0" mnemonicParsing="false" stylesheets="@CSS%20Botao.css" onAction="#procuraOS" prefHeight="31.0" prefWidth="237.0" text="Buscar ordem de serviço" />
-      <Button fx:id="sair" alignment="CENTER" contentDisplay="RIGHT" layoutX="523.0" layoutY="360.0" maxHeight="31.0" stylesheets="@CSS%20Botao.css" maxWidth="90.0" mnemonicParsing="false" onAction="#sair" prefHeight="31.0" prefWidth="77.0" style="-fx-background-color: #000000;" text="Sair" textFill="WHITE" />
-      <Button fx:id="cadastroOrcamento" layoutX="60.0" layoutY="246.0" mnemonicParsing="false" stylesheets="@CSS%20Botao.css" onAction="#cadastroOrcamento" prefHeight="31.0" prefWidth="237.0" text="Criar orçamento" />
-      <Button fx:id="procuraCliente" layoutX="325.0" layoutY="106.0" mnemonicParsing="false" stylesheets="@CSS%20Botao.css" onAction="#procuraCliente" prefHeight="31.0" prefWidth="237.0" text="Procurar cliente" />
-      <Button fx:id="cadastroFuncionario" layoutX="325.0" layoutY="246.0" mnemonicParsing="false" stylesheets="@CSS%20Botao.css" onAction="#cadastroFuncionario" prefHeight="31.0" prefWidth="237.0" text="Cadastrar novo funcionário" />
+      <BorderPane prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <center>
+            <StackPane prefHeight="266.0" prefWidth="337.0" BorderPane.alignment="CENTER">
+               <children>
+                  <Label text="Logado como administrador" StackPane.alignment="BOTTOM_LEFT">
+                     <padding>
+                        <Insets bottom="10.0" left="20.0" />
+                     </padding>
+                  </Label>
+                  <Button fx:id="sair" alignment="CENTER" contentDisplay="RIGHT" maxHeight="31.0" maxWidth="90.0" mnemonicParsing="false" onAction="#sair" prefHeight="31.0" prefWidth="77.0" stylesheets="@CSS%20Botao.css" text="Sair" textFill="WHITE" StackPane.alignment="BOTTOM_RIGHT">
+                     <StackPane.margin>
+                        <Insets bottom="10.0" right="20.0" />
+                     </StackPane.margin>
+                  </Button>
+                  <StackPane prefHeight="254.0" prefWidth="500.0" StackPane.alignment="CENTER">
+                     <children>
+                        <Button fx:id="cadastroCliente" mnemonicParsing="false" onAction="#cadastroCliente" prefHeight="31.0" prefWidth="237.0" stylesheets="@CSS%20Botao.css" text="Cadastrar novo cliente" StackPane.alignment="CENTER">
+                           <StackPane.margin>
+                              <Insets left="-250.0" top="-120.0" />
+                           </StackPane.margin>
+                        </Button>
+                        <Button fx:id="cadastroOS" mnemonicParsing="false" onAction="#cadastroOS" prefHeight="31.0" prefWidth="237.0" stylesheets="@CSS%20Botao.css" text="Criar nova ordem de serviço" StackPane.alignment="CENTER">
+                           <StackPane.margin>
+                              <Insets left="-250.0" top="200.0" />
+                           </StackPane.margin>
+                        </Button>
+                        <Button fx:id="procuraOS" mnemonicParsing="false" onAction="#procuraOS" prefHeight="31.0" prefWidth="237.0" stylesheets="@CSS%20Botao.css" text="Buscar ordem de serviço" StackPane.alignment="CENTER">
+                           <StackPane.margin>
+                              <Insets left="250.0" top="200.0" />
+                           </StackPane.margin>
+                        </Button>
+                        <Button fx:id="cadastroOrcamento" mnemonicParsing="false" onAction="#cadastroOrcamento" prefHeight="31.0" prefWidth="237.0" stylesheets="@CSS%20Botao.css" text="Criar orçamento" StackPane.alignment="CENTER">
+                           <StackPane.margin>
+                              <Insets left="250.0" top="40.0" />
+                           </StackPane.margin>
+                        </Button>
+                        <Button fx:id="procuraCliente" mnemonicParsing="false" onAction="#procuraCliente" prefHeight="31.0" prefWidth="237.0" stylesheets="@CSS%20Botao.css" text="Procurar cliente" StackPane.alignment="CENTER">
+                           <StackPane.margin>
+                              <Insets left="250.0" top="-120.0" />
+                           </StackPane.margin>
+                        </Button>
+                        <Button fx:id="cadastroFuncionario" mnemonicParsing="false" onAction="#cadastroFuncionario" prefHeight="31.0" prefWidth="237.0" stylesheets="@CSS%20Botao.css" text="Cadastrar novo funcionário" StackPane.alignment="CENTER">
+                           <StackPane.margin>
+                              <Insets left="-250.0" top="40.0" />
+                           </StackPane.margin>
+                        </Button>
+                     </children>
+                     <StackPane.margin>
+                        <Insets bottom="100.0" left="50.0" right="50.0" top="50.0" />
+                     </StackPane.margin>
+                  </StackPane>
+                  <Label fx:id="faixa" alignment="CENTER" contentDisplay="TOP" prefHeight="39.0" prefWidth="2000.0" stylesheets="@CSS%20Botao.css" text="Administrador" textAlignment="JUSTIFY" textFill="WHITE" StackPane.alignment="TOP_CENTER" />
+               </children>
+            </StackPane>
+         </center>
+      </BorderPane>
    </children>
 </AnchorPane>
