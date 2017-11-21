@@ -14,6 +14,7 @@ import Domain.Cidade;
 import Domain.Cliente;
 import Domain.UF;
 import Domain.Usuario;
+import Exception.ExcecaoPersistencia;
 import Main.Run;
 import Service.ManterCEP;
 import Service.ManterCidade;
@@ -101,9 +102,15 @@ public class CadastroClienteViewController implements Initializable {
     
      private Usuario usuarioLogado;
 
-    /**
-     * Initializes the controller class.
-     */
+    private boolean criaOS;
+
+    public boolean isCriaOS() {
+        return criaOS;
+    }
+
+    public void setCriaOS(boolean criaOS) {
+        this.criaOS = criaOS;
+    }
     
      public void setRun(Run run) {
         this.run = run;
@@ -241,7 +248,21 @@ public class CadastroClienteViewController implements Initializable {
             alert.setContentText("O Cliente foi cadastrada com sucesso");
 
             alert.showAndWait();
-            voltar();
+            if(criaOS) {
+                try {
+                    TelaCadastroOSController controlador = new TelaCadastroOSController(cliente);
+                    controlador.setRun(run);
+                    FXMLLoader loader = new FXMLLoader();
+                    loader.setLocation(Run.class.getResource("../View/TelaCadastroOSView.fxml"));
+                    loader.setController(controlador);
+                    AnchorPane TelaCadastroOS = (AnchorPane) loader.load();
+                    run.getRootLayout().setCenter(TelaCadastroOS);
+                } catch (IOException ex) {
+                    Logger.getLogger(Run.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            } else {
+                voltar();
+            }
         } catch (Exception ex) {
             System.out.println("Problema ao criar Cliente: "+ex);
         }

@@ -141,23 +141,17 @@ public class TelaListagemClienteController implements Initializable {
                 if (click.getClickCount() == 2) {
                     if(criaOS) {
                         try {
-                            System.out.println("Hy");
                             ManterCliente manterCliente = new ManterClienteImpl(ClienteDAOImpl.getInstance());
                             Cliente cliente = manterCliente.getClienteById(
                                     listaCliente.getSelectionModel().getSelectedItem().getCodCPF_CNPJ());
-                            try {
-                                TelaCadastroOSController controlador = new TelaCadastroOSController(cliente);
-                                controlador.setRun(run);
-                                controlador.setListagemCliente(true);
-                                FXMLLoader loader = new FXMLLoader();
-                                loader.setLocation(Run.class.getResource("../View/TelaCadastroOSView.fxml"));
-                                loader.setController(controlador);
-                                AnchorPane TelaCadastroOS = (AnchorPane) loader.load();
-                                run.getRootLayout().setCenter(TelaCadastroOS);
-                            } catch (IOException ex) {
-                                Logger.getLogger(Run.class.getName()).log(Level.SEVERE, null, ex);
-                            }
-                        } catch (ExcecaoPersistencia ex) {
+                            TelaCadastroOSController controlador = new TelaCadastroOSController(cliente);
+                            controlador.setRun(run);
+                            FXMLLoader loader = new FXMLLoader();
+                            loader.setLocation(Run.class.getResource("../View/TelaCadastroOSView.fxml"));
+                            loader.setController(controlador);
+                            AnchorPane TelaCadastroOS = (AnchorPane) loader.load();
+                            run.getRootLayout().setCenter(TelaCadastroOS);
+                        } catch (ExcecaoPersistencia|IOException ex) {
                             Logger.getLogger(TelaListagemClienteController.class.getName()).log(Level.SEVERE, null, ex);
                         }
                     } else {
