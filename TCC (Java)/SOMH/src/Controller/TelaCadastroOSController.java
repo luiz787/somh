@@ -124,7 +124,6 @@ public class TelaCadastroOSController implements Initializable {
     private Run run;
     private Usuario usuarioLogado;
     private Cliente cliente;
-    private boolean listagemCliente;
 
     public Cliente getCliente() {
         return cliente;
@@ -132,14 +131,6 @@ public class TelaCadastroOSController implements Initializable {
 
     public void setCliente(Cliente cliente) {
         this.cliente = cliente;
-    }
-    
-    public boolean isListagemCliente() {
-        return listagemCliente;
-    }
-
-    public void setListagemCliente(boolean listagemCliente) {
-        this.listagemCliente = listagemCliente;
     }
     
     public void setRun(Run run) {
@@ -573,12 +564,13 @@ public class TelaCadastroOSController implements Initializable {
         try {
             FXMLLoader loader = new FXMLLoader();
             
-            loader.setLocation(Run.class.getResource("../View/CadastroCliente.fxml"));
+            loader.setLocation(Run.class.getResource("../View/CadastroClienteView.fxml"));
             AnchorPane TelaCadastroCliente = (AnchorPane) loader.load();
             
             run.getRootLayout().setCenter(TelaCadastroCliente);
             
             CadastroClienteViewController controller = loader.getController();
+            controller.setCriaOS(true);
             controller.setRun(run);
         } catch (IOException ex) {
             Logger.getLogger(TelaCadastroOSController.class.getName()).log(Level.SEVERE, null, ex);
