@@ -133,6 +133,9 @@ public class CadastroUsuarioController implements Initializable, Serializable {
             AnchorPane TelaLogin = (AnchorPane) loader.load();
 
             run.getRootLayout().setCenter(TelaLogin);
+            
+            TelaAdministradorViewController controller = loader.getController();
+            controller.setRun(run);
 
         } catch (IOException ex) {
             Logger.getLogger(Run.class.getName()).log(Level.SEVERE, null, ex);

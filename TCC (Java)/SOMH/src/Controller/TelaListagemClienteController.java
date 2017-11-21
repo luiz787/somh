@@ -55,7 +55,7 @@ public class TelaListagemClienteController implements Initializable {
     ObservableList<String> parametros =FXCollections.observableArrayList("Nome","CPF/CNPJ");
     
     public static Long ClienteSelect;
-    
+    public static boolean alterar=false;
     @FXML
     private ScrollPane scrollPane;
     @FXML
@@ -109,8 +109,7 @@ public class TelaListagemClienteController implements Initializable {
     public TelaListagemClienteController() {
         try {
             listCliente = FXCollections.observableArrayList(mantercliente.getAll()); //prenche a lista de clientes
-            long aux = 0; 
-            ClienteSelect = aux;
+           
         } catch (ExcecaoPersistencia ex) {
             Logger.getLogger(TelaListagemClienteController.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -155,6 +154,7 @@ public class TelaListagemClienteController implements Initializable {
                             Logger.getLogger(TelaListagemClienteController.class.getName()).log(Level.SEVERE, null, ex);
                         }
                     } else {
+                        alterar=true;
                         ClienteSelect = listaCliente.getSelectionModel().getSelectedItem().getCodCPF_CNPJ(); //seta o id do cliente selecionado
                         run.showCadastroClienteView(); // mostra o cliente selecionado
                     }

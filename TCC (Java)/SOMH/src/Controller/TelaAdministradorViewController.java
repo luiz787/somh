@@ -61,7 +61,7 @@ public class TelaAdministradorViewController extends Run implements Initializabl
 
         run.getRootLayout().setCenter(TelaFuncionario);
 
-        TelaListagemOSController controller = loader.getController();
+        TelaOrcamentoViewController controller = loader.getController();
         controller.setRun(run);
     }
 

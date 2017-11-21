@@ -127,7 +127,7 @@ public class CadastroClienteViewController implements Initializable {
             }
             estado.setItems(ufs); //preemche a lista de estado
             listacliente = new TelaListagemClienteController();
-            if(listacliente.ClienteSelect != 0){   //verifica se
+            if(listacliente.alterar){   //verifica se
                 Cliente clienteaux = new Cliente();
                 clienteaux = mantercliente.getClienteById(listacliente.ClienteSelect);
                 id_cliente.setEditable(false);
@@ -232,13 +232,11 @@ public class CadastroClienteViewController implements Initializable {
                
            }
             
-            if(listacliente.ClienteSelect != 0){
-                System.out.println("cusao DA PORRA");
-                long aux=0;
-                listacliente.ClienteSelect = aux; //reseta cliente selecionado
+            if(listacliente.alterar){
+                
+                listacliente.alterar=false; //reseta cliente selecionado
                 mantercliente.alterarCliente(cliente);
             }else{
-                System.out.println("cusao");
                 mantercliente.cadastrarCliente(cliente);
             }
             System.out.println("debug");
