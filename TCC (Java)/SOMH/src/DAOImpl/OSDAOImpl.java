@@ -107,7 +107,7 @@ public class OSDAOImpl implements OSDAO {
 
             String sql = "UPDATE os "
                     + "SET "
-                    + "cod_cpf_cnpj=?, "
+                    //+ "cod_cpf_cnpj=?, "
                     + "seq_equipto=?, "
                     + "txt_reclamacao=?, "
                     + "txt_observacao_acessorios=?, "
@@ -117,30 +117,30 @@ public class OSDAOImpl implements OSDAO {
                     + " WHERE nro_OS=?;";
 
             PreparedStatement pstmt = connection.prepareStatement(sql);
-            pstmt.setLong(1, os.getCliente().getCodCPF_CNPJ());
-            pstmt.setLong(2, os.getEquipamento().getId());
-            pstmt.setString(3, os.getTxtReclamacao());
+            //pstmt.setLong(1, os.getCliente().getCodCPF_CNPJ());
+            pstmt.setLong(1, os.getEquipamento().getId());
+            pstmt.setString(2, os.getTxtReclamacao());
             if(os.getTxtObservacaoAcessorios()!=null) {
-                pstmt.setString(4, os.getTxtObservacaoAcessorios());
+                pstmt.setString(3, os.getTxtObservacaoAcessorios());
+            } else {
+                pstmt.setNull(3, java.sql.Types.NULL);
+            }
+            if(os.getVlrDesconto()!=null) {
+                pstmt.setDouble(4, os.getVlrDesconto());
             } else {
                 pstmt.setNull(4, java.sql.Types.NULL);
             }
-            if(os.getVlrDesconto()!=null) {
-                pstmt.setDouble(5, os.getVlrDesconto());
+            if(os.getPerDesconto()!=null) {
+                pstmt.setDouble(5, os.getPerDesconto());
             } else {
                 pstmt.setNull(5, java.sql.Types.NULL);
             }
-            if(os.getPerDesconto()!=null) {
-                pstmt.setDouble(6, os.getPerDesconto());
+            if(os.getVlrFrete()!=null) {
+                pstmt.setDouble(6, os.getVlrFrete());
             } else {
                 pstmt.setNull(6, java.sql.Types.NULL);
             }
-            if(os.getVlrFrete()!=null) {
-                pstmt.setDouble(7, os.getVlrFrete());
-            } else {
-                pstmt.setNull(7, java.sql.Types.NULL);
-            }
-            pstmt.setLong(8, os.getId());
+            pstmt.setLong(7, os.getId());
             pstmt.executeUpdate();
 
             pstmt.close();
