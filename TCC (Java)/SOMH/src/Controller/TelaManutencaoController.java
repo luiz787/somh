@@ -242,14 +242,17 @@ public class TelaManutencaoController implements Initializable {
         ManterPeca manterPeca = new ManterPecaImpl(new PecaDAOImpl());
         ManterOSItemPeca manterOSItemPeca = new ManterOSItemPecaImpl(OSItemPecaDAOImpl.getInstance());
         for (Peca x1 : pecas) {
-            if (pecasEstoqueString.contains(x1.getDescricao())) {
-                OSItemPeca osItemPeca = new OSItemPeca();
-                osItemPeca.setOs(os);
-                osItemPeca.setId(x1.getId());
-                osItemPeca.setQtd(1);
-                osItemPeca.setValorVenda(x1.getPrecoVenda());
-                osItemPeca.setSituacao("Peça trocada");
-                manterOSItemPeca.cadastrarOSItemPeca(osItemPeca);
+            for (String pecaS : pecasUsadasString) {
+                if (x1.getDescricao().equals(pecaS)) {
+                    OSItemPeca osItemPeca = new OSItemPeca();
+                    osItemPeca.setOs(os);
+                    osItemPeca.setId(x1.getId());
+                    osItemPeca.setQtd(1);
+                    osItemPeca.setValorVenda(x1.getPrecoVenda());
+                    osItemPeca.setSituacao("Peça trocada");
+                    System.out.println("Inseri uma peça. -> ");
+                    manterOSItemPeca.cadastrarOSItemPeca(osItemPeca);
+                }
             }
         }
         //cadastra os objetos de OSItemPeca, fazendo a relacao entre a OS
