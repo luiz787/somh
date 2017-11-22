@@ -30,6 +30,7 @@ import java.util.Date;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -37,7 +38,8 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.control.ListView;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
@@ -85,10 +87,16 @@ public class TelaManutencaoController implements Initializable {
     private TextArea observacoes;
 
     @FXML
-    private ListView<String> pecasEstoque;
+    private TableView<Peca> pecasEstoque;
 
     @FXML
-    private ListView<String> pecasUsadas;
+    private TableView<Peca> pecasUsadas;
+
+    @FXML
+    private TableColumn<Peca, String> pecasEstoqueColumn;
+
+    @FXML
+    private TableColumn<Peca, String> pecasUsadasColumn;
 
     @FXML
     private Label precoPecas;
@@ -144,13 +152,13 @@ public class TelaManutencaoController implements Initializable {
         } catch (ExcecaoPersistencia ex) {
             Logger.getLogger(TelaManutencaoController.class.getName()).log(Level.SEVERE, null, ex);
         }
-        pecasEstoqueString = FXCollections.observableArrayList();
+        ObservableList<Peca> pecasData = FXCollections.observableArrayList();
         for (Peca peca : pecas) {
-            pecasEstoqueString.add(peca.getDescricao());
+            pecasData.add(peca);
         }
-        pecasEstoque.setItems(pecasEstoqueString);
-        pecasUsadasString = FXCollections.observableArrayList();
-        pecasUsadas.setItems(pecasUsadasString);
+        pecasEstoque.setItems(pecasData);
+        pecasEstoqueColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getDescricao()));
+        pecasUsadasColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getDescricao()));
         codigoOS.setText(String.valueOf(os.getId()));
         ManterOSStatus manterOSStatus = new ManterOSStatusImpl(OSStatusDAOImpl.getInstance());
         try {
@@ -163,29 +171,28 @@ public class TelaManutencaoController implements Initializable {
 
     public void adicionarPecaUso() {
         if (pecasEstoque.getSelectionModel().getSelectedItem() != null) {
-            pecasUsadasString.add(pecasEstoque.getSelectionModel().getSelectedItem());
-            pecasEstoqueString.remove(pecasEstoque.getSelectionModel().getSelectedItem());
+            ObservableList<Peca> newPecaData = FXCollections.observableArrayList();
+            for (int i = 0; i < pecasUsadas.getItems().size(); i++) {
+                Peca pecaExistente = pecasUsadas.getItems().get(i);
+                newPecaData.add(pecaExistente);
+            }
+            newPecaData.add(pecasEstoque.getSelectionModel().getSelectedItem());
+            pecasUsadas.setItems(newPecaData);
             recalcularPrecoPecas();
         }
     }
 
     public void removerPecaUso() {
         if (pecasUsadas.getSelectionModel().getSelectedItem() != null) {
-            pecasEstoqueString.add(pecasUsadas.getSelectionModel().getSelectedItem());
-            pecasUsadasString.remove(pecasUsadas.getSelectionModel().getSelectedItem());
+            pecasUsadas.getItems().remove(pecasUsadas.getSelectionModel().getSelectedItem());
             recalcularPrecoPecas();
         }
     }
 
     public void recalcularPrecoPecas() {
         double total = 0.0;
-        for (int i = 0; i < pecasUsadasString.size(); i++) {
-            //procurar no array
-            for (Peca peca : pecas) {
-                if (peca.getDescricao().equals(pecasUsadasString.get(i))) {
-                    total += peca.getPrecoVenda();
-                }
-            }
+        for (int i = 0; i < pecasUsadas.getItems().size(); i++) {
+            total += pecasUsadas.getItems().get(i).getPrecoVenda();
         }
         precoPecas.setText("R$" + String.valueOf(total));
     }
@@ -241,19 +248,15 @@ public class TelaManutencaoController implements Initializable {
         //cadastra um novo status da OS atual, informando a data atual, o funcionário responsável, e o status 7 (pronto)
         ManterPeca manterPeca = new ManterPecaImpl(new PecaDAOImpl());
         ManterOSItemPeca manterOSItemPeca = new ManterOSItemPecaImpl(OSItemPecaDAOImpl.getInstance());
-        for (Peca x1 : pecas) {
-            for (String pecaS : pecasUsadasString) {
-                if (x1.getDescricao().equals(pecaS)) {
-                    OSItemPeca osItemPeca = new OSItemPeca();
-                    osItemPeca.setOs(os);
-                    osItemPeca.setId(x1.getId());
-                    osItemPeca.setQtd(1);
-                    osItemPeca.setValorVenda(x1.getPrecoVenda());
-                    osItemPeca.setSituacao("Peça trocada");
-                    System.out.println("Inseri uma peça. -> ");
-                    manterOSItemPeca.cadastrarOSItemPeca(osItemPeca);
-                }
-            }
+        for (Peca x1 : pecasUsadas.getItems()) {
+            OSItemPeca osItemPeca = new OSItemPeca();
+            osItemPeca.setOs(os);
+            osItemPeca.setId(x1.getId());
+            osItemPeca.setQtd(1);
+            osItemPeca.setValorVenda(x1.getPrecoVenda());
+            osItemPeca.setSituacao("Peça trocada");
+            System.out.println("Inseri uma peça. -> ");
+            manterOSItemPeca.cadastrarOSItemPeca(osItemPeca);
         }
         //cadastra os objetos de OSItemPeca, fazendo a relacao entre a OS
         //e as pecas utilizadas por ela.

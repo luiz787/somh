@@ -2,7 +2,8 @@
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -55,8 +56,6 @@
         <TextField fx:id="marcaPeca" layoutX="263.0" layoutY="467.0" prefWidth="200.0" />
         <TextField fx:id="valorPeca" layoutX="263.0" layoutY="497.0" prefWidth="200.0" />
         <Button fx:id="addPeca" layoutX="392.0" layoutY="528.0" mnemonicParsing="false" onAction="#adicionarPecaEstoque" text="Adicionar" />
-        <ListView fx:id="pecasUsadas" layoutX="131.0" layoutY="184.0" prefHeight="157.0" prefWidth="139.0" />
-        <ListView fx:id="pecasEstoque" layoutX="368.0" layoutY="184.0" prefHeight="157.0" prefWidth="139.0" />
         <Button fx:id="removerPeca" layoutX="290.0" layoutY="224.0" mnemonicParsing="false" onAction="#removerPecaUso" prefHeight="27.0" prefWidth="56.0" style="" text="&gt;" />
         <Button fx:id="adicionarPeca" layoutX="290.0" layoutY="269.0" mnemonicParsing="false" onAction="#adicionarPecaUso" prefHeight="27.0" prefWidth="56.0" text="&lt;" />
         <Label fx:id="codigoOS" font="$x3" layoutX="228.0" layoutY="110.0" prefHeight="25.0" prefWidth="77.0" text="Label" />
@@ -64,6 +63,16 @@
         <Label fx:id="descricaoEquipamento" font="$x3" layoutX="688.0" layoutY="120.0" text="Label" />
         <Label fx:id="precoPecas" font="$x3" layoutX="290.0" layoutY="354.0" prefHeight="25.0" prefWidth="77.0" text="R$0.0" />
         <Label fx:id="nomeTecnico" font="$x3" layoutX="641.0" layoutY="442.0" minHeight="18.62109375" prefHeight="18.62109375" text="Label" />
+            <TableView fx:id="pecasUsadas" layoutX="121.0" layoutY="170.0" prefHeight="152.0" prefWidth="151.0">
+              <columns>
+                <TableColumn fx:id="pecasUsadasColumn" prefWidth="150.0" text="Peças usadas" />
+              </columns>
+            </TableView>
+            <TableView fx:id="pecasEstoque" layoutX="363.0" layoutY="170.0" prefHeight="152.0" prefWidth="151.0">
+               <columns>
+                  <TableColumn fx:id="pecasEstoqueColumn" prefWidth="150.0" text="Peças no estoque" />
+               </columns>
+            </TableView>
       </children>
     </Pane>
   </children>
