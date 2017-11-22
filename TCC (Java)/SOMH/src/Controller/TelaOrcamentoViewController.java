@@ -26,6 +26,8 @@ import ServiceImpl.ManterOSImpl;
 import ServiceImpl.ManterOSStatusImpl;
 import java.io.IOException;
 import java.net.URL;
+import java.sql.Date;
+import java.text.SimpleDateFormat;
 import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
@@ -66,10 +68,12 @@ public class TelaOrcamentoViewController implements Initializable {
     @FXML
     private Label datEntrada;
     @FXML
-    private Label faixa;    
+    private Label faixa;
     @FXML
     private TextField totalServico;
-    
+    @FXML
+    private Button Menu;
+
     private OS os;
 
     private List<OSStatus> osStatus;
@@ -104,26 +108,43 @@ public class TelaOrcamentoViewController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         System.out.println("Iniciando tela de orçamento...");
 
+        usuario = LoginController.getUsuarioLogado();
+
         ManterOS manterOS;
         ManterOSAcessorio manterOSAcessorio;
         ManterOSStatus manterOSStatus;
         List<OSAcessorio> osAcessorios;
         String acessorios = "";
-        
+
         try {
-            
-            
+
             manterOS = new ManterOSImpl(OSDAOImpl.getInstance());
             manterOSAcessorio = new ManterOSAcessorioImpl(OSAcessorioDAOImpl.getInstance());
             manterOSStatus = new ManterOSStatusImpl(OSStatusDAOImpl.getInstance());
-            
+
             osAcessorios = manterOSAcessorio.getAllByOS(os.getId());
             osStatus = manterOSStatus.getAllByOS(os.getId());
 
             System.out.println("Criou objetos");
-            for (int i = 0; i < osAcessorios.size(); i++) {
-                acessorios += osAcessorios.get(i).getAcessorio().getNomeAcessorio() + ", ";
+            if (osAcessorios.size() == 0) {
+                acessorios = "Sem acessórios registrados.";
+            } else if (osAcessorios.size() == 1) {
+                acessorios = osAcessorios.get(0).getAcessorio().getNomeAcessorio();
+            } else if (osAcessorios.size() > 1) {
+                for (int i = 0; i < osAcessorios.size(); i++) {
+                    if (i == (osAcessorios.size() - 1)) {
+                        acessorios += " e " + osAcessorios.get(i).getAcessorio().getNomeAcessorio() + ".";
+                    } else if (i == (osAcessorios.size() - 2)) {
+                        acessorios += osAcessorios.get(i).getAcessorio().getNomeAcessorio();
+                    } else {
+                        acessorios += osAcessorios.get(i).getAcessorio().getNomeAcessorio() + ", ";
+                    }
+                }
             }
+
+            Date date = new Date(osStatus.get(0).getDatOcorrencia());
+            SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yy");
+            String dataEntrada = dateFormat.format(date);
 
             codOs.setText(String.valueOf(os.getId()));
             descEquip.setText(os.getEquipamento().getDesEquipto());
@@ -131,11 +152,12 @@ public class TelaOrcamentoViewController implements Initializable {
             descAcessorios.setText(acessorios);
             txtObs.setText(os.getTxtObservacaoAcessorios());
             descDefeitos.setText(os.getTxtReclamacao());
-            datEntrada.setText(osStatus.get(0).getDatOcorrencia().toString());
+
+            datEntrada.setText(dataEntrada);
         } catch (ExcecaoPersistencia ex) {
             System.err.println("Erro ao localizar os dados da OS requisitada.");
         }
-    
+
     }
 
     @FXML
