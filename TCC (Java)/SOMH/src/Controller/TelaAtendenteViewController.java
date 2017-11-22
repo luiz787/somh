@@ -5,6 +5,7 @@
  */
 package Controller;
 
+import Domain.Usuario;
 import Main.Run;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -38,6 +39,10 @@ public class TelaAtendenteViewController implements Initializable {
     private Button sair;
     @FXML
     private Label nomeFuncionario;
+    @FXML
+    private Label nomeLog;
+    
+    private Usuario user;
     
     private Run run;
     /**
@@ -47,6 +52,9 @@ public class TelaAtendenteViewController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         System.out.println("Inicializando tela do atendente...");
+        
+        user = LoginController.getUsuarioLogado();
+        nomeLog.setText("Logado como " + user.getNome());
     }
 
     public void cadastroOS() throws Exception {

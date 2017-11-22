@@ -5,6 +5,7 @@
  */
 package Controller;
 
+import Domain.Usuario;
 import Main.Run;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -14,6 +15,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
@@ -28,6 +30,10 @@ public class TelaTelefonistaViewController implements Initializable {
     private Button procuraCliente;
     @FXML
     private Button sair;
+    @FXML 
+    private Label nomeLog;
+    
+    private Usuario user;
     
     private Run run;
 
@@ -36,7 +42,10 @@ public class TelaTelefonistaViewController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        System.out.println("Inicializando tela do telefonista...");
+        System.out.println("Inicializando tela do telefonista...");        
+        
+        user = LoginController.getUsuarioLogado();
+        nomeLog.setText("Logado como " + user.getNome());
     }
 
     public void procuraCliente() throws Exception {

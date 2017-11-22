@@ -5,20 +5,17 @@
  */
 package Controller;
 
+import Domain.Usuario;
 import Main.Run;
-import static com.sun.glass.ui.Application.run;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
-import javafx.stage.Stage;
 
 /**
  * FXML Controller class
@@ -36,7 +33,10 @@ public class TelaTecnicoViewController implements Initializable {
     @FXML
     private Button sair;
     @FXML
-    private Label nomeFuncionario;
+    private Label nomeLog;
+    
+    private Usuario user;
+    
     private Run run;
 
     /**
@@ -44,7 +44,10 @@ public class TelaTecnicoViewController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        System.out.println("Inicializando tela do técnico...");
+        System.out.println("Inicializando tela do técnico...");        
+        
+        user = LoginController.getUsuarioLogado();
+        nomeLog.setText("Logado como " + user.getNome());
     }
 
     public void cadastroOrcamento() throws Exception {

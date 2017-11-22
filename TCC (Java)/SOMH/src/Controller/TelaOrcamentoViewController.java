@@ -35,6 +35,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 
@@ -64,12 +65,16 @@ public class TelaOrcamentoViewController implements Initializable {
     private Label descDefeitos;
     @FXML
     private Label datEntrada;
-
+    @FXML
+    private Label faixa;    
+    @FXML
+    private TextField totalServico;
+    
     private OS os;
 
     private List<OSStatus> osStatus;
 
-    private Usuario usuarioLogado;
+    private Usuario usuario;
 
     public List<OSStatus> getOsStatus() {
         return osStatus;
@@ -104,14 +109,18 @@ public class TelaOrcamentoViewController implements Initializable {
         ManterOSStatus manterOSStatus;
         List<OSAcessorio> osAcessorios;
         String acessorios = "";
-
+        
         try {
+            
+            
             manterOS = new ManterOSImpl(OSDAOImpl.getInstance());
             manterOSAcessorio = new ManterOSAcessorioImpl(OSAcessorioDAOImpl.getInstance());
-            manterOSStatus = new ManterOSStatusImpl (OSStatusDAOImpl.getInstance());
+            manterOSStatus = new ManterOSStatusImpl(OSStatusDAOImpl.getInstance());
+            
             osAcessorios = manterOSAcessorio.getAllByOS(os.getId());
             osStatus = manterOSStatus.getAllByOS(os.getId());
 
+            System.out.println("Criou objetos");
             for (int i = 0; i < osAcessorios.size(); i++) {
                 acessorios += osAcessorios.get(i).getAcessorio().getNomeAcessorio() + ", ";
             }
@@ -126,7 +135,7 @@ public class TelaOrcamentoViewController implements Initializable {
         } catch (ExcecaoPersistencia ex) {
             System.err.println("Erro ao localizar os dados da OS requisitada.");
         }
-
+    
     }
 
     @FXML
@@ -134,7 +143,7 @@ public class TelaOrcamentoViewController implements Initializable {
         try {
             String telaUsuario = "";
             FXMLLoader loader;
-            switch (Integer.parseInt(usuarioLogado.getPerfil().getId().toString())) {
+            switch (Integer.parseInt(usuario.getPerfil().getId().toString())) {
                 case 1:
                     telaUsuario = "TelaAdministradorView.fxml";
 

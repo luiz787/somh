@@ -5,6 +5,7 @@
  */
 package Controller;
 
+import Domain.Usuario;
 import Main.Run;
 import java.io.IOException;
 import java.net.URL;
@@ -15,6 +16,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
@@ -42,6 +44,10 @@ public class TelaAdministradorViewController extends Run implements Initializabl
     private Button cadastroCliente;
     @FXML
     private Button procuraCliente;
+    @FXML
+    private Label nomeLog;
+    
+    private Usuario usuario;
     
     private Run run;
 
@@ -51,6 +57,9 @@ public class TelaAdministradorViewController extends Run implements Initializabl
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         System.out.println("Inicializando tela do administrador...");
+        
+        usuario = LoginController.getUsuarioLogado();
+        nomeLog.setText("Logado como " + usuario.getNome());        
     }
 
     public void cadastroOrcamento() throws Exception {
