@@ -26,11 +26,16 @@ import java.io.IOException;
 import java.net.URL;
 import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.ResourceBundle;
+import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -119,8 +124,6 @@ public class TelaManutencaoController implements Initializable {
     private Run run;
     private OS os;
 
-    private ObservableList<String> pecasEstoqueString;
-    private ObservableList<String> pecasUsadasString;
     private ArrayList<Peca> pecas;
 
     public OS getOs() {
@@ -167,6 +170,15 @@ public class TelaManutencaoController implements Initializable {
             Logger.getLogger(TelaManutencaoController.class.getName()).log(Level.SEVERE, null, ex);
         }
         descricaoEquipamento.setText(os.getEquipamento().getDesEquipto());
+        valorServicos.textProperty().addListener((ObservableValue<? extends String> ov, String t, String t1) -> {
+            if (!valorServicos.getText().isEmpty()) {
+                Double tot = Double.parseDouble(valorServicos.getText()) + Double.parseDouble(precoPecas.getText());
+                valorTotal.setText(String.valueOf(tot));
+            } else {
+                Double tot = Double.parseDouble(precoPecas.getText());
+                valorTotal.setText(String.valueOf(tot));
+            }
+        });
     }
 
     public void adicionarPecaUso() {
@@ -194,7 +206,12 @@ public class TelaManutencaoController implements Initializable {
         for (int i = 0; i < pecasUsadas.getItems().size(); i++) {
             total += pecasUsadas.getItems().get(i).getPrecoVenda();
         }
-        precoPecas.setText("R$" + String.valueOf(total));
+        precoPecas.setText(String.valueOf(total));
+        if (!valorServicos.getText().isEmpty()) {
+            valorTotal.setText(String.valueOf(Double.parseDouble(valorServicos.getText()) + total));
+        } else {
+            valorTotal.setText(String.valueOf(total));
+        }
     }
 
     public void adicionarPecaEstoque() throws ExcecaoNegocio, ExcecaoPersistencia {
@@ -204,7 +221,7 @@ public class TelaManutencaoController implements Initializable {
         p.setMarca(marcaPeca.getText());
         ManterPeca manterPeca = new ManterPecaImpl(new PecaDAOImpl());
         manterPeca.insert(p);
-        pecasEstoqueString.add(p.getDescricao());
+        pecasEstoque.getItems().add(p);
         refreshPecasEstoqueString();
         recalcularPrecoPecas();
     }
@@ -213,8 +230,8 @@ public class TelaManutencaoController implements Initializable {
         ManterPeca manterPeca = new ManterPecaImpl(new PecaDAOImpl());
         pecas = (ArrayList<Peca>) manterPeca.listAll();
         for (Peca x1 : pecas) {
-            if (!pecasEstoqueString.contains(x1.getDescricao()) && !pecasUsadasString.contains(x1.getDescricao())) {
-                pecasEstoqueString.add(x1.getDescricao());
+            if (!pecasEstoque.getItems().contains(x1)) {
+                pecasEstoque.getItems().add(x1);
             }
         }
     }
@@ -233,9 +250,7 @@ public class TelaManutencaoController implements Initializable {
         } catch (IOException ex) {
             Logger.getLogger(TelaManutencaoController.class.getName()).log(Level.SEVERE, null, ex);
         }
-
         run.getRootLayout().setCenter(TelaFuncionario);
-
         TelaListagemOSController controller = loader.getController();
         controller.setRun(run);
         //retornar para listagem de OS
@@ -248,11 +263,12 @@ public class TelaManutencaoController implements Initializable {
         //cadastra um novo status da OS atual, informando a data atual, o funcionário responsável, e o status 7 (pronto)
         ManterPeca manterPeca = new ManterPecaImpl(new PecaDAOImpl());
         ManterOSItemPeca manterOSItemPeca = new ManterOSItemPecaImpl(OSItemPecaDAOImpl.getInstance());
-        for (Peca x1 : pecasUsadas.getItems()) {
+        Set<Peca> pecasUnicas = new HashSet<>(pecasUsadas.getItems());
+        for (Peca x1 : pecasUnicas) { //itera sobre o SET, que contém apenas valores únicos
             OSItemPeca osItemPeca = new OSItemPeca();
             osItemPeca.setOs(os);
             osItemPeca.setId(x1.getId());
-            osItemPeca.setQtd(1);
+            osItemPeca.setQtd(Collections.frequency(pecasUsadas.getItems(), x1));//determina a quantidade a partir da frequencia de ocorrencia no arraylist
             osItemPeca.setValorVenda(x1.getPrecoVenda());
             osItemPeca.setSituacao("Peça trocada");
             System.out.println("Inseri uma peça. -> ");
@@ -261,7 +277,6 @@ public class TelaManutencaoController implements Initializable {
         //cadastra os objetos de OSItemPeca, fazendo a relacao entre a OS
         //e as pecas utilizadas por ela.
         FXMLLoader loader = new FXMLLoader();
-
         loader.setLocation(Run.class.getResource("../View/TelaListagemOSView.fxml"));
         AnchorPane TelaFuncionario = null;
         try {
