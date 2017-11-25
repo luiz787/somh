@@ -31,8 +31,8 @@ import ServiceImpl.ManterOSStatusImpl;
 import ServiceImpl.ManterStatusImpl;
 import java.io.IOException;
 import java.net.URL;
-import java.sql.Date;
 import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
@@ -235,7 +235,7 @@ public class TelaOrcamentoViewController implements Initializable {
         ManterStatus manterStatus;
         ManterOSStatus manterOSStatus;
         Status status;
-
+        
         try {
             manterStatus = new ManterStatusImpl(StatusDAOImpl.getInstance());
             manterOSStatus = new ManterOSStatusImpl(OSStatusDAOImpl.getInstance());
@@ -243,12 +243,16 @@ public class TelaOrcamentoViewController implements Initializable {
 
             System.out.println("ID OS: " + os.getId() + ". ID STATUS: " + status.getNome());
             osStatus.setOs(os);
+            osStatus.setDatOcorrencia(new Date().getTime());
+            osStatus.setUsuario(usuario);
             osStatus.setStatus(status);
-
-            manterOSStatus.update(osStatus);
+            
+            manterOSStatus.cadastrarOSStatus(osStatus);
             System.out.println("Status alterado com sucesso. Novo status: " + osStatus.getStatus().getNome());
         } catch (ExcecaoPersistencia ex) {
             System.out.println("Erro ao mudar o status do orçamento: " + ex.getMessage());
+        } catch (ExcecaoNegocio ex) {
+            Logger.getLogger(TelaOrcamentoViewController.class.getName()).log(Level.SEVERE, null, ex);
         }
 
         FXMLLoader loader;
