@@ -13,7 +13,7 @@
          <center>
             <StackPane prefHeight="150.0" prefWidth="200.0" BorderPane.alignment="CENTER">
                <children>
-                  <Label text="Logado como" StackPane.alignment="BOTTOM_LEFT">
+                  <Label fx:id="nomeLog" text="Logado como" StackPane.alignment="BOTTOM_LEFT">
                      <StackPane.margin>
                         <Insets bottom="10.0" left="20.0" />
                      </StackPane.margin>
