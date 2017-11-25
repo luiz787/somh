@@ -14,7 +14,7 @@
          <center>
             <StackPane prefHeight="150.0" prefWidth="200.0" BorderPane.alignment="CENTER">
                <children>
-                  <Button fx:id="criar" alignment="CENTER" contentDisplay="RIGHT" maxHeight="31.0" maxWidth="90.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="90.0" stylesheets="@CSS%20Botao.css" text="Prosseguir" textFill="WHITE" StackPane.alignment="BOTTOM_RIGHT">
+                  <Button fx:id="criar" alignment="CENTER" contentDisplay="RIGHT" maxHeight="31.0" maxWidth="90.0" mnemonicParsing="false" onAction="#aguardaCliente" prefHeight="31.0" prefWidth="90.0" stylesheets="@CSS%20Botao.css" text="Prosseguir" textFill="WHITE" StackPane.alignment="BOTTOM_RIGHT">
                      <StackPane.margin>
                         <Insets bottom="10.0" right="20.0" />
                      </StackPane.margin>
