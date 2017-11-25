@@ -10,20 +10,25 @@ import DAO.OSDAO;
 import DAOImpl.OSAcessorioDAOImpl;
 import DAOImpl.OSDAOImpl;
 import DAOImpl.OSStatusDAOImpl;
+import DAOImpl.StatusDAOImpl;
 import Domain.Acessorio;
 import Domain.Equipamento;
 import Domain.OS;
 import Domain.OSAcessorio;
 import Domain.OSStatus;
+import Domain.Status;
 import Domain.Usuario;
+import Exception.ExcecaoNegocio;
 import Exception.ExcecaoPersistencia;
 import Main.Run;
 import Service.ManterOS;
 import Service.ManterOSAcessorio;
 import Service.ManterOSStatus;
+import Service.ManterStatus;
 import ServiceImpl.ManterOSAcessorioImpl;
 import ServiceImpl.ManterOSImpl;
 import ServiceImpl.ManterOSStatusImpl;
+import ServiceImpl.ManterStatusImpl;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.Date;
@@ -222,5 +227,39 @@ public class TelaOrcamentoViewController implements Initializable {
         } catch (IOException ex) {
             Logger.getLogger(Run.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }
+
+    @FXML
+    private void aguardaCliente() throws IOException {
+        OSStatus osStatus = new OSStatus();
+        ManterStatus manterStatus;
+        ManterOSStatus manterOSStatus;
+        Status status;
+
+        try {
+            manterStatus = new ManterStatusImpl(StatusDAOImpl.getInstance());
+            manterOSStatus = new ManterOSStatusImpl(OSStatusDAOImpl.getInstance());
+            status = manterStatus.getStatusById(3);
+
+            System.out.println("ID OS: " + os.getId() + ". ID STATUS: " + status.getNome());
+            osStatus.setOs(os);
+            osStatus.setStatus(status);
+
+            manterOSStatus.update(osStatus);
+            System.out.println("Status alterado com sucesso. Novo status: " + osStatus.getStatus().getNome());
+        } catch (ExcecaoPersistencia ex) {
+            System.out.println("Erro ao mudar o status do orçamento: " + ex.getMessage());
+        }
+
+        FXMLLoader loader;
+        loader = new FXMLLoader();
+
+        loader.setLocation(Run.class.getResource("../View/TelaListagemOSView.fxml"));
+        AnchorPane TelaTecnico = (AnchorPane) loader.load();
+
+        run.getRootLayout().setCenter(TelaTecnico);
+
+        TelaListagemOSController controller = loader.getController();
+        controller.setRun(run);
     }
 }
