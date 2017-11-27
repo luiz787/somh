@@ -18,7 +18,7 @@
                         <Insets top="-120.0" />
                      </StackPane.margin></Button>
                   <Button fx:id="cadastroOS" mnemonicParsing="false" onAction="#cadastroOS" prefHeight="31.0" prefWidth="237.0" snapToPixel="false" stylesheets="@CSS%20Botao.css" text="Criar nova ordem de serviço" />
-                  <Label text="Logado como" StackPane.alignment="BOTTOM_LEFT">
+                  <Label fx:id="nomeLog" text="Logado como" StackPane.alignment="BOTTOM_LEFT">
                      <StackPane.margin>
                         <Insets bottom="10.0" left="20.0" />
                      </StackPane.margin></Label>

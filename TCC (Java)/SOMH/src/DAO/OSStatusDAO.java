@@ -9,5 +9,4 @@ public interface OSStatusDAO {
     public void deleteAll(Long idOS) throws ExcecaoPersistencia;
     public List<OSStatus> listAllByOS(Long id) throws ExcecaoPersistencia;
     public List<OSStatus> listAll() throws ExcecaoPersistencia;
-    public void update(OSStatus os) throws ExcecaoPersistencia;
 }
