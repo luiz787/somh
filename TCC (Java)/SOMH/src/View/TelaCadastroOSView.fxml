@@ -24,28 +24,28 @@
                      <children>
                         <Pane fx:id="painel" layoutY="36.0" prefHeight="958.0" prefWidth="611.0" stylesheets="@CSS%20Botao.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="37.0">
                            <children>
+                              <TextField fx:id="nomeEquipamento" focusTraversable="false" layoutX="30.0" layoutY="117.0" prefHeight="25.0" prefWidth="296.0" />
+                              <TextField fx:id="marca" focusTraversable="false" layoutX="346.0" layoutY="117.0" prefHeight="25.0" prefWidth="122.0" />
+                              <TextArea fx:id="componentes" focusTraversable="false" layoutX="25.0" layoutY="167.0" prefHeight="110.0" prefWidth="296.0" />
+                              <TextField fx:id="modelo" focusTraversable="false" layoutX="346.0" layoutY="191.0" prefHeight="25.0" prefWidth="122.0" />
+                              <TextField fx:id="nroSerie" focusTraversable="false" layoutX="346.0" layoutY="252.0" prefHeight="25.0" prefWidth="122.0" />
+                              <TextField fx:id="nomeAcessorioCadastro" focusTraversable="false" layoutX="143.0" layoutY="528.0" prefHeight="25.0" prefWidth="241.0" />
+                              <TextArea fx:id="observacaoAcessorio" focusTraversable="false" layoutX="25.0" layoutY="590.0" prefHeight="110.0" prefWidth="296.0" />
+                              <TextArea fx:id="reclamacao" focusTraversable="false" layoutX="39.0" layoutY="763.0" prefHeight="110.0" prefWidth="296.0" />
                               <Label layoutX="26.0" layoutY="96.0" text="Nome" />
                               <Label layoutX="342.0" layoutY="167.0" text="Modelo" />
                               <Button fx:id="cancelar" alignment="CENTER" focusTraversable="false" layoutX="506.0" layoutY="913.0" mnemonicParsing="false" onAction="#redirecionaTelaFuncionario" prefHeight="31.0" prefWidth="90.0" stylesheets="@CSS%20Botao.css" text="Cancelar" textFill="WHITE" />
                               <Label layoutX="14.0" layoutY="79.0" text="Equipamento" underline="true" />
                               <Label layoutX="27.0" layoutY="561.0" text="Observação" />
-                              <TextArea fx:id="reclamacao" focusTraversable="false" layoutX="39.0" layoutY="763.0" prefHeight="110.0" prefWidth="296.0" />
                               <Label layoutX="426.0" layoutY="54.0" text="Data:" />
                               <Label layoutX="426.0" layoutY="25.0" text="Nro OS:" />
                               <Label layoutX="22.0" layoutY="142.0" text="Componentes" />
-                              <TextField fx:id="marca" focusTraversable="false" layoutX="346.0" layoutY="117.0" prefHeight="25.0" prefWidth="122.0" />
                               <Label layoutX="340.0" layoutY="230.0" text="Numero de Série" />
                               <Label layoutX="26.0" layoutY="532.0" text="Cadastrar Acessório:" />
-                              <TextField fx:id="nroSerie" focusTraversable="false" layoutX="346.0" layoutY="252.0" prefHeight="25.0" prefWidth="122.0" />
                               <Label layoutX="12.0" layoutY="8.0" text="Cliente" underline="true" AnchorPane.leftAnchor="12.0" />
                               <Button fx:id="criar" alignment="CENTER" contentDisplay="RIGHT" focusTraversable="false" layoutX="15.0" layoutY="913.0" maxHeight="31.0" maxWidth="90.0" mnemonicParsing="false" onAction="#criaOS" prefHeight="31.0" prefWidth="90.0" stylesheets="@CSS%20Botao.css" text="Criar" textFill="WHITE" AnchorPane.rightAnchor="506.0" />
-                              <TextField fx:id="nomeAcessorioCadastro" focusTraversable="false" layoutX="143.0" layoutY="528.0" prefHeight="25.0" prefWidth="241.0" />
                               <Label layoutX="17.0" layoutY="715.0" text="Problema" underline="true" />
-                              <TextField fx:id="modelo" focusTraversable="false" layoutX="346.0" layoutY="191.0" prefHeight="25.0" prefWidth="122.0" />
-                              <TextArea fx:id="observacaoAcessorio" focusTraversable="false" layoutX="25.0" layoutY="590.0" prefHeight="110.0" prefWidth="296.0" />
                               <Button fx:id="cadastroCliente" layoutX="327.0" layoutY="21.0" mnemonicParsing="false" onAction="#cadastrarCliente" text="+" />
-                              <TextField fx:id="nomeEquipamento" focusTraversable="false" layoutX="30.0" layoutY="117.0" prefHeight="25.0" prefWidth="296.0" />
-                              <TextArea fx:id="componentes" focusTraversable="false" layoutX="25.0" layoutY="167.0" prefHeight="110.0" prefWidth="296.0" />
                               <Label fx:id="data" layoutX="482.0" layoutY="54.0" text="LabelData" />
                               <Button fx:id="pesquisa" layoutX="286.0" layoutY="21.0" mnemonicParsing="false" onAction="#pesquisarCliente" prefHeight="16.0" prefWidth="34.0" stylesheets="@CSS%20Botao.css" />
                               <Label fx:id="nomeCliente" layoutX="68.0" layoutY="25.0" prefHeight="17.0" prefWidth="200.0" style="-fx-background-color: #ffffff;" />
