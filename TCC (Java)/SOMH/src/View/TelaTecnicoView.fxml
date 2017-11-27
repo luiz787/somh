@@ -13,11 +13,6 @@
          <center>
             <StackPane BorderPane.alignment="CENTER">
                <children>
-                  <Button fx:id="cadastroOrcamento" mnemonicParsing="false" onAction="#cadastroOrcamento" prefHeight="31.0" prefWidth="237.0" stylesheets="@CSS%20Botao.css" text="Criar orçamento" StackPane.alignment="CENTER">
-                     <StackPane.margin>
-                        <Insets top="-60.0" />
-                     </StackPane.margin>
-                  </Button>
                   <Label fx:id="nomeLog" text="Logado como" StackPane.alignment="BOTTOM_LEFT">
                      <StackPane.margin>
                         <Insets bottom="10.0" left="20.0" />
@@ -25,7 +20,7 @@
                   </Label>
                   <Button fx:id="procuraOS" mnemonicParsing="false" onAction="#procuraOS" prefHeight="31.0" prefWidth="237.0" stylesheets="@CSS%20Botao.css" text="Buscar ordem de serviço" StackPane.alignment="CENTER">
                      <StackPane.margin>
-                        <Insets top="60.0" />
+                        <Insets />
                      </StackPane.margin>
                   </Button>
                   <Button fx:id="sair" alignment="CENTER" contentDisplay="RIGHT" maxHeight="31.0" maxWidth="90.0" mnemonicParsing="false" onAction="#sair" prefHeight="31.0" prefWidth="77.0" stylesheets="@CSS%20Botao.css" text="Sair" textFill="WHITE" StackPane.alignment="BOTTOM_RIGHT">

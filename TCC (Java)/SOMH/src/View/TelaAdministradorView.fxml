@@ -32,15 +32,10 @@
                         </Button>
                         <Button fx:id="cadastroOS" mnemonicParsing="false" onAction="#cadastroOS" prefHeight="31.0" prefWidth="237.0" stylesheets="@CSS%20Botao.css" text="Criar nova ordem de serviço" StackPane.alignment="CENTER">
                            <StackPane.margin>
-                              <Insets left="-250.0" top="200.0" />
+                              <Insets left="-250.0" top="40.0" />
                            </StackPane.margin>
                         </Button>
                         <Button fx:id="procuraOS" mnemonicParsing="false" onAction="#procuraOS" prefHeight="31.0" prefWidth="237.0" stylesheets="@CSS%20Botao.css" text="Buscar ordem de serviço" StackPane.alignment="CENTER">
-                           <StackPane.margin>
-                              <Insets left="250.0" top="200.0" />
-                           </StackPane.margin>
-                        </Button>
-                        <Button fx:id="cadastroOrcamento" mnemonicParsing="false" onAction="#cadastroOrcamento" prefHeight="31.0" prefWidth="237.0" stylesheets="@CSS%20Botao.css" text="Criar orçamento" StackPane.alignment="CENTER">
                            <StackPane.margin>
                               <Insets left="250.0" top="40.0" />
                            </StackPane.margin>
@@ -52,7 +47,7 @@
                         </Button>
                         <Button fx:id="cadastroFuncionario" mnemonicParsing="false" onAction="#cadastroFuncionario" prefHeight="31.0" prefWidth="237.0" stylesheets="@CSS%20Botao.css" text="Cadastrar novo funcionário" StackPane.alignment="CENTER">
                            <StackPane.margin>
-                              <Insets left="-250.0" top="40.0" />
+                              <Insets top="200.0" />
                            </StackPane.margin>
                         </Button>
                      </children>
