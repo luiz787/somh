@@ -25,8 +25,6 @@ import javafx.scene.layout.Pane;
 public class TelaAdministradorViewController extends Run implements Initializable {
 
     @FXML
-    private Pane pane;
-    @FXML
     private Button procuraOS;
     @FXML
     private Button sair;
@@ -44,6 +42,8 @@ public class TelaAdministradorViewController extends Run implements Initializabl
     private Usuario usuario;
     
     private Run run;
+    @FXML
+    private Label faixa;
 
     /**
      * Initializes the controller class.
@@ -56,6 +56,7 @@ public class TelaAdministradorViewController extends Run implements Initializabl
         nomeLog.setText("Logado como " + usuario.getNome());        
     }
 
+    @FXML
     public void procuraOS() throws Exception {
         
         FXMLLoader loader = new FXMLLoader();
@@ -70,6 +71,7 @@ public class TelaAdministradorViewController extends Run implements Initializabl
         
     }
 
+    @FXML
     public void cadastroFuncionario() throws Exception {
         FXMLLoader loader = new FXMLLoader();
 
@@ -82,6 +84,7 @@ public class TelaAdministradorViewController extends Run implements Initializabl
         controller.setRun(run);
     }
 
+    @FXML
     public void cadastroOS() throws Exception {
         FXMLLoader loader = new FXMLLoader();
         TelaCadastroOSController controlador = new TelaCadastroOSController(null);
@@ -95,6 +98,7 @@ public class TelaAdministradorViewController extends Run implements Initializabl
         controller.setRun(run);
     }
     
+    @FXML
     public void cadastroCliente() throws Exception {
         FXMLLoader loader = new FXMLLoader();
 
@@ -107,6 +111,7 @@ public class TelaAdministradorViewController extends Run implements Initializabl
         controller.setRun(run);
     }
 
+    @FXML
     public void procuraCliente() throws Exception {
         FXMLLoader loader = new FXMLLoader();
 
@@ -119,6 +124,7 @@ public class TelaAdministradorViewController extends Run implements Initializabl
         controller.setRun(run);
     }
 
+    @FXML
     public void sair() throws Exception {
         FXMLLoader loader = new FXMLLoader();
 

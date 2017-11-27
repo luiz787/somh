@@ -47,14 +47,12 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.control.ListView;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.SelectionMode;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
@@ -129,11 +127,18 @@ public class TelaOSController implements Initializable {
     private HBox hbox;
     @FXML
     private Label nomeCliente;
+    @FXML
+    private Button aprovarBtn;
+    @FXML
+    private Button recusarBtn;
+    @FXML
+    private Button avisarBtn;
+    @FXML
+    private Button entregarBtn;
     
     private Run run;
     private OS os;
     private Usuario usuarioLogado;
-    
 
     public OS getOs() {
         return os;
@@ -163,6 +168,19 @@ public class TelaOSController implements Initializable {
             if(!status.getNome().equals("Em orçamento")) {
                 excluirBtn.setVisible(false);
                 alterarBtn.setVisible(false);
+            }
+            if(usuarioLogado.getPerfil().getDescricao().equals("telefonista")) {
+                if(status.getNome().equals("Aguardando cliente")) {
+                    aprovarBtn.setVisible(true);
+                    recusarBtn.setVisible(true);
+                } else if(status.getNome().equals("Pronto")) {
+                    avisarBtn.setVisible(true);
+                }
+            }
+            if(usuarioLogado.getPerfil().getDescricao().equals("atendente")) {
+                if(status.getNome().equals("Avisado")) {
+                    entregarBtn.setVisible(true);
+                }
             }
             long val = osStatus.get(0).getDatOcorrencia();
             Date date = new Date(val);
@@ -200,20 +218,6 @@ public class TelaOSController implements Initializable {
     
     public void setRun(Run run) {
         this.run = run;
-    }
-    
-    private void redirecionaTelaCliente(MouseEvent event) {
-        try{
-            FXMLLoader loader = new FXMLLoader();
-            
-            loader.setLocation(Run.class.getResource("../View/TelaCliente.fxml"));
-            AnchorPane TelaCliente = (AnchorPane) loader.load();
-            //run.setCliente(cliente);
-            run.getRootLayout().setCenter(TelaCliente);
-        
-        } catch (IOException ex) {
-            Logger.getLogger(Run.class.getName()).log(Level.SEVERE, null, ex);
-        }
     }
 
     @FXML
@@ -658,5 +662,93 @@ public class TelaOSController implements Initializable {
         } catch (IOException ex) {
             Logger.getLogger(Run.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }
+
+    @FXML
+    private void aprovarOS(ActionEvent event) throws ExcecaoPersistencia, ExcecaoNegocio {
+        ManterOSStatus manterOSStatus = new ManterOSStatusImpl(OSStatusDAOImpl.getInstance());
+        OSStatus osStatus = new OSStatus();
+        osStatus.setDatOcorrencia(System.currentTimeMillis());
+        osStatus.setUsuario(usuarioLogado);
+        Status status = new Status();
+        status.setId(5);
+        status.setNome("Aprovado");
+        osStatus.setStatus(status);
+        osStatus.setOs(os);
+        manterOSStatus.cadastrarOSStatus(osStatus);
+        
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("Aprovar OS");
+        alert.setHeaderText("Concluído");
+        alert.setContentText("A OS foi aprovada com sucesso!");
+
+        alert.showAndWait();
+        voltarOS();
+    }
+
+    @FXML
+    private void recusarOS(ActionEvent event) throws ExcecaoPersistencia, ExcecaoNegocio {
+        ManterOSStatus manterOSStatus = new ManterOSStatusImpl(OSStatusDAOImpl.getInstance());
+        OSStatus osStatus = new OSStatus();
+        osStatus.setDatOcorrencia(System.currentTimeMillis());
+        osStatus.setUsuario(usuarioLogado);
+        Status status = new Status();
+        status.setId(4);
+        status.setNome("Recusado");
+        osStatus.setStatus(status);
+        osStatus.setOs(os);
+        manterOSStatus.cadastrarOSStatus(osStatus);
+        
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("Recusar OS");
+        alert.setHeaderText("Concluído");
+        alert.setContentText("A OS foi recusada com sucesso!");
+
+        alert.showAndWait();
+        voltarOS();
+    }
+
+    @FXML
+    private void avisarOS(ActionEvent event) throws ExcecaoPersistencia, ExcecaoNegocio {
+        ManterOSStatus manterOSStatus = new ManterOSStatusImpl(OSStatusDAOImpl.getInstance());
+        OSStatus osStatus = new OSStatus();
+        osStatus.setDatOcorrencia(System.currentTimeMillis());
+        osStatus.setUsuario(usuarioLogado);
+        Status status = new Status();
+        status.setId(8);
+        status.setNome("Avisado");
+        osStatus.setStatus(status);
+        osStatus.setOs(os);
+        manterOSStatus.cadastrarOSStatus(osStatus);
+        
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("Avisar OS");
+        alert.setHeaderText("Concluído");
+        alert.setContentText("A OS foi avisada com sucesso!");
+
+        alert.showAndWait();
+        voltarOS();
+    }
+
+    @FXML
+    private void entregarOS(ActionEvent event) throws ExcecaoPersistencia, ExcecaoNegocio {
+        ManterOSStatus manterOSStatus = new ManterOSStatusImpl(OSStatusDAOImpl.getInstance());
+        OSStatus osStatus = new OSStatus();
+        osStatus.setDatOcorrencia(System.currentTimeMillis());
+        osStatus.setUsuario(usuarioLogado);
+        Status status = new Status();
+        status.setId(9);
+        status.setNome("Entregue");
+        osStatus.setStatus(status);
+        osStatus.setOs(os);
+        manterOSStatus.cadastrarOSStatus(osStatus);
+        
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("Entregar OS");
+        alert.setHeaderText("Concluído");
+        alert.setContentText("A OS foi entregue com sucesso!");
+
+        alert.showAndWait();
+        voltarOS();
     }
 }
