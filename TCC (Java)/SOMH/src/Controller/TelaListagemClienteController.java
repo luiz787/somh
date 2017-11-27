@@ -119,6 +119,7 @@ public class TelaListagemClienteController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         try {
             filtroCliente.setItems(parametros);
+            filtroCliente.setValue("CPF/CNPJ");
             usuarioLogado = LoginController.getUsuarioLogado();
             
            colunaCPF.setCellValueFactory(new PropertyValueFactory<Cliente, Long>("codCPF_CNPJ"));
@@ -174,8 +175,6 @@ public class TelaListagemClienteController implements Initializable {
     private void realizarPesquisa(ActionEvent event) {
         try {
            
-           ClienteSelect = listaCliente.getSelectionModel().getSelectedItem().getCodCPF_CNPJ();
-                        System.out.println(ClienteSelect);
           
             
             listCliente.clear(); 
@@ -188,16 +187,16 @@ public class TelaListagemClienteController implements Initializable {
                 
                 if(listCliente.get(i).getCodCPF_CNPJ().toString().contains(textoPesquisa.getText()) && filtroCliente.getValue().toString().contains("CPF/CNPJ")){
                     listClienteaux.add(listCliente.get(i));
-                    System.out.println("CPF");
+                    
                 }
                 if(listCliente.get(i).getNome().toLowerCase().contains(textoPesquisa.getText().toLowerCase()) && filtroCliente.getValue().toString().contains("Nome")){
                     listClienteaux.add(listCliente.get(i));
-                    System.out.println("nome");
+                    
                 }
                 
                 
             }
-            System.out.println("debug");
+            
             if(listClienteaux.isEmpty()){
                 listaCliente.setItems(listCliente);
             }else{

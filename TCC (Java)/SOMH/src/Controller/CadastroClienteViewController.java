@@ -183,10 +183,10 @@ public class CadastroClienteViewController implements Initializable {
                 Alert alert = new Alert(AlertType.ERROR);
                 alert.setTitle("Cadastro de Cliente");
                 alert.setHeaderText("Erro");
-                alert.setContentText("Preencha os campos corretamente!(Campos com * são obrigatórios!)");
+                alert.setContentText("Preencha os campos corretamente! (Campos com * são obrigatórios!)");
 
                 alert.showAndWait();
-                throw new Exception("Preencha os campos corretamente!(Campos com * são obrigatórios!)");
+                throw new Exception("Preencha os campos corretamente! (Campos com * são obrigatórios!)");
             }
             
              
@@ -239,11 +239,10 @@ public class CadastroClienteViewController implements Initializable {
             }else{
                 mantercliente.cadastrarCliente(cliente);
             }
-            System.out.println("debug");
             Alert alert = new Alert(AlertType.CONFIRMATION);
             alert.setTitle("Cadastro de Cliente");
             alert.setHeaderText("Concluído");
-            alert.setContentText("O Cliente foi cadastrada com sucesso");
+            alert.setContentText("O Cliente foi cadastrado com sucesso!");
 
             alert.showAndWait();
             if(criaOS) {
