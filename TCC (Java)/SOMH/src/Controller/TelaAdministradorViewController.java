@@ -7,19 +7,15 @@ package Controller;
 
 import Domain.Usuario;
 import Main.Run;
-import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
-import javafx.stage.Stage;
 
 /**
  * FXML Controller class
@@ -30,8 +26,6 @@ public class TelaAdministradorViewController extends Run implements Initializabl
 
     @FXML
     private Pane pane;
-    @FXML
-    private Button cadastroOrcamento;
     @FXML
     private Button procuraOS;
     @FXML
@@ -60,18 +54,6 @@ public class TelaAdministradorViewController extends Run implements Initializabl
         
         usuario = LoginController.getUsuarioLogado();
         nomeLog.setText("Logado como " + usuario.getNome());        
-    }
-
-    public void cadastroOrcamento() throws Exception {
-        FXMLLoader loader = new FXMLLoader();
-
-        loader.setLocation(Run.class.getResource("../View/TelaOrcamentoView.fxml"));
-        AnchorPane TelaFuncionario = (AnchorPane) loader.load();
-
-        run.getRootLayout().setCenter(TelaFuncionario);
-
-        TelaOrcamentoViewController controller = loader.getController();
-        controller.setRun(run);
     }
 
     public void procuraOS() throws Exception {

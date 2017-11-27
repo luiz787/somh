@@ -27,8 +27,6 @@ public class TelaTecnicoViewController implements Initializable {
     @FXML
     private Pane pane;
     @FXML
-    private Button cadastroOrcamento;
-    @FXML
     private Button procuraOS;
     @FXML
     private Button sair;
@@ -48,18 +46,6 @@ public class TelaTecnicoViewController implements Initializable {
         
         user = LoginController.getUsuarioLogado();
         nomeLog.setText("Logado como " + user.getNome());
-    }
-
-    public void cadastroOrcamento() throws Exception {
-        FXMLLoader loader = new FXMLLoader();
-
-        loader.setLocation(Run.class.getResource("../View/TelaOrcamentoView.fxml"));
-        AnchorPane TelaFuncionario = (AnchorPane) loader.load();
-
-        run.getRootLayout().setCenter(TelaFuncionario);
-
-        TelaListagemOSController controller = loader.getController();
-        controller.setRun(run);
     }
 
     public void procuraOS() throws Exception {
