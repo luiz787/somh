@@ -127,6 +127,10 @@
                               <TextField fx:id="nomeAcessorioCadastro" layoutX="144.0" layoutY="630.0" prefHeight="25.0" prefWidth="241.0" visible="false" />
                               <Label fx:id="cadastrarAcessorioLB" layoutX="32.0" layoutY="634.0" text="Cadastrar Acessório:" visible="false" />
                               <Label fx:id="nomeCliente" layoutX="64.0" layoutY="51.0" text="nomeCliente" />
+                              <Button fx:id="aprovarBtn" focusTraversable="false" layoutX="15.0" layoutY="1033.0" mnemonicParsing="false" onAction="#aprovarOS" prefHeight="20.0" prefWidth="70.0" text="Aprovar" visible="false" />
+                              <Button fx:id="recusarBtn" focusTraversable="false" layoutX="284.0" layoutY="1033.0" mnemonicParsing="false" onAction="#recusarOS" prefHeight="20.0" prefWidth="70.0" text="Recusar" visible="false" />
+                              <Button fx:id="avisarBtn" focusTraversable="false" layoutX="15.0" layoutY="1033.0" mnemonicParsing="false" onAction="#avisarOS" prefHeight="20.0" prefWidth="70.0" text="Avisar" visible="false" />
+                              <Button fx:id="entregarBtn" focusTraversable="false" layoutX="15.0" layoutY="1033.0" mnemonicParsing="false" onAction="#entregarOS" prefHeight="20.0" prefWidth="70.0" text="Entregar" visible="false" />
                            </children>
                         </Pane>
                      </children>

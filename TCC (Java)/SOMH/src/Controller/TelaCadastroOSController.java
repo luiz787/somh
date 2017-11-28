@@ -1,7 +1,6 @@
 package Controller;
 
 import DAOImpl.AcessorioDAOImpl;
-import DAOImpl.ClienteDAOImpl;
 import DAOImpl.EquipamentoDAOImpl;
 import DAOImpl.OSAcessorioDAOImpl;
 import DAOImpl.OSDAOImpl;
@@ -18,13 +17,11 @@ import Domain.Perfil;
 import Domain.Status;
 import Domain.Usuario;
 import Service.ManterAcessorio;
-import Service.ManterCliente;
 import Service.ManterEquipamento;
 import Service.ManterOS;
 import Service.ManterOSAcessorio;
 import Service.ManterOSStatus;
 import ServiceImpl.ManterAcessorioImpl;
-import ServiceImpl.ManterClienteImpl;
 import ServiceImpl.ManterEquipamentoImpl;
 import ServiceImpl.ManterOSAcessorioImpl;
 import ServiceImpl.ManterOSImpl;
@@ -43,8 +40,6 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
@@ -58,7 +53,6 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
-import javafx.stage.Stage;
 
 public class TelaCadastroOSController implements Initializable {
 
@@ -124,6 +118,7 @@ public class TelaCadastroOSController implements Initializable {
     private Run run;
     private Usuario usuarioLogado;
     private Cliente cliente;
+    
 
     public Cliente getCliente() {
         return cliente;
@@ -162,7 +157,7 @@ public class TelaCadastroOSController implements Initializable {
         try {
             ManterOS manterOS = new ManterOSImpl(OSDAOImpl.getInstance());
             List<OS> listaOS = manterOS.getAll();
-            if(listaOS.size()==0) {
+            if(listaOS.isEmpty()) {
                 nroOS.setText("1");
             } else {
                 OS ultimaOS = listaOS.get(listaOS.size()-1);
@@ -317,15 +312,8 @@ public class TelaCadastroOSController implements Initializable {
             }
             
             osStatus.setDatOcorrencia(System.currentTimeMillis());
-            usuario.setId((long)(1));//Substituir quando login estiver pronto
-            usuario.setNome("Gabriel Victor");
-            Perfil perfil = new Perfil();
-            perfil.setId((long)1);
-            perfil.setDescricao("Balcão");
-            usuario.setPerfil(perfil);
-            usuario.setSenha("supersenha123");
-            osStatus.setUsuario(usuario);
-            status.setId(1);//Substituir quando login estiver pronto
+            osStatus.setUsuario(usuarioLogado);
+            status.setId(1);
             status.setNome("Em orçamento");
             osStatus.setStatus(status);
             osStatus.setOs(os);
