@@ -206,15 +206,6 @@ public class TelaManutencaoController implements Initializable {
             Logger.getLogger(TelaManutencaoController.class.getName()).log(Level.SEVERE, null, ex);
         }
         descricaoEquipamento.setText(os.getEquipamento().getDesEquipto());
-        valorServicos.textProperty().addListener((ObservableValue<? extends String> ov, String t, String t1) -> {
-            if (!valorServicos.getText().isEmpty()) {
-                Double tot = Double.parseDouble(valorServicos.getText()) + Double.parseDouble(precoPecas.getText());
-                valorTotal.setText(String.valueOf(tot));
-            } else {
-                Double tot = Double.parseDouble(precoPecas.getText());
-                valorTotal.setText(String.valueOf(tot));
-            }
-        });
     }
 
     public void adicionarPecaUso() {
@@ -249,6 +240,19 @@ public class TelaManutencaoController implements Initializable {
             valorTotal.setText(String.valueOf(total));
         }
     }
+    
+    public void recalcularPrecoServicos(){
+        double total = 0.0;
+        for (int i=0; i<servicosUsados.getItems().size(); i++){
+            total+=Double.parseDouble(servicosUsados.getItems().get(i).getValor());//string???????
+        }
+        valorServicos.setText(String.valueOf(total));
+        if (!precoPecas.getText().isEmpty()){
+            valorTotal.setText(String.valueOf(Double.parseDouble(precoPecas.getText()) + total));
+        } else {
+            valorTotal.setText(String.valueOf(total));
+        }
+    }
 
     public void adicionarPecaEstoque() throws ExcecaoNegocio, ExcecaoPersistencia {
         Peca p = new Peca();
@@ -270,15 +274,14 @@ public class TelaManutencaoController implements Initializable {
             }
             newServicoData.add(servicosEstoque.getSelectionModel().getSelectedItem());
             servicosUsados.setItems(newServicoData);
-            //recalcularPrecoPecas();
+            recalcularPrecoServicos();
         }
     }
     
     public void removerServicoUso(){
-        System.out.println("debug remover servicos");
         if (servicosUsados.getSelectionModel().getSelectedItem() != null) {
             servicosUsados.getItems().remove(servicosUsados.getSelectionModel().getSelectedItem());
-            //recalcularPrecoPecas();
+            recalcularPrecoServicos();
         }
     }
 
@@ -317,7 +320,6 @@ public class TelaManutencaoController implements Initializable {
             osItemPeca.setQtd(Collections.frequency(pecasUsadas.getItems(), x1));//determina a quantidade a partir da frequencia de ocorrencia no arraylist
             osItemPeca.setValorVenda(x1.getPrecoVenda());
             osItemPeca.setSituacao("Peça trocada");
-            System.out.println("Inseri uma peça. -> ");
             manterOSItemPeca.cadastrarOSItemPeca(osItemPeca);
         }
         //cadastra os objetos de OSItemPeca, fazendo a relacao entre a OS
@@ -332,9 +334,10 @@ public class TelaManutencaoController implements Initializable {
             osItemServico.setQuantidadeServico(Collections.frequency(servicosUsados.getItems(), x1));
             osItemServico.setSituacao(true);
             osItemServico.setValorServico(Double.parseDouble(x1.getValor()));
-            System.out.println("Inseri serviço.");
             manterOSItemServico.cadastrarOSItemServico(osItemServico);
         }
+        //cadastra os objetos de OSItemServico, fazendo a relacao entre a OS
+        //e os servicos utilizadas por ela.
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation(Run.class.getResource("../View/TelaListagemOSView.fxml"));
         AnchorPane TelaFuncionario = null;
@@ -343,9 +346,7 @@ public class TelaManutencaoController implements Initializable {
         } catch (IOException ex) {
             Logger.getLogger(TelaManutencaoController.class.getName()).log(Level.SEVERE, null, ex);
         }
-
         run.getRootLayout().setCenter(TelaFuncionario);
-
         TelaListagemOSController controller = loader.getController();
         controller.setRun(run);
         //retornar para listagem de OS
