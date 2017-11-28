@@ -25,6 +25,8 @@ public class OSItemServico {
     Double valorServico;
     boolean situacao;
 
+    public OSItemServico() {}
+
     public OS getOs() {
         return os;
     }
