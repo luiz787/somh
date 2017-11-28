@@ -4,6 +4,8 @@ import DAOImpl.AcessorioDAOImpl;
 import DAOImpl.EquipamentoDAOImpl;
 import DAOImpl.OSAcessorioDAOImpl;
 import DAOImpl.OSDAOImpl;
+import DAOImpl.OSItemPecaDAOImpl;
+import DAOImpl.OSItemServicoDAOImpl;
 import DAOImpl.OSStatusDAOImpl;
 import DAOImpl.StatusDAOImpl;
 import Domain.Acessorio;
@@ -11,6 +13,8 @@ import Domain.Cliente;
 import Domain.Equipamento;
 import Domain.OS;
 import Domain.OSAcessorio;
+import Domain.OSItemPeca;
+import Domain.OSItemServico;
 import Domain.OSStatus;
 import Domain.Status;
 import Domain.Usuario;
@@ -21,12 +25,16 @@ import Service.ManterAcessorio;
 import Service.ManterEquipamento;
 import Service.ManterOS;
 import Service.ManterOSAcessorio;
+import Service.ManterOSItemPeca;
+import Service.ManterOSItemServico;
 import Service.ManterOSStatus;
 import Service.ManterStatus;
 import ServiceImpl.ManterAcessorioImpl;
 import ServiceImpl.ManterEquipamentoImpl;
 import ServiceImpl.ManterOSAcessorioImpl;
 import ServiceImpl.ManterOSImpl;
+import ServiceImpl.ManterOSItemPecaImpl;
+import ServiceImpl.ManterOSItemServicoImpl;
 import ServiceImpl.ManterOSStatusImpl;
 import ServiceImpl.ManterStatusImpl;
 import java.io.IOException;
@@ -135,6 +143,10 @@ public class TelaOSController implements Initializable {
     private Button avisarBtn;
     @FXML
     private Button entregarBtn;
+    @FXML
+    private Label preçoFinal;
+    @FXML
+    private Label preçoFinalLB;
     
     private Run run;
     private OS os;
@@ -162,6 +174,8 @@ public class TelaOSController implements Initializable {
             ManterStatus manterStatus = new ManterStatusImpl(StatusDAOImpl.getInstance());
             ManterOSStatus manterOSStatus = new ManterOSStatusImpl(OSStatusDAOImpl.getInstance());
             ManterOSAcessorio manterOSAcessorio = new ManterOSAcessorioImpl(OSAcessorioDAOImpl.getInstance());
+            ManterOSItemPeca manterOSItemPeca = new ManterOSItemPecaImpl(OSItemPecaDAOImpl.getInstance());
+            ManterOSItemServico manterOSItemServico = new ManterOSItemServicoImpl(OSItemServicoDAOImpl.getInstance());
             
             ArrayList<OSStatus> osStatus = (ArrayList<OSStatus>) manterOSStatus.getAllByOS(os.getId());
             Status status = osStatus.get(osStatus.size()-1).getStatus();
@@ -181,6 +195,20 @@ public class TelaOSController implements Initializable {
                 if(status.getNome().equals("Avisado")) {
                     entregarBtn.setVisible(true);
                 }
+            }
+            if(status.getId()>=7) {
+                preçoFinalLB.setVisible(true);
+                preçoFinal.setVisible(true);
+                ArrayList<OSItemPeca> osItemPecaList = (ArrayList<OSItemPeca>) manterOSItemPeca.getAllByOS(os.getId());
+                Double valorTotal = 0.0;
+                for(OSItemPeca osItemPeca : osItemPecaList) {
+                    valorTotal += (osItemPeca.getValorVenda()*osItemPeca.getQtd());
+                }
+                ArrayList<OSItemServico> osItemServicoList = (ArrayList<OSItemServico>) manterOSItemServico.getAllByOS(os.getId());
+                for(OSItemServico osItemServico : osItemServicoList) {
+                    valorTotal += (osItemServico.getValorServico()*osItemServico.getQuantidadeServico());
+                }
+                preçoFinal.setText(valorTotal.toString());
             }
             long val = osStatus.get(0).getDatOcorrencia();
             Date date = new Date(val);
@@ -212,6 +240,8 @@ public class TelaOSController implements Initializable {
             colunaAcessoriosCadastrados.setCellValueFactory(cellData -> cellData.getValue().NomeAcessorioProperty());
             colunaAcessoriosSelecionados.setCellValueFactory(cellData -> cellData.getValue().NomeAcessorioProperty());
         } catch (ExcecaoPersistencia ex) {
+            Logger.getLogger(TelaOSController.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ExcecaoNegocio ex) {
             Logger.getLogger(TelaOSController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }    
