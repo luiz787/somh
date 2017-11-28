@@ -138,10 +138,10 @@ public class TelaManutencaoController implements Initializable {
     private TextField valorPeca;
 
     @FXML
-    private TextField valorServicos;
+    private Label valorServicos;
 
     @FXML
-    private TextField valorTotal;
+    private Label valorTotal;
 
     private Run run;
     private OS os;
