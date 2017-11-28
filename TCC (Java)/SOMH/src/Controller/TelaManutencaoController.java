@@ -6,22 +6,30 @@
 package Controller;
 
 import DAOImpl.OSItemPecaDAOImpl;
+import DAOImpl.OSItemServicoDAOImpl;
 import DAOImpl.OSStatusDAOImpl;
 import DAOImpl.PecaDAOImpl;
+import DAOImpl.ServicoDAOImpl;
 import Domain.OS;
 import Domain.OSItemPeca;
+import Domain.OSItemServico;
 import Domain.OSStatus;
 import Domain.Peca;
+import Domain.Servico;
 import Domain.Status;
 import Exception.ExcecaoNegocio;
 import Exception.ExcecaoPersistencia;
 import Main.Run;
 import Service.ManterOSItemPeca;
+import Service.ManterOSItemServico;
 import Service.ManterOSStatus;
 import Service.ManterPeca;
+import Service.ManterServico;
 import ServiceImpl.ManterOSItemPecaImpl;
+import ServiceImpl.ManterOSItemServicoImpl;
 import ServiceImpl.ManterOSStatusImpl;
 import ServiceImpl.ManterPecaImpl;
+import ServiceImpl.ManterServicoImpl;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.Timestamp;
@@ -34,7 +42,6 @@ import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.beans.property.SimpleStringProperty;
-import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -102,15 +109,24 @@ public class TelaManutencaoController implements Initializable {
 
     @FXML
     private TableColumn<Peca, String> pecasUsadasColumn;
+    
+    @FXML
+    private TableView<Servico> servicosEstoque;
+    
+    @FXML
+    private TableView<Servico> servicosUsados;
+    
+    @FXML
+    private TableColumn<Servico, String> servicosEstoqueColumn;
+    
+    @FXML
+    private TableColumn<Servico, String> servicosUsadosColumn;
 
     @FXML
     private Label precoPecas;
 
     @FXML
     private Button removerPeca;
-
-    @FXML
-    private TextArea servicos;
 
     @FXML
     private TextField valorPeca;
@@ -124,6 +140,7 @@ public class TelaManutencaoController implements Initializable {
     private Run run;
     private OS os;
 
+    private ArrayList<Servico> servicos;
     private ArrayList<Peca> pecas;
 
     public OS getOs() {
@@ -162,6 +179,19 @@ public class TelaManutencaoController implements Initializable {
         pecasEstoque.setItems(pecasData);
         pecasEstoqueColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getDescricao()));
         pecasUsadasColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getDescricao()));
+        ManterServico manterServico = new ManterServicoImpl(ServicoDAOImpl.getInstance());
+        try {
+            servicos = (ArrayList<Servico>) manterServico.listAll();
+        } catch (ExcecaoPersistencia ex) {
+            Logger.getLogger(TelaManutencaoController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        ObservableList<Servico> servicosData = FXCollections.observableArrayList();
+        for (Servico servico:servicos){
+            servicosData.add(servico);
+        }
+        servicosEstoque.setItems(servicosData);
+        servicosEstoqueColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getDescricao()));
+        servicosUsadosColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getDescricao()));
         codigoOS.setText(String.valueOf(os.getId()));
         ManterOSStatus manterOSStatus = new ManterOSStatusImpl(OSStatusDAOImpl.getInstance());
         try {
@@ -222,17 +252,26 @@ public class TelaManutencaoController implements Initializable {
         ManterPeca manterPeca = new ManterPecaImpl(new PecaDAOImpl());
         manterPeca.insert(p);
         pecasEstoque.getItems().add(p);
-        refreshPecasEstoqueString();
         recalcularPrecoPecas();
     }
-
-    public void refreshPecasEstoqueString() throws ExcecaoPersistencia {
-        ManterPeca manterPeca = new ManterPecaImpl(new PecaDAOImpl());
-        pecas = (ArrayList<Peca>) manterPeca.listAll();
-        for (Peca x1 : pecas) {
-            if (!pecasEstoque.getItems().contains(x1)) {
-                pecasEstoque.getItems().add(x1);
+    
+    public void adicionarServicoUso(){
+        if (servicosEstoque.getSelectionModel().getSelectedItem() != null) {
+            ObservableList<Servico> newServicoData = FXCollections.observableArrayList();
+            for (int i = 0; i < servicosUsados.getItems().size(); i++) {
+                Servico servicoExistente = servicosUsados.getItems().get(i);
+                newServicoData.add(servicoExistente);
             }
+            newServicoData.add(servicosEstoque.getSelectionModel().getSelectedItem());
+            servicosUsados.setItems(newServicoData);
+            //recalcularPrecoPecas();
+        }
+    }
+    
+    public void removerServicoUso(){
+        if (pecasUsadas.getSelectionModel().getSelectedItem() != null) {
+            pecasUsadas.getItems().remove(pecasUsadas.getSelectionModel().getSelectedItem());
+            //recalcularPrecoPecas();
         }
     }
 
@@ -276,6 +315,19 @@ public class TelaManutencaoController implements Initializable {
         }
         //cadastra os objetos de OSItemPeca, fazendo a relacao entre a OS
         //e as pecas utilizadas por ela.
+        ManterServico manterServico = new ManterServicoImpl(ServicoDAOImpl.getInstance());
+        ManterOSItemServico manterOSItemServico = new ManterOSItemServicoImpl(OSItemServicoDAOImpl.getInstance());
+        Set<Servico> servicosUnicos = new HashSet<>(servicosUsados.getItems());
+        for (Servico x1:servicosUnicos){
+            OSItemServico osItemServico = new OSItemServico();
+            osItemServico.setOs(os);
+            osItemServico.setServico(x1);
+            osItemServico.setQuantidadeServico(Collections.frequency(servicosUsados.getItems(), x1));
+            osItemServico.setSituacao(true);
+            osItemServico.setValorServico(Double.parseDouble(x1.getValor()));
+            System.out.println("Inseri serviço.");
+            manterOSItemServico.cadastrarOSItemServico(osItemServico);
+        }
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation(Run.class.getResource("../View/TelaListagemOSView.fxml"));
         AnchorPane TelaFuncionario = null;
