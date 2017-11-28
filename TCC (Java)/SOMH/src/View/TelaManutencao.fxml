@@ -85,8 +85,8 @@
                         <TableColumn fx:id="servicosEstoqueColumn" prefWidth="150.0" text="Serviços" />
                      </columns>
                   </TableView>
-                  <Button layoutX="728.0" layoutY="212.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="56.0" text="&gt;" />
-                  <Button layoutX="728.0" layoutY="246.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="57.0" text="&lt;" />
+                  <Button fx:id="removerServico" layoutX="728.0" layoutY="212.0" mnemonicParsing="false" onAction="#removerServicoUso" prefHeight="25.0" prefWidth="56.0" text="&gt;" />
+                  <Button fx:id="adicionarServico" layoutX="728.0" layoutY="246.0" mnemonicParsing="false" onAction="#adicionarServicoUso" prefHeight="25.0" prefWidth="57.0" text="&lt;" />
             </children>
           </Pane>
          </children>

@@ -76,6 +76,12 @@ public class TelaManutencaoController implements Initializable {
 
     @FXML
     private Button botaoIrrecuperavel;
+    
+    @FXML
+    private Button adicionarServico;
+    
+    @FXML
+    private Button removerServico;
 
     @FXML
     private Label codigoOS;
@@ -269,8 +275,9 @@ public class TelaManutencaoController implements Initializable {
     }
     
     public void removerServicoUso(){
-        if (pecasUsadas.getSelectionModel().getSelectedItem() != null) {
-            pecasUsadas.getItems().remove(pecasUsadas.getSelectionModel().getSelectedItem());
+        System.out.println("debug remover servicos");
+        if (servicosUsados.getSelectionModel().getSelectedItem() != null) {
+            servicosUsados.getItems().remove(servicosUsados.getSelectionModel().getSelectedItem());
             //recalcularPrecoPecas();
         }
     }
