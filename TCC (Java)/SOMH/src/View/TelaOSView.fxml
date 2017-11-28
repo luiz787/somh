@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.paint.*?>
 <?import java.lang.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
@@ -131,6 +132,16 @@
                               <Button fx:id="recusarBtn" focusTraversable="false" layoutX="284.0" layoutY="1033.0" mnemonicParsing="false" onAction="#recusarOS" prefHeight="20.0" prefWidth="70.0" text="Recusar" visible="false" />
                               <Button fx:id="avisarBtn" focusTraversable="false" layoutX="15.0" layoutY="1033.0" mnemonicParsing="false" onAction="#avisarOS" prefHeight="20.0" prefWidth="70.0" text="Avisar" visible="false" />
                               <Button fx:id="entregarBtn" focusTraversable="false" layoutX="15.0" layoutY="1033.0" mnemonicParsing="false" onAction="#entregarOS" prefHeight="20.0" prefWidth="70.0" text="Entregar" visible="false" />
+                              <Label fx:id="preçoFinalLB" layoutX="365.0" layoutY="101.0" text="Preço Final: " visible="false">
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font>
+                              </Label>
+                              <Label fx:id="preçoFinal" layoutX="366.0" layoutY="124.0" text="preçoFinal" textFill="#2aae2c" visible="false">
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font>
+                              </Label>
                            </children>
                         </Pane>
                      </children>
