@@ -2,5 +2,7 @@
 <classpath>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="lib" path="C:/Users/Dell/Desktop/somh/TCC (Java)/mysql-connector-java-5.1.42-bin.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Dell/Desktop/somh/TCC (Java)/controlsfx-8.0.6_20.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

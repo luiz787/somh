@@ -177,7 +177,7 @@ public class TelaOrcamentoViewController implements Initializable {
 
                     loader = new FXMLLoader();
 
-                    loader.setLocation(Run.class.getResource("../View/" + telaUsuario));
+                    loader.setLocation(Run.class.getResource("../view/" + telaUsuario));
                     AnchorPane TelaAdministrador = (AnchorPane) loader.load();
 
                     run.getRootLayout().setCenter(TelaAdministrador);
@@ -190,7 +190,7 @@ public class TelaOrcamentoViewController implements Initializable {
 
                     loader = new FXMLLoader();
 
-                    loader.setLocation(Run.class.getResource("../View/" + telaUsuario));
+                    loader.setLocation(Run.class.getResource("../view/" + telaUsuario));
                     AnchorPane TelaAtendente = (AnchorPane) loader.load();
 
                     run.getRootLayout().setCenter(TelaAtendente);
@@ -203,7 +203,7 @@ public class TelaOrcamentoViewController implements Initializable {
 
                     loader = new FXMLLoader();
 
-                    loader.setLocation(Run.class.getResource("../View/" + telaUsuario));
+                    loader.setLocation(Run.class.getResource("../view/" + telaUsuario));
                     AnchorPane TelaTelefonista = (AnchorPane) loader.load();
 
                     run.getRootLayout().setCenter(TelaTelefonista);
@@ -216,7 +216,7 @@ public class TelaOrcamentoViewController implements Initializable {
 
                     loader = new FXMLLoader();
 
-                    loader.setLocation(Run.class.getResource("../View/" + telaUsuario));
+                    loader.setLocation(Run.class.getResource("../view/" + telaUsuario));
                     AnchorPane TelaTecnico = (AnchorPane) loader.load();
 
                     run.getRootLayout().setCenter(TelaTecnico);
@@ -259,7 +259,7 @@ public class TelaOrcamentoViewController implements Initializable {
         FXMLLoader loader;
         loader = new FXMLLoader();
 
-        loader.setLocation(Run.class.getResource("../View/TelaListagemOSView.fxml"));
+        loader.setLocation(Run.class.getResource("../view/TelaListagemOSView.fxml"));
         AnchorPane TelaTecnico = (AnchorPane) loader.load();
 
         run.getRootLayout().setCenter(TelaTecnico);

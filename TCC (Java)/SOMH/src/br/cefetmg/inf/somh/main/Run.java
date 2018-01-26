@@ -69,7 +69,7 @@ public class Run extends Application {
         try {
             // Carrega o root layout do arquivo fxml.
             FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(Run.class.getResource("../View/RootLayout.fxml"));
+            loader.setLocation(Run.class.getResource("../view/RootLayout.fxml"));
             rootLayout = (BorderPane) loader.load();
             // Mostra a scene (cena) contendo o root layout.
             Scene scene = new Scene(rootLayout);
@@ -83,7 +83,7 @@ public class Run extends Application {
         try {
             FXMLLoader loader = new FXMLLoader();
 
-            loader.setLocation(Run.class.getResource("../View/CadastroClienteView.fxml"));
+            loader.setLocation(Run.class.getResource("../view/CadastroClienteView.fxml"));
             AnchorPane CadastroClienteView = (AnchorPane) loader.load();
 
             rootLayout.setCenter(CadastroClienteView);
@@ -99,7 +99,7 @@ public class Run extends Application {
     public void showLogin() {
         try {
             FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(Run.class.getResource("../View/Login.fxml"));
+            loader.setLocation(Run.class.getResource("../view/Login.fxml"));
             AnchorPane Login = (AnchorPane) loader.load();
             rootLayout.setCenter(Login);
             LoginController controller = loader.getController();

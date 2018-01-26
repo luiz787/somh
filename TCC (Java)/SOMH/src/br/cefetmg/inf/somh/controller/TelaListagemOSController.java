@@ -250,7 +250,7 @@ public class TelaListagemOSController implements Initializable {
                                     TelaOrcamentoViewController controlador = new TelaOrcamentoViewController(os);
                                     controlador.setRun(run);
                                     FXMLLoader loader = new FXMLLoader();
-                                    loader.setLocation(Run.class.getResource("../View/TelaOrcamentoView.fxml"));
+                                    loader.setLocation(Run.class.getResource("../view/TelaOrcamentoView.fxml"));
                                     loader.setController(controlador);
                                     AnchorPane TelaOrcamento = (AnchorPane) loader.load();
                                     run.getRootLayout().setCenter(TelaOrcamento);
@@ -258,7 +258,7 @@ public class TelaListagemOSController implements Initializable {
                                     TelaManutencaoController controlador = new TelaManutencaoController(os);
                                     controlador.setRun(run);
                                     FXMLLoader loader = new FXMLLoader();
-                                    loader.setLocation(Run.class.getResource("../View/TelaManutencao.fxml"));
+                                    loader.setLocation(Run.class.getResource("../view/TelaManutencao.fxml"));
                                     loader.setController(controlador);
                                     AnchorPane TelaManutencao = (AnchorPane) loader.load();
                                     run.getRootLayout().setCenter(TelaManutencao);
@@ -267,7 +267,7 @@ public class TelaListagemOSController implements Initializable {
                                 TelaOSController controlador = new TelaOSController(os);
                                 controlador.setRun(run);
                                 FXMLLoader loader = new FXMLLoader();
-                                loader.setLocation(Run.class.getResource("../View/TelaOSView.fxml"));
+                                loader.setLocation(Run.class.getResource("../view/TelaOSView.fxml"));
                                 loader.setController(controlador);
                                 AnchorPane TelaOS = (AnchorPane) loader.load();
                                 run.getRootLayout().setCenter(TelaOS);
@@ -434,7 +434,7 @@ public class TelaListagemOSController implements Initializable {
                     
                     loader = new FXMLLoader();
             
-                    loader.setLocation(Run.class.getResource("../View/"+telaUsuario));
+                    loader.setLocation(Run.class.getResource("../view/"+telaUsuario));
                     AnchorPane TelaAdministrador = (AnchorPane) loader.load();
 
                     run.getRootLayout().setCenter(TelaAdministrador);
@@ -447,7 +447,7 @@ public class TelaListagemOSController implements Initializable {
                     
                     loader = new FXMLLoader();
             
-                    loader.setLocation(Run.class.getResource("../View/"+telaUsuario));
+                    loader.setLocation(Run.class.getResource("../view/"+telaUsuario));
                     AnchorPane TelaAtendente = (AnchorPane) loader.load();
 
                     run.getRootLayout().setCenter(TelaAtendente);
@@ -460,7 +460,7 @@ public class TelaListagemOSController implements Initializable {
                     
                     loader = new FXMLLoader();
             
-                    loader.setLocation(Run.class.getResource("../View/"+telaUsuario));
+                    loader.setLocation(Run.class.getResource("../view/"+telaUsuario));
                     AnchorPane TelaTelefonista = (AnchorPane) loader.load();
 
                     run.getRootLayout().setCenter(TelaTelefonista);
@@ -473,7 +473,7 @@ public class TelaListagemOSController implements Initializable {
                     
                     loader = new FXMLLoader();
             
-                    loader.setLocation(Run.class.getResource("../View/"+telaUsuario));
+                    loader.setLocation(Run.class.getResource("../view/"+telaUsuario));
                     AnchorPane TelaTecnico = (AnchorPane) loader.load();
 
                     run.getRootLayout().setCenter(TelaTecnico);

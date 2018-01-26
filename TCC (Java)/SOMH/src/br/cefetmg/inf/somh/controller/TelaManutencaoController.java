@@ -293,7 +293,7 @@ public class TelaManutencaoController implements Initializable {
         //cadastra um novo status da OS atual, informando a data atual, o funcionário responsável, e o status 11 (irrecuperavel)
         FXMLLoader loader = new FXMLLoader();
 
-        loader.setLocation(Run.class.getResource("../View/TelaListagemOSView.fxml"));
+        loader.setLocation(Run.class.getResource("../view/TelaListagemOSView.fxml"));
         AnchorPane TelaFuncionario = null;
         try {
             TelaFuncionario = (AnchorPane) loader.load();
@@ -340,7 +340,7 @@ public class TelaManutencaoController implements Initializable {
         //cadastra os objetos de OSItemServico, fazendo a relacao entre a OS
         //e os servicos utilizadas por ela.
         FXMLLoader loader = new FXMLLoader();
-        loader.setLocation(Run.class.getResource("../View/TelaListagemOSView.fxml"));
+        loader.setLocation(Run.class.getResource("../view/TelaListagemOSView.fxml"));
         AnchorPane TelaFuncionario = null;
         try {
             TelaFuncionario = (AnchorPane) loader.load();

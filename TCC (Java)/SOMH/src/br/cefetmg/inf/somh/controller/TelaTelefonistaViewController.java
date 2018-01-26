@@ -61,7 +61,7 @@ public class TelaTelefonistaViewController implements Initializable {
     public void procuraCliente() throws Exception {
         FXMLLoader loader = new FXMLLoader();
 
-        loader.setLocation(Run.class.getResource("../View/TelaListagemClienteView.fxml"));
+        loader.setLocation(Run.class.getResource("../view/TelaListagemClienteView.fxml"));
         AnchorPane TelaFuncionario = (AnchorPane) loader.load();
 
         run.getRootLayout().setCenter(TelaFuncionario);
@@ -74,7 +74,7 @@ public class TelaTelefonistaViewController implements Initializable {
     public void sair() throws Exception {
         FXMLLoader loader = new FXMLLoader();
 
-        loader.setLocation(Run.class.getResource("../View/Login.fxml"));
+        loader.setLocation(Run.class.getResource("../view/Login.fxml"));
         AnchorPane TelaFuncionario = (AnchorPane) loader.load();
 
         run.getRootLayout().setCenter(TelaFuncionario);
@@ -92,7 +92,7 @@ public class TelaTelefonistaViewController implements Initializable {
         try {
             FXMLLoader loader = new FXMLLoader();
             
-            loader.setLocation(Run.class.getResource("../View/TelaListagemOSView.fxml"));
+            loader.setLocation(Run.class.getResource("../view/TelaListagemOSView.fxml"));
             AnchorPane TelaFuncionario = (AnchorPane) loader.load();
             
             run.getRootLayout().setCenter(TelaFuncionario);

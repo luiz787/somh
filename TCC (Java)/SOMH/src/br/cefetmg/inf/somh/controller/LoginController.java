@@ -84,7 +84,7 @@ public class LoginController implements Initializable {
                     showTelaTecnicoView();
                     break;
                 default:
-                    Alert alert = new Alert(AlertType.ERROR, "Erro: perfil de usuário inválido. Tente novamente.");
+                    Alert alert = new Alert(AlertType.ERROR, "Erro: perfil de usuario invalido. Tente novamente.");
                     Optional<ButtonType> result = alert.showAndWait();
                     if (result.isPresent() && result.get() == ButtonType.OK) {
                         user.setText("");
@@ -93,7 +93,7 @@ public class LoginController implements Initializable {
                     break;
             } // arrumar ordem das chamadas
         } else {
-            Alert alert = new Alert(AlertType.ERROR, "Erro: usuário ou senha incorretos. Tente novamente.");
+            Alert alert = new Alert(AlertType.ERROR, "Erro: usuario ou senha incorretos. Tente novamente.");
             Optional<ButtonType> result = alert.showAndWait();
             if (result.isPresent() && result.get() == ButtonType.OK) {
                 user.setText("");
@@ -113,7 +113,7 @@ public class LoginController implements Initializable {
         try {
             FXMLLoader loader = new FXMLLoader();
 
-            loader.setLocation(Run.class.getResource("../View/teste.fxml"));
+            loader.setLocation(Run.class.getResource("../view/teste.fxml"));
             AnchorPane TelaFuncionario = (AnchorPane) loader.load();
 
             run.getRootLayout().setCenter(TelaFuncionario);
@@ -130,7 +130,7 @@ public class LoginController implements Initializable {
         try {
             FXMLLoader loader = new FXMLLoader();
 
-            loader.setLocation(Run.class.getResource("../View/TelaAdministradorView.fxml"));
+            loader.setLocation(Run.class.getResource("../view/TelaAdministradorView.fxml"));
             AnchorPane TelaAdm = (AnchorPane) loader.load();
 
             run.getRootLayout().setCenter(TelaAdm);
@@ -148,7 +148,7 @@ public class LoginController implements Initializable {
         try {
             FXMLLoader loader = new FXMLLoader();
 
-            loader.setLocation(Run.class.getResource("../View/TelaAtendenteView.fxml"));
+            loader.setLocation(Run.class.getResource("../view/TelaAtendenteView.fxml"));
             AnchorPane TelaAtendente = (AnchorPane) loader.load();
 
             run.getRootLayout().setCenter(TelaAtendente);
@@ -165,7 +165,7 @@ public class LoginController implements Initializable {
         try {
             FXMLLoader loader = new FXMLLoader();
 
-            loader.setLocation(Run.class.getResource("../View/TelaTelefonistaView.fxml"));
+            loader.setLocation(Run.class.getResource("../view/TelaTelefonistaView.fxml"));
             AnchorPane TelaTelefonista = (AnchorPane) loader.load();
 
             run.getRootLayout().setCenter(TelaTelefonista);
@@ -182,7 +182,7 @@ public class LoginController implements Initializable {
         try {
             FXMLLoader loader = new FXMLLoader();
 
-            loader.setLocation(Run.class.getResource("../View/TelaTecnicoView.fxml"));
+            loader.setLocation(Run.class.getResource("../view/TelaTecnicoView.fxml"));
             AnchorPane TelaTecnico = (AnchorPane) loader.load();
 
             run.getRootLayout().setCenter(TelaTecnico);

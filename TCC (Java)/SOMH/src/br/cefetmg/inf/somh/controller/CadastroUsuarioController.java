@@ -130,7 +130,7 @@ public class CadastroUsuarioController implements Initializable, Serializable {
         try {
             FXMLLoader loader = new FXMLLoader();
 
-            loader.setLocation(Run.class.getResource("../View/TelaAdministradorView.fxml"));
+            loader.setLocation(Run.class.getResource("../view/TelaAdministradorView.fxml"));
             AnchorPane TelaLogin = (AnchorPane) loader.load();
 
             run.getRootLayout().setCenter(TelaLogin);

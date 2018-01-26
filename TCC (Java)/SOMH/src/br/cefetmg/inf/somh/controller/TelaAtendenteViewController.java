@@ -62,7 +62,7 @@ public class TelaAtendenteViewController implements Initializable {
         FXMLLoader loader = new FXMLLoader();
         TelaCadastroOSController controlador = new TelaCadastroOSController(null);
         loader.setController(controlador);
-        loader.setLocation(Run.class.getResource("../View/TelaCadastroOSView.fxml"));
+        loader.setLocation(Run.class.getResource("../view/TelaCadastroOSView.fxml"));
         AnchorPane TelaFuncionario = (AnchorPane) loader.load();
 
         run.getRootLayout().setCenter(TelaFuncionario);
@@ -74,7 +74,7 @@ public class TelaAtendenteViewController implements Initializable {
     public void cadastroCliente() throws Exception {
         FXMLLoader loader = new FXMLLoader();
 
-        loader.setLocation(Run.class.getResource("../View/CadastroClienteView.fxml"));
+        loader.setLocation(Run.class.getResource("../view/CadastroClienteView.fxml"));
         AnchorPane TelaFuncionario = (AnchorPane) loader.load();
 
         run.getRootLayout().setCenter(TelaFuncionario);
@@ -87,7 +87,7 @@ public class TelaAtendenteViewController implements Initializable {
     public void procuraOS() throws Exception {
         FXMLLoader loader = new FXMLLoader();
 
-        loader.setLocation(Run.class.getResource("../View/TelaListagemOSView.fxml"));
+        loader.setLocation(Run.class.getResource("../view/TelaListagemOSView.fxml"));
         AnchorPane TelaFuncionario = (AnchorPane) loader.load();
 
         run.getRootLayout().setCenter(TelaFuncionario);
@@ -99,7 +99,7 @@ public class TelaAtendenteViewController implements Initializable {
     public void sair() throws Exception {
         FXMLLoader loader = new FXMLLoader();
 
-        loader.setLocation(Run.class.getResource("../View/Login.fxml"));
+        loader.setLocation(Run.class.getResource("../view/Login.fxml"));
         AnchorPane TelaFuncionario = (AnchorPane) loader.load();
 
         run.getRootLayout().setCenter(TelaFuncionario);
