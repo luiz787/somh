@@ -144,9 +144,9 @@ public class TelaOSController implements Initializable {
     @FXML
     private Button entregarBtn;
     @FXML
-    private Label preçoFinal;
+    private Label precoFinal;
     @FXML
-    private Label preçoFinalLB;
+    private Label precoFinalLB;
     
     private Run run;
     private OS os;
@@ -197,8 +197,8 @@ public class TelaOSController implements Initializable {
                 }
             }
             if(status.getId()>=7) {
-                preçoFinalLB.setVisible(true);
-                preçoFinal.setVisible(true);
+                precoFinalLB.setVisible(true);
+                precoFinal.setVisible(true);
                 ArrayList<OSItemPeca> osItemPecaList = (ArrayList<OSItemPeca>) manterOSItemPeca.getAllByOS(os.getId());
                 Double valorTotal = 0.0;
                 for(OSItemPeca osItemPeca : osItemPecaList) {
@@ -208,7 +208,7 @@ public class TelaOSController implements Initializable {
                 for(OSItemServico osItemServico : osItemServicoList) {
                     valorTotal += (osItemServico.getValorServico()*osItemServico.getQuantidadeServico());
                 }
-                preçoFinal.setText(valorTotal.toString());
+                precoFinal.setText(valorTotal.toString());
             }
             long val = osStatus.get(0).getDatOcorrencia();
             Date date = new Date(val);
