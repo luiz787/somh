@@ -1,15 +1,5 @@
 package br.cefetmg.inf.somh.dao.impl;
 
-import br.cefetmg.inf.somh.bd.JDBCManterConexao;
-import br.cefetmg.inf.somh.dao.AcessorioDAO;
-import br.cefetmg.inf.somh.dao.ClienteDAO;
-import br.cefetmg.inf.somh.dao.EquipamentoDAO;
-import br.cefetmg.inf.somh.dao.OSDAO;
-import br.cefetmg.inf.somh.domain.Cliente;
-import br.cefetmg.inf.somh.domain.OS;
-import br.cefetmg.inf.somh.domain.OSAcessorio;
-import br.cefetmg.inf.somh.exception.ExcecaoPersistencia;
-
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -18,6 +8,13 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
+import br.cefetmg.inf.somh.bd.JDBCManterConexao;
+import br.cefetmg.inf.somh.dao.ClienteDAO;
+import br.cefetmg.inf.somh.dao.EquipamentoDAO;
+import br.cefetmg.inf.somh.dao.OSDAO;
+import br.cefetmg.inf.somh.domain.OS;
+import br.cefetmg.inf.somh.exception.ExcecaoPersistencia;
 
 public class OSDAOImpl implements OSDAO {
     private static OSDAOImpl osDAO = null;

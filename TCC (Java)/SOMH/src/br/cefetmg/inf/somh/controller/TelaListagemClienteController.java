@@ -5,24 +5,19 @@
  */
 package br.cefetmg.inf.somh.controller;
 
-import br.cefetmg.inf.somh.dao.impl.ClienteDAOImpl;
-import br.cefetmg.inf.somh.dao.impl.UfDAOImpl;
-import br.cefetmg.inf.somh.domain.Cidade;
-import br.cefetmg.inf.somh.domain.Cliente;
-import br.cefetmg.inf.somh.domain.UF;
-import br.cefetmg.inf.somh.domain.Usuario;
-import br.cefetmg.inf.somh.exception.ExcecaoPersistencia;
-import br.cefetmg.inf.somh.main.Run;
-import br.cefetmg.inf.somh.service.ManterCliente;
-import br.cefetmg.inf.somh.service.ManterUF;
-import br.cefetmg.inf.somh.service.impl.ManterClienteImpl;
-import br.cefetmg.inf.somh.service.impl.ManterUFImpl;
-
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
+import br.cefetmg.inf.somh.dao.impl.ClienteDAOImpl;
+import br.cefetmg.inf.somh.domain.Cliente;
+import br.cefetmg.inf.somh.domain.Usuario;
+import br.cefetmg.inf.somh.exception.ExcecaoPersistencia;
+import br.cefetmg.inf.somh.main.Run;
+import br.cefetmg.inf.somh.service.ManterCliente;
+import br.cefetmg.inf.somh.service.impl.ManterClienteImpl;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -33,7 +28,6 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
-import javafx.scene.control.CheckBox;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
@@ -43,7 +37,6 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
-import javafx.util.Callback;
 
 /**
  * FXML Controller class

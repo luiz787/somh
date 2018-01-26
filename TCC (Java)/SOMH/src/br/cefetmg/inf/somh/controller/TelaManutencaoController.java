@@ -5,6 +5,18 @@
  */
 package br.cefetmg.inf.somh.controller;
 
+import java.io.IOException;
+import java.net.URL;
+import java.sql.Timestamp;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Date;
+import java.util.HashSet;
+import java.util.ResourceBundle;
+import java.util.Set;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 import br.cefetmg.inf.somh.dao.impl.OSItemPecaDAOImpl;
 import br.cefetmg.inf.somh.dao.impl.OSItemServicoDAOImpl;
 import br.cefetmg.inf.somh.dao.impl.OSStatusDAOImpl;
@@ -30,20 +42,7 @@ import br.cefetmg.inf.somh.service.impl.ManterOSItemServicoImpl;
 import br.cefetmg.inf.somh.service.impl.ManterOSStatusImpl;
 import br.cefetmg.inf.somh.service.impl.ManterPecaImpl;
 import br.cefetmg.inf.somh.service.impl.ManterServicoImpl;
-
-import java.io.IOException;
-import java.net.URL;
-import java.sql.Timestamp;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Date;
-import java.util.HashSet;
-import java.util.ResourceBundle;
-import java.util.Set;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javafx.beans.property.SimpleStringProperty;
-import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;

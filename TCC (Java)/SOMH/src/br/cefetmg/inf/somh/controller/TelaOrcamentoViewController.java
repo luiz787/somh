@@ -5,14 +5,19 @@
  */
 package br.cefetmg.inf.somh.controller;
 
-import br.cefetmg.inf.somh.dao.OSAcessorioDAO;
-import br.cefetmg.inf.somh.dao.OSDAO;
+import java.io.IOException;
+import java.net.URL;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.List;
+import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 import br.cefetmg.inf.somh.dao.impl.OSAcessorioDAOImpl;
 import br.cefetmg.inf.somh.dao.impl.OSDAOImpl;
 import br.cefetmg.inf.somh.dao.impl.OSStatusDAOImpl;
 import br.cefetmg.inf.somh.dao.impl.StatusDAOImpl;
-import br.cefetmg.inf.somh.domain.Acessorio;
-import br.cefetmg.inf.somh.domain.Equipamento;
 import br.cefetmg.inf.somh.domain.OS;
 import br.cefetmg.inf.somh.domain.OSAcessorio;
 import br.cefetmg.inf.somh.domain.OSStatus;
@@ -29,15 +34,6 @@ import br.cefetmg.inf.somh.service.impl.ManterOSAcessorioImpl;
 import br.cefetmg.inf.somh.service.impl.ManterOSImpl;
 import br.cefetmg.inf.somh.service.impl.ManterOSStatusImpl;
 import br.cefetmg.inf.somh.service.impl.ManterStatusImpl;
-
-import java.io.IOException;
-import java.net.URL;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.List;
-import java.util.ResourceBundle;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;

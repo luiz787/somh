@@ -5,11 +5,10 @@
  */
 package br.cefetmg.inf.somh.dao;
 
-import br.cefetmg.inf.somh.domain.OSItemPeca;
-import br.cefetmg.inf.somh.domain.OSStatus;
-import br.cefetmg.inf.somh.exception.ExcecaoPersistencia;
-
 import java.util.List;
+
+import br.cefetmg.inf.somh.domain.OSItemPeca;
+import br.cefetmg.inf.somh.exception.ExcecaoPersistencia;
 
 /**
  *

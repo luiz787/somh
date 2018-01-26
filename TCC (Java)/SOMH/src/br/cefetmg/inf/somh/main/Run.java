@@ -1,18 +1,12 @@
 package br.cefetmg.inf.somh.main;
 
-import br.cefetmg.inf.somh.controller.CadastroClienteViewController;
-import br.cefetmg.inf.somh.controller.CadastroUsuarioController;
-import br.cefetmg.inf.somh.controller.LoginController;
-import br.cefetmg.inf.somh.controller.TelaCadastroOSController;
-import br.cefetmg.inf.somh.controller.TelaListagemClienteController;
-import br.cefetmg.inf.somh.controller.TelaListagemOSController;
-import br.cefetmg.inf.somh.controller.TelaManutencaoController;
-import br.cefetmg.inf.somh.controller.TelaOSController;
-import br.cefetmg.inf.somh.domain.Cliente;
-
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
+import br.cefetmg.inf.somh.controller.CadastroClienteViewController;
+import br.cefetmg.inf.somh.controller.LoginController;
+import br.cefetmg.inf.somh.domain.Cliente;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;

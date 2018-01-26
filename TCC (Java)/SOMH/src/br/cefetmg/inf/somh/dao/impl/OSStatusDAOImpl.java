@@ -1,15 +1,5 @@
 package br.cefetmg.inf.somh.dao.impl;
 
-import br.cefetmg.inf.somh.bd.JDBCManterConexao;
-import br.cefetmg.inf.somh.dao.OSDAO;
-import br.cefetmg.inf.somh.dao.OSStatusDAO;
-import br.cefetmg.inf.somh.dao.PerfilDAO;
-import br.cefetmg.inf.somh.dao.StatusDAO;
-import br.cefetmg.inf.somh.dao.UsuarioDAO;
-import br.cefetmg.inf.somh.domain.OSStatus;
-import br.cefetmg.inf.somh.domain.Status;
-import br.cefetmg.inf.somh.exception.ExcecaoPersistencia;
-
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -19,6 +9,15 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
+import br.cefetmg.inf.somh.bd.JDBCManterConexao;
+import br.cefetmg.inf.somh.dao.OSDAO;
+import br.cefetmg.inf.somh.dao.OSStatusDAO;
+import br.cefetmg.inf.somh.dao.StatusDAO;
+import br.cefetmg.inf.somh.dao.UsuarioDAO;
+import br.cefetmg.inf.somh.domain.OSStatus;
+import br.cefetmg.inf.somh.domain.Status;
+import br.cefetmg.inf.somh.exception.ExcecaoPersistencia;
 
 public class OSStatusDAOImpl implements OSStatusDAO{
     private static OSStatusDAOImpl osStatusDAO = null;
